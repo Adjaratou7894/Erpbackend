@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 
 public interface EtatActiviteRepository extends JpaRepository<Etat_activite,Long> {
+
 }
