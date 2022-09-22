@@ -7,8 +7,8 @@ import java.util.List;
 public interface SalleService {
     Salle AjouterSalle(Salle salle);
     List<Salle> AffichageDesSalle();
-    Salle modifierSalle(Long id, Salle salle);
-    String SupprissionSalle(Long id);
+    Salle modifierSalle(Long idsalle, Salle salle);
+    String SupprissionSalle(Long idsalle);
     List<Salle> AffichageDesSalleOccupee();
     List<Salle> AffichageDesSalleLibre();
 

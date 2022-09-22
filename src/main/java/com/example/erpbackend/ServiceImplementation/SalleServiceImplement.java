@@ -28,8 +28,8 @@ public class SalleServiceImplement implements SalleService {
 
     //****************Modification de la Salle*******************
     @Override
-    public Salle modifierSalle(Long id, Salle salle) {
-        return salleRepository.findById(id)
+    public Salle modifierSalle(Long idsalle, Salle salle) {
+        return salleRepository.findById(idsalle)
                 .map(pA-> {
                     pA.setDisponibilite(salle.getDisponibilite());
                     return salleRepository.save(pA);
@@ -38,8 +38,8 @@ public class SalleServiceImplement implements SalleService {
 
     //****************Supression de la Salle*******************
     @Override
-    public String SupprissionSalle(Long id) {
-        salleRepository.deleteById(id);
+    public String SupprissionSalle(Long idsalle) {
+        salleRepository.deleteById(idsalle);
         return "Salle Supprimer avec Succés";
     }
 

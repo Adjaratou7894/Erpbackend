@@ -39,14 +39,14 @@ public class SalleController {
         return SalleService.AffichageDesSalleOccupee();
     }
     @ApiOperation(value = "Modification d'une Salle")
-    @PutMapping("/modifierSalle/{id}")
-    public Salle modifier(@PathVariable Long id,@RequestBody Salle Salle){
-        return SalleService.modifierSalle(id,Salle);}
+    @PutMapping("/modifierSalle/{idsalle}")
+    public Salle modifier(@PathVariable Long idsalle,@RequestBody Salle Salle){
+        return SalleService.modifierSalle(idsalle,Salle);}
 
     @ApiOperation(value = "Suppression d'une Salle")
     @DeleteMapping("/SupprimerSalle")
-    public String supprimer(@PathVariable Long id){
-        return SalleService.SupprissionSalle(id);
+    public String supprimer(@PathVariable Long idsalle){
+        return SalleService.SupprissionSalle(idsalle);
     }
 }
 
