@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -15,4 +16,8 @@ public class Tirage {
     private  String    LibelleTirage;
     private  Integer   nombrePostulantTire;
     private  Date      date;
+    @ManyToOne
+    private Utilisateur utilisateur;
+    @ManyToOne
+    private Liste_postulant listePostulant;
 }

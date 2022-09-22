@@ -13,4 +13,6 @@ public class Liste_postulant {
     private Long id;
     private String libelleListe;
     private Integer nombreTirage;
+    @OneToOne
+    private Activite activite;
 }

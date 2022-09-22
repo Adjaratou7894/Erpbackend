@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -18,4 +19,8 @@ public class Utilisateur {
     private String prenom;
     private String email;
     private String password;
+    @ManyToOne
+    private Entite entite;
+    @ManyToOne
+    private Role role;
 }
