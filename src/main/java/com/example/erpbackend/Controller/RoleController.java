@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Role;
 import com.example.erpbackend.Service.RoleService;
 import io.swagger.annotations.Api;
@@ -20,18 +21,26 @@ public class RoleController {
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UN ROLE======================
     @ApiOperation(value = "Ajouter un rôle")
     @PostMapping("/ajouter")
-    public String create(@RequestBody Role role){
-        roleService.ajouterRole(role);
-        return "Rôle ajouté avec succès";
+    public ReponseMessage create(@RequestBody Role role){
+        return roleService.ajouterRole(role);
     }
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UN ROLE======================
 
     //================DEBUT DE LA METHODE PERMETTANT DE MODIFIER UN ROLE======================
     @ApiOperation(value = "Modifier un rôle")
     @PutMapping("/modifier")
-    public String update(@RequestBody Role role){
-        roleService.modifierRole(role);
-        return "Rôle modifié avec succès";
+    public ReponseMessage update(@RequestBody Role role){
+        if (roleService.trouverRoleParId(role.getIdrole()) !=  null){
+
+            roleService.modifierRole(role);
+            ReponseMessage message = new ReponseMessage("Etat modifié avec suces", true);
+
+            return message;
+        }else {
+            ReponseMessage message = new ReponseMessage("Etat non trouvé", false);
+
+            return message;
+        }
     }
     //================FIN DE LA METHODE PERMETTANT DE MODIFIER UN ROLE======================
 
@@ -45,9 +54,10 @@ public class RoleController {
 
     //================DEBUT DE LA METHODE PERMETTANT DE SUPPRIMER UN ROLE======================
     @ApiOperation(value = "Supprimer un rôle")
-    @DeleteMapping("/supprimer/{id}")
-    public String delete(@PathVariable Long id){
-            return roleService.supprimerRole(id);
+    @DeleteMapping("/supprimer/{idrole}")
+    public ReponseMessage delete(@PathVariable Long idrole){
+
+        return roleService.supprimerRole(idrole);
     }
     //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UN ROLE======================
 }

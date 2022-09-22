@@ -1,5 +1,7 @@
 package com.example.erpbackend.Service;
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Etat_activite;
 import com.example.erpbackend.Model.Role;
 
 import java.util.List;
@@ -8,7 +10,7 @@ public interface RoleService {
 
 
     //================METHODE PERMETTANT D'AJOUTER UN ROLE=========================
-    Role ajouterRole(Role role);
+    ReponseMessage ajouterRole(Role role);
 
 
     //================METHODE PERMETTANT DE MODIFIER UN ROLE=========================
@@ -18,5 +20,9 @@ public interface RoleService {
     List<Role> afficherRole();
 
     //================METHODE PERMETTANT DE SUPPRIMER UN ROLE=========================
-    String supprimerRole(Long id);
+    ReponseMessage supprimerRole(Long idrole);
+
+
+    //================METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UN ROLE=========================
+    Role trouverRoleParId(Long idrole);
 }

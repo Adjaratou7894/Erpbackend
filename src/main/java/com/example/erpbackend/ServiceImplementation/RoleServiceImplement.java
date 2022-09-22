@@ -1,5 +1,6 @@
 package com.example.erpbackend.ServiceImplementation;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Role;
 import com.example.erpbackend.Repository.RoleRepository;
 import com.example.erpbackend.Service.RoleService;
@@ -19,8 +20,16 @@ public class RoleServiceImplement implements RoleService {
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UN ROLE=========================
     @Override
-    public Role ajouterRole(Role role) {
-        return roleRepository.save(role);
+    public ReponseMessage ajouterRole(Role role) {
+        if (roleRepository.findByNom(role.getNom()) == null){
+            roleRepository.save(role);
+            ReponseMessage message = new ReponseMessage("Rôle ajouté avec succes", true);
+            return  message;
+        }else {
+            ReponseMessage message = new ReponseMessage("Cet rôle existe déjà ", false);
+
+            return message;
+        }
     }
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UN ROLE=========================
 
@@ -28,9 +37,9 @@ public class RoleServiceImplement implements RoleService {
     //================DEBUT DE LA METHODE PERMETTANT DE MODIFIER UN ROLE=========================
     @Override
     public Role modifierRole(Role role) {
-        return roleRepository.findById(role.getId())
+        return roleRepository.findById(role.getIdrole())
         .map(p->{
-            p.setId(role.getId());
+            //p.setIdrole(role.getIdrole());
             p.setNom(role.getNom());
             return roleRepository.save(p);
         }).orElseThrow(() -> new RuntimeException("Rôle non trouvé !"));
@@ -48,15 +57,21 @@ public class RoleServiceImplement implements RoleService {
 
     //================DEBUT DE LA METHODE PERMETTANT DE SUPPRIMER UN ROLE=========================
     @Override
-    public String supprimerRole(Long id) {
+    public ReponseMessage supprimerRole(Long idrole) {
 
-        if (roleRepository.findById(id).get()!=null){
-            roleRepository.deleteById(id);
-            return "Rôle supprimé avec succès";
+        if(roleRepository.findByIdrole(idrole) != null){
+            roleRepository.deleteById(idrole);
+            ReponseMessage message = new ReponseMessage("Rôle supprimé avec succes", true);
+            return message;
         }else {
-            return "Ce rôle n'existe pas ";
+            ReponseMessage message = new ReponseMessage("Etat non trouvée", false);
+            return message;
         }
+    }
 
+    @Override
+    public Role trouverRoleParId(Long idrole) {
+        return roleRepository.findByIdrole(idrole);
     }
     //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UN ROLE=========================
 }
