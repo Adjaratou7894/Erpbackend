@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Salle;
 import com.example.erpbackend.Service.SalleService;
 import io.swagger.annotations.Api;
@@ -20,7 +21,7 @@ public class SalleController {
     private  SalleService SalleService;
     @ApiOperation(value = "Ajout d'une Salle")
    @PostMapping("/AjouterSalle")
-    public Salle AjouterSalle(@RequestBody Salle salle){
+    public ReponseMessage AjouterSalle(@RequestBody Salle salle){
        return SalleService.AjouterSalle(salle);
    }
     @ApiOperation(value = "Affichage de Toutes Les Salles")
@@ -39,13 +40,24 @@ public class SalleController {
         return SalleService.AffichageDesSalleOccupee();
     }
     @ApiOperation(value = "Modification d'une Salle")
-    @PutMapping("/modifierSalle/{idsalle}")
-    public Salle modifier(@PathVariable Long idsalle,@RequestBody Salle Salle){
-        return SalleService.modifierSalle(idsalle,Salle);}
+    @PutMapping("/modifierSalle")
+    public ReponseMessage modifier(@RequestBody Salle Salle){
+        if (SalleService.trouverSalleParId(Salle.getIdsalle()) !=null){
+            SalleService.modifierSalle(Salle);
+            ReponseMessage message = new ReponseMessage("Salle modifiée avec suces", true);
+
+            return message;
+        }else {
+            ReponseMessage message = new ReponseMessage("Salle non trouvée", false);
+
+            return message;
+        }
+
+    }
 
     @ApiOperation(value = "Suppression d'une Salle")
     @DeleteMapping("/SupprimerSalle")
-    public String supprimer(@PathVariable Long idsalle){
+    public ReponseMessage supprimer(@PathVariable Long idsalle){
         return SalleService.SupprissionSalle(idsalle);
     }
 }
