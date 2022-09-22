@@ -29,13 +29,15 @@ public class EntiteController {
     //**********On modifie une entité avec son id dans path variable et un type de retour String********
     @PutMapping("/modifier")
     public Entite modifierEntite(@RequestBody Entite entite){
-        return entiteServiceImplement.modifier(entite);
+       return entiteServiceImplement.modifier(entite);
+
     }
+
 
 
     //**********On supprime une entité avec son id dans path variable et un type de retour String********
-    @DeleteMapping("/supprimer/{id}")
+  /*  @DeleteMapping("/supprimer/{id}")
     public String supprimerEntite(@PathVariable Long id){
         return entiteServiceImplement.supprimer(id);
-    }
+    }*/
 }

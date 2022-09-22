@@ -11,6 +11,6 @@ import java.util.List;
 public class Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long   id;
+    private Long   idEntite;
     private String nom;
 }
