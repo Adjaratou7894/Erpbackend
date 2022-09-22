@@ -13,7 +13,8 @@ public class Activite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  id;
     private String nom;
-    private Date   DateDebut;
-    private Date   DateFin;
+    private Date   dateDebut;
+    private Date   dateFin;
     private String duree;
+    private Boolean etat;
 }

@@ -16,4 +16,5 @@ public class Postulant {
     private String numero;
     private String email;
     private String genre;
+    private Boolean etat;
 }
