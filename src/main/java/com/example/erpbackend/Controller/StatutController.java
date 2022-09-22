@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Statut;
 import com.example.erpbackend.Service.StatutService;
 import io.swagger.annotations.Api;
@@ -21,22 +22,36 @@ public class StatutController {
 
     @ApiOperation(value = "Juste pour ajouter le statut ")
     @PostMapping("/ajouter")
-    public Statut ajoute(@RequestBody Statut statut){
+    public ReponseMessage ajoute(@RequestBody Statut statut){
+
         return statutService.ajouter(statut);
     }
     @ApiOperation(value = "Juste pour afficher le statut ")
     @GetMapping("/afficher")
     public List<Statut> read(){
+
         return statutService.lister();
     }
     @ApiOperation(value = "Juste pour modifier le statut ")
     @PutMapping("/modifier")
-    public Statut update(@RequestBody Statut statut){
-        return statutService.modifier(statut);
+    public ReponseMessage update(@RequestBody Statut statut){
+
+        if(statutService.trouverStatuParIdstatut(statut.getIdstatut()) != null ){
+            statutService.modifier(statut);
+            ReponseMessage message = new ReponseMessage("Statut modifié avec suces", true);
+
+            return message;
+        }else {
+            ReponseMessage message = new ReponseMessage("Statut non trouvé", false);
+
+            return message;
+        }
     }
     @ApiOperation(value = "Juste pour supprimer le statut ")
-    @DeleteMapping("/supprimer/{id}")
-    public String delete(@PathVariable Long id){
-        return statutService.supprimer(id);
+    @DeleteMapping("/supprimer/{idstatut}")
+
+    public ReponseMessage delete(@PathVariable Long idstatut){
+
+        return statutService.supprimer(idstatut);
     }
 }

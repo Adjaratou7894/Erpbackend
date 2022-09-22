@@ -1,9 +1,11 @@
 package com.example.erpbackend.ServiceImplementation;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Statut;
 import com.example.erpbackend.Repository.StatutRepository;
 import com.example.erpbackend.Service.StatutService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,12 +14,21 @@ import java.util.List;
 @AllArgsConstructor
 public class StatutServiceImplement implements StatutService {
 
+    @Autowired
     private final StatutRepository statutRepository;
 
     @Override
-    public Statut ajouter(Statut statut) {
+    public ReponseMessage ajouter(Statut statut) {
 
-        return statutRepository.save(statut);
+        if(statutRepository.findByNom(statut.getNom()) == null){
+            statutRepository.save(statut);
+            ReponseMessage message = new ReponseMessage("Etat ajouté avec succes", true);
+            return  message;
+        }else {
+            ReponseMessage message = new ReponseMessage("Cet état existe déjà ", false);
+
+            return message;
+        }
     }
 
     @Override
@@ -27,7 +38,7 @@ public class StatutServiceImplement implements StatutService {
 
     @Override
     public Statut modifier(Statut statut) {
-        return statutRepository.findById(statut.getId())
+        return statutRepository.findById(statut.getIdstatut())
                 .map(statut1 -> {
                     statut1.setNom(statut.getNom());
                     return statutRepository.save(statut1);
@@ -35,8 +46,22 @@ public class StatutServiceImplement implements StatutService {
     }
 
     @Override
-    public String supprimer(long id) {
-        statutRepository.deleteById(id);
-        return "Statut "+id+" suprimer !";
+    public ReponseMessage supprimer(Long idstatut) {
+        if(statutRepository.findByIdstatut(idstatut) != null){
+            statutRepository.deleteById(idstatut);
+            ReponseMessage message = new ReponseMessage("Statut supprimé avec succes", true);
+            return message;
+        }
+        else {
+            ReponseMessage message = new ReponseMessage("Statut non trouvée", false);
+            return message;
+        }
     }
+
+    @Override
+    public Statut trouverStatuParIdstatut(Long idstatut) {
+
+        return statutRepository.findByIdstatut(idstatut);
+    }
+
 }

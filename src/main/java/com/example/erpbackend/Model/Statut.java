@@ -11,7 +11,7 @@ import javax.persistence.*;
 public class Statut {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idstatut;
     private String nom;
 
 }
