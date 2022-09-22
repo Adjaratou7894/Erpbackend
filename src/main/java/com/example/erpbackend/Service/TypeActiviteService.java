@@ -9,17 +9,18 @@ import java.util.List;
 public interface TypeActiviteService {
 
     // Création d'un Type d'activités
-    Type_activite ajouterTypeActivite(Type_activite type_activite);
+    ReponseMessage ajouterTypeActivite(Type_activite type_activite);
 
     // Affichage d'un Type d'activités
     List<Type_activite> afficherTypeActivite();
 
 
     // Modification Type d'activités
-    Type_activite modifierTypeActivite(Long id,Type_activite type_activite);
+    ReponseMessage modifierTypeActivite(Long id,Type_activite type_activite);
 
     //Supprimer un Type d'activités
- //   String supprimerTypeActvite(Long id);
+ //
+      ReponseMessage supprimerTypeActvite(Long id);
 
 
 }

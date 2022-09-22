@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Type_activite {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long    idActivite;
+    private Long    idactivite;
     private String  typeActivite;
     private String typePostulant;
 }

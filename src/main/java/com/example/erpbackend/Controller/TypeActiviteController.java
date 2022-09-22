@@ -21,7 +21,7 @@ public class TypeActiviteController {
     // ============================== ICI ON CREE LA LISTE DES TYPES DE L'ACTIVITE ==============================
     @PostMapping("/ajouter")
     @ApiOperation(value = "Ici on ajoute les types d'activité")
-    public Type_activite ajouterTypesActivites(@RequestBody Type_activite type_activite){
+    public ReponseMessage ajouterTypesActivites(@RequestBody Type_activite type_activite){
         return this.typeActiviteServiceImplement.ajouterTypeActivite(type_activite);
     }
 
@@ -37,7 +37,7 @@ public class TypeActiviteController {
     // =======================ICI ON MODIFIE UN DES TYPES DE L'ACTIVITE===============================
     @ApiOperation(value = "Ici on modifie un types d'activité")
     @PutMapping("/modifier/{id}")
-    public  Type_activite modifierTypeActivite(@PathVariable("id") Long id,@RequestBody Type_activite type_activite){
+    public  ReponseMessage modifierTypeActivite(@PathVariable("id") Long id,@RequestBody Type_activite type_activite){
         return  typeActiviteServiceImplement.modifierTypeActivite(id,type_activite);
     }
 
@@ -45,14 +45,15 @@ public class TypeActiviteController {
     // =======================ICI ON SUPPRIME UN DES TYPES DE L'ACTIVITE===============================
 
 
-  /*
+
     @ApiOperation(value = "Ici on supprime les types d'activité")
     @DeleteMapping("/supprimer/{id}")
-    public String supprimerTypeActivite(@PathVariable("id") Long id){
+    public ReponseMessage supprimerTypeActivite(@PathVariable("id") Long id){
         return  typeActiviteServiceImplement.supprimerTypeActvite(id);
     }
 
-   */
+
+
 
 
 
