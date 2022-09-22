@@ -12,5 +12,7 @@ public class Statut {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nom;
+    @ManyToMany
+    private Acteur acteur;
 
 }
