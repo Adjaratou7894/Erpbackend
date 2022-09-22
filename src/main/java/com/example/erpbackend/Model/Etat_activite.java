@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Etat_activite {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private  Long  id;
+    private  Long  idetat;
     private  String etat;
 
 }
