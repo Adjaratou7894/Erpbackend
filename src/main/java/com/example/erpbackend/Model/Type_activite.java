@@ -7,6 +7,7 @@ import javax.persistence.*;
 @Entity
 @Table
 @Data
+
 public class Type_activite {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)

@@ -8,6 +8,7 @@ import java.util.Date;
 @Entity
 @Table
 @Data
+
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
