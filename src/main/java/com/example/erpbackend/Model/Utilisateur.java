@@ -17,6 +17,7 @@ public class Utilisateur {
     private Long id;
     private String nom;
     private String prenom;
+    private String numero;
     private String email;
     private String password;
     @ManyToOne

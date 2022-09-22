@@ -16,6 +16,5 @@ public class Postulant {
     private String numero;
     private String email;
     private String genre;
-    @ManyToOne
-    private Liste_postulant listePostulant;
+    private Boolean etat;
 }

@@ -7,10 +7,10 @@ import javax.persistence.*;
 @Entity
 @Table
 @Data
-public class Etat_postulant {
+public class Statut {
     @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String libelle;
+    private String nom;
 
 }
