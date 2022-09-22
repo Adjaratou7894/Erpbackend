@@ -15,8 +15,6 @@ public interface SalleRepository extends JpaRepository<Salle, Long> {
     @Query(value = "SELECT * from salle where disponibilite = False", nativeQuery = true)
     public List<Salle> AfficherLesSallesOccupee();
 
-    Salle findBySalle(String salle);
-
     Salle findByIdsalle(Long idsalle);
 
 }

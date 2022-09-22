@@ -55,16 +55,16 @@ public class EtatActiviteServiceImplement implements EtatActiviteService {
 
     @Override
     public List<Etat_activite> afficherEtatActivite() {
-        return null;
+        return etatActiviteRepository.findAll();
     }
 
     @Override
     public Etat_activite trouverEtatActiviteParLibelle(String etat) {
-        return null;
+        return etatActiviteRepository.findByEtat(etat);
     }
 
     @Override
     public Etat_activite trouverEtatActiviteParId(Long idetat) {
-        return null;
+        return etatActiviteRepository.findByIdetat(idetat);
     }
 }
