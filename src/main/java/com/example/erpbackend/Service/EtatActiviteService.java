@@ -8,14 +8,18 @@ import java.util.List;
 public interface EtatActiviteService {
 
     //ajoute un etat activite
-    Etat_activite ajouterEtatActivite(Etat_activite etat_activite);
+    ReponseMessage ajouterEtatActivite(Etat_activite etat_activite);
 
     //modifie un etat activite
     Etat_activite modifierEtatActivite(Etat_activite etat_activite);
 
     //supprime un etat activite
-    ReponseMessage supprimerEtatActivite(Long id);
+    ReponseMessage supprimerEtatActivite(String etat);
 
     //afficher les etat activites
     List<Etat_activite> afficherEtatActivite();
+
+    Etat_activite trouverEtatActiviteParLibelle(String etat);
+
+    Etat_activite trouverEtatActiviteParId(Long idetat);
 }
