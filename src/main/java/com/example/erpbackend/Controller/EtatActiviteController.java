@@ -29,10 +29,10 @@ public class EtatActiviteController {
         return etatActiviteService.afficherEtatActivite();
     }
 
-    @DeleteMapping("/supprimer/{etat}")
-    public ReponseMessage supprimerEtatActivite(@PathVariable String etat){
+    @DeleteMapping("/supprimer/{id}")
+    public ReponseMessage supprimerEtatActivite(@PathVariable Long id){
 
-        return etatActiviteService.supprimerEtatActivite(etat);
+        return etatActiviteService.supprimerEtatActivite(id);
     }
 
     @PutMapping("/modifier")

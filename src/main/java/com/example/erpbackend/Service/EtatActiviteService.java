@@ -14,7 +14,7 @@ public interface EtatActiviteService {
     Etat_activite modifierEtatActivite(Etat_activite etat_activite);
 
     //supprime un etat activite
-    ReponseMessage supprimerEtatActivite(String etat);
+    ReponseMessage supprimerEtatActivite(Long id);
 
     //afficher les etat activites
     List<Etat_activite> afficherEtatActivite();
