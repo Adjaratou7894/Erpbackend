@@ -11,7 +11,8 @@ import javax.persistence.*;
 public class Postulant_tire {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private  Long      id;
     private  Long      idPostulant;
+    @ManyToOne
+    private Tirage tirage;
 }

@@ -18,4 +18,15 @@ public class Activite {
     private Date   dateFin;
     private String duree;
     private Boolean etat;
+    @ManyToOne
+    private Type_activite typeActivite;
+    @ManyToOne
+    private Etat_activite etatActivite;
+    @ManyToOne
+    private Entite entite;
+    @ManyToOne
+    private Utilisateur utilisateur;
+    @OneToOne
+    private Salle salle;
+
 }
