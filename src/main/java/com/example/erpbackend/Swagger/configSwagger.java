@@ -27,8 +27,8 @@ public class configSwagger {
     @Bean
     public ApiInfo apiInfo() {
         final ApiInfoBuilder builder = new ApiInfoBuilder();
-        builder.title("Notre API de gestion de tourisme").version("1.0").license("(C) Copyright ODC")
-                .description("La liste de mes fonctionnalités");
+        builder.title("Notre API de gestion ODC").version("1.0").license("(C) Copyright ODC")
+                .description("La liste des fonctionnalités");
         return builder.build();
     }
 }
