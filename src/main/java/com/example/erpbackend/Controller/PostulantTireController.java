@@ -4,6 +4,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/postulant")
-public class PostulantController {
+@RequestMapping("/postulanttire")
+public class PostulantTireController {
 }
