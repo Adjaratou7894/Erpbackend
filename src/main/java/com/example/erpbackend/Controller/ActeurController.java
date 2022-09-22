@@ -14,11 +14,11 @@ import java.util.List;
 public class ActeurController {
 
     private final ActeurService acteurService;
-    @PostMapping("/creeracteur")
+    @PostMapping("/ajouter")
     public Acteur creerActeur( @RequestBody Acteur acteur){
         return acteurService.creerActeur(acteur);
     }
-    @PutMapping("/modifieracteur/{id}")
+    @PutMapping("/modifier/{id}")
     public Acteur modifierActeur(  @PathVariable Long id,@RequestBody Acteur acteur){
         return acteurService.modifierActeur(id, acteur);
     }
