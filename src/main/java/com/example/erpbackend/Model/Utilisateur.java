@@ -10,7 +10,7 @@ import javax.persistence.*;
 @Table
 @Data
 
-public class Utilisateur {
+public class    Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
