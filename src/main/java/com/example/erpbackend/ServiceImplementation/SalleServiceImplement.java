@@ -21,6 +21,7 @@ public class SalleServiceImplement implements SalleService {
     public ReponseMessage AjouterSalle(Salle salle) {
         if (salleRepository.findByIdsalle(salle.getIdsalle()) != null) {
             salleRepository.save(salle);
+            salleRepository.save(salle) ;
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
         }else { ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
