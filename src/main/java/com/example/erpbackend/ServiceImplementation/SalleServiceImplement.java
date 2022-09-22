@@ -2,8 +2,11 @@ package com.example.erpbackend.ServiceImplementation;
 
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Salle;
+import com.example.erpbackend.Repository.SalleRepository;
+import com.example.erpbackend.Repository.StatutRepository;
 import com.example.erpbackend.Service.SalleService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,7 +16,9 @@ import java.util.List;
 @AllArgsConstructor
 public class SalleServiceImplement implements SalleService {
 
-<<<<<<< HEAD
+
+    @Autowired
+    private final SalleRepository salleRepository;
     //****************Ajout d'une Salle*******************
     @Override
     public ReponseMessage AjouterSalle(Salle salle) {
@@ -69,7 +74,5 @@ public class SalleServiceImplement implements SalleService {
     public Salle trouverSalleParId(Long idsalle) {
         return salleRepository.findByIdsalle(idsalle);
     }
-=======
 
->>>>>>> fea3055d262c50ccccc5502691815dd88eee3b99
 }
