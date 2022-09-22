@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Type_activite;
 import com.example.erpbackend.ServiceImplementation.TypeActiviteServiceImplement;
 import io.swagger.annotations.Api;
@@ -42,11 +43,16 @@ public class TypeActiviteController {
 
 
     // =======================ICI ON SUPPRIME UN DES TYPES DE L'ACTIVITE===============================
+
+
+  /*
     @ApiOperation(value = "Ici on supprime les types d'activité")
     @DeleteMapping("/supprimer/{id}")
-    public  String supprimerTypeActivite(@PathVariable("id") Long id){
-        return  this.typeActiviteServiceImplement.supprimerTypeActvite(id);
+    public String supprimerTypeActivite(@PathVariable("id") Long id){
+        return  typeActiviteServiceImplement.supprimerTypeActvite(id);
     }
+
+   */
 
 
 

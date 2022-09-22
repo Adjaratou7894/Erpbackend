@@ -1,11 +1,13 @@
 package com.example.erpbackend.ServiceImplementation;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Type_activite;
 import com.example.erpbackend.Repository.TypeActiviteRepository;
 import com.example.erpbackend.Service.TypeActiviteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import springfox.documentation.service.ResponseMessage;
 
 import java.util.List;
 
@@ -27,6 +29,9 @@ public class TypeActiviteServiceImplement implements TypeActiviteService {
 
     @Override
     public Type_activite modifierTypeActivite(Long id, Type_activite type_activite) {
+
+
+
         return typeActiviteRepository.findById(id)
                 .map(type_activite1 -> {
                     type_activite1.setTypeActivite(type_activite.getTypeActivite());
@@ -35,9 +40,13 @@ public class TypeActiviteServiceImplement implements TypeActiviteService {
                 }).orElseThrow(() -> new RuntimeException("Type activité non trouvé"));
     }
 
-    @Override
+  /*  @Override
     public String supprimerTypeActvite(Long id) {
-         typeActiviteRepository.deleteById(id);
-        return "Type d'activité supprimer avec success";
+        return typeActiviteRepository.deleteById(id);
     }
+
+   */
+
+
 }
+

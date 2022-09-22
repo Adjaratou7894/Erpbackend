@@ -1,5 +1,6 @@
 package com.example.erpbackend.Service;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Tirage;
 import com.example.erpbackend.Model.Type_activite;
 
@@ -18,5 +19,7 @@ public interface TypeActiviteService {
     Type_activite modifierTypeActivite(Long id,Type_activite type_activite);
 
     //Supprimer un Type d'activités
-    String supprimerTypeActvite(Long id);
+ //   String supprimerTypeActvite(Long id);
+
+
 }

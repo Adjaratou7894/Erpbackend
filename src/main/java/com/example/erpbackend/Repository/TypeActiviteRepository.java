@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface TypeActiviteRepository extends JpaRepository<Type_activite, Long> {
+
+//    Type_activite findbyid(Long id_activite);
 }
