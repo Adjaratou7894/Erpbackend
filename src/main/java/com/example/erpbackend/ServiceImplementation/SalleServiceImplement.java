@@ -19,8 +19,8 @@ public class SalleServiceImplement implements SalleService {
     //****************Ajout d'une Salle*******************
     @Override
     public ReponseMessage AjouterSalle(Salle salle) {
-        if (salleRepository.findBySalle(salle.getNom()) != null) {
-            salleRepository.save(salle) ;
+        if (salleRepository.findByIdsalle(salle.getIdsalle()) != null) {
+            salleRepository.save(salle);
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
         }else { ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
@@ -59,16 +59,19 @@ public class SalleServiceImplement implements SalleService {
 
     @Override
     public List<Salle> AffichageDesSalleOccupee() {
+
         return salleRepository.AfficherLesSallesDisponible();
     }
 
     @Override
     public List<Salle> AffichageDesSalleLibre() {
+
         return salleRepository.AfficherLesSallesOccupee();
     }
 
     @Override
     public Salle trouverSalleParId(Long idsalle) {
+
         return salleRepository.findByIdsalle(idsalle);
     }
 }
