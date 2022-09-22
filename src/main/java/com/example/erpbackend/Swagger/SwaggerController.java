@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequestMapping("/")
 @RestController
-
 public class SwaggerController {
     @RequestMapping(method = RequestMethod.GET)
     public String swaggerUI(){
