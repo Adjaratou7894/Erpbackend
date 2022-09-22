@@ -9,6 +9,7 @@ import javax.persistence.*;
 @Table
 @Data
 @NoArgsConstructor
+
 public class Type_activite {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
