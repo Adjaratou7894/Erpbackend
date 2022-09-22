@@ -28,7 +28,7 @@ public class RoleController {
 
     //================DEBUT DE LA METHODE PERMETTANT DE MODIFIER UN ROLE======================
     @ApiOperation(value = "Modifier un rôle")
-    @PatchMapping("/modifier")
+    @PutMapping("/modifier")
     public String update(@RequestBody Role role){
         roleService.modifierRole(role);
         return "Rôle modifié avec succès";
