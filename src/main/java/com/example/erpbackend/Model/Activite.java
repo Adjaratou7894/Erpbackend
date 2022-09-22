@@ -28,4 +28,5 @@ public class Activite {
     private Utilisateur utilisateur;
     @OneToOne
     private Salle salle;
+
 }

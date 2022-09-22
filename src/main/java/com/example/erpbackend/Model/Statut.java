@@ -16,6 +16,10 @@ public class Statut {
     private Long idstatut;
     private String nom;
     @ManyToMany
+<<<<<<< HEAD
     private List<Acteur> acteur = new ArrayList<>();
+=======
+    private List<Acteur> acteurs = new ArrayList<>();
+>>>>>>> fea3055d262c50ccccc5502691815dd88eee3b99
 
 }

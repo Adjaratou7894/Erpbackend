@@ -5,7 +5,6 @@ import com.example.erpbackend.Model.Salle;
 import com.example.erpbackend.Repository.SalleRepository;
 import com.example.erpbackend.Service.SalleService;
 import lombok.AllArgsConstructor;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,6 +13,8 @@ import java.util.List;
 @Service
 @AllArgsConstructor
 public class SalleServiceImplement implements SalleService {
+
+
     private final SalleRepository salleRepository;
 
     //****************Ajout d'une Salle*******************

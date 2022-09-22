@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+<<<<<<< HEAD
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Salle;
 import com.example.erpbackend.Service.SalleService;
@@ -11,12 +12,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+>>>>>>> fea3055d262c50ccccc5502691815dd88eee3b99
 
 @RestController
 @RequestMapping("/salle")
-@AllArgsConstructor
-@Api(value = "hello", description = "Sample hello world application")
 public class SalleController {
+<<<<<<< HEAD
    @Autowired
     private  SalleService SalleService;
     @ApiOperation(value = "Ajout d'une Salle")
@@ -60,5 +64,6 @@ public class SalleController {
     public ReponseMessage supprimer(@PathVariable Long idsalle){
         return SalleService.SupprissionSalle(idsalle);
     }
+=======
+>>>>>>> fea3055d262c50ccccc5502691815dd88eee3b99
 }
-
