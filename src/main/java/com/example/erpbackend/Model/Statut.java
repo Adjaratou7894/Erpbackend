@@ -3,6 +3,8 @@ package com.example.erpbackend.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table
@@ -13,6 +15,6 @@ public class Statut {
     private Long id;
     private String nom;
     @ManyToMany
-    private Acteur acteur;
+    private List<Acteur> acteur = new ArrayList<>();
 
 }
