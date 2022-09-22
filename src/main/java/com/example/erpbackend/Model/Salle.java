@@ -11,6 +11,7 @@ import javax.persistence.*;
 public class Salle {
     @Id
     @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private  Long   id;
+    private  Long   idsalle;
+    private String nom;
     private  Boolean disponibilite;
 }
