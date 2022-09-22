@@ -1,6 +1,5 @@
 package com.example.erpbackend.Controller;
 
-<<<<<<< HEAD
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Salle;
 import com.example.erpbackend.Service.SalleService;
@@ -12,46 +11,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-=======
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
->>>>>>> fea3055d262c50ccccc5502691815dd88eee3b99
 
 @RestController
 @RequestMapping("/salle")
 public class SalleController {
-<<<<<<< HEAD
-   @Autowired
-    private  SalleService SalleService;
+    @Autowired
+    private SalleService SalleService;
+
     @ApiOperation(value = "Ajout d'une Salle")
-   @PostMapping("/AjouterSalle")
-    public ReponseMessage AjouterSalle(@RequestBody Salle salle){
-       return SalleService.AjouterSalle(salle);
-   }
+    @PostMapping("/AjouterSalle")
+    public ReponseMessage AjouterSalle(@RequestBody Salle salle) {
+        return SalleService.AjouterSalle(salle);
+    }
+
     @ApiOperation(value = "Affichage de Toutes Les Salles")
-   @GetMapping("/afficherToutesLesSalles")
-    public List<Salle> afficherToutesLesSalles(){
-       return SalleService.AffichageDesSalle();
-   }
+    @GetMapping("/afficherToutesLesSalles")
+    public List<Salle> afficherToutesLesSalles() {
+        return SalleService.AffichageDesSalle();
+    }
+
     @ApiOperation(value = "Affichage de Toutes Les Salles Occupées")
     @GetMapping("/afficherToutesLesSallesOccupee")
-    public List<Salle> afficherToutesLesSallesOccupee(){
+    public List<Salle> afficherToutesLesSallesOccupee() {
         return SalleService.AffichageDesSalleOccupee();
     }
+
     @ApiOperation(value = "Affichage de Toutes Les Salles Libres")
     @GetMapping("/afficherToutesLesSallesLibre")
-    public List<Salle> afficherToutesLesSallesLibre(){
+    public List<Salle> afficherToutesLesSallesLibre() {
         return SalleService.AffichageDesSalleOccupee();
     }
+
     @ApiOperation(value = "Modification d'une Salle")
     @PutMapping("/modifierSalle")
-    public ReponseMessage modifier(@RequestBody Salle Salle){
-        if (SalleService.trouverSalleParId(Salle.getIdsalle()) !=null){
+    public ReponseMessage modifier(@RequestBody Salle Salle) {
+        if (SalleService.trouverSalleParId(Salle.getIdsalle()) != null) {
             SalleService.modifierSalle(Salle);
             ReponseMessage message = new ReponseMessage("Salle modifiée avec suces", true);
 
             return message;
-        }else {
+        } else {
             ReponseMessage message = new ReponseMessage("Salle non trouvée", false);
 
             return message;
@@ -61,9 +62,7 @@ public class SalleController {
 
     @ApiOperation(value = "Suppression d'une Salle")
     @DeleteMapping("/SupprimerSalle")
-    public ReponseMessage supprimer(@PathVariable Long idsalle){
+    public ReponseMessage supprimer(@PathVariable Long idsalle) {
         return SalleService.SupprissionSalle(idsalle);
     }
-=======
->>>>>>> fea3055d262c50ccccc5502691815dd88eee3b99
 }
