@@ -75,7 +75,6 @@ public class PostulantController {
                     return message;
                 }
             }
-
             }
     }
 }
