@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/activite")
-
+@Api(value = "hello", description = "Gestion des activtés")
 public class ActiviteController {
 
     @Autowired
