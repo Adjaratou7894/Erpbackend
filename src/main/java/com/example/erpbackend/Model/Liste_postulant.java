@@ -11,9 +11,12 @@ import javax.persistence.*;
 public class Liste_postulant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long Idlistepostulant;
+
     private String libelleListe;
+
     private Integer nombreTirage;
+
     @OneToOne
     private Activite activite;
 }
