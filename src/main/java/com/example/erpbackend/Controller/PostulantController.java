@@ -33,8 +33,7 @@ public class PostulantController {
 
 
     //Le controlleur permettant d'importer un fichier et créer automatiquement une liste des postulants
-   /* @RequestMapping("/import/excel/{libelleliste}")//il prend en parametre le libelle de la liste des postulant
-    public String importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste) {*/
+
     @RequestMapping("/import/excel/{libelleliste}/{libelleActivite}")
     public ReponseMessage importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste, @PathVariable String libelleActivite) {
 

@@ -19,6 +19,7 @@ public class UtilisateurController {
     // ============================== Récuperer tous les utilisateurs dans dans la base de données ===============
     @GetMapping("/afficher")
     public List<Utilisateur> afficherUtilisateur(){
+
         return utilisateurService.afficherUtilisateur();
     }
 
@@ -26,6 +27,7 @@ public class UtilisateurController {
     // ============================== Ajouter un utilisateur dans dans la base de données =======================
     @PostMapping("/ajouter")
     public Utilisateur ajouterUtilisateur(@RequestBody Utilisateur utilisateur){
+
         return utilisateurService.ajouterUtilisateur(utilisateur);
     };
 
@@ -33,6 +35,7 @@ public class UtilisateurController {
     // ============================== Modifier un utilisateur dans dans la base de données =======================
     @PutMapping("/modifier/{id}")
     public Utilisateur modifierUtilisateur(@RequestBody Utilisateur utilisateur, @PathVariable Long id){
+
         return utilisateurService.modifierUtilisateur(utilisateur, id);
     }
 
@@ -40,6 +43,7 @@ public class UtilisateurController {
     // ============================== Supprimer un utilisateur par son id dans dans la base de données ===========
     @DeleteMapping("/supprimer/{id}")
     public String supprimer(@PathVariable Long id){
+
         return utilisateurService.supprimerUtilisateur(id);
     }
 
@@ -47,6 +51,7 @@ public class UtilisateurController {
     // ============================== Ce connecter avec son email et mot de passe ================================
     @GetMapping("/seconnecter")
     public Object seConnecter(@RequestBody String email, String password){
+
         return utilisateurService.seConnecter(email, password);
     }
 }
