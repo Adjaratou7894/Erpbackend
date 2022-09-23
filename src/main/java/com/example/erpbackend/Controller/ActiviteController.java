@@ -26,6 +26,7 @@ public class ActiviteController {
     @ApiOperation(value = "Ajouter une activité")
     @PostMapping("/ajouter")
     public ReponseMessage create(@RequestBody Activite activite){
+
         return activiteService.ajouterActivite(activite);
     }
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================

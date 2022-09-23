@@ -41,15 +41,21 @@ public class TirageController {
 
     @PostMapping("/createTirage/{libelle_liste}/{libelle_activite}")
     public ReponseMessage create(@RequestBody Tirage tirage, @PathVariable String libelle_liste, @PathVariable String libelle_activite){
-        ReponseMessage message = new ReponseMessage();
 
-        Tirage tirageConserne = tirageService.trouverTirageParLibelle(libelle_liste);
+        Tirage tirageConserne = tirageService.trouverTirageParLibelle(tirage.getLibelleTirage());
 
-        Activite activiteConserne = activiteService.trouverActiviteParLibelle(libelle_activite);
+        if (tirageConserne == null){
+            Activite activiteConserne = activiteService.trouverActiviteParLibelle(libelle_activite);
 
-        Liste_postulant listeConserne = listePostulantService.trouverListePostulantParLibelle(libelle_liste);
+            Liste_postulant listeConserne = listePostulantService.trouverListePostulantParLibelle(libelle_liste);
 
-        return tirageService.creer(tirageConserne, listeConserne, activiteConserne);
+            return tirageService.creer(tirage, listeConserne, activiteConserne);
+        }else {
+            ReponseMessage message = new ReponseMessage("Ce tirage existe dejà", false);
+
+            return message;
+        }
+
     }
 
 

@@ -3,7 +3,9 @@ package com.example.erpbackend.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -33,5 +35,6 @@ public class Activite {
 
     @OneToOne
     private Salle salle;
+
 
 }

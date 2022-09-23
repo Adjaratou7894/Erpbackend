@@ -76,7 +76,6 @@ public class ListePostulantServiceImplement implements ListePostulantService {
 
     @Override
     public Liste_postulant creerlistepostulant(Liste_postulant listePostulant) {
-        listePostulant.setNombretirage(0);
         return listePostulantRepository.save(listePostulant);
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface TirageService {
     //methode permettant de faire le trie avec la liste des postulant à trie et le nombre à trié en parametre
-    List<Postulant> trie(List<Postulant> listAtrier, Long nbre);
+    void trie(List<Postulant> listAtrier, int nbre, Long idTirage);
 
     //methode permettant de creer un tirage
     ReponseMessage creer(Tirage tirage, Liste_postulant liste, Activite activite);
