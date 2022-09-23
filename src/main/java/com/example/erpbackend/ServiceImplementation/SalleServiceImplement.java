@@ -22,19 +22,12 @@ public class SalleServiceImplement implements SalleService {
 
     @Override
     public ReponseMessage AjouterSalle(Salle salle) {
-<<<<<<< HEAD
         if (salleRepository.findByNom(salle.getNom()) == null) {
-=======
-        if (salleRepository.findByIdsalle(salle.getIdsalle()) != null) {
->>>>>>> ahmadoutest
+
             salleRepository.save(salle);
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
         }else { ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
-<<<<<<< HEAD
-=======
-
->>>>>>> ahmadoutest
             return message;
            }
         }
