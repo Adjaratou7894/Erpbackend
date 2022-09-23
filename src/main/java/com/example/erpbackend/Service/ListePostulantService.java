@@ -16,4 +16,8 @@ public interface ListePostulantService {
     ReponseMessage supprimerListePostulant (Long idlistepostulant);
 
     Liste_postulant trouverStatuParIdListePostulant (Long idlistepostulant);
+
+    Liste_postulant trouverListePostulantParLibelle(String libelleliste);
+
+    Liste_postulant creerlistepostulant(Liste_postulant listePostulant);
 }

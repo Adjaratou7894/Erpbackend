@@ -14,5 +14,12 @@ import java.util.List;
 @AllArgsConstructor
 public class PostulantServiceImplement implements PostulantService {
 
+    private PostulantRepository postulantRepository;
 
+
+    @Override
+    public List<Postulant> enregistrerPostulant(List<Postulant> listPost) {
+
+        return postulantRepository.saveAll(listPost);
+    }
 }

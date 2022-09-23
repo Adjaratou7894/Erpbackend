@@ -11,5 +11,5 @@ public interface ListePostulantRepository extends JpaRepository<Liste_postulant,
 
     Liste_postulant findByLibelleliste(String libelleliste);
 
-    Liste_postulant findByIdlistepostulant(Long idlistepostulant);
+    Liste_postulant findByIdliste(Long idlistepostulant);
 }
