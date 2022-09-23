@@ -1,4 +1,5 @@
 package com.example.erpbackend.Controller;
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Acteur;
 import com.example.erpbackend.Service.ActeurService;
 import io.swagger.annotations.Api;
@@ -19,13 +20,13 @@ public class ActeurController {
 
     @ApiOperation(value = "Creer un Acteur")
     @PostMapping("/ajouter")
-    public Acteur creerActeur( @RequestBody Acteur acteur){
+    public ReponseMessage creerActeur(@RequestBody Acteur acteur){
         return acteurService.creerActeur(acteur);
     }
     @ApiOperation(value = "Modifier un Acteur")
-    @PutMapping("/modifier/{id}")
-    public Acteur modifierActeur(  @PathVariable Long id,@RequestBody Acteur acteur){
-        return acteurService.modifierActeur(id, acteur);
+    @PutMapping("/modifier")
+    public ReponseMessage modifierActeur(@RequestBody Acteur acteur){
+        return acteurService.modifierActeur(acteur);
     }
     @ApiOperation(value = "Afficher la liste des Acteur")
     @GetMapping("/afficheracteur")
@@ -34,9 +35,8 @@ public class ActeurController {
     }
     @ApiOperation(value = "Supprimer un Acteur")
     @DeleteMapping("/supprimer/{id}")
-    public String delete (@PathVariable Long id){
+    public ReponseMessage delete (@PathVariable Long id){
         return acteurService.SupprimerActeur(id);
     }
-
 
 }

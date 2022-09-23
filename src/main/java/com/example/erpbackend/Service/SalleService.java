@@ -9,7 +9,7 @@ public interface SalleService {
 
     List<Salle> AffichageDesSalle();
 
-    Salle modifierSalle(Salle salle);
+    ReponseMessage modifierSalle(Salle salle);
 
     ReponseMessage SupprissionSalle(Long idsalle);
 

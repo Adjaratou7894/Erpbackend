@@ -14,7 +14,7 @@ import java.util.List;
 public class Acteur {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long idacteur;
     private String nom;
     private String prenom;
     private String numero;

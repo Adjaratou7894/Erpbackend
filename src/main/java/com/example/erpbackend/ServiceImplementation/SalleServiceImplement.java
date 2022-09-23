@@ -22,12 +22,11 @@ public class SalleServiceImplement implements SalleService {
 
     @Override
     public ReponseMessage AjouterSalle(Salle salle) {
-        if (salleRepository.findByIdsalle(salle.getIdsalle()) != null) {
-                salleRepository.save(salle);
-                ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
-                return message;
-            } else {
-            ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
+        if (salleRepository.findByNom(salle.getNom()) == null) {
+            salleRepository.save(salle);
+            ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
+            return message;
+        }else { ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
             return message;
            }
         }
@@ -38,22 +37,32 @@ public class SalleServiceImplement implements SalleService {
             return salleRepository.findAll();
         }
 
-        //****************Modification de la Salle*******************
-        @Override
-        public Salle modifierSalle (Salle salle){
+    //****************Modification de la Salle*******************
+    @Override
+    public ReponseMessage modifierSalle( Salle salle) {
+        if (salleRepository.findByIdsalle(salle.getIdsalle()) !=null) {
             return salleRepository.findById(salle.getIdsalle())
-                    .map(pA -> {
+                    .map(pA-> {
                         pA.setNom(salle.getNom());
                         pA.setDisponibilite(salle.getDisponibilite());
-                        return salleRepository.save(pA);
-                    }).orElseThrow(() -> new RuntimeException("Salle non trouvée"));
+                        salleRepository.save(pA);
+                        ReponseMessage message = new ReponseMessage("Salle modifiée avec succes", true);
+                        return  message;
+                    }).orElseThrow(()-> new RuntimeException("Salle non trouvée"));
+        }else {
+            ReponseMessage message = new ReponseMessage("Salle non trouvée ", false);
+
+            return message;
         }
+
+    }
 
     //****************Supression de la Salle*******************
     @Override
     public ReponseMessage SupprissionSalle(Long idsalle) {
-        if (salleRepository.findById(idsalle) !=null){
-            ReponseMessage message = new ReponseMessage("Salle Supprimer avec Succés", true);
+        if(salleRepository.findByIdsalle(idsalle) != null){
+            salleRepository.deleteById(idsalle);
+            ReponseMessage message = new ReponseMessage("Salle Supprimée avec Succés", true);
            return message;
         } else {
             ReponseMessage message = new ReponseMessage("Impossible de Supprimer", false);
