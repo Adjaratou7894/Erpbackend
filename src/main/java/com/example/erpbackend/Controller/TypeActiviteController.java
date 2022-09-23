@@ -12,7 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/typeactivite")
-@Api(value = "hello")
+@Api(value = "hello", description = "Gestion des TypeActivité")
 public class TypeActiviteController {
     @Autowired
     public TypeActiviteServiceImplement typeActiviteServiceImplement;

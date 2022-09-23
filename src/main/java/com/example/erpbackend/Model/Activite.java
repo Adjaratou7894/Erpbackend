@@ -12,12 +12,14 @@ import java.util.Date;
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private Long  id;
     private String nom;
     private Date   dateDebut;
     private Date   dateFin;
     private String duree;
     private Boolean etat;
+
     @ManyToOne
     private Type_activite typeActivite;
     @ManyToOne

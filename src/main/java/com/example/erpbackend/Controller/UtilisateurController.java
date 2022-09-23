@@ -2,12 +2,14 @@ package com.example.erpbackend.Controller;
 
 import com.example.erpbackend.Model.Utilisateur;
 import com.example.erpbackend.Service.UtilisateurService;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Api(value = "hello", description = "Gestion des Users")
 @RequestMapping("/utilisateur")
 public class UtilisateurController {
     @Autowired
