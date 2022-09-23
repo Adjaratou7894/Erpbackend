@@ -17,6 +17,7 @@ public class Activite {
     private Date   dateFin;
     private String duree;
     private Boolean etat;
+
     @ManyToOne
     private Type_activite typeActivite;
     @ManyToOne

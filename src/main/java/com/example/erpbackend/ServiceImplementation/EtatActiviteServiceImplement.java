@@ -42,15 +42,16 @@ public class EtatActiviteServiceImplement implements EtatActiviteService {
 
     @Override
     public ReponseMessage supprimerEtatActivite(Long id) {
+            etatActiviteRepository.deleteById(id);
+            if (etatActiviteRepository.findByIdetat(id) != null) {
 
-        if(etatActiviteRepository.findByIdetat(id) != null){
-            ReponseMessage message = new ReponseMessage("Etat supprimé avec succes", true);
-            return message;
-        }else {
-            ReponseMessage message = new ReponseMessage("Etat non trouvée", false);
-            return message;
+                ReponseMessage message = new ReponseMessage("Etat supprimé avec succes", true);
+                return message;
+            } else {
+                ReponseMessage message = new ReponseMessage("Etat non trouvée", false);
+                return message;
+            }
         }
-    }
 
     @Override
     public List<Etat_activite> afficherEtatActivite() {

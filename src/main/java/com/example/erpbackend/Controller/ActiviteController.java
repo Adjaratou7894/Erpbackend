@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Role;
@@ -10,6 +11,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import io.swagger.annotations.Api;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 @RequestMapping("/activite")

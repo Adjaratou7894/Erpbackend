@@ -18,6 +18,7 @@ public class Acteur {
     private String nom;
     private String prenom;
     private String numero;
+
     @ManyToMany(
 
             fetch = FetchType.LAZY,
