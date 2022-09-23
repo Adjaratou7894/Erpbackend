@@ -59,6 +59,7 @@ public class RoleServiceImplement implements RoleService {
     //================DEBUT DE LA METHODE PERMETTANT D'AFFICHER UN ROLE=========================
     @Override
     public List<Role> afficherRole() {
+
         return roleRepository.findAll();
     }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER UN ROLE=========================
@@ -83,6 +84,7 @@ public class RoleServiceImplement implements RoleService {
     //================DEBUT DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UN ROLE=========================
     @Override
     public Role trouverRoleParId(Long idrole) {
+
         return roleRepository.findByIdrole(idrole);
     }
 

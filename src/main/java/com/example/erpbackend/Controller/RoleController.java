@@ -22,6 +22,7 @@ public class RoleController {
     @ApiOperation(value = "Ajouter un rôle")
     @PostMapping("/ajouter")
     public ReponseMessage create(@RequestBody Role role){
+
         return roleService.ajouterRole(role);
     }
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UN ROLE======================
@@ -30,6 +31,7 @@ public class RoleController {
     @ApiOperation(value = "Modifier un rôle")
     @PutMapping("/modifier")
     public ReponseMessage update(@RequestBody Role role){
+
             return roleService.modifierRole(role);
     }
     //================FIN DE LA METHODE PERMETTANT DE MODIFIER UN ROLE======================
@@ -38,6 +40,7 @@ public class RoleController {
     @ApiOperation(value = "Afficher la liste des rôles")
     @GetMapping("/Afficher")
     public List<Role> read(){
+
         return roleService.afficherRole();
     }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LA LISTE DES ROLES========================

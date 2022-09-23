@@ -13,16 +13,16 @@ public interface RoleService {
     ReponseMessage ajouterRole(Role role);
 
 
-    //================METHODE PERMETTANT DE MODIFIER UN ROLE=========================
+    //================METHODE PERMETTANT DE MODIFIER UN ROLE========================
     ReponseMessage modifierRole(Role role);
 
-    //================METHODE PERMETTANT D'AFFICHER LES ROLES=========================
+    //================METHODE PERMETTANT D'AFFICHER LES ROLES========================
     List<Role> afficherRole();
 
-    //================METHODE PERMETTANT DE SUPPRIMER UN ROLE=========================
+    //================METHODE PERMETTANT DE SUPPRIMER UN ROLE========================
     ReponseMessage supprimerRole(Long idrole);
 
 
-    //================METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UN ROLE=========================
+    //================METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UN ROLE========================
     Role trouverRoleParId(Long idrole);
 }
