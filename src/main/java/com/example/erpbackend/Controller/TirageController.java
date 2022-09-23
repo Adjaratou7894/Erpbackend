@@ -34,11 +34,6 @@ public class TirageController {
     //================FIN DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
 
 
-    //================DEBUT DE LA METHODE PERMETTANT DE CREER UN TIRAGE=========================
-
-    //================FIN DE LA METHODE PERMETTANT DE CREER UN TIRAGE=========================
-
-
     //================DEBUT DE LA METHODE PERMETTANT DE RECUPERER TIRAGE PAR IDLIST=========================
         @ApiOperation(value = "Afficher la listes des tirages par idlist")
         @GetMapping("/recupererTirageParIdliste/{Idlistepostulant}")
