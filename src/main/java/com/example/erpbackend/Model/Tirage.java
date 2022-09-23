@@ -13,8 +13,8 @@ import java.util.List;
 public class Tirage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long      id;
-    private  String    LibelleTirage;
+    private  Long      idtirage;
+    private  String    libelleTirage;
     private  Integer   nombrePostulantTire;
     private  Date      date;
    /* @ManyToOne

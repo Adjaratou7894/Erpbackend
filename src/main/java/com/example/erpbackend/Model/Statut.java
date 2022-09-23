@@ -15,7 +15,8 @@ public class Statut {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idstatut;
     private String nom;
-   @ManyToMany
+
+    @ManyToMany
     private List<Acteur> acteurs = new ArrayList<>();
 
 }

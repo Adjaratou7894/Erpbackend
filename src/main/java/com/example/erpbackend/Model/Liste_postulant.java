@@ -18,7 +18,6 @@ public class Liste_postulant {
     private Integer nombretirage;
     private Date dateliste;
 
-    @JsonIgnore
-       @OneToOne
+    @OneToOne
     private Activite activite;
 }

@@ -34,24 +34,24 @@ public class EtatActiviteServiceImplement implements EtatActiviteService {
 
     @Override
     public Etat_activite modifierEtatActivite(Etat_activite etat_activite) {
-        return etatActiviteRepository.findById(etat_activite.getIdetat())
-                .map(ea -> {
+        return etatActiviteRepository.findById(etat_activite.getIdetat()).map(ea -> {
                         ea.setEtat(etat_activite.getEtat());
                     return etatActiviteRepository.save(ea);
                 }).orElseThrow(() -> new RuntimeException("erreur"));
     }
 
     @Override
-    public ReponseMessage supprimerEtatActivite(String etat) {
+    public ReponseMessage supprimerEtatActivite(Long id) {
+            etatActiviteRepository.deleteById(id);
+            if (etatActiviteRepository.findByIdetat(id) != null) {
 
-        if(etatActiviteRepository.findByEtat(etat) != null){
-            ReponseMessage message = new ReponseMessage("Etat supprimé avec succes", true);
-            return message;
-        }else {
-            ReponseMessage message = new ReponseMessage("Etat non trouvée", false);
-            return message;
+                ReponseMessage message = new ReponseMessage("Etat supprimé avec succes", true);
+                return message;
+            } else {
+                ReponseMessage message = new ReponseMessage("Etat non trouvée", false);
+                return message;
+            }
         }
-    }
 
     @Override
     public List<Etat_activite> afficherEtatActivite() {
@@ -60,7 +60,7 @@ public class EtatActiviteServiceImplement implements EtatActiviteService {
 
     @Override
     public Etat_activite trouverEtatActiviteParLibelle(String etat) {
-        return null;
+        return etatActiviteRepository.findByEtat(etat);
     }
 
     @Override

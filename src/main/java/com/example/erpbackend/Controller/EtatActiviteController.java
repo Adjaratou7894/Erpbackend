@@ -4,19 +4,27 @@ import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Etat_activite;
 import com.example.erpbackend.Repository.EtatActiviteRepository;
 import com.example.erpbackend.Service.EtatActiviteService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@Api(value = "hello", description = "Gestion de l'etat des activités")
 @RequestMapping("/etatactivite")
 @AllArgsConstructor
 public class EtatActiviteController {
 
+    @Autowired
+
     private final EtatActiviteService etatActiviteService;
 
     private final EtatActiviteRepository etatActiviteRepository;
+
+    @ApiOperation(value = "Créer un état a une activitée")
 
 
     @PostMapping("/ajouter")
@@ -24,16 +32,20 @@ public class EtatActiviteController {
         return etatActiviteService.ajouterEtatActivite(etat_activite);
     }
 
+    @ApiOperation(value = "Afficher la liste de l'état d'une Activitée")
     @GetMapping("/afficher")
     public List<Etat_activite> afficherEtatActivité(){
         return etatActiviteService.afficherEtatActivite();
     }
 
-    @DeleteMapping("/supprimer/{etat}")
-    public ReponseMessage supprimerEtatActivite(@PathVariable String etat){
+    @ApiOperation(value = "Suprimer l'état une Activitée")
 
-        return etatActiviteService.supprimerEtatActivite(etat);
+    @DeleteMapping("/supprimer/{id}")
+    public ReponseMessage supprimerEtatActivite(@PathVariable Long id){
+
+        return etatActiviteService.supprimerEtatActivite(id);
     }
+    @ApiOperation(value = "Modifier l'état d'une Activitée")
 
     @PutMapping("/modifier")
     public ReponseMessage modifierEtatActivite(@RequestBody Etat_activite etat_activite){

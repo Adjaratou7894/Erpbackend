@@ -7,10 +7,15 @@ import java.util.List;
 
 public interface SalleService {
     ReponseMessage AjouterSalle(Salle salle);
+
     List<Salle> AffichageDesSalle();
+
     Salle modifierSalle(Salle salle);
+
     ReponseMessage SupprissionSalle(Long idsalle);
+
     List<Salle> AffichageDesSalleOccupee();
+
     List<Salle> AffichageDesSalleLibre();
 
     Salle trouverSalleParId(Long idsalle);

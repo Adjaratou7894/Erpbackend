@@ -68,10 +68,15 @@ public class RoleServiceImplement implements RoleService {
             return message;
         }
     }
+    //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UN ROLE=========================
 
+
+    //================DEBUT DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UN ROLE=========================
     @Override
     public Role trouverRoleParId(Long idrole) {
         return roleRepository.findByIdrole(idrole);
     }
-    //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UN ROLE=========================
+
+    //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UN ROLE=========================
+
 }
