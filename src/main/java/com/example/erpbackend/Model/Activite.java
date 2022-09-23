@@ -8,16 +8,16 @@ import java.util.Date;
 @Entity
 @Table
 @Data
-
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long  id;
+    private Long  idactivite;
     private String nom;
     private Date   dateDebut;
     private Date   dateFin;
     private String duree;
     private Boolean etat;
+
     @ManyToOne
     private Type_activite typeActivite;
     @ManyToOne

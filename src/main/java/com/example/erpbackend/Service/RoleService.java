@@ -14,7 +14,7 @@ public interface RoleService {
 
 
     //================METHODE PERMETTANT DE MODIFIER UN ROLE=========================
-    Role modifierRole(Role role);
+    ReponseMessage modifierRole(Role role);
 
     //================METHODE PERMETTANT D'AFFICHER LES ROLES=========================
     List<Role> afficherRole();

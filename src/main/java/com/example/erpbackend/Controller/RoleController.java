@@ -30,17 +30,7 @@ public class RoleController {
     @ApiOperation(value = "Modifier un rôle")
     @PutMapping("/modifier")
     public ReponseMessage update(@RequestBody Role role){
-        if (roleService.trouverRoleParId(role.getIdrole()) !=  null){
-
-            roleService.modifierRole(role);
-            ReponseMessage message = new ReponseMessage("Etat modifié avec suces", true);
-
-            return message;
-        }else {
-            ReponseMessage message = new ReponseMessage("Etat non trouvé", false);
-
-            return message;
-        }
+            return roleService.modifierRole(role);
     }
     //================FIN DE LA METHODE PERMETTANT DE MODIFIER UN ROLE======================
 
