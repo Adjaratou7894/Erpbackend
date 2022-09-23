@@ -1,5 +1,7 @@
 package com.example.erpbackend.Service;
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
@@ -11,7 +13,7 @@ public interface TirageService {
     List<Postulant> trie(List<Postulant> listAtrier, Long nbre);
 
     //methode permettant de creer un tirage
-    Tirage creer(Tirage tirage, Liste_postulant liste);
+    ReponseMessage creer(Tirage tirage, Liste_postulant liste, Activite activite);
 
     //methode permettant de trouver un tirage par son libellet
     Tirage trouverTirageParLibelle(String libelleTirage);

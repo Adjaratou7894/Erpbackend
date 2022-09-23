@@ -26,7 +26,7 @@ public class SalleServiceImplement implements SalleService {
             salleRepository.save(salle);
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
-        }else { ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
+        }else { ReponseMessage message = new ReponseMessage("Cette salle existe déjà", false);
             return message;
            }
         }
