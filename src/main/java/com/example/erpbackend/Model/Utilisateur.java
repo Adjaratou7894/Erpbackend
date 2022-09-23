@@ -20,7 +20,7 @@ public class    Utilisateur {
     private String numero;
     private String email;
     private String password;
-    @ManyToOne
+   @ManyToOne
     private Entite entite;
     @ManyToOne
     private Role role;

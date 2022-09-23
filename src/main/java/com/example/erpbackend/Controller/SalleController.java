@@ -13,42 +13,47 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @Api(value = "Test", description = "Gestion Des Salle")
 @RequestMapping("/salle")
 public class SalleController {
+
    @Autowired
     private  SalleService SalleService;
+
     @ApiOperation(value = "Ajout d'une Salle")
-   @PostMapping("/AjouterSalle")
-    public ReponseMessage AjouterSalle(@RequestBody Salle salle){
-       return SalleService.AjouterSalle(salle);
-   }
+    @PostMapping("/AjouterSalle")
+    public ReponseMessage AjouterSalle(@RequestBody Salle salle) {
+        return SalleService.AjouterSalle(salle);
+    }
+
     @ApiOperation(value = "Affichage de Toutes Les Salles")
-   @GetMapping("/afficherToutesLesSalles")
-    public List<Salle> afficherToutesLesSalles(){
-       return SalleService.AffichageDesSalle();
-   }
+    @GetMapping("/afficherToutesLesSalles")
+    public List<Salle> afficherToutesLesSalles() {
+        return SalleService.AffichageDesSalle();
+    }
+
     @ApiOperation(value = "Affichage de Toutes Les Salles Occupées")
     @GetMapping("/afficherToutesLesSallesOccupee")
-    public List<Salle> afficherToutesLesSallesOccupee(){
+    public List<Salle> afficherToutesLesSallesOccupee() {
         return SalleService.AffichageDesSalleOccupee();
     }
+
     @ApiOperation(value = "Affichage de Toutes Les Salles Libres")
     @GetMapping("/afficherToutesLesSallesLibre")
-    public List<Salle> afficherToutesLesSallesLibre(){
+    public List<Salle> afficherToutesLesSallesLibre() {
         return SalleService.AffichageDesSalleOccupee();
     }
+
     @ApiOperation(value = "Modification d'une Salle")
     @PutMapping("/modifierSalle")
-    public ReponseMessage modifier(@RequestBody Salle Salle){
-        if (SalleService.trouverSalleParId(Salle.getIdsalle()) !=null){
+    public ReponseMessage modifier(@RequestBody Salle Salle) {
+        if (SalleService.trouverSalleParId(Salle.getIdsalle()) != null) {
             SalleService.modifierSalle(Salle);
             ReponseMessage message = new ReponseMessage("Salle modifiée avec suces", true);
 
             return message;
-        }else {
+        } else {
             ReponseMessage message = new ReponseMessage("Salle non trouvée", false);
 
             return message;
@@ -58,7 +63,7 @@ public class SalleController {
 
     @ApiOperation(value = "Suppression d'une Salle")
     @DeleteMapping("/SupprimerSalle")
-    public ReponseMessage supprimer(@PathVariable Long idsalle){
+    public ReponseMessage supprimer(@PathVariable Long idsalle) {
         return SalleService.SupprissionSalle(idsalle);
     }
 }

@@ -16,7 +16,7 @@ public class Statut {
     private Long idstatut;
     private String nom;
 
-    @ManyToMany
+   @ManyToMany
     private List<Acteur> acteurs = new ArrayList<>();
 
 }
