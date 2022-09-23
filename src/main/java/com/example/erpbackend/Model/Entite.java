@@ -3,6 +3,7 @@ package com.example.erpbackend.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table
@@ -11,6 +12,6 @@ import javax.persistence.*;
 public class Entite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long   id;
+    private Long   idEntite;
     private String nom;
 }

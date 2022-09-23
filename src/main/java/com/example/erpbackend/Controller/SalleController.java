@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Salle;
 import com.example.erpbackend.Service.SalleService;
@@ -12,10 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+
 @RestController
 @RequestMapping("/salle")
-@AllArgsConstructor
-@Api(value = "hello", description = "Sample hello world application")
 public class SalleController {
    @Autowired
     private  SalleService SalleService;
@@ -60,5 +63,5 @@ public class SalleController {
     public ReponseMessage supprimer(@PathVariable Long idsalle){
         return SalleService.SupprissionSalle(idsalle);
     }
-}
 
+}
