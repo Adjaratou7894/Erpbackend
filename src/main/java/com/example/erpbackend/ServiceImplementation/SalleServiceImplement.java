@@ -22,7 +22,7 @@ public class SalleServiceImplement implements SalleService {
     //****************Ajout d'une Salle*******************
     @Override
     public ReponseMessage AjouterSalle(Salle salle) {
-        if (salleRepository.findBySalle(salle.getNom()) != null) {
+        if (salleRepository.findByNom(salle.getNom()) != null) {
             salleRepository.save(salle) ;
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
