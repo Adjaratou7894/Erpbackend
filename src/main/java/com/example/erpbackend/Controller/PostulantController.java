@@ -1,5 +1,9 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Activite;
+import com.example.erpbackend.Service.ActiviteService;
+import io.swagger.annotations.Api;
 import com.example.erpbackend.Importation.ConfigExcel;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
@@ -9,7 +13,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.PathVariable;
-import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,10 +29,15 @@ public class PostulantController {
     @Autowired
     private final ListePostulantService listePostulantService;
     private final PostulantService postulantService;
+    final private ActiviteService activiteService;
+
 
     //Le controlleur permettant d'importer un fichier et créer automatiquement une liste des postulants
-    @RequestMapping("/import/excel/{libelleliste}")//il prend en parametre le libelle de la liste des postulant
-    public String importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste) {
+   /* @RequestMapping("/import/excel/{libelleliste}")//il prend en parametre le libelle de la liste des postulant
+    public String importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste) {*/
+    @RequestMapping("/import/excel/{libelleliste}/{libelleActivite}")
+    public ReponseMessage importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste, @PathVariable String libelleActivite) {
+
 
         /*
          * MultipartFile, classe java permettant d'importer un ou plusieurs fichiers
@@ -41,44 +49,43 @@ public class PostulantController {
 
         List<Postulant> postelist = importfichier.excelImport(file);
 
-        if(postelist.size()==0){//verifie si la liste est vide
+                if (postelist.size() == 0) {
 
-            return "Fichier vide";
-        }else {//si la liste n'est pas vide
+                    ReponseMessage message = new ReponseMessage("Fichier vide", false);
 
-            //itialisation de la classe postulant liste
-            Liste_postulant liste_postulant = new Liste_postulant();
+                    return message;
+                } else {
+                    Liste_postulant liste_postulant = new Liste_postulant();
 
-            //Recuperation du libelle de la liste
-            liste_postulant.setLibelleliste(libelleliste);
+                    if (activiteService.trouverActiviteParLibelle(libelleActivite) == null) {
 
-            //on modifie la date de la liste en lui donnant la date actuelle
-            liste_postulant.setDateliste(new Date());
+                        ReponseMessage message = new ReponseMessage("Cette activité n'existe pas", false);
 
-            //verifie si la liste existe déjà ou pas
-            if(listePostulantService.trouverListePostulantParLibelle(liste_postulant.getLibelleliste()) == null){
-                //on crée la liste et garder cette listepostulant dans lpt
-                Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
+                        return message;
+                    } else {
+                        Activite activite = new Activite();
 
-                /*
-                 * Dans la boucle for suivant on parcours la liste des postulants en lui ajoutant l'id de la liste
-                 * sur la quelle la liste a été tiré
-                 */
+                        liste_postulant.setLibelleliste(libelleliste);
+                        liste_postulant.setDateliste(new Date());
 
-                for(Postulant pot:postelist){
+                        if (listePostulantService.trouverListePostulantParLibelle(liste_postulant.getLibelleliste()) == null) {
+                            Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
 
-                    //ajout de l'id de la liste à tous les  postulants
-                    pot.setListePostulant(lpt);
-                    //attribuer l'etat true par defeaut au postulant tirer
-                    pot.setEtat(true);
+                            for (Postulant pot : postelist) {
+
+                                pot.setListePostulant(lpt);
+                                pot.setEtat(true);
+                            }
+                            System.out.println(postelist);
+                            postulantService.enregistrerPostulant(postelist);
+                            ReponseMessage message = new ReponseMessage("liste importer avec succes", true);
+                            return message;
+                        } else {
+                            ReponseMessage message = new ReponseMessage("Cette liste existe déjà", false);
+                            return message;
+                        }
+                    }
+
                 }
-                System.out.println(postelist);
-                //enregistrement de la liste des postulants importés dans la base
-                postulantService.enregistrerPostulant(postelist);
-                return "liste importer avec succes";
-            }else {
-                return "Cette liste existe déjà";
             }
         }
-    }
-}

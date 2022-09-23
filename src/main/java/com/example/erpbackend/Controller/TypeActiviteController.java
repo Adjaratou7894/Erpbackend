@@ -17,16 +17,16 @@ public class TypeActiviteController {
     @Autowired
     public TypeActiviteServiceImplement typeActiviteServiceImplement;
 
-
     // ============================== ICI ON CREE LA LISTE DES TYPES DE L'ACTIVITE ==============================
+
     @PostMapping("/ajouter")
     @ApiOperation(value = "Ici on ajoute les types d'activité")
     public ReponseMessage ajouterTypesActivites(@RequestBody Type_activite type_activite){
         return this.typeActiviteServiceImplement.ajouterTypeActivite(type_activite);
     }
 
-
     // =======================ICI ON AFFICHE LA LISTE DES TYPES DE L'ACTIVITE===============================
+
     @GetMapping("/afficher")
     @ApiOperation(value = "Ici on liste les types d'activité")
     public List<Type_activite> lesTypesActivites(){
@@ -41,21 +41,13 @@ public class TypeActiviteController {
         return  typeActiviteServiceImplement.modifierTypeActivite(id,type_activite);
     }
 
-
     // =======================ICI ON SUPPRIME UN DES TYPES DE L'ACTIVITE===============================
-
-
 
     @ApiOperation(value = "Ici on supprime les types d'activité")
     @DeleteMapping("/supprimer/{id}")
     public ReponseMessage supprimerTypeActivite(@PathVariable("id") Long id){
+
         return  typeActiviteServiceImplement.supprimerTypeActvite(id);
     }
-
-
-
-
-
-
 
 }

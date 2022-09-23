@@ -17,8 +17,9 @@ public class Tirage {
     private  String    libelleTirage;
     private  Integer   nombrePostulantTire;
     private  Date      date;
-   /* @ManyToOne
+
+    @ManyToOne
     private Utilisateur utilisateur;
     @ManyToOne
-    private Liste_postulant listePostulant;*/
+    private Liste_postulant listePostulant;
 }

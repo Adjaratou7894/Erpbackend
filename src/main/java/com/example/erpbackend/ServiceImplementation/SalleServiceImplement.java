@@ -3,7 +3,6 @@ package com.example.erpbackend.ServiceImplementation;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Salle;
 import com.example.erpbackend.Repository.SalleRepository;
-
 import com.example.erpbackend.Service.SalleService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,34 +19,35 @@ public class SalleServiceImplement implements SalleService {
     private final SalleRepository salleRepository;
 
     //****************Ajout d'une Salle*******************
+
     @Override
     public ReponseMessage AjouterSalle(Salle salle) {
         if (salleRepository.findByIdsalle(salle.getIdsalle()) != null) {
             salleRepository.save(salle);
-
-            salleRepository.save(salle) ;
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
         }else { ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
-            return message;
-        }
-        }
-    //****************Liste de toutes les Salles*******************
-    @Override
-    public List<Salle> AffichageDesSalle() {
-        return salleRepository.findAll();
-    }
 
-    //****************Modification de la Salle*******************
-    @Override
-    public Salle modifierSalle( Salle salle) {
-        return salleRepository.findById(salle.getIdsalle())
-                .map(pA-> {
-                    pA.setNom(salle.getNom());
-                    pA.setDisponibilite(salle.getDisponibilite());
-                    return salleRepository.save(pA);
-                }).orElseThrow(()-> new RuntimeException("Salle non trouvée"));
-    }
+            return message;
+           }
+        }
+
+        //****************Liste de toutes les Salles*******************
+        @Override
+        public List<Salle> AffichageDesSalle () {
+            return salleRepository.findAll();
+        }
+
+        //****************Modification de la Salle*******************
+        @Override
+        public Salle modifierSalle (Salle salle){
+            return salleRepository.findById(salle.getIdsalle())
+                    .map(pA -> {
+                        pA.setNom(salle.getNom());
+                        pA.setDisponibilite(salle.getDisponibilite());
+                        return salleRepository.save(pA);
+                    }).orElseThrow(() -> new RuntimeException("Salle non trouvée"));
+        }
 
     //****************Supression de la Salle*******************
     @Override
@@ -79,5 +79,6 @@ public class SalleServiceImplement implements SalleService {
 
         return salleRepository.findByIdsalle(idsalle);
     }
+
 
 }

@@ -13,7 +13,6 @@ import java.util.List;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 @RestController
 @Api(value = "Test", description = "Gestion Des Salle")
 @RequestMapping("/salle")
@@ -66,4 +65,5 @@ public class SalleController {
     public ReponseMessage supprimer(@PathVariable Long idsalle) {
         return SalleService.SupprissionSalle(idsalle);
     }
+
 }

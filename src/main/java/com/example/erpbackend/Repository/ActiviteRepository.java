@@ -12,4 +12,5 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     Activite findByNom(String nom);
 
     Activite findByIdactivite(Long idactivite);
+
 }
