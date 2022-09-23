@@ -48,7 +48,7 @@ public class SalleController {
 
 
     @ApiOperation(value = "Suppression d'une Salle")
-    @DeleteMapping("/SupprimerSalle")
+    @DeleteMapping("/modifierSalle")
     public ReponseMessage modifier(@RequestBody Salle Salle){
             return SalleService.modifierSalle(Salle);
     }
