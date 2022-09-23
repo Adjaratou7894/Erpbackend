@@ -5,6 +5,7 @@ import com.example.erpbackend.Model.Salle;
 import com.example.erpbackend.Repository.SalleRepository;
 import com.example.erpbackend.Service.SalleService;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,13 +16,12 @@ import java.util.List;
 public class SalleServiceImplement implements SalleService {
 
 
+    //****************Ajout d'une Salle*******************
     private final SalleRepository salleRepository;
 
-    //****************Ajout d'une Salle*******************
     @Override
     public ReponseMessage AjouterSalle(Salle salle) {
-        if (salleRepository.findByIdsalle(salle.getIdsalle()) != null) {
-            salleRepository.save(salle);
+        if (salleRepository.findByIdsalle(salle.getIdsalle()) != null ) {
             salleRepository.save(salle) ;
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
@@ -37,7 +37,7 @@ public class SalleServiceImplement implements SalleService {
 
     //****************Modification de la Salle*******************
     @Override
-    public Salle modifierSalle( Salle salle) {
+    public Salle modifierSalle(Salle salle) {
         return salleRepository.findById(salle.getIdsalle())
                 .map(pA-> {
                     pA.setNom(salle.getNom());
