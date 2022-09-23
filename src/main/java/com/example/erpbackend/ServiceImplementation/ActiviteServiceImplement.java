@@ -90,5 +90,12 @@ public class ActiviteServiceImplement implements ActiviteService {
 
         return activiteRepository.findByIdactivite(idactivite);
     }
+
+    @Override
+    public Activite trouverActiviteParLibelle(String libelleActivite) {
+
+        return activiteRepository.findByNom(libelleActivite);
+
+        }
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
 }

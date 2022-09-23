@@ -1,6 +1,9 @@
 package com.example.erpbackend.Controller;
 
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Activite;
+import com.example.erpbackend.Service.ActiviteService;
 import io.swagger.annotations.Api;
 import com.example.erpbackend.Importation.ConfigExcel;
 import com.example.erpbackend.Model.Liste_postulant;
@@ -27,39 +30,52 @@ public class PostulantController {
     @Autowired
     private final ListePostulantService listePostulantService;
     private final PostulantService postulantService;
+    final private ActiviteService activiteService;
 
-    @RequestMapping("/import/excel/{libelleliste}")
-    public String importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste) {
+    @RequestMapping("/import/excel/{libelleliste}/{libelleActivite}")
+    public ReponseMessage importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste, @PathVariable String libelleActivite) {
 
         ConfigExcel importfichier = new ConfigExcel();
 
         List<Postulant> postelist = importfichier.excelImport(file);
 
-
-
         if(postelist.size()==0){
 
-            return "Fichier vide";
+            ReponseMessage message = new ReponseMessage("Fichier vide", false);
+
+            return message;
         }else {
             Liste_postulant liste_postulant = new Liste_postulant();
 
-            liste_postulant.setLibelleliste(libelleliste);
-            liste_postulant.setDateliste(new Date());
+            if (activiteService.trouverActiviteParLibelle(libelleActivite) == null){
 
-            if(listePostulantService.trouverListePostulantParLibelle(liste_postulant.getLibelleliste()) == null){
-                Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
+                ReponseMessage message = new ReponseMessage("Cette activité n'existe pas", false);
 
-                for(Postulant pot:postelist){
-
-                    pot.setListePostulant(lpt);
-                    pot.setEtat(true);
-                }
-                System.out.println(postelist);
-                postulantService.enregistrerPostulant(postelist);
-                return "liste importer avec succes";
+                return message;
             }else {
-                return "Cette liste existe déjà";
+                Activite activite = new Activite();
+
+                liste_postulant.setLibelleliste(libelleliste);
+                liste_postulant.setDateliste(new Date());
+
+                if(listePostulantService.trouverListePostulantParLibelle(liste_postulant.getLibelleliste()) == null){
+                    Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
+
+                    for(Postulant pot:postelist){
+
+                        pot.setListePostulant(lpt);
+                        pot.setEtat(true);
+                    }
+                    System.out.println(postelist);
+                    postulantService.enregistrerPostulant(postelist);
+                    ReponseMessage message = new ReponseMessage("liste importer avec succes", true);
+                    return message;
+                }else {
+                    ReponseMessage message = new ReponseMessage("Cette liste existe déjà", false);
+                    return message;
+                }
             }
-        }
+
+            }
     }
 }

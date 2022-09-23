@@ -24,4 +24,6 @@ public interface ActiviteService {
     //================METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
     Activite trouverActiviteParId(Long idactivite);
 
+    Activite trouverActiviteParLibelle(String libelleActivite);
+
 }
