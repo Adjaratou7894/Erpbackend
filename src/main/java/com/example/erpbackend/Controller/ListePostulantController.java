@@ -1,11 +1,14 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Liste_postulant;
+import com.example.erpbackend.Service.ListePostulantService;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Service.ListePostulantService;
-
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "hello", description = "Gestion de la liste des Postulants")
+@Api(value = "hello", description = "Entité Liste Postulant")
+@RestController
 @RequestMapping("/listepostulant")
 @AllArgsConstructor
 public class ListePostulantController {

@@ -59,7 +59,7 @@ public class TirageServiceImplement implements TirageService{
 
 
         //ajout de l'id de la liste à au tirage
-        tirage.setListePostulant(liste);
+        tirage.setIdtirage(liste.getIdliste());
 
         //ajout de la date actuelle au tirage
         tirage.setDate(new Date());

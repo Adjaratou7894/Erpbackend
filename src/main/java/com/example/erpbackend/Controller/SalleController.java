@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "Test", description = "Gestion Des Salle")
 @RequestMapping("/salle")
 public class SalleController {
-
-   @Autowired
-    private  SalleService SalleService;
+    @Autowired
+    private SalleService SalleService;
 
     @ApiOperation(value = "Ajout d'une Salle")
     @PostMapping("/AjouterSalle")
