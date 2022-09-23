@@ -66,4 +66,5 @@ public class SalleController {
     public ReponseMessage supprimer(@PathVariable Long idsalle) {
         return SalleService.SupprissionSalle(idsalle);
     }
+
 }

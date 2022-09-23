@@ -17,6 +17,7 @@ public class SalleServiceImplement implements SalleService {
 
     @Autowired
     private final SalleRepository salleRepository;
+
     //****************Ajout d'une Salle*******************
 
     @Override
@@ -26,9 +27,9 @@ public class SalleServiceImplement implements SalleService {
                 ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
                 return message;
             } else {
-                ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
-                return message;
-            }
+            ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
+            return message;
+           }
         }
 
         //****************Liste de toutes les Salles*******************
@@ -78,4 +79,6 @@ public class SalleServiceImplement implements SalleService {
 
         return salleRepository.findByIdsalle(idsalle);
     }
+
+
 }

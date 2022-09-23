@@ -9,7 +9,6 @@ import java.util.Date;
 @Entity
 @Table
 @Data
-
 public class Liste_postulant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,7 +17,6 @@ public class Liste_postulant {
     private Integer nombretirage;
     private Date dateliste;
 
-    @JsonIgnore
-       @OneToOne
+    @OneToOne
     private Activite activite;
 }
