@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Service.ListePostulantService;
+
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +38,7 @@ public class ListePostulantController {
     @ApiOperation(value = "Juste pour modifier la Liste Postulant ")
     @PutMapping("/modifier")
     public ReponseMessage updateListePostulant(@RequestBody Liste_postulant listePostulant) {
-        if (listePostulantService.trouverStatuParIdListePostulant(listePostulant.getIdlistepostulant()) != null) {
+        if (listePostulantService.trouverStatuParIdListePostulant(listePostulant.getIdliste()) != null) {
             listePostulantService.modifierListePostulant(listePostulant);
             ReponseMessage message = new ReponseMessage("Liste Postulant modifié avec suces", true);
 

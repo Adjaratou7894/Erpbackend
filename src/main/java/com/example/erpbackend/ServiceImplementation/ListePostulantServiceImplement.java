@@ -20,7 +20,9 @@ public class ListePostulantServiceImplement implements ListePostulantService {
     @Override
     public ReponseMessage ajouterListePostulant(Liste_postulant liste_postulant) {
         if(listePostulantRepository.findByLibelleliste(liste_postulant.getLibelleliste()) == null){
+            liste_postulant.setNombretirage(0);
             listePostulantRepository.save(liste_postulant);
+
             ReponseMessage message = new ReponseMessage("Liste postulant ajouté avec succes", true);
             return  message;
         }else {
@@ -38,10 +40,11 @@ public class ListePostulantServiceImplement implements ListePostulantService {
 
     @Override
     public Liste_postulant modifierListePostulant(Liste_postulant liste_postulant) {
-        return listePostulantRepository.findById(liste_postulant.getIdlistepostulant())
+        return listePostulantRepository.findById(liste_postulant.getIdliste())
                 .map(lp -> {
                     lp.setLibelleliste(liste_postulant.getLibelleliste());
                     lp.setNombretirage(liste_postulant.getNombretirage());
+                    lp.setDateliste(liste_postulant.getDateliste());
                     lp.setActivite(liste_postulant.getActivite());
                     return listePostulantRepository.save(lp);
                 }).orElseThrow(() -> new RuntimeException("Liste postulant nom trouver") );
@@ -49,7 +52,7 @@ public class ListePostulantServiceImplement implements ListePostulantService {
 
     @Override
     public ReponseMessage supprimerListePostulant(Long idlistepostulant) {
-        if(listePostulantRepository.findByIdlistepostulant(idlistepostulant) != null){
+        if(listePostulantRepository.findByIdliste(idlistepostulant) != null){
             listePostulantRepository.deleteById(idlistepostulant);
             ReponseMessage message = new ReponseMessage("Liste postulant supprimé avec succes", true);
             return message;
@@ -63,6 +66,17 @@ public class ListePostulantServiceImplement implements ListePostulantService {
     @Override
     public Liste_postulant trouverStatuParIdListePostulant(Long idlistepostulant) {
 
-        return listePostulantRepository.findByIdlistepostulant(idlistepostulant);
+        return listePostulantRepository.findByIdliste(idlistepostulant);
+    }
+
+    @Override
+    public Liste_postulant trouverListePostulantParLibelle(String libelleliste) {
+        return listePostulantRepository.findByLibelleliste(libelleliste);
+    }
+
+    @Override
+    public Liste_postulant creerlistepostulant(Liste_postulant listePostulant) {
+        listePostulant.setNombretirage(0);
+        return listePostulantRepository.save(listePostulant);
     }
 }

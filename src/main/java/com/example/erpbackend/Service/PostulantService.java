@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface PostulantService {
 
+    List<Postulant> enregistrerPostulant(List<Postulant> listPost);
+
 }
