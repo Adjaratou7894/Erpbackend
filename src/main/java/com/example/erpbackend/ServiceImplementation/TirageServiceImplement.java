@@ -5,6 +5,8 @@ import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
+import com.example.erpbackend.Repository.PostulantRepository;
+import com.example.erpbackend.Repository.PostulantTireRepository;
 import com.example.erpbackend.Repository.TirageRepository;
 import com.example.erpbackend.Service.TirageService;
 import lombok.AllArgsConstructor;
@@ -22,14 +24,21 @@ public class TirageServiceImplement implements TirageService{
 
     //definition du repositroy du tirage
     @Autowired
-    public final TirageRepository tirageRepository;
+    private final TirageRepository tirageRepository;
 
+    @Autowired
+    private final PostulantRepository postulantRepository;
+
+    @Autowired
+    private final PostulantTireRepository postulantTireRepository;
 
     //================DEBUT DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
     @Override
-    public List<Postulant> trie(List<Postulant> listAtrier, Long nbre) {
+    public void trie(List<Postulant> listAtrier, int nbre, Long idTirage) {
+
         //création d'une variable random
         Random rand = new Random();
+
         //declaration de la liste qui contiendra les postulants selectionnés
         List<Postulant> list = new ArrayList<>();
 
@@ -50,16 +59,26 @@ public class TirageServiceImplement implements TirageService{
             listAtrier.remove(listAtrier.get(index));
         }
 
-        //on retourne les postulant trié
-        return list;
+        //parcours de la liste postulants trié
+        for (Postulant p : list){
+
+            //enregistrement de la liste triée
+            //postulantTrieService.creer(p.getIdpostulant(), p.getNom_postulant(), p.getPrenom_postulant(),p.getNumero_postulant(),p.getEmail(),idTirage);
+
+            postulantTireRepository.INSERT_POST_TIRE(p.getId(), idTirage);
+        }
+
     }
     //================FIN DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
 
+
+
     //================DEBUT DE LA METHODE PERMETTANT DE CREER UN TIRAGE=========================
+
     @Override
     public ReponseMessage creer(Tirage tirage, Liste_postulant liste, Activite activite) {
 
-        if (tirage == null && liste != null && activite != null){
+        if (liste != null && activite != null){
 
             //ajout de l'id de la liste à au tirage
             tirage.setListePostulant(liste);
@@ -68,16 +87,19 @@ public class TirageServiceImplement implements TirageService{
             tirage.setDate(new Date());
 
             //retourne le tirage crée
-            tirageRepository.save(tirage);
+            Tirage tirageCree = tirageRepository.save(tirage);
+
+            //retourne tous les postulants d'une liste donnée
+            List<Postulant> listePostulantATiree = postulantRepository.FIND_POSTULANT_PAR_ID_LIST(liste.getIdliste());
+
+            System.out.println("nombre: " + tirageCree.getNombrePostulantTire() + "id: " + tirageCree.getIdtirage());
+
+            trie(listePostulantATiree, tirageCree.getNombrePostulantTire(), tirageCree.getIdtirage());
+
 
             ReponseMessage message = new ReponseMessage("Tirage éffectué avec succes", true);
 
             return message;
-        }else if (tirage != null){
-            ReponseMessage message = new ReponseMessage("Ce Tirage existe déjà", false);
-
-            return message;
-
         }else if(liste == null){
             ReponseMessage message = new ReponseMessage("Cette liste n'existe pas", false);
 
@@ -90,6 +112,8 @@ public class TirageServiceImplement implements TirageService{
         }
     }
     //================FIN DE LA METHODE PERMETTANT DE CREER UN TIRAGE=========================
+
+
 
     //================DEBUT DE LA METHODE PERMETTANT DE RECUPERER LE LIBELLE DU TIRAGE=========================
     @Override
@@ -114,6 +138,7 @@ public class TirageServiceImplement implements TirageService{
     public Iterable<Object[]> AfficherTousLesTirages(Long idlistepostulant) {
         return tirageRepository.trouverParId(idlistepostulant);
     }
+
 
     @Override
     public Tirage recupererTirageIdTirage(Long idtirage) {

@@ -46,19 +46,24 @@ public class PostulantController {
             return message;
         }else {
             Liste_postulant liste_postulant = new Liste_postulant();
+            Activite activite = activiteService.trouverActiviteParLibelle(libelleActivite);
 
-            if (activiteService.trouverActiviteParLibelle(libelleActivite) == null){
+            if (activite == null){
 
                 ReponseMessage message = new ReponseMessage("Cette activité n'existe pas", false);
 
                 return message;
             }else {
-                Activite activite = new Activite();
+                Liste_postulant listt = listePostulantService.trouverListePostulantParLibelle(libelleliste);
 
-                liste_postulant.setLibelleliste(libelleliste);
-                liste_postulant.setDateliste(new Date());
+                if(listt == null){
 
-                if(listePostulantService.trouverListePostulantParLibelle(liste_postulant.getLibelleliste()) == null){
+                    liste_postulant.setActivite(activite);
+
+                    liste_postulant.setNombretirage(0);
+
+                    liste_postulant.setLibelleliste(libelleliste);
+
                     Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
 
                     for(Postulant pot:postelist){
