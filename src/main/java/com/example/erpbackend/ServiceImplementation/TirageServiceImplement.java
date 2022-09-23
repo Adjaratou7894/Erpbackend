@@ -1,5 +1,7 @@
 package com.example.erpbackend.ServiceImplementation;
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
@@ -55,17 +57,37 @@ public class TirageServiceImplement implements TirageService{
 
     //================DEBUT DE LA METHODE PERMETTANT DE CREER UN TIRAGE=========================
     @Override
-    public Tirage creer(Tirage tirage, Liste_postulant liste) {
+    public ReponseMessage creer(Tirage tirage, Liste_postulant liste, Activite activite) {
 
+        if (tirage == null && liste != null && activite != null){
 
-        //ajout de l'id de la liste à au tirage
-        tirage.setListePostulant(liste);
+            //ajout de l'id de la liste à au tirage
+            tirage.setListePostulant(liste);
 
-        //ajout de la date actuelle au tirage
-        tirage.setDate(new Date());
+            //ajout de la date actuelle au tirage
+            tirage.setDate(new Date());
 
-        //retourne le tirage crée
-        return tirageRepository.save(tirage);
+            //retourne le tirage crée
+            tirageRepository.save(tirage);
+
+            ReponseMessage message = new ReponseMessage("Tirage éffectué avec succes", true);
+
+            return message;
+        }else if (tirage != null){
+            ReponseMessage message = new ReponseMessage("Ce Tirage existe déjà", false);
+
+            return message;
+
+        }else if(liste == null){
+            ReponseMessage message = new ReponseMessage("Cette liste n'existe pas", false);
+
+            return message;
+
+        }else{
+            ReponseMessage message = new ReponseMessage("Cette activité n'existe pas", false);
+
+            return message;
+        }
     }
     //================FIN DE LA METHODE PERMETTANT DE CREER UN TIRAGE=========================
 
