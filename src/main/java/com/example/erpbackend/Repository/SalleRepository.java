@@ -16,7 +16,7 @@ public interface SalleRepository extends JpaRepository<Salle, Long> {
     public List<Salle> AfficherLesSallesOccupee();
 
 
-    //Salle findBySalle(String salle);
+    Salle findByNom(String nom);
 
 
     Salle findByIdsalle(Long idsalle);

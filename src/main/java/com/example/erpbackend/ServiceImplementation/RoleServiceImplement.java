@@ -36,13 +36,22 @@ public class RoleServiceImplement implements RoleService {
 
     //================DEBUT DE LA METHODE PERMETTANT DE MODIFIER UN ROLE=========================
     @Override
-    public Role modifierRole(Role role) {
-        return roleRepository.findById(role.getIdrole())
-        .map(p->{
-            //p.setIdrole(role.getIdrole());
-            p.setNom(role.getNom());
-            return roleRepository.save(p);
-        }).orElseThrow(() -> new RuntimeException("Rôle non trouvé !"));
+    public ReponseMessage modifierRole(Role role) {
+        if (roleRepository.findByIdrole(role.getIdrole()) !=null) {
+            return roleRepository.findById(role.getIdrole())
+                    .map(p->{
+                        //p.setIdrole(role.getIdrole());
+                        p.setNom(role.getNom());
+                        roleRepository.save(p);
+                        ReponseMessage message = new ReponseMessage("Role modifié avec succes", true);
+                        return  message;
+                    }).orElseThrow(() -> new RuntimeException("Rôle non trouvé !"));
+        }else {
+            ReponseMessage message = new ReponseMessage("Role non trouvée ", false);
+
+            return message;
+        }
+
     }
     //================FIN DE LA METHODE PERMETTANT DE MODIFIER UN ROLE=========================
 

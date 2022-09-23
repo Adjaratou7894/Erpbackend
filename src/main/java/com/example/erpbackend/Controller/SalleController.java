@@ -24,7 +24,8 @@ public class SalleController {
     @ApiOperation(value = "Ajout d'une Salle")
    @PostMapping("/AjouterSalle")
     public ReponseMessage AjouterSalle(@RequestBody Salle salle){
-       return SalleService.AjouterSalle(salle);
+
+        return SalleService.AjouterSalle(salle);
    }
     @ApiOperation(value = "Affichage de Toutes Les Salles")
    @GetMapping("/afficherToutesLesSalles")
@@ -44,22 +45,13 @@ public class SalleController {
     @ApiOperation(value = "Modification d'une Salle")
     @PutMapping("/modifierSalle")
     public ReponseMessage modifier(@RequestBody Salle Salle){
-        if (SalleService.trouverSalleParId(Salle.getIdsalle()) !=null){
-            SalleService.modifierSalle(Salle);
-            ReponseMessage message = new ReponseMessage("Salle modifiée avec suces", true);
-
-            return message;
-        }else {
-            ReponseMessage message = new ReponseMessage("Salle non trouvée", false);
-
-            return message;
-        }
-
+            return SalleService.modifierSalle(Salle);
     }
 
     @ApiOperation(value = "Suppression d'une Salle")
-    @DeleteMapping("/SupprimerSalle")
+    @DeleteMapping("/SupprimerSalle/{idsalle}")
     public ReponseMessage supprimer(@PathVariable Long idsalle){
+
         return SalleService.SupprissionSalle(idsalle);
     }
 
