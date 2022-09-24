@@ -8,6 +8,7 @@ import com.example.erpbackend.Model.Tirage;
 import com.example.erpbackend.Repository.PostulantRepository;
 import com.example.erpbackend.Repository.PostulantTireRepository;
 import com.example.erpbackend.Repository.TirageRepository;
+import com.example.erpbackend.Service.ListePostulantService;
 import com.example.erpbackend.Service.TirageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class TirageServiceImplement implements TirageService{
 
     @Autowired
     private final PostulantTireRepository postulantTireRepository;
+
+    private final ListePostulantService listePostulantService;
 
     //================DEBUT DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
     @Override
@@ -97,6 +100,9 @@ public class TirageServiceImplement implements TirageService{
 
             trie(listePostulantATiree, tirageCree.getNombrePostulantTire(), tirageCree.getIdtirage());
 
+            liste.setNombretirage(liste.getNombretirage()+1);
+
+            listePostulantService.modifierListePostulant(liste);
 
             ReponseMessage message = new ReponseMessage("Tirage éffectué avec succes", true);
 

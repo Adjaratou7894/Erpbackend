@@ -42,10 +42,13 @@ public class ListePostulantServiceImplement implements ListePostulantService {
     public Liste_postulant modifierListePostulant(Liste_postulant liste_postulant) {
         return listePostulantRepository.findById(liste_postulant.getIdliste())
                 .map(lp -> {
+                    if(liste_postulant.getLibelleliste() != null)
                     lp.setLibelleliste(liste_postulant.getLibelleliste());
+                    if (liste_postulant.getNombretirage() != null)
                     lp.setNombretirage(liste_postulant.getNombretirage());
-                    lp.setDateliste(liste_postulant.getDateliste());
+                    if (liste_postulant.getActivite() != null)
                     lp.setActivite(liste_postulant.getActivite());
+
                     return listePostulantRepository.save(lp);
                 }).orElseThrow(() -> new RuntimeException("Liste postulant nom trouver") );
     }
