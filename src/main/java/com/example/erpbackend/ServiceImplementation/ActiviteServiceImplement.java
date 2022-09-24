@@ -4,6 +4,7 @@ import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Role;
 import com.example.erpbackend.Repository.ActiviteRepository;
+import com.example.erpbackend.Repository.Activite_ActeurRepository;
 import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,11 +17,27 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Autowired
     private ActiviteRepository activiteRepository;
 
+    @Autowired
+    private Activite_ActeurRepository activite_acteurRepository;
+
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
-    public ReponseMessage ajouterActivite(Activite activite) {
+    public ReponseMessage ajouterActivite(Activite activite, String idacteurs) {
         if (activiteRepository.findByNom(activite.getNom()) == null){
-            activiteRepository.save(activite);
+
+            Activite activiteCree = activiteRepository.save(activite);
+
+            // //Un tableau qui contenera l'id des acteurs par case
+            String[] allIdActeurs = idacteurs.split(",");
+
+            for (String idact : allIdActeurs) {
+
+                long l = Long.parseLong(idact);
+
+                activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, activite.getIdactivite());
+
+            }
+
             ReponseMessage message = new ReponseMessage("Activité ajoutée avec succes", true);
             return  message;
         }else {

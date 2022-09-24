@@ -67,7 +67,6 @@ public class TirageServiceImplement implements TirageService{
 
             postulantTireRepository.INSERT_POST_TIRE(p.getId(), idTirage);
         }
-
     }
     //================FIN DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
 
@@ -82,6 +81,8 @@ public class TirageServiceImplement implements TirageService{
 
             //ajout de l'id de la liste à au tirage
             tirage.setListePostulant(liste);
+
+            tirage.setActivite(activite);
 
             //ajout de la date actuelle au tirage
             tirage.setDate(new Date());

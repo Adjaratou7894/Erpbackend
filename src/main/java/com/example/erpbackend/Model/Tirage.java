@@ -23,4 +23,7 @@ public class Tirage {
 
     @ManyToOne
     private Liste_postulant listePostulant;
+
+    @ManyToOne
+    private Activite activite;
 }
