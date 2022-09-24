@@ -19,6 +19,7 @@ public class Acteur {
     private String prenom;
     private String numero;
 
+    /*
     @ManyToMany(
 
             fetch = FetchType.LAZY,
@@ -28,7 +29,9 @@ public class Acteur {
             }
     )
     private List<Activite> activites = new ArrayList<>();
-
+*/
+    @ManyToOne
+    private Statut statut;
 
     }
 

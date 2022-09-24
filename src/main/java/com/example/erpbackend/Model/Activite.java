@@ -22,6 +22,7 @@ public class Activite {
     @ManyToOne
     private Type_activite typeActivite;
 
+
     @ManyToOne
     private Etat_activite etatActivite;
 
