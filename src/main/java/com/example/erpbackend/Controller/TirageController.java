@@ -1,9 +1,12 @@
 package com.example.erpbackend.Controller;
 
 import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
+import com.example.erpbackend.Service.ActiviteService;
+import com.example.erpbackend.Service.ListePostulantService;
 import com.example.erpbackend.Service.PostulantService;
 import com.example.erpbackend.Service.TirageService;
 import io.swagger.annotations.Api;
@@ -28,13 +31,35 @@ public class TirageController {
     @Autowired
     private PostulantService postulantService;
 
+    @Autowired
+    private ListePostulantService listePostulantService;
 
-    //================DEBUT DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
-
-    //================FIN DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
-
+    @Autowired
+    private ActiviteService activiteService;
 
     //================DEBUT DE LA METHODE PERMETTANT DE RECUPERER TIRAGE PAR IDLIST=========================
+
+    @PostMapping("/createTirage/{libelle_liste}/{libelle_activite}")
+    public ReponseMessage create(@RequestBody Tirage tirage, @PathVariable String libelle_liste, @PathVariable String libelle_activite){
+
+        Tirage tirageConserne = tirageService.trouverTirageParLibelle(tirage.getLibelleTirage());
+
+        if (tirageConserne == null){
+            Activite activiteConserne = activiteService.trouverActiviteParLibelle(libelle_activite);
+
+            Liste_postulant listeConserne = listePostulantService.trouverListePostulantParLibelle(libelle_liste);
+
+            return tirageService.creer(tirage, listeConserne, activiteConserne);
+        }else {
+            ReponseMessage message = new ReponseMessage("Ce tirage existe dejà", false);
+
+            return message;
+        }
+
+    }
+
+
+
         @ApiOperation(value = "Afficher la listes des tirages par idlist")
         @GetMapping("/recupererTirageParIdliste/{Idlistepostulant}")
         public Iterable<Object[]> getTirageParIdListe(@PathVariable Long Idlistepostulant){
