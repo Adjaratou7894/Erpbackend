@@ -36,6 +36,7 @@ public class ActiviteController {
     @ApiOperation(value = "ici on Modifier une activité")
     @PutMapping("/modifier")
     public ReponseMessage update(@RequestBody Activite activite){
+
         return activiteService.modifierActivite(activite);
     }
     //================FIN DE LA METHODE PERMETTANT DE MODIFIER UNE ACTIVITE======================

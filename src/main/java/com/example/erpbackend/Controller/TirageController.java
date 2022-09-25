@@ -97,4 +97,14 @@ public class TirageController {
     }
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER TIRAGE PAR IDTIRAGE=========================
 
+
+
+    @ApiOperation(value = "ici on Modifier une activité")
+    @PutMapping("/valider")
+    public ReponseMessage validerTirage(@RequestBody Tirage tirage){
+
+        return tirageService.validerTirageTirage(tirage);
+    }
+
+
 }

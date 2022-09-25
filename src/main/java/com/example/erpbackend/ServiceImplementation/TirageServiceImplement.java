@@ -156,5 +156,23 @@ public class TirageServiceImplement implements TirageService{
     public Tirage recupererTirageIdTirage(Long idtirage) {
         return tirageRepository.findById(idtirage).get();
     }
+
+    @Override
+    public ReponseMessage validerTirageTirage(Tirage tirage) {
+        if (tirageRepository.findByLibelleTirage(tirage.getLibelleTirage()) != null) {
+            return tirageRepository.findById(tirage.getIdtirage())
+                    .map(p -> {
+                        p.setValidite(tirage.getValidite());
+                        tirageRepository.save(p);
+                        ReponseMessage message = new ReponseMessage("Tirage validé avec succes", true);
+                        return  message;
+
+                    }).orElseThrow(() -> new RuntimeException("Tirage non trouvée !"));
+        }else {
+            ReponseMessage message = new ReponseMessage("Tirage non trouvée ", false);
+
+            return message;
+        }
+    }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LES TIRAGES=========================
 }
