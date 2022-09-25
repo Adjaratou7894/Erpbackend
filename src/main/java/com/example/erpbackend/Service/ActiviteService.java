@@ -28,4 +28,10 @@ public interface ActiviteService {
 
     Activite trouverActiviteParLibelle(String libelleActivite);
 
+    //ReponseMessage lancerActivite(Long idAct);
+
+    //ReponseMessage closeActivite(Long idAct);
+
+    List<Object> afficheActiviteEnFonctionEtat(String etat);
+
 }

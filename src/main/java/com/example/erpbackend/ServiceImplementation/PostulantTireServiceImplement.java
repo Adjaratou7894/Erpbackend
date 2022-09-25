@@ -115,4 +115,20 @@ public class PostulantTireServiceImplement implements PostulantTireService {
         }
         return postulantsGenre;
     }
+
+    @Override
+    public List<Postulant> recupererIdPostulantTireParTirage(Long idTirage) {
+
+        List<Long> IdPostulantTire = postulantTireRepository.FIND_ALL_POSTULANT_TIRE_PAR_TIRAGE(idTirage);
+        List<Postulant> postulantList = new ArrayList<>();
+
+        Postulant postulant = new Postulant();
+
+        for (Long idPost : IdPostulantTire){
+           postulant = postulantRepository.FIND_POSTULANT_PAR_ID(idPost);
+            postulantList.add(postulant);
+        }
+
+        return postulantList;
+    }
 }

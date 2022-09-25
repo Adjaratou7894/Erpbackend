@@ -2,6 +2,7 @@ package com.example.erpbackend.ServiceImplementation;
 
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Liste_postulant;
+import com.example.erpbackend.Model.Tirage;
 import com.example.erpbackend.Repository.ListePostulantRepository;
 import com.example.erpbackend.Service.ListePostulantService;
 import lombok.AllArgsConstructor;

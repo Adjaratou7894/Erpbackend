@@ -23,4 +23,7 @@ public interface PostulantTireService {
     List<Postulant> recupererTousLesPostulantTire();
 
     List<Postulant> recupererTousLesPostulantTireFilter(String genre);
+
+    List<Postulant> recupererIdPostulantTireParTirage(Long idTirage);
+
 }

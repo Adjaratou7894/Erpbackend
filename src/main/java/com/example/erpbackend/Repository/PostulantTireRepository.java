@@ -30,4 +30,8 @@ public interface PostulantTireRepository extends JpaRepository<Postulant_tire,Lo
     @Query(value = "select * from postulant where genre = :genre", nativeQuery = true)
     List<String> FIND_POSTULANT_PAR_GENRE(@Param("genre") String genre);
     */
+
+    @Query(value = "select postulant_tire.id_postulant from postulant_tire where postulant_tire.tirage_idtirage = :tirage_idtirage", nativeQuery = true)
+    List<Long> FIND_ALL_POSTULANT_TIRE_PAR_TIRAGE(@Param("tirage_idtirage") Long tirage_idtirage);
+
 }

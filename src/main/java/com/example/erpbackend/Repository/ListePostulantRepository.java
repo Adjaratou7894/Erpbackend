@@ -3,7 +3,11 @@ package com.example.erpbackend.Repository;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Statut;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 
