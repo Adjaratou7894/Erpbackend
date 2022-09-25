@@ -82,7 +82,8 @@ public class UtilisateurServiceImplement implements UtilisateurService {
     public Object seConnecter(String email, String motDePasse) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findByEmailAndPassword(email, motDePasse);
         if (utilisateur.isEmpty()){
-            return "Mot de passe ou identifiant incorrect !";
+            ReponseMessage message = new ReponseMessage("Mot de passe ou identifiant incorrect", false);
+            return message;
         }else {
         return utilisateur.get();
         }

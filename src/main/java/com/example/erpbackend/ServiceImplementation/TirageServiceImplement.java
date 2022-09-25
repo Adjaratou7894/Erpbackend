@@ -8,6 +8,7 @@ import com.example.erpbackend.Model.Tirage;
 import com.example.erpbackend.Repository.PostulantRepository;
 import com.example.erpbackend.Repository.PostulantTireRepository;
 import com.example.erpbackend.Repository.TirageRepository;
+import com.example.erpbackend.Service.ListePostulantService;
 import com.example.erpbackend.Service.TirageService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,8 @@ public class TirageServiceImplement implements TirageService{
 
     @Autowired
     private final PostulantTireRepository postulantTireRepository;
+
+    private final ListePostulantService listePostulantService;
 
     //================DEBUT DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
     @Override
@@ -67,6 +70,9 @@ public class TirageServiceImplement implements TirageService{
 
             postulantTireRepository.INSERT_POST_TIRE(p.getId(), idTirage);
         }
+
+
+
     }
     //================FIN DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
 
@@ -87,6 +93,8 @@ public class TirageServiceImplement implements TirageService{
             //ajout de la date actuelle au tirage
             tirage.setDate(new Date());
 
+            tirage.setValidite(false);
+
             //retourne le tirage crée
             Tirage tirageCree = tirageRepository.save(tirage);
 
@@ -97,6 +105,9 @@ public class TirageServiceImplement implements TirageService{
 
             trie(listePostulantATiree, tirageCree.getNombrePostulantTire(), tirageCree.getIdtirage());
 
+            liste.setNombretirage(liste.getNombretirage()+1);
+
+            listePostulantService.modifierListePostulant(liste);
 
             ReponseMessage message = new ReponseMessage("Tirage éffectué avec succes", true);
 
@@ -144,6 +155,24 @@ public class TirageServiceImplement implements TirageService{
     @Override
     public Tirage recupererTirageIdTirage(Long idtirage) {
         return tirageRepository.findById(idtirage).get();
+    }
+
+    @Override
+    public ReponseMessage validerTirageTirage(Tirage tirage) {
+        if (tirageRepository.findByLibelleTirage(tirage.getLibelleTirage()) != null) {
+            return tirageRepository.findById(tirage.getIdtirage())
+                    .map(p -> {
+                        p.setValidite(tirage.getValidite());
+                        tirageRepository.save(p);
+                        ReponseMessage message = new ReponseMessage("Tirage validé avec succes", true);
+                        return  message;
+
+                    }).orElseThrow(() -> new RuntimeException("Tirage non trouvée !"));
+        }else {
+            ReponseMessage message = new ReponseMessage("Tirage non trouvée ", false);
+
+            return message;
+        }
     }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LES TIRAGES=========================
 }

@@ -22,10 +22,10 @@ public class StatutServiceImplement implements StatutService {
 
         if(statutRepository.findByNom(statut.getNom()) == null){
             statutRepository.save(statut);
-            ReponseMessage message = new ReponseMessage("Etat ajouté avec succes", true);
+            ReponseMessage message = new ReponseMessage("Statut ajouté avec succes", true);
             return  message;
         }else {
-            ReponseMessage message = new ReponseMessage("Cet état existe déjà ", false);
+            ReponseMessage message = new ReponseMessage("Cet statut existe déjà ", false);
 
             return message;
         }

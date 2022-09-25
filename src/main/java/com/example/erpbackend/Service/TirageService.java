@@ -30,5 +30,9 @@ public interface TirageService {
     //methode permettant d'affichertirage par idTirage
     Tirage recupererTirageIdTirage(Long idtirage);
 
+    //Valider un tirage
+
+    ReponseMessage validerTirageTirage(Tirage tirage);
+
 
 }

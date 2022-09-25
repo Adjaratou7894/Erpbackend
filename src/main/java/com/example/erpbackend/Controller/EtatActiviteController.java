@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Api(value = "hello", description = "Gestion de l'etat des activités")
+@Api(value = "hello", description = "controller Gestion de l'etat des activités")
 @RequestMapping("/etatactivite")
 @AllArgsConstructor
 public class EtatActiviteController {
@@ -24,28 +24,28 @@ public class EtatActiviteController {
 
     private final EtatActiviteRepository etatActiviteRepository;
 
-    @ApiOperation(value = "Créer un état a une activitée")
-
+    @ApiOperation(value = "ici on ajoute la liste de l'état d'Activitée")
 
     @PostMapping("/ajouter")
     public ReponseMessage ajouterEtatActivité(@RequestBody Etat_activite etat_activite){
         return etatActiviteService.ajouterEtatActivite(etat_activite);
     }
 
-    @ApiOperation(value = "Afficher la liste de l'état d'une Activitée")
+    @ApiOperation(value = "ici on Afficher la liste de l'état d'Activitée")
+
     @GetMapping("/afficher")
     public List<Etat_activite> afficherEtatActivité(){
         return etatActiviteService.afficherEtatActivite();
     }
 
-    @ApiOperation(value = "Suprimer l'état une Activitée")
+    @ApiOperation(value = "ici on Supprimer l'état une Activitée")
 
     @DeleteMapping("/supprimer/{id}")
     public ReponseMessage supprimerEtatActivite(@PathVariable Long id){
 
         return etatActiviteService.supprimerEtatActivite(id);
     }
-    @ApiOperation(value = "Modifier l'état d'une Activitée")
+    @ApiOperation(value = "ici on Modifier l'état d'Activitée")
 
     @PutMapping("/modifier")
     public ReponseMessage modifierEtatActivite(@RequestBody Etat_activite etat_activite){

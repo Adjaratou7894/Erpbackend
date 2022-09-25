@@ -30,6 +30,8 @@ public class ActiviteServiceImplement implements ActiviteService {
             // //Un tableau qui contenera l'id des acteurs par case
             String[] allIdActeurs = idacteurs.split(",");
 
+            System.out.println("les id : " + allIdActeurs);
+
             for (String idact : allIdActeurs) {
 
                 long l = Long.parseLong(idact);
