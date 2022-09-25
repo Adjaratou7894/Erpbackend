@@ -12,23 +12,25 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/typeactivite")
-@Api(value = "hello", description = "Gestion des TypeActivité")
+@Api(value = "hello", description = "controller permettent la Gestion des TypeActivité")
 public class TypeActiviteController {
     @Autowired
     public TypeActiviteServiceImplement typeActiviteServiceImplement;
 
     // ============================== ICI ON CREE LA LISTE DES TYPES DE L'ACTIVITE ==============================
 
-    @PostMapping("/ajouter")
+
     @ApiOperation(value = "Ici on ajoute les types d'activité")
+    @PostMapping("/ajouter")
     public ReponseMessage ajouterTypesActivites(@RequestBody Type_activite type_activite){
         return this.typeActiviteServiceImplement.ajouterTypeActivite(type_activite);
     }
 
     // =======================ICI ON AFFICHE LA LISTE DES TYPES DE L'ACTIVITE===============================
 
-    @GetMapping("/afficher")
+
     @ApiOperation(value = "Ici on liste les types d'activité")
+    @GetMapping("/afficher")
     public List<Type_activite> lesTypesActivites(){
         return this.typeActiviteServiceImplement.afficherTypeActivite();
     }

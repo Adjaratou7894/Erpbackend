@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @Api(value = "hello", description = "Entité Liste Postulant")
 @RestController
 @RequestMapping("/listepostulant")
@@ -25,21 +26,21 @@ public class ListePostulantController {
     @Autowired
     private final ListePostulantService listePostulantService;
 
-    @ApiOperation(value = "Juste pour ajouter la Liste Postulant ")
+    @ApiOperation(value = "ici on ajouter la Liste Postulant ")
     @PostMapping("/ajouter")
     public ReponseMessage ajouterListePostulant(@RequestBody Liste_postulant listePostulant) {
 
         return listePostulantService.ajouterListePostulant(listePostulant);
     }
 
-    @ApiOperation(value = "Juste pour afficher la Liste Postulant ")
+    @ApiOperation(value = "ici on afficher la Liste Postulant ")
     @GetMapping("/afficher")
     public List<Liste_postulant> afficherListePostulant() {
 
         return listePostulantService.afficherListePostulant();
     }
 
-    @ApiOperation(value = "Juste pour modifier la Liste Postulant ")
+    @ApiOperation(value = "ici on modifier la Liste Postulant ")
     @PutMapping("/modifier")
     public ReponseMessage updateListePostulant(@RequestBody Liste_postulant listePostulant) {
         if (listePostulantService.trouverStatuParIdListePostulant(listePostulant.getIdliste()) != null) {
@@ -54,7 +55,7 @@ public class ListePostulantController {
         }
     }
 
-    @ApiOperation(value = "Juste pour supprimer le Liste Postulant ")
+    @ApiOperation(value = "ici on supprimer la Liste Postulant ")
     @DeleteMapping("/supprimer/{idlistepostulant}")
     public ReponseMessage deleteListePostulant(@PathVariable Long idlistepostulant){
 

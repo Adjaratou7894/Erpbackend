@@ -24,10 +24,12 @@ public class SalleServiceImplement implements SalleService {
     public ReponseMessage AjouterSalle(Salle salle) {
         if (salleRepository.findByNom(salle.getNom()) == null) {
 
+            salle.setDisponibilite(true);
+
             salleRepository.save(salle);
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
-        }else { ReponseMessage message = new ReponseMessage("Ajout Impossible", false);
+        }else { ReponseMessage message = new ReponseMessage("Cette salle existe déjà", false);
             return message;
            }
         }

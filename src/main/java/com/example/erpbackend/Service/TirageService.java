@@ -1,5 +1,7 @@
 package com.example.erpbackend.Service;
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
@@ -8,10 +10,10 @@ import java.util.List;
 
 public interface TirageService {
     //methode permettant de faire le trie avec la liste des postulant à trie et le nombre à trié en parametre
-    List<Postulant> trie(List<Postulant> listAtrier, Long nbre);
+    void trie(List<Postulant> listAtrier, int nbre, Long idTirage);
 
     //methode permettant de creer un tirage
-    Tirage creer(Tirage tirage, Liste_postulant liste);
+    ReponseMessage creer(Tirage tirage, Liste_postulant liste, Activite activite);
 
     //methode permettant de trouver un tirage par son libellet
     Tirage trouverTirageParLibelle(String libelleTirage);
@@ -27,6 +29,10 @@ public interface TirageService {
 
     //methode permettant d'affichertirage par idTirage
     Tirage recupererTirageIdTirage(Long idtirage);
+
+    //Valider un tirage
+
+    ReponseMessage validerTirageTirage(Tirage tirage);
 
 
 }

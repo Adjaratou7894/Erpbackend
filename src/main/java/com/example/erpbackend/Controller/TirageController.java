@@ -1,9 +1,12 @@
 package com.example.erpbackend.Controller;
 
 import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
+import com.example.erpbackend.Service.ActiviteService;
+import com.example.erpbackend.Service.ListePostulantService;
 import com.example.erpbackend.Service.PostulantService;
 import com.example.erpbackend.Service.TirageService;
 import io.swagger.annotations.Api;
@@ -16,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Api(value = "hello", description = "Gestion des tirages")
+@Api(value = "hello", description = "controller permettent la Gestion des tirages")
 @AllArgsConstructor
 @NoArgsConstructor
 @RequestMapping("/tirage")
@@ -28,31 +31,57 @@ public class TirageController {
     @Autowired
     private PostulantService postulantService;
 
+    @Autowired
+    private ListePostulantService listePostulantService;
 
-    //================DEBUT DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
-
-    //================FIN DE LA METHODE PERMETTANT DE FAIRE LE TIRAGE=========================
-
+    @Autowired
+    private ActiviteService activiteService;
 
     //================DEBUT DE LA METHODE PERMETTANT DE RECUPERER TIRAGE PAR IDLIST=========================
-        @ApiOperation(value = "Afficher la listes des tirages par idlist")
+
+
+    @ApiOperation(value = "ici on créer la listes des tirages par idlist")
+    @PostMapping("/ajouter/{libelle_liste}/{libelle_activite}")
+    public ReponseMessage create(@RequestBody Tirage tirage, @PathVariable String libelle_liste, @PathVariable String libelle_activite){
+
+        Tirage tirageConserne = tirageService.trouverTirageParLibelle(tirage.getLibelleTirage());
+
+        if (tirageConserne == null){
+            Activite activiteConserne = activiteService.trouverActiviteParLibelle(libelle_activite);
+
+            Liste_postulant listeConserne = listePostulantService.trouverListePostulantParLibelle(libelle_liste);
+
+            return tirageService.creer(tirage, listeConserne, activiteConserne);
+        }else {
+            ReponseMessage message = new ReponseMessage("Ce tirage existe dejà", false);
+
+            return message;
+        }
+
+    }
+
+
+
+        @ApiOperation(value = "ici Afficher la listes des tirages par idlist")
         @GetMapping("/recupererTirageParIdliste/{Idlistepostulant}")
         public Iterable<Object[]> getTirageParIdListe(@PathVariable Long Idlistepostulant){
+
             return tirageService.AfficherTousLesTirages(Idlistepostulant);
         }
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER TIRAGE PAR IDTIRAGE=========================
 
 
     //================DEBUT DE LA METHODE PERMETTANT D'AFFICHER LES TIRAGES=========================
-    @ApiOperation(value = "Afficher la liste des tirages")
+    @ApiOperation(value = "ici on Afficher la liste des tirages")
     @GetMapping("/afficher")
     public List<Tirage> read(){
+
         return tirageService.lire();
     }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LES TIRAGES=========================
 
     //================DEBUT DE LA METHODE PERMETTANT D'AFFICHER LE NOMBRE TOTAL DU TIRAGE=========================
-    @ApiOperation(value = "Afficher le nombre total du tirage")
+    @ApiOperation(value = "ici on Afficher le nombre total du tirage")
     @GetMapping("/AfficherTirageTotal")
     public Long getNombreTotalTirage(){
 
@@ -61,12 +90,22 @@ public class TirageController {
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LE NOMBRE TOTAL DU TIRAGE=========================
 
     //================DEBUT DE LA METHODE PERMETTANT DE RECUPERER TIRAGE PAR IDTIRAGE=========================
-    @ApiOperation(value = "Recuperer Tirage par idTirage")
+    @ApiOperation(value = "ici on Recuperer Tirage par idTirage")
     @GetMapping("/recupererTirageParId/{idtirage}")
     public Tirage recupererTiragesparIdTirage(@PathVariable Long idtirage){
 
         return tirageService.recupererTirageIdTirage(idtirage);
     }
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER TIRAGE PAR IDTIRAGE=========================
+
+
+
+    @ApiOperation(value = "ici on Modifier une activité")
+    @PutMapping("/valider")
+    public ReponseMessage validerTirage(@RequestBody Tirage tirage){
+
+        return tirageService.validerTirageTirage(tirage);
+    }
+
 
 }
