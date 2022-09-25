@@ -10,32 +10,40 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@Api(value = "hello", description = "Gestion des Acteur")
+@Api(value = "hello", description = "controller permettant Gestion des Acteur")
 @AllArgsConstructor
 @RequestMapping("/acteur")
 
 public class ActeurController {
 
     private final ActeurService acteurService;
-
-    @ApiOperation(value = "Creer un Acteur")
+    //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UN ACTEUR======================
+    @ApiOperation(value = "ici on ajoute un Acteur")
     @PostMapping("/ajouter")
     public ReponseMessage creerActeur(@RequestBody Acteur acteur){
+
         return acteurService.creerActeur(acteur);
+        //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTEUR======================
     }
-    @ApiOperation(value = "Modifier un Acteur")
+
+    @ApiOperation(value = "ici on Modifier un Acteur")
     @PutMapping("/modifier")
     public ReponseMessage modifierActeur(@RequestBody Acteur acteur){
+
         return acteurService.modifierActeur(acteur);
     }
-    @ApiOperation(value = "Afficher la liste des Acteur")
+
+    @ApiOperation(value = "ici on Afficher la liste des Acteur")
     @GetMapping("/afficheracteur")
     public List<Acteur> afficheracteur(){
+
         return acteurService.afficherToutLesActeurs();
     }
-    @ApiOperation(value = "Supprimer un Acteur")
+
+    @ApiOperation(value = "ici on Supprimer un Acteur")
     @DeleteMapping("/supprimer/{id}")
     public ReponseMessage delete (@PathVariable Long id){
+
         return acteurService.SupprimerActeur(id);
     }
 

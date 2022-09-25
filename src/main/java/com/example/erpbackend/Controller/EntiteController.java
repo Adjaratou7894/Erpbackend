@@ -12,28 +12,30 @@ import java.util.List;
 
 @RestController
 @AllArgsConstructor
-@Api(value = "hello", description = "Gestion des Entités")
+@Api(value = "hello", description = "controller permettant la Gestion des Entités")
 @RequestMapping("/entite")
 public class EntiteController {
     private final EntiteServiceImplement entiteServiceImplement;
     //**********On ajoute un entité avec un type de retour entite********
-    @ApiOperation(value = "Créer un Entité")
+    @ApiOperation(value = "ici on ajoute un Entité")
     @PostMapping("/ajouter")
     public ReponseMessage ajouterEntite(@RequestBody Entite entite){
-      return   entiteServiceImplement.ajouter(entite);
+
+        return   entiteServiceImplement.ajouter(entite);
     }
 
 
     //**********On affiche un entité avec un type de retour liste********
-    @ApiOperation(value = "Afficher la liste des Entités")
+    @ApiOperation(value = "ici on Afficher la liste des Entités")
     @GetMapping("/afficher")
     public List<Entite> afficherListeEntite(){
-       return entiteServiceImplement.afficher();
+
+        return entiteServiceImplement.afficher();
     }
 
 
     //**********On modifie une entité avec son id dans path variable et un type de retour String********
-    @ApiOperation(value = "Modifier un entité")
+    @ApiOperation(value = "ici on Modifier un entité")
     @PutMapping("/modifier")
     public ReponseMessage modifierEntite(@RequestBody Entite entite){
        return entiteServiceImplement.modifier(entite);
@@ -43,9 +45,10 @@ public class EntiteController {
 
 
     //**********On supprime une entité avec son id dans path variable et un type de retour String********
-    @ApiOperation(value = "Supprimer un entité")
+    @ApiOperation(value = "ici on Supprimer un entité")
     @DeleteMapping("/supprimer/{id}")
     public ReponseMessage supprimerEntite(@PathVariable Long id){
+
         return entiteServiceImplement.supprimer(id);
     }
 }

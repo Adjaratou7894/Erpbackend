@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -21,6 +22,7 @@ public class ListePostulantServiceImplement implements ListePostulantService {
     public ReponseMessage ajouterListePostulant(Liste_postulant liste_postulant) {
         if(listePostulantRepository.findByLibelleliste(liste_postulant.getLibelleliste()) == null){
             liste_postulant.setNombretirage(0);
+            liste_postulant.setDateliste(new Date());
             listePostulantRepository.save(liste_postulant);
 
             ReponseMessage message = new ReponseMessage("Liste postulant ajouté avec succes", true);

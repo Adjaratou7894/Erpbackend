@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "hello", description = "Entité Statut")
+@Api(value = "hello", description = "controller permettent la gestion Entité Statut")
 @RestController
 @RequestMapping("/statut")
 @AllArgsConstructor
@@ -20,19 +20,19 @@ public class StatutController {
     @Autowired
     private final StatutService statutService;
 
-    @ApiOperation(value = "Juste pour ajouter le statut ")
+    @ApiOperation(value = "ici on ajouter le statut ")
     @PostMapping("/ajouter")
     public ReponseMessage ajoute(@RequestBody Statut statut){
 
         return statutService.ajouter(statut);
     }
-    @ApiOperation(value = "Juste pour afficher le statut ")
+    @ApiOperation(value = "ici on  afficher le statut ")
     @GetMapping("/afficher")
     public List<Statut> read(){
 
         return statutService.lister();
     }
-    @ApiOperation(value = "Juste pour modifier le statut ")
+    @ApiOperation(value = "ici on modifier le statut ")
     @PutMapping("/modifier")
     public ReponseMessage update(@RequestBody Statut statut){
 
@@ -47,7 +47,7 @@ public class StatutController {
             return message;
         }
     }
-    @ApiOperation(value = "Juste pour supprimer le statut ")
+    @ApiOperation(value = "ici on supprimer le statut ")
     @DeleteMapping("/supprimer/{idstatut}")
 
     public ReponseMessage delete(@PathVariable Long idstatut){

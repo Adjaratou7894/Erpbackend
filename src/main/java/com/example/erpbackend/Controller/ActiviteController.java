@@ -16,14 +16,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/activite")
-@Api(value = "hello", description = "Gestion des activtés")
+@Api(value = "hello", description = "controller permettant la Gestion des activtés")
 public class ActiviteController {
 
     @Autowired
     private ActiviteService activiteService;
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
-    @ApiOperation(value = "Ajouter une activité")
+    @ApiOperation(value = "ici on Ajouter une activité")
     @PostMapping("/ajouter/{idacteurs}")
     public ReponseMessage create(@RequestBody Activite activite , @PathVariable String idacteurs){
 //
@@ -33,22 +33,22 @@ public class ActiviteController {
     }
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
 
-    @ApiOperation(value = "Modifier une activité")
+    @ApiOperation(value = "ici on Modifier une activité")
     @PutMapping("/modifier")
     public ReponseMessage update(@RequestBody Activite activite){
         return activiteService.modifierActivite(activite);
     }
     //================FIN DE LA METHODE PERMETTANT DE MODIFIER UNE ACTIVITE======================
 
-    @ApiOperation(value = "Afficher la liste des activités")
-    @GetMapping("/Afficher")
+    @ApiOperation(value = "ici on Afficher la liste des activités")
+    @GetMapping("/afficher")
     public List<Activite> read(){
 
         return activiteService.afficherActivite();
     }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LA LISTE DES ACTIVITES========================
 
-    @ApiOperation(value = "Supprimer une activité")
+    @ApiOperation(value = "ici on Supprimer une activité")
     @DeleteMapping("/supprimer/{idactivite}")
     public ReponseMessage delete(@PathVariable Long idactivite){
 

@@ -8,6 +8,7 @@ import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
 import com.example.erpbackend.Service.*;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -31,6 +32,7 @@ public class ImportTriePostulant {
     final private TirageService tirageService;
 
 
+    @ApiOperation(value = "ici on fait Importer et trié en meme temps")
     @PostMapping("/import/excel/{libelle}/{libelleT}/{nbre}/{libelleAct}")//il prend en parametre le libelle de la liste
     public ReponseMessage importFormExcelT(@Param("file") MultipartFile file, Liste_postulant liste, @PathVariable String libelle, @PathVariable("libelleT") String libelleT, @PathVariable("nbre") int nbre, @PathVariable("libelleAct") String libelleAct) {
 
@@ -52,7 +54,7 @@ public class ImportTriePostulant {
             return message;
         }else {
             Liste_postulant liste_postulant = new Liste_postulant();
-            Activite activite = activiteService.trouverActiviteParLibelle(libelle);
+            Activite activite = activiteService.trouverActiviteParLibelle(libelleAct);
 
             if (activite == null){
 
@@ -72,8 +74,6 @@ public class ImportTriePostulant {
 
                     Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
 
-                    tirageService.creer(tirage, lpt, act);
-
                     for(Postulant pot:postelist){
 
                         pot.setListePostulant(lpt);
@@ -81,6 +81,7 @@ public class ImportTriePostulant {
                     }
                     System.out.println(postelist);
                     postulantService.enregistrerPostulant(postelist);
+                    tirageService.creer(tirage, lpt, act);
                     ReponseMessage message = new ReponseMessage("liste importer avec succes", true);
                     return message;
                 }else {
