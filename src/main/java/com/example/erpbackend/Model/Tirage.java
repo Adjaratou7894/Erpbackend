@@ -17,10 +17,14 @@ public class Tirage {
     private  String    libelleTirage;
     private  Integer   nombrePostulantTire;
     private  Date      date;
+    private Boolean     validite;
 
     @ManyToOne
     private Utilisateur utilisateur;
 
     @ManyToOne
     private Liste_postulant listePostulant;
+
+    @ManyToOne
+    private Activite activite;
 }

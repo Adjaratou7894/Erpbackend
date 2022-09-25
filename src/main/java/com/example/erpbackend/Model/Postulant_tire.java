@@ -13,6 +13,7 @@ public class Postulant_tire {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long      id;
     private  Long      idPostulant;
+
     @ManyToOne
     private Tirage tirage;
 }

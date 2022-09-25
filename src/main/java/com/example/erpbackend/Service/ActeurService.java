@@ -7,6 +7,7 @@ import com.example.erpbackend.Model.Acteur;
 import java.util.List;
 
 public interface ActeurService {
+
     // Création d'un acteur
     ReponseMessage creerActeur(Acteur acteur);
 

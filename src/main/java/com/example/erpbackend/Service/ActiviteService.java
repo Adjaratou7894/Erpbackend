@@ -3,12 +3,14 @@ package com.example.erpbackend.Service;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Role;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 public interface ActiviteService {
+    //,
     //================METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
-    ReponseMessage ajouterActivite(Activite activite);
+    ReponseMessage ajouterActivite(Activite activite, String idacteurs);
 
 
     //================METHODE PERMETTANT DE MODIFIER UNE ACTIVITE=========================

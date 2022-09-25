@@ -1,11 +1,68 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Liste_postulant;
+import com.example.erpbackend.Model.Postulant;
+import com.example.erpbackend.Model.Postulant_tire;
+import com.example.erpbackend.Model.Tirage;
+import com.example.erpbackend.Service.ListePostulantService;
+import com.example.erpbackend.Service.PostulantService;
+import com.example.erpbackend.Service.PostulantTireService;
+import com.example.erpbackend.Service.TirageService;
 import io.swagger.annotations.Api;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import io.swagger.annotations.ApiOperation;
+import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
-@Api(value = "hello", description = "Gestion des postulants ")
+@Api(value = "hello", description = "controller permettant de Gestion les postulants tirés ")
 @RequestMapping("/postulanttire")
+@AllArgsConstructor
 public class PostulantTireController {
+
+    @Autowired
+    private final PostulantTireService postulantTireService;
+
+    private final TirageService tirageService;
+
+    private final PostulantService postulantService;
+
+    private final ListePostulantService listePostulantService;
+
+    @ApiOperation(value = "ici on ajouter un postulant tiré ")
+    @PostMapping("/ajouter/{listeLibelle}/{tirageLibelle}")
+    public ReponseMessage ajouterPostulantTire(@RequestBody Postulant postulant, @PathVariable String tirageLibelle, @PathVariable String listeLibelle){
+
+        Liste_postulant liste = listePostulantService.trouverListePostulantParLibelle(listeLibelle);
+
+        Tirage tirage = tirageService.trouverTirageParLibelle(tirageLibelle);
+
+        postulant.setListePostulant(liste);
+
+        return postulantTireService.ajouterPostulantTrie(postulant, tirage);
+    }
+
+    @ApiOperation(value = "ici on afficher tout les postulant tiré ")
+    @GetMapping("/afficher")
+    public List<Postulant> readPostulantTire(){
+
+        return postulantTireService.recupererTousLesPostulantTire();
+    }
+
+    @GetMapping("/afficher/{genre}")
+    public List<Postulant> afficherPostulantFiltre(@PathVariable String genre){
+        //Postulant pgenre = postulantService.trouverPostulantParGenre(genre);
+
+            return postulantTireService.recupererTousLesPostulantTireFilter(genre);
+
+    }
+    @ApiOperation(value = "ici on supprimer un postulant tiré ")
+    @DeleteMapping("/supprimer/{id}")
+    public ReponseMessage deletePostulantTire(Long id){
+
+        return postulantTireService.supprimerPostulantTrie(id);
+    }
 }
