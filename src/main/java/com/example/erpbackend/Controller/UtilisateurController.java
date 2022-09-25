@@ -40,7 +40,7 @@ public class UtilisateurController {
     // ============================== Modifier un utilisateur dans dans la base de données =======================
 
     @ApiOperation(value = "Modifier un user")
-   // @PutMapping("/modifier")
+   @PutMapping("/modifier")
     public ReponseMessage modifierUtilisateur(@RequestBody Utilisateur utilisateur){
         return utilisateurService.modifierUtilisateur(utilisateur);
 

@@ -19,8 +19,9 @@ public class EntiteController {
     //**********On ajoute un entité avec un type de retour entite********
     @ApiOperation(value = "Créer un Entité")
     @PostMapping("/ajouter")
-    public ReponseMessage ajouterEntite(Entite entite){
-      return   entiteServiceImplement.ajouter(entite);
+    public ReponseMessage ajouterEntite(@RequestBody Entite entite){
+
+        return   entiteServiceImplement.ajouter(entite);
     }
 
 
