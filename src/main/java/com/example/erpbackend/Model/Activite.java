@@ -26,11 +26,6 @@ public class Activite {
     @ManyToOne
     private Etat_activite etatActivite;
 
-    /*
-    @ManyToOne
-    private Entite entite;
-    */
-
     @ManyToOne
     private Utilisateur utilisateur;
 
