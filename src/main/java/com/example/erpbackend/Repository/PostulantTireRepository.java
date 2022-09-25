@@ -23,9 +23,11 @@ public interface PostulantTireRepository extends JpaRepository<Postulant_tire,Lo
    // Postulant_tire findById(Long id);
    Postulant_tire findByIdPostulant(Long idPostulant);
 
-   @Query(value = "select id_postulant from postulant_tire", nativeQuery = true)
+   @Query(value = "select id_postulant from postulant_tire, tirage where postulant_tire.tirage_idtirage = tirage.idtirage and tirage.validite = 1", nativeQuery = true)
     List<Long> FIND_ALL_POSTULANT_TIRE();
 
+   /*
     @Query(value = "select * from postulant where genre = :genre", nativeQuery = true)
     List<String> FIND_POSTULANT_PAR_GENRE(@Param("genre") String genre);
+    */
 }

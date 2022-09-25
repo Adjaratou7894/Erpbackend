@@ -82,7 +82,9 @@ public class PostulantTireServiceImplement implements PostulantTireService {
         List<Postulant> postulantList = new ArrayList<>();
 
         for (Long idPost : idPostTire){
+
             postulant = postulantRepository.FIND_POSTULANT_PAR_ID(idPost);
+
             postulantList.add(postulant);
         }
 

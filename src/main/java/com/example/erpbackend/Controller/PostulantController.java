@@ -32,7 +32,7 @@ public class PostulantController {
     final private ActiviteService activiteService;
 
     @ApiOperation(value = "ici on Importer un fichier")
-    @RequestMapping("/import/excel/{libelleliste}/{libelleActivite}")
+    @PostMapping("/import/excel/{libelleliste}/{libelleActivite}")
     public ReponseMessage importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste, @PathVariable String libelleActivite) {
 
         ConfigExcel importfichier = new ConfigExcel();
@@ -84,7 +84,7 @@ public class PostulantController {
     }
 
     @ApiOperation(value = "ici on Ajouter un postulant")
-    @RequestMapping("/ajouter")
+    @PostMapping("/ajouter")
     public Object ajouterPostulant(@RequestBody Postulant postulant){
 
        return postulantService.ajouterPostulant(postulant);
