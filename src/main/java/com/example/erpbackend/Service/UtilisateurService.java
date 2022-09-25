@@ -1,18 +1,19 @@
 package com.example.erpbackend.Service;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Utilisateur;
 
 import java.util.List;
 
 public interface UtilisateurService {
 
-    Utilisateur ajouterUtilisateur(Utilisateur utilisateur);
+    ReponseMessage ajouterUtilisateur(Utilisateur utilisateur);
 
-    Utilisateur modifierUtilisateur(Utilisateur utilisateur, Long id);
+    ReponseMessage modifierUtilisateur(Utilisateur utilisateur);
 
     List<Utilisateur> afficherUtilisateur();
 
-    String supprimerUtilisateur(Long id);
+    ReponseMessage supprimerUtilisateur(Long iduser);
 
     Object seConnecter(String email, String motDePasse);
 

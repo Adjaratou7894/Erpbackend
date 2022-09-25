@@ -1,43 +1,51 @@
 package com.example.erpbackend.Controller;
 
-
+import com.example.erpbackend.Importation.ConfigExcel;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
-import com.example.erpbackend.Service.ActiviteService;
-import io.swagger.annotations.Api;
-import com.example.erpbackend.Importation.ConfigExcel;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
-import com.example.erpbackend.Service.ListePostulantService;
-import com.example.erpbackend.Service.PostulantService;
+import com.example.erpbackend.Model.Tirage;
+import com.example.erpbackend.Service.*;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
-@Api(value = "hello", description = "controller permettant la Gestion des Postulants")
-@RequestMapping("/postulant")
+@Api(value = "hello", description = "Importer et tirer en même temps")
+@RequestMapping("/import")
 @AllArgsConstructor
-public class PostulantController {
-
+public class ImportTriePostulant {
     @Autowired
     private final ListePostulantService listePostulantService;
     private final PostulantService postulantService;
     final private ActiviteService activiteService;
+    final private TirageService tirageService;
 
-    @ApiOperation(value = "ici on Importer un fichier")
-    @PostMapping("/import/excel/{libelleliste}/{libelleActivite}")
-    public ReponseMessage importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste, @PathVariable String libelleActivite) {
+
+    @ApiOperation(value = "ici on fait Importer et trié en meme temps")
+    @PostMapping("/import/excel/{iduser}/{libelle}/{libelleT}/{nbre}/{libelleAct}")//il prend en parametre le libelle de la liste
+    public ReponseMessage importFormExcelT(@Param("file") MultipartFile file, Liste_postulant liste, @PathVariable String libelle, @PathVariable("libelleT") String libelleT, @PathVariable("nbre") int nbre, @PathVariable("libelleAct") String libelleAct) {
 
         ConfigExcel importfichier = new ConfigExcel();
 
         List<Postulant> postelist = importfichier.excelImport(file);
+
+        Tirage tirage = new Tirage();
+        Activite act = activiteService.trouverActiviteParLibelle(libelleAct);
+
+        tirage.setLibelleTirage(libelleT);
+        tirage.setNombrePostulantTire(nbre);
+
 
         if(postelist.size()==0){
 
@@ -46,7 +54,7 @@ public class PostulantController {
             return message;
         }else {
             Liste_postulant liste_postulant = new Liste_postulant();
-            Activite activite = activiteService.trouverActiviteParLibelle(libelleActivite);
+            Activite activite = activiteService.trouverActiviteParLibelle(libelleAct);
 
             if (activite == null){
 
@@ -54,7 +62,7 @@ public class PostulantController {
 
                 return message;
             }else {
-                Liste_postulant listt = listePostulantService.trouverListePostulantParLibelle(libelleliste);
+                Liste_postulant listt = listePostulantService.trouverListePostulantParLibelle(libelle);
 
                 if(listt == null){
 
@@ -62,7 +70,7 @@ public class PostulantController {
 
                     liste_postulant.setNombretirage(0);
 
-                    liste_postulant.setLibelleliste(libelleliste);
+                    liste_postulant.setLibelleliste(libelle);
 
                     Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
 
@@ -73,6 +81,7 @@ public class PostulantController {
                     }
                     System.out.println(postelist);
                     postulantService.enregistrerPostulant(postelist);
+                    tirageService.creer(tirage, lpt, act);
                     ReponseMessage message = new ReponseMessage("liste importer avec succes", true);
                     return message;
                 }else {
@@ -80,19 +89,6 @@ public class PostulantController {
                     return message;
                 }
             }
-            }
-    }
-
-    @ApiOperation(value = "ici on Ajouter un postulant")
-    @PostMapping("/ajouter")
-    public Object ajouterPostulant(@RequestBody Postulant postulant){
-
-       return postulantService.ajouterPostulant(postulant);
-    }
-
-    @ApiOperation(value = "ici on Afficher les postulants")
-    @GetMapping("/afficher")
-    public List<Postulant> afficherliste(){
-        return postulantService.afficherPostulant();
+        }
     }
 }

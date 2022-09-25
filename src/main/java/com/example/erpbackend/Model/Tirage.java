@@ -13,12 +13,18 @@ import java.util.List;
 public class Tirage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private  Long      id;
-    private  String    LibelleTirage;
+    private  Long      idtirage;
+    private  String    libelleTirage;
     private  Integer   nombrePostulantTire;
     private  Date      date;
+    private Boolean     validite;
+
     @ManyToOne
     private Utilisateur utilisateur;
+
     @ManyToOne
     private Liste_postulant listePostulant;
+
+    @ManyToOne
+    private Activite activite;
 }

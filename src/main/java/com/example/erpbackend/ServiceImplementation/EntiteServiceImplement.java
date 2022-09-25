@@ -19,8 +19,16 @@ public class EntiteServiceImplement implements EntiteService {
     private final EntiteRepository entiteRepository;
     //**********On ajout une entité avec son id et un type de retour Entite********
     @Override
-    public Entite ajouter(Entite entite) {
-        return entiteRepository.save(entite);
+    public ReponseMessage ajouter(Entite entite) {
+        if(entiteRepository.findByNom(entite.getNom())==null){
+            entiteRepository.save(entite);
+            ReponseMessage message = new ReponseMessage("Entité ajoutée avec succes", true);
+            return  message;
+        }else {
+            ReponseMessage message = new ReponseMessage("Cette entité existe déjà ", false);
+
+            return message;
+        }
     }
     //**********On affiche une entité avec son id et un type de retour liste********
 
@@ -31,25 +39,32 @@ public class EntiteServiceImplement implements EntiteService {
     }
     //**********On modifie une entité avec son id et un type de retour Entite********
     @Override
-    public Entite modifier(Entite entite) {
-        return entiteRepository.findById(entite.getIdEntite())
+    public ReponseMessage modifier(Entite entite) {
+        if (entiteRepository.findByIdEntite(entite.getIdEntite()) !=null) {
+            return entiteRepository.findById(entite.getIdEntite())
                 .map(entite1 -> {
                     entite1.setNom(entite.getNom());
-                    return entiteRepository.save(entite1);
-                }).orElseThrow(() -> new RuntimeException("Entité  non trouvé"));
+                    entiteRepository.save(entite1);
+                    ReponseMessage message = new ReponseMessage("Entité modifiée avec succes", true);
+                    return  message;
+                }).orElseThrow(() -> new RuntimeException("Entité  non trouvée"));
+        }else {
+            ReponseMessage message = new ReponseMessage("Entité non trouvée ", false);
 
+            return message;
+        }
     }
     //**********On supprime une entité avec son id********
     @Override
     public ReponseMessage supprimer(Long id) {
-        if(entiteRepository.findById(id).get() != null) {
-            ReponseMessage reponseMessage;
+        if (entiteRepository.findByIdEntite(id) != null) {
             entiteRepository.deleteById(id);
-          reponseMessage = new  ReponseMessage("supprimé avec succés",true);
-        return  reponseMessage;}
-        else {
-            ReponseMessage reponseMessage = new ReponseMessage("Suppression impossible", false);
-            return  reponseMessage;}
+            ReponseMessage message = new ReponseMessage("Entité supprimée avec succes", true);
+            return message;
+        } else {
+            ReponseMessage message = new ReponseMessage("Entité non trouvée", false);
+            return message;
+        }
     }
 
     }

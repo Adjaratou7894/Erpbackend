@@ -12,14 +12,14 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/role")
-@Api(value = "hello", description = "Gestion des Rôles")
+@Api(value = "hello", description = "controller permettant la Gestion des Rôles")
 public class RoleController {
 
     @Autowired
     private RoleService roleService;
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UN ROLE======================
-    @ApiOperation(value = "Ajouter un rôle")
+    @ApiOperation(value = "ici on Ajouter un rôle")
     @PostMapping("/ajouter")
     public ReponseMessage create(@RequestBody Role role){
         return roleService.ajouterRole(role);
@@ -27,33 +27,23 @@ public class RoleController {
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UN ROLE======================
 
     //================DEBUT DE LA METHODE PERMETTANT DE MODIFIER UN ROLE======================
-    @ApiOperation(value = "Modifier un rôle")
+    @ApiOperation(value = "ici on Modifier un rôle")
     @PutMapping("/modifier")
     public ReponseMessage update(@RequestBody Role role){
-        if (roleService.trouverRoleParId(role.getIdrole()) !=  null){
-
-            roleService.modifierRole(role);
-            ReponseMessage message = new ReponseMessage("Etat modifié avec suces", true);
-
-            return message;
-        }else {
-            ReponseMessage message = new ReponseMessage("Etat non trouvé", false);
-
-            return message;
-        }
+            return roleService.modifierRole(role);
     }
     //================FIN DE LA METHODE PERMETTANT DE MODIFIER UN ROLE======================
 
     //================DEBUT DE LA METHODE PERMETTANT D'AFFICHER LA LISTE DES ROLES======================
-    @ApiOperation(value = "Afficher la liste des rôles")
-    @GetMapping("/Afficher")
+    @ApiOperation(value = "ici on Afficher la liste des rôles")
+    @GetMapping("/afficher")
     public List<Role> read(){
         return roleService.afficherRole();
     }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LA LISTE DES ROLES========================
 
     //================DEBUT DE LA METHODE PERMETTANT DE SUPPRIMER UN ROLE======================
-    @ApiOperation(value = "Supprimer un rôle")
+    @ApiOperation(value = "ici on Supprimer un rôle")
     @DeleteMapping("/supprimer/{idrole}")
     public ReponseMessage delete(@PathVariable Long idrole){
 

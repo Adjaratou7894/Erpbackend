@@ -1,5 +1,6 @@
 package com.example.erpbackend.ServiceImplementation;
 
+import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Utilisateur;
 import com.example.erpbackend.Repository.UtilisateurRepository;
 import com.example.erpbackend.Service.UtilisateurService;
@@ -18,23 +19,40 @@ public class UtilisateurServiceImplement implements UtilisateurService {
 
     // ================= ajouter un utilisateur   ===============================================================
     @Override
-    public Utilisateur ajouterUtilisateur(Utilisateur utilisateur) {
-        return utilisateurRepository.save(utilisateur);
+    public ReponseMessage ajouterUtilisateur(Utilisateur utilisateur) {
+        if (utilisateurRepository.findByEmail(utilisateur.getEmail()) == null){
+            utilisateurRepository.save(utilisateur);
+            ReponseMessage message = new ReponseMessage("Utilisateur ajouté avec succes", true);
+            return  message;
+        }else {
+            ReponseMessage message = new ReponseMessage("Cet utilisateur existe déjà ", false);
+
+            return message;
+        }
     }
 
 
     // ================= Modifier un utilisateur   =============================================================
     @Override
-    public Utilisateur modifierUtilisateur(Utilisateur utilisateur, Long id) {
-        return utilisateurRepository.findById(id)
-                .map(u -> {
-                    u.setNom(utilisateur.getNom());
-                    u.setPrenom(utilisateur.getPrenom());
-                    u.setNumero(utilisateur.getNumero());
-                    u.setEmail(utilisateur.getEmail());
-                    u.setPassword(utilisateur.getPassword());
-                    return utilisateurRepository.save(u);
-                }).orElseThrow(() -> new RuntimeException("Cet utilisateur n'existe pas"));
+    public ReponseMessage modifierUtilisateur(Utilisateur utilisateur) {
+        if (utilisateurRepository.findByIduser(utilisateur.getIduser()) !=null) {
+            return utilisateurRepository.findById(utilisateur.getIduser())
+                    .map(u -> {
+                        u.setNom(utilisateur.getNom());
+                        u.setPrenom(utilisateur.getPrenom());
+                        u.setNumero(utilisateur.getNumero());
+                        u.setEmail(utilisateur.getEmail());
+                        u.setPassword(utilisateur.getPassword());
+                        utilisateurRepository.save(u);
+                        ReponseMessage message = new ReponseMessage("User modifié avec succes", true);
+                        return  message;
+                    }).orElseThrow(() -> new RuntimeException("Cet utilisateur n'existe pas"));
+        }else {
+            ReponseMessage message = new ReponseMessage("User non trouvée ", false);
+
+            return message;
+        }
+
     }
 
 
@@ -47,9 +65,15 @@ public class UtilisateurServiceImplement implements UtilisateurService {
 
     // ================= Supprimer un utilisateur par son Id ===================================================
     @Override
-    public String supprimerUtilisateur(Long id) {
-        utilisateurRepository.findById(id);
-        return "Utilisateur supprimer avec succé !";
+    public ReponseMessage supprimerUtilisateur(Long iduser) {
+        if(utilisateurRepository.findByIduser(iduser) != null){
+            utilisateurRepository.deleteById(iduser);
+            ReponseMessage message = new ReponseMessage("User supprimé avec succes", true);
+            return message;
+        }else {
+            ReponseMessage message = new ReponseMessage("User non trouvée", false);
+            return message;
+        }
     }
 
 
@@ -58,7 +82,8 @@ public class UtilisateurServiceImplement implements UtilisateurService {
     public Object seConnecter(String email, String motDePasse) {
         Optional<Utilisateur> utilisateur = utilisateurRepository.findByEmailAndPassword(email, motDePasse);
         if (utilisateur.isEmpty()){
-            return "Mot de passe ou identifiant incorrect !";
+            ReponseMessage message = new ReponseMessage("Mot de passe ou identifiant incorrect", false);
+            return message;
         }else {
         return utilisateur.get();
         }
