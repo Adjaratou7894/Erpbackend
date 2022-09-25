@@ -175,4 +175,11 @@ public class TirageServiceImplement implements TirageService{
         }
     }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LES TIRAGES=========================
+
+
+    @Override
+    public List<Tirage> recupererIdTirageParListe(Long idliste) {
+        return tirageRepository.FIND_ALL_TIRAGE_PAR_LISTE(idliste);
+    }
+
 }

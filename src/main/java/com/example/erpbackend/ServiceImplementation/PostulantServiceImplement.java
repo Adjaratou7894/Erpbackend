@@ -58,4 +58,11 @@ public class PostulantServiceImplement implements PostulantService {
     public Postulant trouverPostulantParGenre(String genre) {
         return postulantRepository.findByGenre(genre);
     }
+
+    @Override
+    public List<Object> trouverAllApprenantOuParticipant(String typePostulant) {
+
+        return postulantRepository.FIND_ALL_APPRENANT_OR_PARTICIPANT(typePostulant);
+    }
+
 }

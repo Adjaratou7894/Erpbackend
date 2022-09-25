@@ -29,7 +29,25 @@ public interface PostulantRepository extends JpaRepository<Postulant,Long> {
     @Query(value = "select * from postulant where id = :id", nativeQuery = true)
     Postulant FIND_POSTULANT_PAR_ID(@Param("id") Long id);
 
+    /*
+    @Query(value = "select nom_postulant, prenom_postulant,type_activite,type_postulant" +
+            " from postulant, liste_postulant, activite, type_activite where " +
+            "liste_postulant.idliste = postulant.liste_postulant_idliste and " +
+            "activite.type_activite_idactivite = type_activite.idactivite and " +
+            "type_activite.type_postulant = :type_postulant;", nativeQuery = true)
+    List<Object> FIND_ALL_APPRENANT_OR_PARTICIPANT(@Param("type_postulant") String type_postulant);
 
+     */
+
+
+    @Query(value = "select distinct postulant_tire.id_postulant from" +
+            " postulant_tire,tirage,liste_postulant,activite,type_activite" +
+            " where postulant_tire.tirage_idtirage=tirage.idtirage and" +
+            " tirage.liste_postulant_idliste = liste_postulant.idliste and " +
+            "liste_postulant.activite_idactivite=activite.idactivite and " +
+            "activite.type_activite_idactivite=type_activite.idactivite and " +
+            "type_activite.type_postulant = :type_postulant", nativeQuery = true)
+    List<Object> FIND_ALL_APPRENANT_OR_PARTICIPANT(@Param("type_postulant") String type_postulant);
 
     Postulant findByGenre (String genre);
 }

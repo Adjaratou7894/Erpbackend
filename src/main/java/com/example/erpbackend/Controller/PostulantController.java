@@ -95,4 +95,13 @@ public class PostulantController {
     public List<Postulant> afficherliste(){
         return postulantService.afficherPostulant();
     }
+
+
+    @ApiOperation(value = "ici on Afficher Le nombre de postulant ou de participant")
+    @GetMapping("/afficherNombreParticipantOuApprenant/{typePostulant}")
+    public int afficherNombreParticipantOuApprenant(@PathVariable String typePostulant){
+
+        return postulantService.trouverAllApprenantOuParticipant(typePostulant).size();
+    }
+
 }

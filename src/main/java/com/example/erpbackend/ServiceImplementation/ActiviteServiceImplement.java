@@ -115,5 +115,11 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.findByNom(libelleActivite);
 
         }
+
+    @Override
+    public List<Object> afficheActiviteEnFonctionEtat(String etat) {
+        return activiteRepository.FIND_ACTIVITE_PAR_ETAT(etat);
+    }
+
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
 }

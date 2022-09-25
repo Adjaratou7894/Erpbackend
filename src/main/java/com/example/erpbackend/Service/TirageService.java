@@ -34,5 +34,7 @@ public interface TirageService {
 
     ReponseMessage validerTirageTirage(Tirage tirage);
 
+    List<Tirage> recupererIdTirageParListe(Long idliste);
+
 
 }

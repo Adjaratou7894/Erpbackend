@@ -55,5 +55,15 @@ public class ActiviteController {
 
         return activiteService.supprimerActivite(idactivite);
     }
+
+    @ApiOperation(value = "Ici on affiche les trois activites recente en fontion de l'etat")
+    @GetMapping("/activitesRecentes/{etatActivite}")
+    public List<Object> trouverTroisActviteParEtat(@PathVariable String etatActivite){
+
+        return activiteService.afficheActiviteEnFonctionEtat(etatActivite);
+    }
+
+
+
     //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
 }

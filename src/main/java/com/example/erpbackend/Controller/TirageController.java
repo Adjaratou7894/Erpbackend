@@ -37,6 +37,8 @@ public class TirageController {
     @Autowired
     private ActiviteService activiteService;
 
+
+
     //================DEBUT DE LA METHODE PERMETTANT DE RECUPERER TIRAGE PAR IDLIST=========================
 
 
@@ -105,6 +107,13 @@ public class TirageController {
     public ReponseMessage validerTirage(@RequestBody Tirage tirage){
 
         return tirageService.validerTirageTirage(tirage);
+    }
+
+    @ApiOperation(value = "ici affiche les tirages par id d'une liste ")
+    @GetMapping("/tirageParListe/{idListe}")
+    public List<Tirage> recupererLesTirageParListe(@PathVariable Long idListe){
+
+        return tirageService.recupererIdTirageParListe(idListe);
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Model.Postulant;
+import com.example.erpbackend.Model.Tirage;
 import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.erpbackend.Message.ReponseMessage;
@@ -56,4 +58,5 @@ public class ListePostulantController {
 
         return listePostulantService.supprimerListePostulant(idlistepostulant);
     }
+
 }

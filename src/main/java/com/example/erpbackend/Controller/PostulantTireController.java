@@ -61,8 +61,16 @@ public class PostulantTireController {
     }
     @ApiOperation(value = "ici on supprimer un postulant tiré ")
     @DeleteMapping("/supprimer/{id}")
-    public ReponseMessage deletePostulantTire(Long id){
+    public ReponseMessage deletePostulantTire(@PathVariable Long id){
 
         return postulantTireService.supprimerPostulantTrie(id);
     }
+
+    @ApiOperation(value = "ici affiche les postulants tirés par id du tirage ")
+    @GetMapping("/PostulantTireParTirage/{idTirage}")
+    public List<Postulant> recupererLesPostulantTireParTirage(@PathVariable Long idTirage){
+
+        return postulantTireService.recupererIdPostulantTireParTirage(idTirage);
+    }
+
 }

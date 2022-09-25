@@ -13,4 +13,6 @@ public interface PostulantService {
     List<Postulant> afficherPostulant();
 
     Postulant trouverPostulantParGenre(String genre);
+
+    List<Object> trouverAllApprenantOuParticipant(String typePostulant);
 }
