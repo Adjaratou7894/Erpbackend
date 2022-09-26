@@ -24,6 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/listepostulant")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100")
 public class ListePostulantController {
 
     @Autowired

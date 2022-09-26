@@ -16,13 +16,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @Api(value = "hello", description = "controller permettant la Gestion des Postulants")
 @RequestMapping("/postulant")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100")
 public class PostulantController {
 
     @Autowired

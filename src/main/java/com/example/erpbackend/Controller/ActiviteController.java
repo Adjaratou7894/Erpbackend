@@ -19,6 +19,7 @@ import java.util.List;
 @RequestMapping("/activite")
 @Api(value = "hello", description = "controller permettant la Gestion des activtés")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100")
 public class ActiviteController {
 
     @Autowired
