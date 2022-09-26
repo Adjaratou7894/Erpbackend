@@ -23,6 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @RequestMapping("/tirage")
+@CrossOrigin(origins = "http://localhost:8100")
 public class TirageController {
 
     @Autowired

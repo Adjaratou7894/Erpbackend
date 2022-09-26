@@ -12,10 +12,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -24,6 +21,7 @@ import java.util.List;
 @Api(value = "hello", description = "Importer et tirer en même temps")
 @RequestMapping("/import")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100")
 public class ImportTriePostulant {
     @Autowired
     private final ListePostulantService listePostulantService;

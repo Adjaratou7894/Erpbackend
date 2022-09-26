@@ -16,6 +16,7 @@ import java.util.List;
 @Api(value = "hello", description = "controller Gestion de l'etat des activités")
 @RequestMapping("/etatactivite")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100")
 public class EtatActiviteController {
 
     @Autowired

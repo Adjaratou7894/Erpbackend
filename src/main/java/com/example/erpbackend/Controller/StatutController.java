@@ -15,6 +15,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/statut")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100")
 public class StatutController {
 
     @Autowired

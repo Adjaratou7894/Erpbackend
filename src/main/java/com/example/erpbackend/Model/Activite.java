@@ -15,6 +15,7 @@ public class Activite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  idactivite;
     private String nom;
+    private String description;
     private Date   dateDebut;
     private Date   dateFin;
     private Boolean etat;

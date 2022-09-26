@@ -21,6 +21,7 @@ import java.util.List;
 @Api(value = "hello", description = "controller permettant de Gestion les postulants tirés ")
 @RequestMapping("/postulanttire")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100")
 public class PostulantTireController {
 
     @Autowired
