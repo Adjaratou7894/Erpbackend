@@ -14,4 +14,5 @@ public class Entite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long   idEntite;
     private String nom;
+    private String photo;
 }
