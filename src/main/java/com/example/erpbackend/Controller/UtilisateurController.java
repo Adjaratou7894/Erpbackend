@@ -25,7 +25,13 @@ public class UtilisateurController {
 
         return utilisateurService.afficherUtilisateur();
     }
+    // ============================== Récuperer le nombre de tous les utilisateurs dans dans la base de données ===============
+    @ApiOperation(value = "ici on Afficher le nombre des users")
+    @GetMapping("/afficherNbreUser")
+    public int afficherNobreUtilisateur(){
 
+        return utilisateurService.afficherUtilisateur().size();
+    }
 
     // ============================== Ajouter un utilisateur dans dans la base de données =======================
     @ApiOperation(value = "ici on fait l'Ajouter un users")
