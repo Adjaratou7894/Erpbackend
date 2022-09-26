@@ -25,21 +25,31 @@ public class UtilisateurController {
 
         return utilisateurService.afficherUtilisateur();
     }
+    // ============================== Récuperer le nombre de tous les utilisateurs dans dans la base de données ===============
+    @ApiOperation(value = "ici on Afficher le nombre des users")
+    @GetMapping("/afficherNbreUser")
+    public int afficherNobreUtilisateur(){
 
+        return utilisateurService.afficherUtilisateur().size();
+    }
 
     // ============================== Ajouter un utilisateur dans dans la base de données =======================
     @ApiOperation(value = "ici on fait l'Ajouter un users")
     @PostMapping("/ajouter")
+
     public ReponseMessage ajouterUtilisateur(@RequestBody Utilisateur utilisateur){
+
         return utilisateurService.ajouterUtilisateur(utilisateur);
     };
 
 
     // ============================== Modifier un utilisateur dans dans la base de données =======================
+
     @ApiOperation(value = "ici on Modifier un user")
     @PutMapping("/modifier")
     public ReponseMessage modifierUtilisateur(@RequestBody Utilisateur utilisateur){
         return utilisateurService.modifierUtilisateur(utilisateur);
+
     }
 
 
@@ -47,14 +57,15 @@ public class UtilisateurController {
     @ApiOperation(value = "ici on Supprimer un user")
     @DeleteMapping("/supprimer/{iduser}")
     public ReponseMessage supprimer(@PathVariable Long iduser){
-        return utilisateurService.supprimerUtilisateur(iduser);
-    }
+            return utilisateurService.supprimerUtilisateur(iduser);
 
+        }
 
     // ============================== Ce connecter avec son email et mot de passe ================================
     @ApiOperation(value = "Methode permettant de Se connecter")
     @GetMapping("/seconnecter")
     public Object seConnecter(@RequestBody String email, String password){
+
         return utilisateurService.seConnecter(email, password);
     }
 }

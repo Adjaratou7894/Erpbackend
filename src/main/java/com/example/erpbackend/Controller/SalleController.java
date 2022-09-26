@@ -17,9 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Api(value = "Test", description = "controller permettent la Gestion Des Salle")
 @RequestMapping("/salle")
 public class SalleController {
-
-   @Autowired
-    private  SalleService SalleService;
+    @Autowired
+    private SalleService SalleService;
 
     @ApiOperation(value = "ici on Ajout d'une Salle")
     @PostMapping("/ajouter")
@@ -29,7 +28,7 @@ public class SalleController {
     }
 
     @ApiOperation(value = "ici on Affichage de Toutes Les Salles")
-    @GetMapping("/afficherToutesLesSalles")
+    @GetMapping("/afficher")
     public List<Salle> afficherToutesLesSalles() {
 
         return SalleService.AffichageDesSalle();
@@ -39,8 +38,9 @@ public class SalleController {
     @GetMapping("/afficherToutesLesSallesOccupee")
     public List<Salle> afficherToutesLesSallesOccupee() {
 
-        return SalleService.AffichageDesSalleOccupee();
+        return SalleService.AffichageDesSalleLibre();
     }
+
 
     @ApiOperation(value = "ici on Affiche de Toutes Les Salles Libres")
     @GetMapping("/afficherToutesLesSallesLibre")
@@ -48,12 +48,19 @@ public class SalleController {
 
         return SalleService.AffichageDesSalleOccupee();
     }
+    // ============================== Récuperer le nombre de salle disponibles dans la base de données ===============
+    @ApiOperation(value = "ici on Afficher le nombre de salle disponible ")
+    @GetMapping("/affichernbresalledispo")
+    public int nbresalledispo(){
+
+        return SalleService.AffichageDesSalleOccupee().size();
+    }
 
     @ApiOperation(value = "ici on Modifier d'une Salle")
-    @DeleteMapping("/modifier")
+    @PutMapping("/modifier")
     public ReponseMessage modifiersalle(@RequestBody Salle Salle){
 
-        return SalleService.modifierSalle(Salle);
+            return SalleService.modifierSalle(Salle);
     }
 
     @ApiOperation(value = "ici on Supprime d'une Salle")

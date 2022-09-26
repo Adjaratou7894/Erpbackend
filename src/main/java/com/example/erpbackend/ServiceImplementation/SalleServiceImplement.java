@@ -25,6 +25,7 @@ public class SalleServiceImplement implements SalleService {
         if (salleRepository.findByNom(salle.getNom()) == null) {
 
             salle.setDisponibilite(true);
+
             salleRepository.save(salle);
             ReponseMessage message = new ReponseMessage("Salle ajouté avec succes", true);
             return message;
@@ -45,6 +46,7 @@ public class SalleServiceImplement implements SalleService {
         if (salleRepository.findByIdsalle(salle.getIdsalle()) !=null) {
             return salleRepository.findById(salle.getIdsalle())
                     .map(pA-> {
+                        pA.setIdsalle(salle.getIdsalle());
                         pA.setNom(salle.getNom());
                         pA.setDisponibilite(salle.getDisponibilite());
                         salleRepository.save(pA);

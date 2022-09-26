@@ -1,6 +1,5 @@
 package com.example.erpbackend.Controller;
 
-
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Service.ActiviteService;
@@ -31,57 +30,72 @@ public class PostulantController {
     private final PostulantService postulantService;
     final private ActiviteService activiteService;
 
+
+    //Le controlleur permettant d'importer un fichier et créer automatiquement une liste des postulants
+
     @ApiOperation(value = "ici on Importer un fichier")
     @PostMapping("/import/excel/{libelleliste}/{libelleActivite}")
-    public ReponseMessage importFormExcel(@Param("file") MultipartFile file, @PathVariable  String libelleliste, @PathVariable String libelleActivite) {
+    public ReponseMessage importFormExcel(@Param("file") MultipartFile file, @PathVariable String libelleliste, @PathVariable String libelleActivite) {
+
+
+        /*
+         * MultipartFile, classe java permettant d'importer un ou plusieurs fichiers
+         */
 
         ConfigExcel importfichier = new ConfigExcel();
 
+//stockage de la liste des postulants retournée par la classe "ConfigExcel"  dans postulantList
+
         List<Postulant> postelist = importfichier.excelImport(file);
 
-        if(postelist.size()==0){
+        if (postelist.size() == 0) {
 
             ReponseMessage message = new ReponseMessage("Fichier vide", false);
 
             return message;
-        }else {
+        } else {
+
             Liste_postulant liste_postulant = new Liste_postulant();
             Activite activite = activiteService.trouverActiviteParLibelle(libelleActivite);
 
-            if (activite == null){
+            if (activite == null) {
+
 
                 ReponseMessage message = new ReponseMessage("Cette activité n'existe pas", false);
 
                 return message;
             }else {
-                Liste_postulant listt = listePostulantService.trouverListePostulantParLibelle(libelleliste);
 
-                if(listt == null){
+            Liste_postulant listt = listePostulantService.trouverListePostulantParLibelle(libelleliste);
 
-                    liste_postulant.setActivite(activite);
+            if (listt == null) {
 
-                    liste_postulant.setNombretirage(0);
+                liste_postulant.setActivite(activite);
 
-                    liste_postulant.setLibelleliste(libelleliste);
+                liste_postulant.setNombretirage(0);
 
-                    Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
+                liste_postulant.setLibelleliste(libelleliste);
 
-                    for(Postulant pot:postelist){
+                Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
 
-                        pot.setListePostulant(lpt);
-                        pot.setEtat(true);
-                    }
-                    System.out.println(postelist);
-                    postulantService.enregistrerPostulant(postelist);
-                    ReponseMessage message = new ReponseMessage("liste importer avec succes", true);
-                    return message;
-                }else {
-                    ReponseMessage message = new ReponseMessage("Cette liste existe déjà", false);
-                    return message;
+                for (Postulant pot : postelist) {
+
+                    pot.setListePostulant(lpt);
+                    pot.setEtat(true);
                 }
+                System.out.println(postelist);
+                postulantService.enregistrerPostulant(postelist);
+                ReponseMessage message = new ReponseMessage("liste importer avec succes", true);
+                return message;
+            } else {
+                ReponseMessage message = new ReponseMessage("Cette liste existe déjà", false);
+                return message;
             }
-            }
+        }
+
     }
+
+}
 
     @ApiOperation(value = "ici on Ajouter un postulant")
     @PostMapping("/ajouter")

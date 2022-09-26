@@ -85,8 +85,13 @@ public class TirageServiceImplement implements TirageService{
 
         if (liste != null && activite != null){
 
+
+        //ajout de l'id de la liste à au tirage
+        tirage.setIdtirage(liste.getIdliste());
+
             //ajout de l'id de la liste à au tirage
             tirage.setListePostulant(liste);
+
 
             tirage.setActivite(activite);
 

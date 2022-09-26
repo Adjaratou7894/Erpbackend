@@ -1,5 +1,10 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Liste_postulant;
+import com.example.erpbackend.Service.ListePostulantService;
+import io.swagger.annotations.Api;
+
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
 import io.swagger.annotations.Api;
@@ -7,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Service.ListePostulantService;
-
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api(value = "hello", description = "controller permettant Gestion de la liste des Postulants")
+
+@Api(value = "hello", description = "Entité Liste Postulant")
+@RestController
 @RequestMapping("/listepostulant")
 @AllArgsConstructor
 public class ListePostulantController {
@@ -35,6 +41,11 @@ public class ListePostulantController {
     public List<Liste_postulant> afficherListePostulant() {
 
         return listePostulantService.afficherListePostulant();
+    }
+    @ApiOperation(value = "ici on afficher la Liste Postulant ")
+    @GetMapping("/afficherNbreListePostulant")
+    public int nbreListePostulant(){
+        return listePostulantService.afficherListePostulant().size();
     }
 
     @ApiOperation(value = "ici on modifier la Liste Postulant ")

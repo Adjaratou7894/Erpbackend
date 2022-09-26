@@ -1,6 +1,7 @@
 package com.example.erpbackend.Controller;
 
 import io.swagger.annotations.Api;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/activite")
 @Api(value = "hello", description = "controller permettant la Gestion des activtés")
+@AllArgsConstructor
 public class ActiviteController {
 
     @Autowired
@@ -25,7 +27,7 @@ public class ActiviteController {
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
     @ApiOperation(value = "ici on Ajouter une activité")
     @PostMapping("/ajouter/{idacteurs}")
-    public ReponseMessage create(@RequestBody Activite activite , @PathVariable String idacteurs){
+    public ReponseMessage createactivite(@RequestBody Activite activite , @PathVariable String idacteurs){
 //
         //, idacteurs
         return activiteService.ajouterActivite(activite, idacteurs);
@@ -34,8 +36,8 @@ public class ActiviteController {
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
 
     @ApiOperation(value = "ici on Modifier une activité")
-    @PutMapping("/modifier")
-    public ReponseMessage update(@RequestBody Activite activite){
+    @PutMapping("/ ")
+    public ReponseMessage updateactivite(@RequestBody Activite activite){
 
         return activiteService.modifierActivite(activite);
     }
@@ -43,7 +45,7 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Afficher la liste des activités")
     @GetMapping("/afficher")
-    public List<Activite> read(){
+    public List<Activite> readactivite(){
 
         return activiteService.afficherActivite();
     }
@@ -51,7 +53,7 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Supprimer une activité")
     @DeleteMapping("/supprimer/{idactivite}")
-    public ReponseMessage delete(@PathVariable Long idactivite){
+    public ReponseMessage deleteactivite(@PathVariable Long idactivite){
 
         return activiteService.supprimerActivite(idactivite);
     }
