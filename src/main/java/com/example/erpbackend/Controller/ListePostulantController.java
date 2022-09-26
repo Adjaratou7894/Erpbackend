@@ -42,6 +42,11 @@ public class ListePostulantController {
 
         return listePostulantService.afficherListePostulant();
     }
+    @ApiOperation(value = "ici on afficher la Liste Postulant ")
+    @GetMapping("/afficherNbreListePostulant")
+    public int nbreListePostulant(){
+        return listePostulantService.afficherListePostulant().size();
+    }
 
     @ApiOperation(value = "ici on modifier la Liste Postulant ")
     @PutMapping("/modifier")

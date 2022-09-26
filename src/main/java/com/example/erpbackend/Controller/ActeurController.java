@@ -34,7 +34,7 @@ public class ActeurController {
     }
 
     @ApiOperation(value = "ici on Afficher la liste des Acteur")
-    @GetMapping("/afficheracteur")
+    @GetMapping("/afficher")
     public List<Acteur> afficheracteur(){
 
         return acteurService.afficherToutLesActeurs();
