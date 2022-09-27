@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin(origins ="http://localhost:8100")
 @Api(value = "Test", description = "controller permettent la Gestion Des Salle")
 @RequestMapping("/salle")
 @CrossOrigin(origins = "http://localhost:8100")
