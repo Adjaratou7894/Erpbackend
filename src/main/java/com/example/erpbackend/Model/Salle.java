@@ -14,4 +14,6 @@ public class Salle {
     private  Long   idsalle;
     private String nom;
     private  Boolean disponibilite;
+    private String etage;
+    private int nbreplace;
 }
