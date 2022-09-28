@@ -63,7 +63,6 @@ public class ActiviteServiceImplement implements ActiviteService {
                         p.setEtat(activite.getEtat());
                         p.setEtatActivite(activite.getEtatActivite());
                         p.setTypeActivite(activite.getTypeActivite());
-                        p.setUtilisateur(activite.getUtilisateur());
                         p.setSalle(activite.getSalle());
                         activiteRepository.save(p);
                         ReponseMessage message = new ReponseMessage("Activité modifiée avec succes", true);
