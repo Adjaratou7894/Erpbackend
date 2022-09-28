@@ -14,5 +14,6 @@ public class Entite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long   idEntite;
     private String nom;
-    private String photo;
+    @Column(nullable = true, length = 64)
+    private String photoentite;
 }

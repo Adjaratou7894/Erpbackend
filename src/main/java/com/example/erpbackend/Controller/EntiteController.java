@@ -3,11 +3,17 @@ package com.example.erpbackend.Controller;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Entite;
 import com.example.erpbackend.ServiceImplementation.EntiteServiceImplement;
+import com.example.erpbackend.img.ConfigImage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.apache.poi.util.StringUtil;
+import org.springframework.data.repository.query.Param;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 @RestController
@@ -50,5 +56,18 @@ public class EntiteController {
     public ReponseMessage supprimerEntite(@PathVariable Long id){
 
         return entiteServiceImplement.supprimer(id);
+    }
+
+    @PostMapping("/ajouterE")
+    public byte[] ajouterEntit(@Param("test") Entite entite, @Param("file") MultipartFile file) throws IOException {
+
+        String nomfile = StringUtils.cleanPath(file.getOriginalFilename());
+         entite.setPhotoentite(nomfile);
+        String uploaDir = "C:\\Users\\ADIAWIAKOYE\\Desktop\\Erpbackend\\src\\main\\resources\\files";
+        ConfigImage.saveimg(uploaDir, nomfile, file);
+          return entiteServiceImplement.getBytes(entite.getIdEntite());
+
+      //  ReponseMessage message = new ReponseMessage("Entité ajouté avec succes", true);
+        //return message;
     }
 }

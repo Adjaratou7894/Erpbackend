@@ -8,6 +8,11 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -65,6 +70,21 @@ public class EntiteServiceImplement implements EntiteService {
             ReponseMessage message = new ReponseMessage("Entité non trouvée", false);
             return message;
         }
+    }
+
+    @Override
+    public byte [] getBytes(long idEntite) throws IOException {
+              Entite entite = new Entite();
+        if (entiteRepository.findByNom(entite.getNom()) == null) {
+
+            Entite ent = entiteRepository.findByIdEntite(idEntite);
+            String iconephoto = ent.getPhotoentite();
+            File file = new File("src/main/resources/photo" + ent.getIdEntite() + "/" + iconephoto);
+            Path path = Paths.get(file.toURI());
+            Files.readAllBytes(path);
+
+        }
+        return new byte[0];
     }
 
     }
