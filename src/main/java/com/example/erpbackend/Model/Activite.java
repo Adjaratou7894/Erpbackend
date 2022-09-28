@@ -3,9 +3,7 @@ package com.example.erpbackend.Model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table
@@ -19,6 +17,7 @@ public class Activite {
     private Date   dateDebut;
     private Date   dateFin;
     private Boolean etat;
+    private String nombrepersonnedemande;
 
     @ManyToOne
     private Type_activite typeActivite;
@@ -29,6 +28,13 @@ public class Activite {
 
     @ManyToOne
     private Utilisateur utilisateur;
+    @ManyToOne
+    private Utilisateur responsable;
+
+    @ManyToOne
+    private Annee annee;
+    @ManyToOne
+    private Entite entite;
 
     @OneToOne
     private Salle salle;
