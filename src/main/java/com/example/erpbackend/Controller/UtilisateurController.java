@@ -13,10 +13,11 @@ import java.util.List;
 @RestController
 @Api(value = "hello", description = "Controller permettant la Gestion des Users")
 @RequestMapping("/utilisateur")
+@CrossOrigin(origins = "http://localhost:8100")
 public class UtilisateurController {
+
     @Autowired
     private UtilisateurService utilisateurService;
-
 
     // ============================== Récuperer tous les utilisateurs dans dans la base de données ===============
     @ApiOperation(value = "ici on Afficher la liste des users")

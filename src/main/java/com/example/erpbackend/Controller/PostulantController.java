@@ -16,13 +16,13 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
 @Api(value = "hello", description = "controller permettant la Gestion des Postulants")
 @RequestMapping("/postulant")
 @AllArgsConstructor
+@CrossOrigin(origins = "http://localhost:8100")
 public class PostulantController {
 
     @Autowired
@@ -98,10 +98,12 @@ public class PostulantController {
 }
 
     @ApiOperation(value = "ici on Ajouter un postulant")
-    @PostMapping("/ajouter")
-    public Object ajouterPostulant(@RequestBody Postulant postulant){
+    @PostMapping("/ajouter/{libelleListe}")
+    public Postulant ajouterPostulant(@RequestBody Postulant postulant, @PathVariable String libelleListe){
 
-       return postulantService.ajouterPostulant(postulant);
+        //Liste_postulant listePostulant = postulantService.tr
+
+       return postulantService.ajouterPostulant(postulant, libelleListe);
     }
 
     @ApiOperation(value = "ici on Afficher les postulants")
