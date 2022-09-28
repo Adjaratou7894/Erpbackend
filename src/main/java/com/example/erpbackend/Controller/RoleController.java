@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/role")
 @Api(value = "hello", description = "controller permettant la Gestion des Rôles")
+@CrossOrigin(origins = "http://localhost:8100")
 public class RoleController {
 
     @Autowired

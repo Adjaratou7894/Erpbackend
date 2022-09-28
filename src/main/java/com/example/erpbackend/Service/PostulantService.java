@@ -9,7 +9,7 @@ public interface PostulantService {
 
     List<Postulant> enregistrerPostulant(List<Postulant> listPost);
 
-    Postulant ajouterPostulant(Postulant postulant);
+    Postulant ajouterPostulant(Postulant postulant, String libelleListe);
 
     List<Postulant> afficherPostulant();
 

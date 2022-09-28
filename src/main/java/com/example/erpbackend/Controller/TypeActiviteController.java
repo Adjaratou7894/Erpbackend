@@ -13,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/typeactivite")
 @Api(value = "hello", description = "controller permettent la Gestion des TypeActivité")
+@CrossOrigin(origins = "http://localhost:8100")
 public class TypeActiviteController {
     @Autowired
     public TypeActiviteServiceImplement typeActiviteServiceImplement;

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @Api(value = "Test", description = "controller permettent la Gestion Des Salle")
 @RequestMapping("/salle")
+@CrossOrigin(origins = "http://localhost:8100")
 public class SalleController {
     @Autowired
     private SalleService SalleService;
