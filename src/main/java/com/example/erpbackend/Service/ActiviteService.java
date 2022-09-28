@@ -6,6 +6,8 @@ import com.example.erpbackend.Model.Role;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.util.Date;
 import java.util.List;
 
 public interface ActiviteService {
@@ -37,6 +39,29 @@ public interface ActiviteService {
 
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES D'UNE ANNEE ====================================
     List<Object> ActiviteParAnnee(int annee);
+
+    //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR ETAT ====================================
+    List<Activite> activiteParEtat(String etat);
+
+
+    //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR LA DATE LA PLUS RECENTE ====================
+    List<Object> activiteParDatePlusRecente();
+
+
+
+    //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR INTERVALE DE DATE ========================
+    List<Object> activiteParDateIntervale(String dateDebut, String dateFin) throws ParseException;
+
+
+    //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR ENTITE ===================================
+    List<Object> activiteParEntite(String entite);
+
+    //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR ENTITE et STATUS ===========================
+    List<Object> activiteParEntiteEtStatut(String entite, String statut);
+
+
+
+
 
 
 }

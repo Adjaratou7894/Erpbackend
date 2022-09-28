@@ -7,8 +7,13 @@ import com.example.erpbackend.Repository.ActiviteRepository;
 import com.example.erpbackend.Repository.Activite_ActeurRepository;
 import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Collections;
 import java.util.List;
 
@@ -131,6 +136,50 @@ public class ActiviteServiceImplement implements ActiviteService {
         }
         return Collections.singletonList("Aucune activité trouvée !");
 
+    }
+
+    @Override
+    public List<Activite> activiteParEtat(String etat) {
+        return activiteRepository.findByEtat(etat);
+    }
+
+    @Override
+    public List<Object> activiteParDatePlusRecente() {
+        List<Object> activites = activiteRepository.findByDateRecent();
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité trouvée !");
+    }
+
+    @Override
+    public List<Object> activiteParDateIntervale(String dateDebutt, String dateFinn) throws ParseException {
+        Date dateDebut = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebutt);
+
+        Date dateFin = new SimpleDateFormat("yyyy-MM-dd").parse(dateFinn);
+        List<Object> activites = activiteRepository.findByDateIntervale(dateDebut, dateFin);
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité trouvée dans l'intervale des dates données !");
+    }
+
+    @Override
+    public List<Object> activiteParEntite(String entite) {
+        List<Object> activites = activiteRepository.findByEntite(entite);
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité ne trouvée pour cette entité !");
+    }
+
+    @Override
+    public List<Object> activiteParEntiteEtStatut(String entite, String statut) {
+        List<Object> activites = activiteRepository.findByEntiteAndStatus(entite, statut);
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité ne trouvée pour cette entité en fonction de cette entite et status !");
     }
 
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
