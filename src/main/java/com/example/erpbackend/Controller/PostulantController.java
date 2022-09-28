@@ -98,10 +98,12 @@ public class PostulantController {
 }
 
     @ApiOperation(value = "ici on Ajouter un postulant")
-    @PostMapping("/ajouter")
-    public Object ajouterPostulant(@RequestBody Postulant postulant){
+    @PostMapping("/ajouter/{libelleListe}")
+    public Postulant ajouterPostulant(@RequestBody Postulant postulant, @PathVariable String libelleListe){
 
-       return postulantService.ajouterPostulant(postulant);
+        //Liste_postulant listePostulant = postulantService.tr
+
+       return postulantService.ajouterPostulant(postulant, libelleListe);
     }
 
     @ApiOperation(value = "ici on Afficher les postulants")

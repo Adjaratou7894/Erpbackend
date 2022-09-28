@@ -10,7 +10,7 @@ import java.util.List;
 
 public interface PostulantTireService {
 
-    ReponseMessage ajouterPostulantTrie(Postulant postulant, Tirage tirage);
+    ReponseMessage ajouterPostulantTrie(Postulant postulant, Tirage tirage, String libelleListe);
 
     List<Postulant_tire> listerPostulantTrie();
 

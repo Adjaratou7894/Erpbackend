@@ -3,7 +3,6 @@ package com.example.erpbackend.ServiceImplementation;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Postulant_tire;
-import com.example.erpbackend.Model.Statut;
 import com.example.erpbackend.Model.Tirage;
 import com.example.erpbackend.Repository.PostulantRepository;
 import com.example.erpbackend.Repository.PostulantTireRepository;
@@ -24,11 +23,13 @@ public class PostulantTireServiceImplement implements PostulantTireService {
     private PostulantRepository postulantRepository;
 
     @Override
-    public ReponseMessage ajouterPostulantTrie(Postulant postulant, Tirage tirage) {
+    public ReponseMessage ajouterPostulantTrie(Postulant postulant, Tirage tirage, String libelleListe) {
 
             Postulant_tire postulantTire = new Postulant_tire();
 
-        Postulant postulantAjoute = postulantService.ajouterPostulant(postulant);
+
+
+        Postulant postulantAjoute = postulantService.ajouterPostulant(postulant, libelleListe);
 
             if(postulantAjoute != null){
 

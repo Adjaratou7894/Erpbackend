@@ -15,9 +15,9 @@ import java.util.List;
 @RequestMapping("/utilisateur")
 @CrossOrigin(origins = "http://localhost:8100")
 public class UtilisateurController {
+
     @Autowired
     private UtilisateurService utilisateurService;
-
 
     // ============================== Récuperer tous les utilisateurs dans dans la base de données ===============
     @ApiOperation(value = "ici on Afficher la liste des users")
