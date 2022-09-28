@@ -197,4 +197,21 @@ public class PostulantController {
         return postulantService.trouverAllApprenantOuParticipant(typePostulant).size();
     }
 
+
+    @ApiOperation(value = "ici on Afficher Le nombre de postulant par genre")
+    @GetMapping("/afficherParticipantParGenre/{genre}")
+    public List <Postulant> trouverPostulantParGenre(@PathVariable String genre){
+        return postulantService.trouverPostulantParGenre(genre);
+    }
+
+
+    @GetMapping("/filtreParGenreETActivite/{genre}/{nom}")
+    public List<Object> filtreParGenreETActivite(@PathVariable String genre, @PathVariable String nom){
+        return postulantService.filtreParGenreETActivite(genre, nom);
+    }
+    @GetMapping("/filtreParActivite/{activite}")
+    public List<Object> filtreParActivite( @PathVariable String activite){
+        return postulantService.filtreParActivite(activite);
+    }
+
 }
