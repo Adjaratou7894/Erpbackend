@@ -20,6 +20,8 @@ public interface PostulantTireService {
 
     Postulant_tire trouverPostulantTrieParidPostulant (Long idPostulant);
 
+    ReponseMessage ajouterTousLesPostulantTire(List<Postulant> postulants);
+
     List<Postulant> recupererTousLesPostulantTire();
 
     List<Postulant> recupererTousLesPostulantTireFilter(String genre);

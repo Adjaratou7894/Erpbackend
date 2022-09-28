@@ -75,6 +75,26 @@ public class PostulantTireServiceImplement implements PostulantTireService {
     }
 
     @Override
+    public ReponseMessage ajouterTousLesPostulantTire(List<Postulant> postulants) {
+
+        List<Postulant_tire> postulant_tires = new ArrayList<>();
+        Postulant_tire postul = new Postulant_tire();
+
+        for(Postulant pt: postulants){
+            postulantTireRepository.INSERT_POST_TIRE_LISTE(pt.getId(), pt.getListePostulant().getIdliste());
+        }
+
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + postulant_tires.size());
+
+        //postulantTireRepository.saveAll(postulant_tires);
+
+
+        ReponseMessage message = new ReponseMessage("Les poostulant on été ajouté avec succes", true);
+
+        return message;
+    }
+
+    @Override
     public List<Postulant> recupererTousLesPostulantTire() {
 
         List<Long> idPostTire = postulantTireRepository.FIND_ALL_POSTULANT_TIRE();
