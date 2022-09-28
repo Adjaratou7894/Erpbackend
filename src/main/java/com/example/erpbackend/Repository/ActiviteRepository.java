@@ -23,4 +23,8 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             "where activite.etat_activite_idetat = etat_activite.idetat and " +
             "etat_activite.etat = :etat order by date_debut LIMIT 3", nativeQuery = true)
     List<Object> FIND_ACTIVITE_PAR_ETAT(@Param("etat") String etat);
+
+    @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin, activite.nombrepersonnedemande, annee.annee FROM activite, annee WHERE annee.id= activite.annee_id AND annee.annee=:annee",
+            nativeQuery = true)
+    List<Object> ActiviteEnFonctionAnnee(@Param("annee") int annee);
 }

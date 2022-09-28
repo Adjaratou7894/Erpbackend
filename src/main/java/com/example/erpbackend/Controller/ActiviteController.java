@@ -66,6 +66,13 @@ public class ActiviteController {
     }
 
 
+    @GetMapping("/ActiviteParAnnee/{annee}")
+    public List<Object> ActiviteParAnnee(@PathVariable int annee){
+        return activiteService.ActiviteParAnnee(annee);
+    }
 
-    //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
+
+
+
+        //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
 }

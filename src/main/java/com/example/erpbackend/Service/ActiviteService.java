@@ -3,6 +3,7 @@ package com.example.erpbackend.Service;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Role;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,5 +34,9 @@ public interface ActiviteService {
     //ReponseMessage closeActivite(Long idAct);
 
     List<Object> afficheActiviteEnFonctionEtat(String etat);
+
+    //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES D'UNE ANNEE ====================================
+    List<Object> ActiviteParAnnee(int annee);
+
 
 }

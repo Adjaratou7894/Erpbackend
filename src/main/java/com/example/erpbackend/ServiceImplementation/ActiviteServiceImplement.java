@@ -9,6 +9,7 @@ import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -120,6 +121,16 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Override
     public List<Object> afficheActiviteEnFonctionEtat(String etat) {
         return activiteRepository.FIND_ACTIVITE_PAR_ETAT(etat);
+    }
+
+    @Override
+    public List<Object> ActiviteParAnnee(int annee) {
+        List<Object> activites = activiteRepository.ActiviteEnFonctionAnnee(annee);
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité trouvée !");
+
     }
 
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================

@@ -7,6 +7,7 @@ import com.example.erpbackend.Service.PostulantService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -55,7 +56,7 @@ public class PostulantServiceImplement implements PostulantService {
     }
 
     @Override
-    public Postulant trouverPostulantParGenre(String genre) {
+    public List <Postulant> trouverPostulantParGenre(String genre) {
         return postulantRepository.findByGenre(genre);
     }
 
@@ -64,5 +65,24 @@ public class PostulantServiceImplement implements PostulantService {
 
         return postulantRepository.FIND_ALL_APPRENANT_OR_PARTICIPANT(typePostulant);
     }
+
+    @Override
+    public List<Object> filtreParGenreETActivite(String genre, String nom) {
+        List<Object> postulants = postulantRepository.findByGenreAndActivite(genre, nom);
+        if (postulants.size() != 0){
+            return postulants;
+        }
+        return Collections.singletonList("aucun postulant n'est trouvé avec cette activité!");
+    }
+
+    @Override
+    public List<Object> filtreParActivite(String activite) {
+        List<Object> postulants = postulantRepository.findByActivite(activite);
+        if (postulants.size() != 0){
+            return postulants;
+        }
+        return Collections.singletonList("aucun postulant n'est trouvé avec cette activité !");
+    }
+
 
 }
