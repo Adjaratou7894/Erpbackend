@@ -49,5 +49,17 @@ public interface PostulantRepository extends JpaRepository<Postulant,Long> {
             "type_activite.type_postulant = :type_postulant", nativeQuery = true)
     List<Object> FIND_ALL_APPRENANT_OR_PARTICIPANT(@Param("type_postulant") String type_postulant);
 
-    Postulant findByGenre (String genre);
+    @Query(value = "SELECT * FROM postulant WHERE genre=:genre", nativeQuery = true)
+   List <Postulant> findByGenre (String genre);
+
+    @Query(value = "SELECT postulant.nom_postulant,postulant.numero_postulant,postulant.genre, activite.nom FROM" +
+            " postulant ,liste_postulant ,activite WHERE postulant.liste_postulant_idliste = liste_postulant.idliste" +
+            " AND activite.idactivite = liste_postulant.activite_idactivite AND genre=:genre AND activite.nom" +
+            " =:activite",nativeQuery = true)
+    List<Object> findByGenreAndActivite(@Param("genre") String genre, @Param("activite") String activite);
+
+   @Query(value = "SELECT postulant.nom_postulant,postulant.numero_postulant,postulant.genre, activite.nom FROM postulant" +
+           " ,liste_postulant ,activite WHERE postulant.liste_postulant_idliste = liste_postulant.idliste AND" +
+           " activite.idactivite = liste_postulant.activite_idactivite AND activite.nom =:activite",nativeQuery = true)
+    List<Object> findByActivite( @Param("activite") String activite);
 }

@@ -1,5 +1,6 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +21,7 @@ public class Postulant {
     private String genre;
     private Boolean etat;
 
+    @JsonIgnore
     @ManyToOne
     private Liste_postulant listePostulant;
 
