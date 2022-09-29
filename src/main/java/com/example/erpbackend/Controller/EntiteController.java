@@ -2,18 +2,25 @@ package com.example.erpbackend.Controller;
 
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Entite;
+import com.example.erpbackend.Repository.EntiteRepository;
 import com.example.erpbackend.ServiceImplementation.EntiteServiceImplement;
 import com.example.erpbackend.img.ConfigImage;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.apache.poi.util.StringUtil;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.data.repository.query.Param;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @RestController
@@ -22,6 +29,8 @@ import java.util.List;
 @RequestMapping("/entite")
 public class EntiteController {
     private final EntiteServiceImplement entiteServiceImplement;
+
+    private final EntiteRepository entiteRepository;
     //**********On ajoute un entité avec un type de retour entite********
     @ApiOperation(value = "ici on ajoute un Entité")
     @PostMapping("/ajouter")
@@ -59,15 +68,22 @@ public class EntiteController {
     }
 
     @PostMapping("/ajouterE")
-    public byte[] ajouterEntit(@Param("test") Entite entite, @Param("file") MultipartFile file) throws IOException {
-
+    public ReponseMessage ajouterEntit(@Param("nom") String nom, @Param("file") MultipartFile file) throws IOException {
+        Entite entite = new Entite();
         String nomfile = StringUtils.cleanPath(file.getOriginalFilename());
+        System.out.println(nom);
+         entite.setNom(nom);
+        System.out.println(nomfile);
          entite.setPhotoentite(nomfile);
+        System.out.println(entite.getIdEntite());
+        System.out.println(entite.getNom());
         String uploaDir = "C:\\Users\\ADIAWIAKOYE\\Desktop\\Erpbackend\\src\\main\\resources\\files";
+        //String uploaDir = new ClassPathResource("files/").getFile().getAbsolutePath();
         ConfigImage.saveimg(uploaDir, nomfile, file);
-          return entiteServiceImplement.getBytes(entite.getIdEntite());
+       //  entiteServiceImplement.ajouter(entite);
 
-      //  ReponseMessage message = new ReponseMessage("Entité ajouté avec succes", true);
-        //return message;
+         return entiteServiceImplement.ajouter(entite);
+
     }
+
 }

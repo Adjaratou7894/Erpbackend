@@ -16,5 +16,5 @@ public interface EntiteService {
     //**********On supprime une entité avec son id et un type de retour String********
     public ReponseMessage supprimer(Long id);
 
-    public byte [] getBytes(long idEntite) throws IOException;
+    public ReponseMessage getBytes(long idEntite) throws IOException;
 }

@@ -6,6 +6,7 @@ import com.example.erpbackend.Repository.EntiteRepository;
 import com.example.erpbackend.Service.EntiteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -73,18 +74,22 @@ public class EntiteServiceImplement implements EntiteService {
     }
 
     @Override
-    public byte [] getBytes(long idEntite) throws IOException {
+    public ReponseMessage getBytes(long idEntite) throws IOException {
               Entite entite = new Entite();
         if (entiteRepository.findByNom(entite.getNom()) == null) {
-
             Entite ent = entiteRepository.findByIdEntite(idEntite);
             String iconephoto = ent.getPhotoentite();
-            File file = new File("src/main/resources/photo" + ent.getIdEntite() + "/" + iconephoto);
+            File file = new File("C:\\Users\\ADIAWIAKOYE\\Desktop\\Erpbackend\\src\\main\\resources\\files" + ent.getIdEntite() + "/" + iconephoto);
+            //File file = new File(ClassPathResource("files").getFile().getAbsolutePath();
             Path path = Paths.get(file.toURI());
-            Files.readAllBytes(path);
-
+                Files.readAllBytes(path);
+            entiteRepository.save(entite);
+            ReponseMessage message = new ReponseMessage("Entité supprimée avec succes", true);
+            return message;
+        } else {
+            ReponseMessage message = new ReponseMessage("Entité non trouvée", false);
+            return message;
         }
-        return new byte[0];
     }
 
     }
