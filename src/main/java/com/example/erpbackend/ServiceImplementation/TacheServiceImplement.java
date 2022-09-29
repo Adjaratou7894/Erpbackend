@@ -15,8 +15,22 @@ public class TacheServiceImplement implements TacheService {
     final private TachesRepository tachesRepository;
 
     @Override
-    public ReponseMessage enregistrerTaches(Taches taches) {
+    public ReponseMessage enregistrerTaches(Taches taches, String idusers) {
         tachesRepository.save(taches);
+
+
+        String[] allIdidusers = idusers.split(",");
+
+        System.out.println("les id : " + allIdidusers);
+
+        for (String idact : allIdidusers) {
+
+            long l = Long.parseLong(idact);
+
+            tachesRepository.insert_taches_utilisateurs(l, taches.getIdTache());
+
+        }
+
 
         ReponseMessage message = new ReponseMessage("Tache enregistré avec succès", true);
         return message;
