@@ -18,7 +18,7 @@ public class Acteur {
     private String nom;
     private String prenom;
     private String numero;
-
+    private String email;
     /*
     @ManyToMany(
 
