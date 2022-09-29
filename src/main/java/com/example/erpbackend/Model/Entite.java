@@ -16,4 +16,6 @@ public class Entite {
     private String nom;
     @Column(nullable = true, length = 64)
     private String photoentite;
+    private String slogant;
+
 }

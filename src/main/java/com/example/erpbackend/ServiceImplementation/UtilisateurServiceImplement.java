@@ -80,12 +80,12 @@ public class UtilisateurServiceImplement implements UtilisateurService {
     // ================= Connexion d'un utilisateur avec email et mot de passe ==================================
     @Override
     public Object seConnecter(String email, String motDePasse) {
-        Optional<Utilisateur> utilisateur = utilisateurRepository.findByEmailAndPassword(email, motDePasse);
-        if (utilisateur.isEmpty()){
+        Utilisateur utilisateur = utilisateurRepository.findByEmailAndPassword(email, motDePasse).get();
+        if (utilisateur == null){
             ReponseMessage message = new ReponseMessage("Mot de passe ou identifiant incorrect", false);
             return message;
         }else {
-        return utilisateur.get();
+        return utilisateur;
         }
     }
 }

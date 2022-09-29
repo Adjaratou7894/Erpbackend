@@ -20,6 +20,12 @@ public interface PostulantTireRepository extends JpaRepository<Postulant_tire,Lo
     @Query(value = "INSERT INTO postulant_tire(id_postulant, tirage_idtirage) VALUES(?,?);",nativeQuery = true)
     int INSERT_POST_TIRE(Long id_postulant, Long tirage_idtirage);
 
+
+    @Modifying
+    @Transactional
+    @Query(value = "INSERT INTO postulant_tire(id_postulant, liste_postulant_idliste) VALUES(?,?);",nativeQuery = true)
+    int INSERT_POST_TIRE_LISTE(Long id_postulant, Long liste_postulant_idliste);
+
    // Postulant_tire findById(Long id);
    Postulant_tire findByIdPostulant(Long idPostulant);
 

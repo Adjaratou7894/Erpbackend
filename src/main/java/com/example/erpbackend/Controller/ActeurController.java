@@ -13,7 +13,7 @@ import java.util.List;
 @Api(value = "hello", description = "controller permettant Gestion des Acteur")
 @AllArgsConstructor
 @RequestMapping("/acteur")
-
+@CrossOrigin(origins = "http://localhost:8100")
 public class ActeurController {
 
     private final ActeurService acteurService;

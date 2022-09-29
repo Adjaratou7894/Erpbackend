@@ -13,10 +13,11 @@ import java.util.List;
 @RestController
 @Api(value = "hello", description = "Controller permettant la Gestion des Users")
 @RequestMapping("/utilisateur")
+@CrossOrigin(origins = "http://localhost:8100")
 public class UtilisateurController {
+
     @Autowired
     private UtilisateurService utilisateurService;
-
 
     // ============================== Récuperer tous les utilisateurs dans dans la base de données ===============
     @ApiOperation(value = "ici on Afficher la liste des users")
@@ -63,8 +64,8 @@ public class UtilisateurController {
 
     // ============================== Ce connecter avec son email et mot de passe ================================
     @ApiOperation(value = "Methode permettant de Se connecter")
-    @GetMapping("/seconnecter")
-    public Object seConnecter(@RequestBody String email, String password){
+    @GetMapping("/seconnecter/{email}/{password}")
+    public Object seConnecter(@PathVariable String email, @PathVariable String password){
 
         return utilisateurService.seConnecter(email, password);
     }

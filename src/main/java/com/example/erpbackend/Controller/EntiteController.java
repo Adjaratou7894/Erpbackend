@@ -27,6 +27,7 @@ import java.util.List;
 @AllArgsConstructor
 @Api(value = "hello", description = "controller permettant la Gestion des Entités")
 @RequestMapping("/entite")
+@CrossOrigin(origins = "http://localhost:8100")
 public class EntiteController {
     private final EntiteServiceImplement entiteServiceImplement;
 
