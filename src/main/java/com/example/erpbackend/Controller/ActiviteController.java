@@ -28,11 +28,11 @@ public class ActiviteController {
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
     @ApiOperation(value = "ici on Ajouter une activité")
-    @PostMapping("/ajouter/{idacteurs}")
-    public ReponseMessage createactivite(@RequestBody Activite activite , @PathVariable String idacteurs){
+    @PostMapping("/ajouter/{idacteurs}/{idacteurInternes}")
+    public ReponseMessage createactivite(@RequestBody Activite activite , @PathVariable String idacteurs, @PathVariable String idacteurInternes){
 //
         //, idacteurs
-        return activiteService.ajouterActivite(activite, idacteurs);
+        return activiteService.ajouterActivite(activite, idacteurs, idacteurInternes);
 
     }
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
