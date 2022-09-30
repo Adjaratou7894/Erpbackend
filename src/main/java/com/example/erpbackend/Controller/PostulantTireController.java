@@ -34,7 +34,7 @@ public class PostulantTireController {
     private final ListePostulantService listePostulantService;
 
     @ApiOperation(value = "ici on ajouter un postulant tiré ")
-    @PostMapping("/ajouter/{listeLibelle}/{tirageLibelle}")
+    @PostMapping("/ajouter/{listeLibelle}")
     public ReponseMessage ajouterPostulantTire(@RequestBody Postulant postulant, @PathVariable String tirageLibelle, @PathVariable String listeLibelle){
 
         Liste_postulant liste = listePostulantService.trouverListePostulantParLibelle(listeLibelle);

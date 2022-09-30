@@ -16,4 +16,6 @@ public class Postulant_tire {
 
     @ManyToOne
     private Tirage tirage;
+
+
 }

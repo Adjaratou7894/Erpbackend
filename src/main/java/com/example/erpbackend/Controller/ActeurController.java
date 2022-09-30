@@ -16,7 +16,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8100")
 public class ActeurController {
 
-    private final ActeurService acteurService;
+    final private ActeurService acteurService;
+
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UN ACTEUR======================
     @ApiOperation(value = "ici on ajoute un Acteur")
     @PostMapping("/ajouter")
