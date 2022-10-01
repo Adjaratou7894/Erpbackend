@@ -18,7 +18,7 @@ import java.util.List;
 public class EntiteController {
     private final EntiteServiceImplement entiteServiceImplement;
     //**********On ajoute un entité avec un type de retour entite********
-    @ApiOperation(value = "ici on ajoute un Entité")
+    @ApiOperation(value = "ici on ajoute une Entité")
     @PostMapping("/ajouter")
     public ReponseMessage ajouterEntite(@RequestBody Entite entite){
 
@@ -36,7 +36,7 @@ public class EntiteController {
 
 
     //**********On modifie une entité avec son id dans path variable et un type de retour String********
-    @ApiOperation(value = "ici on Modifier un entité")
+    @ApiOperation(value = "ici on Modifier une entité")
     @PutMapping("/modifier")
     public ReponseMessage modifierEntite(@RequestBody Entite entite){
        return entiteServiceImplement.modifier(entite);

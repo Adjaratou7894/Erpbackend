@@ -18,7 +18,6 @@ public class UtilisateurController {
     @Autowired
     private UtilisateurService utilisateurService;
 
-
     // ============================== Récuperer tous les utilisateurs dans dans la base de données ===============
     @ApiOperation(value = "ici on Afficher la liste des users")
     @GetMapping("/afficher")
@@ -64,9 +63,9 @@ public class UtilisateurController {
 
     // ============================== Ce connecter avec son email et mot de passe ================================
     @ApiOperation(value = "Methode permettant de Se connecter")
-    @GetMapping("/seconnecter")
-    public Object seConnecter(@RequestBody String email, String password){
+    @GetMapping("/seconnecter/{email}/{pass}")
+    public Object seConnecter(@PathVariable String email, @PathVariable String pass){
 
-        return utilisateurService.seConnecter(email, password);
+        return utilisateurService.seConnecter(email, pass);
     }
 }
