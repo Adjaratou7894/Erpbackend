@@ -19,13 +19,13 @@ public class TacheController {
 
     final private TacheService tacheService;
 
-    @PostMapping("/ajouter")
-    ReponseMessage ajouterTache(@RequestBody Taches taches){
+    @PostMapping("/ajouter/{idusers}")
+    ReponseMessage ajouterTache(@RequestBody Taches taches, @PathVariable String idusers){
 
-        return tacheService.enregistrerTaches(taches);
+        return tacheService.enregistrerTaches(taches, idusers);
     }
 
-    @GetMapping("RecupererTout")
+    @GetMapping("/RecupererTout")
     List<Taches> recupererLesTaches(){
         return tacheService.recupererTousLesTaches();
     }
