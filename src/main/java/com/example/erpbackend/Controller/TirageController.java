@@ -63,8 +63,6 @@ public class TirageController {
 
     }
 
-
-
         @ApiOperation(value = "ici Afficher la listes des tirages par idlist")
         @GetMapping("/recupererTirageParIdliste/{Idlistepostulant}")
         public Iterable<Object[]> getTirageParIdListe(@PathVariable Long Idlistepostulant){

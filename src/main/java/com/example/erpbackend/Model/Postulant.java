@@ -35,6 +35,5 @@ public class Postulant {
 
         this.email = email_postulant;
         this.genre = genre;
-
     }
 }
