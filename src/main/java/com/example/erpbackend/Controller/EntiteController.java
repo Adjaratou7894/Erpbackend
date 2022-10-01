@@ -69,11 +69,15 @@ public class EntiteController {
     }
 
     @PostMapping("/ajouterE")
-    public ReponseMessage ajouterEntit(@Param("nom") String nom, @Param("file") MultipartFile file) throws IOException {
+    public ReponseMessage ajouterEntit(@Param("nom") String nom, @Param("slogant") String slogant, @Param("description") String description, @Param("file") MultipartFile file) throws IOException {
         Entite entite = new Entite();
         String nomfile = StringUtils.cleanPath(file.getOriginalFilename());
         System.out.println(nom);
          entite.setNom(nom);
+         System.out.println(description);
+         entite.setDescription(description);
+         System.out.println(slogant);
+         entite.setSlogant(slogant);
         System.out.println(nomfile);
          entite.setPhotoentite(nomfile);
         System.out.println(entite.getIdEntite());
