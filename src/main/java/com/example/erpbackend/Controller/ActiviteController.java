@@ -31,6 +31,7 @@ public class ActiviteController {
     @PostMapping("/ajouter/{idacteurs}/{idacteurInternes}")
     public ReponseMessage createactivite(@RequestBody Activite activite , @PathVariable String idacteurs, @PathVariable String idacteurInternes){
 //
+
         //, idacteurs
         return activiteService.ajouterActivite(activite, idacteurs, idacteurInternes);
 
