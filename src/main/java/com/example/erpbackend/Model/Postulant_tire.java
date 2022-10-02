@@ -18,4 +18,6 @@ public class Postulant_tire {
     private Tirage tirage;
 
 
+    @ManyToOne
+    private Liste_postulant listePostulant;
 }

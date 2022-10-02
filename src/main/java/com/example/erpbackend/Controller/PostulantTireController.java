@@ -34,7 +34,7 @@ public class PostulantTireController {
     private final ListePostulantService listePostulantService;
 
     @ApiOperation(value = "ici on ajouter un postulant tiré ")
-    @PostMapping("/ajouter/{listeLibelle}")
+    @PostMapping("/ajouter/{listeLibelle}/{tirageLibelle}")
     public ReponseMessage ajouterPostulantTire(@RequestBody Postulant postulant, @PathVariable String tirageLibelle, @PathVariable String listeLibelle){
 
         Liste_postulant liste = listePostulantService.trouverListePostulantParLibelle(listeLibelle);
@@ -46,11 +46,22 @@ public class PostulantTireController {
         return postulantTireService.ajouterPostulantTrie(postulant, tirage, listeLibelle);
     }
 
+
     @ApiOperation(value = "ici on afficher tout les postulant tiré ")
     @GetMapping("/afficher")
     public List<Postulant> readPostulantTire(){
 
         return postulantTireService.recupererTousLesPostulantTire();
+    }
+    @ApiOperation(value = "ici on ajouter un participant ")
+    @PostMapping("/ajouter/{listelibelle}")
+    public ReponseMessage ajouterParticipant(@RequestBody Postulant postulant,@PathVariable String listelibelle) {
+        Liste_postulant liste = listePostulantService.trouverListePostulantParLibelle(listelibelle);
+
+        postulant.setListePostulant(liste);
+
+        return postulantTireService.ajouterParticipant(postulant, listelibelle);
+
     }
 
     @GetMapping("/afficher/{genre}")
@@ -60,6 +71,7 @@ public class PostulantTireController {
             return postulantTireService.recupererTousLesPostulantTireFilter(genre);
 
     }
+
     @ApiOperation(value = "ici on supprimer un postulant tiré ")
     @DeleteMapping("/supprimer/{id}")
     public ReponseMessage deletePostulantTire(@PathVariable Long id){

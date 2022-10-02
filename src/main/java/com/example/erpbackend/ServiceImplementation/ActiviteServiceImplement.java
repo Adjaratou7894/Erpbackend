@@ -28,7 +28,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
-    public ReponseMessage ajouterActivite(Activite activite, String idacteurs) {
+    public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes) {
         if (activiteRepository.findByNom(activite.getNom()) == null){
             activite.setEtat(true);
              activiteRepository.save(activite);
@@ -36,13 +36,25 @@ public class ActiviteServiceImplement implements ActiviteService {
             // //Un tableau qui contenera l'id des acteurs par case
             String[] allIdActeurs = idacteurs.split(",");
 
+            String[] allIdActeursInternes = idacteurs.split(",");
+
             System.out.println("les id : " + allIdActeurs);
+
+            System.out.println("les id internes: " + allIdActeursInternes);
 
             for (String idact : allIdActeurs) {
 
                 long l = Long.parseLong(idact);
 
                 activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, activite.getIdactivite());
+
+            }
+
+            for (String idact : allIdActeursInternes) {
+
+                long l = Long.parseLong(idact);
+
+                activiteRepository.insert_activites_utilisateurs_animer(l, activite.getIdactivite());
 
             }
 
@@ -69,7 +81,6 @@ public class ActiviteServiceImplement implements ActiviteService {
                         p.setEtat(activite.getEtat());
                         p.setEtatActivite(activite.getEtatActivite());
                         p.setTypeActivite(activite.getTypeActivite());
-                        p.setUtilisateur(activite.getUtilisateur());
                         p.setSalle(activite.getSalle());
                         activiteRepository.save(p);
                         ReponseMessage message = new ReponseMessage("Activité modifiée avec succes", true);

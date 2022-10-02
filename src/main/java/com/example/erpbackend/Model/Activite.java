@@ -3,7 +3,9 @@ package com.example.erpbackend.Model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -26,10 +28,17 @@ public class Activite {
     @ManyToOne
     private Etat_activite etatActivite;
 
-    @ManyToOne
-    private Utilisateur utilisateur;
+    /*@ManyToOne
+    private Utilisateur utilisateur;*/
+
     @ManyToOne
     private Utilisateur responsable;
+
+    /*
+    @ManyToOne
+    private Utilisateur animer;
+
+     */
 
     @ManyToOne
     private Annee annee;
@@ -38,6 +47,23 @@ public class Activite {
 
     @OneToOne
     private Salle salle;
+
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(
+            name="ActivitesUtilisateursAnimer",
+            joinColumns = @JoinColumn(name = "idactivite"),
+            inverseJoinColumns = @JoinColumn(name = "iduser")
+    )
+    private List<Utilisateur> utilisateurs = new ArrayList<>();
+
+
+
 
 
 }
