@@ -15,6 +15,7 @@ import java.util.List;
 @RequestMapping("/utilisateur")
 @CrossOrigin(origins = "http://localhost:8100")
 public class UtilisateurController {
+
     @Autowired
     private UtilisateurService utilisateurService;
 
@@ -63,8 +64,10 @@ public class UtilisateurController {
 
     // ============================== Ce connecter avec son email et mot de passe ================================
     @ApiOperation(value = "Methode permettant de Se connecter")
+
     @GetMapping("/seconnecter/{email}/{pass}")
     public Object seConnecter(@PathVariable String email, @PathVariable String pass){
+
 
         return utilisateurService.seConnecter(email, pass);
     }

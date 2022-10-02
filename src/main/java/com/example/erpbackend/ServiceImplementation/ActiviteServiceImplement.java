@@ -7,8 +7,14 @@ import com.example.erpbackend.Repository.ActiviteRepository;
 import com.example.erpbackend.Repository.Activite_ActeurRepository;
 import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -22,7 +28,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
-    public ReponseMessage ajouterActivite(Activite activite, String idacteurs) {
+    public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes) {
         if (activiteRepository.findByNom(activite.getNom()) == null){
             activite.setEtat(true);
              activiteRepository.save(activite);
@@ -30,13 +36,25 @@ public class ActiviteServiceImplement implements ActiviteService {
             // //Un tableau qui contenera l'id des acteurs par case
             String[] allIdActeurs = idacteurs.split(",");
 
+            String[] allIdActeursInternes = idacteurs.split(",");
+
             System.out.println("les id : " + allIdActeurs);
+
+            System.out.println("les id internes: " + allIdActeursInternes);
 
             for (String idact : allIdActeurs) {
 
                 long l = Long.parseLong(idact);
 
                 activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, activite.getIdactivite());
+
+            }
+
+            for (String idact : allIdActeursInternes) {
+
+                long l = Long.parseLong(idact);
+
+                activiteRepository.insert_activites_utilisateurs_animer(l, activite.getIdactivite());
 
             }
 
@@ -63,7 +81,6 @@ public class ActiviteServiceImplement implements ActiviteService {
                         p.setEtat(activite.getEtat());
                         p.setEtatActivite(activite.getEtatActivite());
                         p.setTypeActivite(activite.getTypeActivite());
-                        p.setUtilisateur(activite.getUtilisateur());
                         p.setSalle(activite.getSalle());
                         activiteRepository.save(p);
                         ReponseMessage message = new ReponseMessage("Activité modifiée avec succes", true);
@@ -120,6 +137,60 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Override
     public List<Object> afficheActiviteEnFonctionEtat(String etat) {
         return activiteRepository.FIND_ACTIVITE_PAR_ETAT(etat);
+    }
+
+    @Override
+    public List<Object> ActiviteParAnnee(int annee) {
+        List<Object> activites = activiteRepository.ActiviteEnFonctionAnnee(annee);
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité trouvée !");
+
+    }
+
+    @Override
+    public List<Activite> activiteParEtat(String etat) {
+        return activiteRepository.findByEtat(etat);
+    }
+
+    @Override
+    public List<Object> activiteParDatePlusRecente() {
+        List<Object> activites = activiteRepository.findByDateRecent();
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité trouvée !");
+    }
+
+    @Override
+    public List<Object> activiteParDateIntervale(String dateDebutt, String dateFinn) throws ParseException {
+        Date dateDebut = new SimpleDateFormat("yyyy-MM-dd").parse(dateDebutt);
+
+        Date dateFin = new SimpleDateFormat("yyyy-MM-dd").parse(dateFinn);
+        List<Object> activites = activiteRepository.findByDateIntervale(dateDebut, dateFin);
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité trouvée dans l'intervale des dates données !");
+    }
+
+    @Override
+    public List<Object> activiteParEntite(String entite) {
+        List<Object> activites = activiteRepository.findByEntite(entite);
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité ne trouvée pour cette entité !");
+    }
+
+    @Override
+    public List<Object> activiteParEntiteEtStatut(String entite, String statut) {
+        List<Object> activites = activiteRepository.findByEntiteAndStatus(entite, statut);
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité ne trouvée pour cette entité en fonction de cette entite et status !");
     }
 
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================

@@ -43,7 +43,7 @@ public class PostulantTireController {
 
         postulant.setListePostulant(liste);
 
-        return postulantTireService.ajouterPostulantTrie(postulant, tirage);
+        return postulantTireService.ajouterPostulantTrie(postulant, tirage, listeLibelle);
     }
 
     @ApiOperation(value = "ici on afficher tout les postulant tiré ")

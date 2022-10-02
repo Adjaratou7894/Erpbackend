@@ -19,6 +19,7 @@ public class Activite {
     private Date   dateDebut;
     private Date   dateFin;
     private Boolean etat;
+    private String nombrepersonnedemande;
 
     @ManyToOne
     private Type_activite typeActivite;
@@ -27,11 +28,42 @@ public class Activite {
     @ManyToOne
     private Etat_activite etatActivite;
 
+    /*@ManyToOne
+    private Utilisateur utilisateur;*/
+
     @ManyToOne
-    private Utilisateur utilisateur;
+    private Utilisateur responsable;
+
+    /*
+    @ManyToOne
+    private Utilisateur animer;
+
+     */
+
+    @ManyToOne
+    private Annee annee;
+    @ManyToOne
+    private Entite entite;
 
     @OneToOne
     private Salle salle;
+
+
+    @ManyToMany(
+            fetch = FetchType.LAZY,
+            cascade = {
+                    CascadeType.PERSIST,
+                    CascadeType.MERGE
+            })
+    @JoinTable(
+            name="ActivitesUtilisateursAnimer",
+            joinColumns = @JoinColumn(name = "idactivite"),
+            inverseJoinColumns = @JoinColumn(name = "iduser")
+    )
+    private List<Utilisateur> utilisateurs = new ArrayList<>();
+
+
+
 
 
 }

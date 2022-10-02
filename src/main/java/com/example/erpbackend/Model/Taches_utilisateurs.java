@@ -1,19 +1,13 @@
 package com.example.erpbackend.Model;
 
 import lombok.Data;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table
 @Data
-
-public class Entite {
+public class Taches_utilisateurs {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long   idEntite;
-    private String nom;
-    private String slogant;
-    private String logo;
+    private Long  id;
 }

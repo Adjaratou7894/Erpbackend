@@ -32,7 +32,7 @@ public class ImportTriePostulant {
 
     @ApiOperation(value = "ici on fait Importer et trié en meme temps")
     @PostMapping("/import/excel/{iduser}/{libelle}/{libelleT}/{nbre}/{libelleAct}")//il prend en parametre le libelle de la liste
-    public ReponseMessage importFormExcelT(@Param("file") MultipartFile file, Liste_postulant liste, @PathVariable String libelle, @PathVariable("libelleT") String libelleT, @PathVariable("nbre") int nbre, @PathVariable("libelleAct") String libelleAct) {
+    public ReponseMessage importFormExcelT(@Param("file") MultipartFile file, @PathVariable Liste_postulant liste, @PathVariable String libelle, @PathVariable("libelleT") String libelleT, @PathVariable("nbre") int nbre, @PathVariable("libelleAct") String libelleAct) {
 
         ConfigExcel importfichier = new ConfigExcel();
 

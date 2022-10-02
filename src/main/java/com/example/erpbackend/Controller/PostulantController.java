@@ -3,6 +3,7 @@ package com.example.erpbackend.Controller;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Service.ActiviteService;
+import com.example.erpbackend.Service.PostulantTireService;
 import io.swagger.annotations.Api;
 import com.example.erpbackend.Importation.ConfigExcel;
 import com.example.erpbackend.Model.Liste_postulant;
@@ -29,6 +30,7 @@ public class PostulantController {
     private final ListePostulantService listePostulantService;
     private final PostulantService postulantService;
     final private ActiviteService activiteService;
+    final private PostulantTireService postulantTireService;
 
 
     //Le controlleur permettant d'importer un fichier et créer automatiquement une liste des postulants
@@ -98,12 +100,89 @@ public class PostulantController {
 }
 
     @ApiOperation(value = "ici on Ajouter un postulant")
-    @PostMapping("/ajouter")
-    public Object ajouterPostulant(@RequestBody Postulant postulant){
+    @PostMapping("/ajouter/{libelleListe}")
+    public Postulant ajouterPostulant(@RequestBody Postulant postulant, @PathVariable String libelleListe){
 
-       return postulantService.ajouterPostulant(postulant);
+        //Liste_postulant listePostulant = postulantService.tr
+
+       return postulantService.ajouterPostulant(postulant, libelleListe);
     }
 
+    //debut de l'import
+
+
+
+    @ApiOperation(value = "ici on Importer un fichier")
+    @PostMapping("/posulantTires/excel/{libelleliste}/{libelleActivite}")
+    public ReponseMessage importFileExcel(@Param("file") MultipartFile file, @PathVariable String libelleliste, @PathVariable String libelleActivite) {
+
+
+        /*
+         * MultipartFile, classe java permettant d'importer un ou plusieurs fichiers
+         */
+
+        ConfigExcel importfichier = new ConfigExcel();
+
+//stockage de la liste des postulants retournée par la classe "ConfigExcel"  dans postulantList
+
+        List<Postulant> postelist = importfichier.excelImport(file);
+
+        if (postelist.size() == 0) {
+
+            ReponseMessage message = new ReponseMessage("Fichier vide", false);
+
+            return message;
+        } else {
+
+            Liste_postulant liste_postulant = new Liste_postulant();
+            Activite activite = activiteService.trouverActiviteParLibelle(libelleActivite);
+
+            if (activite == null) {
+
+
+                ReponseMessage message = new ReponseMessage("Cette activité n'existe pas", false);
+
+                return message;
+            }else {
+
+                Liste_postulant listt = listePostulantService.trouverListePostulantParLibelle(libelleliste);
+
+                if (listt == null) {
+
+                    liste_postulant.setActivite(activite);
+
+                    liste_postulant.setNombretirage(0);
+
+                    liste_postulant.setLibelleliste(libelleliste);
+
+                    Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
+
+                    for (Postulant pot : postelist) {
+
+                        pot.setListePostulant(lpt);
+                        pot.setEtat(true);
+                    }
+                    System.out.println(postelist);
+                    List<Postulant> postulantEnregistrer = postulantService.enregistrerPostulant(postelist);
+
+                    postulantTireService.ajouterTousLesPostulantTire(postulantEnregistrer);
+
+                    ReponseMessage message = new ReponseMessage("liste importer avec succes", true);
+                    return message;
+                } else {
+                    ReponseMessage message = new ReponseMessage("Cette liste existe déjà", false);
+                    return message;
+                }
+            }
+
+        }
+
+    }
+
+
+
+
+//fin de l'import
     @ApiOperation(value = "ici on Afficher les postulants")
     @GetMapping("/afficher")
     public List<Postulant> afficherliste(){
@@ -116,6 +195,23 @@ public class PostulantController {
     public int afficherNombreParticipantOuApprenant(@PathVariable String typePostulant){
 
         return postulantService.trouverAllApprenantOuParticipant(typePostulant).size();
+    }
+
+
+    @ApiOperation(value = "ici on Afficher Le nombre de postulant par genre")
+    @GetMapping("/afficherParticipantParGenre/{genre}")
+    public List <Postulant> trouverPostulantParGenre(@PathVariable String genre){
+        return postulantService.trouverPostulantParGenre(genre);
+    }
+
+
+    @GetMapping("/filtreParGenreETActivite/{genre}/{nom}")
+    public List<Object> filtreParGenreETActivite(@PathVariable String genre, @PathVariable String nom){
+        return postulantService.filtreParGenreETActivite(genre, nom);
+    }
+    @GetMapping("/filtreParActivite/{activite}")
+    public List<Object> filtreParActivite( @PathVariable String activite){
+        return postulantService.filtreParActivite(activite);
     }
 
 }

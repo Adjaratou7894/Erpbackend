@@ -3,7 +3,6 @@ package com.example.erpbackend.ServiceImplementation;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Postulant_tire;
-import com.example.erpbackend.Model.Statut;
 import com.example.erpbackend.Model.Tirage;
 import com.example.erpbackend.Repository.PostulantRepository;
 import com.example.erpbackend.Repository.PostulantTireRepository;
@@ -24,11 +23,13 @@ public class PostulantTireServiceImplement implements PostulantTireService {
     private PostulantRepository postulantRepository;
 
     @Override
-    public ReponseMessage ajouterPostulantTrie(Postulant postulant, Tirage tirage) {
+    public ReponseMessage ajouterPostulantTrie(Postulant postulant, Tirage tirage, String libelleListe) {
 
             Postulant_tire postulantTire = new Postulant_tire();
 
-        Postulant postulantAjoute = postulantService.ajouterPostulant(postulant);
+
+
+        Postulant postulantAjoute = postulantService.ajouterPostulant(postulant, libelleListe);
 
             if(postulantAjoute != null){
 
@@ -71,6 +72,26 @@ public class PostulantTireServiceImplement implements PostulantTireService {
     public Postulant_tire trouverPostulantTrieParidPostulant(Long idPostulant) {
 
         return postulantTireRepository.findByIdPostulant(idPostulant);
+    }
+
+    @Override
+    public ReponseMessage ajouterTousLesPostulantTire(List<Postulant> postulants) {
+
+        List<Postulant_tire> postulant_tires = new ArrayList<>();
+        Postulant_tire postul = new Postulant_tire();
+
+        for(Postulant pt: postulants){
+            postulantTireRepository.INSERT_POST_TIRE_LISTE(pt.getId(), pt.getListePostulant().getIdliste());
+        }
+
+        System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" + postulant_tires.size());
+
+        //postulantTireRepository.saveAll(postulant_tires);
+
+
+        ReponseMessage message = new ReponseMessage("Les poostulant on été ajouté avec succes", true);
+
+        return message;
     }
 
     @Override
