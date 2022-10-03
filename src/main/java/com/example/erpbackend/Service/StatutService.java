@@ -19,6 +19,8 @@ public interface StatutService {
     ReponseMessage supprimer (Long idstatut);
 
     Statut trouverStatuParIdstatut (Long idstatut);
+    int trouverid(String nom);
 
+    Statut trouverparnom(String nom);
 
 }

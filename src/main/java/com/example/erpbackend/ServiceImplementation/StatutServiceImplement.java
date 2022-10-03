@@ -64,4 +64,14 @@ public class StatutServiceImplement implements StatutService {
         return statutRepository.findByIdstatut(idstatut);
     }
 
+    @Override
+    public int trouverid(String nom) {
+        return statutRepository.retrouverid(nom);
+    }
+
+    @Override
+    public Statut trouverparnom(String nom) {
+        return statutRepository.findByNom(nom);
+    }
+
 }

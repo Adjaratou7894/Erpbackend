@@ -55,4 +55,9 @@ public class StatutController {
 
         return statutService.supprimer(idstatut);
     }
+    @ApiOperation(value = "ici on trouve l'id du statut par son nom ")
+    @GetMapping("/id/{nom}")
+    public int trouverparid( @PathVariable String nom){
+        return statutService.trouverid(nom);
+    }
 }

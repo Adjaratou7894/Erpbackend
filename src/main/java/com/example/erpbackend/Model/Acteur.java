@@ -30,8 +30,11 @@ public class Acteur {
     )
     private List<Activite> activites = new ArrayList<>();
 */
+
     @ManyToOne
     private Statut statut;
+
+
 
     }
 
