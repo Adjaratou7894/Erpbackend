@@ -1,17 +1,18 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Model.*;
+import com.example.erpbackend.Service.*;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.erpbackend.Message.ReponseMessage;
-import com.example.erpbackend.Model.Activite;
-import com.example.erpbackend.Service.ActiviteService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.lang.reflect.Type;
 import java.text.ParseException;
 import java.util.List;
 
@@ -26,13 +27,34 @@ public class ActiviteController {
     @Autowired
     private ActiviteService activiteService;
 
+    final private EntiteService entiteService;
+
+    final private TypeActiviteService typeActiviteService;
+
+    final private AnneeService anneeService;
+
+    final private SalleService salleService;
+
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
     @ApiOperation(value = "ici on Ajouter une activité")
-    @PostMapping("/ajouter/{idacteurs}/{idacteurInternes}")
-    public ReponseMessage createactivite(@RequestBody Activite activite , @PathVariable String idacteurs, @PathVariable String idacteurInternes){
-//
+    @PostMapping("/ajouter/{idacteurs}/{idacteurInternes}/{libelleEntite}/{typeAct}/{annee}/{libelleSalle}")
+    public ReponseMessage createactivite(@RequestBody Activite activite , @PathVariable String idacteurs, @PathVariable String idacteurInternes, @PathVariable String libelleEntite, @PathVariable String typeAct, @PathVariable int annee, @PathVariable String libelleSalle){
 
-        //, idacteurs
+        Entite entite = entiteService.recupererEntiteParNom(libelleEntite);
+
+        Type_activite type_activite = typeActiviteService.recupererTypeActParLibelle(libelleEntite);
+
+        Annee annee1 = anneeService.recupererAnneeParLibelle(annee);
+
+        Salle salle = salleService.trouverSalleParNom(libelleSalle);
+
+        activite.setEntite(entite);
+        activite.setTypeActivite(type_activite);
+        activite.setAnnee(annee1);
+        activite.setSalle(salle);
+
+
+        // idacteurs
         return activiteService.ajouterActivite(activite, idacteurs, idacteurInternes);
 
     }

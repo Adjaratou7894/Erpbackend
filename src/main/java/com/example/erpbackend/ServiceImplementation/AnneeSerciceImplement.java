@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import springfox.documentation.service.ResponseMessage;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class AnneeSerciceImplement implements AnneeService {
@@ -39,5 +41,15 @@ public class AnneeSerciceImplement implements AnneeService {
 
             return message;
         }
+    }
+
+    @Override
+    public Annee recupererAnneeParLibelle(int annee) {
+        return null;
+    }
+
+    @Override
+    public List<Annee> recupererLesAnnee() {
+        return anneeRepository.findAll();
     }
 }

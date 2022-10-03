@@ -89,5 +89,10 @@ public class TypeActiviteServiceImplement implements TypeActiviteService {
 
 
     }
+
+    @Override
+    public Type_activite recupererTypeActParLibelle(String libelleAct) {
+        return typeActiviteRepository.findByTypeActivite(libelleAct);
+    }
 }
 

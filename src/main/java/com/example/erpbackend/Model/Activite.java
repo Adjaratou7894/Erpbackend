@@ -35,6 +35,7 @@ public class Activite {
 
     @ManyToOne
     private Annee annee;
+
     @ManyToOne
     private Entite entite;
 
