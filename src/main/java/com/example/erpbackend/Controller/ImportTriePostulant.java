@@ -19,7 +19,7 @@ import java.util.List;
 
 @RestController
 @Api(value = "hello", description = "Importer et tirer en même temps")
-@RequestMapping("/import")
+@RequestMapping("/importTrie")
 @AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:8100")
 public class ImportTriePostulant {
@@ -31,8 +31,10 @@ public class ImportTriePostulant {
 
 
     @ApiOperation(value = "ici on fait Importer et trié en meme temps")
-    @PostMapping("/import/excel/{iduser}/{libelle}/{libelleT}/{nbre}/{libelleAct}")//il prend en parametre le libelle de la liste
-    public ReponseMessage importFormExcelT(@Param("file") MultipartFile file, @PathVariable Liste_postulant liste, @PathVariable String libelle, @PathVariable("libelleT") String libelleT, @PathVariable("nbre") int nbre, @PathVariable("libelleAct") String libelleAct) {
+
+    @PostMapping("/excel/{libelle}/{libelleT}/{nbre}/{libelleAct}")//il prend en parametre le libelle de la liste
+    public ReponseMessage importFormExcelT(@Param("file") MultipartFile file, @PathVariable String libelle, @PathVariable("libelleT") String libelleT, @PathVariable("nbre") int nbre, @PathVariable("libelleAct") String libelleAct) {
+
 
         ConfigExcel importfichier = new ConfigExcel();
 
