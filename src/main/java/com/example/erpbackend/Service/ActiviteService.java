@@ -60,6 +60,9 @@ public interface ActiviteService {
     List<Object> activiteParEntiteEtStatut(String entite, String statut);
 
 
+    int recupererNombreActiviteParMois(int mois);
+
+
 
 
 

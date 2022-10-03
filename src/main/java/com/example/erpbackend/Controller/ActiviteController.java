@@ -31,6 +31,7 @@ public class ActiviteController {
     @PostMapping("/ajouter/{idacteurs}/{idacteurInternes}")
     public ReponseMessage createactivite(@RequestBody Activite activite , @PathVariable String idacteurs, @PathVariable String idacteurInternes){
 //
+
         //, idacteurs
         return activiteService.ajouterActivite(activite, idacteurs, idacteurInternes);
 
@@ -51,6 +52,15 @@ public class ActiviteController {
 
         return activiteService.afficherActivite();
     }
+
+
+    @ApiOperation(value = "ici on Afficher la liste des activités")
+    @GetMapping("/afficher/{mois}")
+    public int  nombreActiviteParMois(@PathVariable int mois){
+
+        return activiteService.recupererNombreActiviteParMois(mois);
+    }
+
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LA LISTE DES ACTIVITES========================
 
     @ApiOperation(value = "ici on Supprimer une activité")

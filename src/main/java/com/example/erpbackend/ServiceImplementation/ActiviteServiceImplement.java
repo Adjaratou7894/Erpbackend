@@ -2,13 +2,10 @@ package com.example.erpbackend.ServiceImplementation;
 
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
-import com.example.erpbackend.Model.Role;
 import com.example.erpbackend.Repository.ActiviteRepository;
 import com.example.erpbackend.Repository.Activite_ActeurRepository;
 import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -31,6 +28,12 @@ public class ActiviteServiceImplement implements ActiviteService {
     public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes) {
         if (activiteRepository.findByNom(activite.getNom()) == null){
             activite.setEtat(true);
+
+
+           int mois =  activite.getDateDebut().getMonth()+1;
+
+           activite.setMois(mois);
+
              activiteRepository.save(activite);
 
             // //Un tableau qui contenera l'id des acteurs par case
@@ -191,6 +194,11 @@ public class ActiviteServiceImplement implements ActiviteService {
             return activites;
         }
         return Collections.singletonList("Aucune activité ne trouvée pour cette entité en fonction de cette entite et status !");
+    }
+
+    @Override
+    public int recupererNombreActiviteParMois(int mois) {
+        return activiteRepository.GET_NUMBER_ACTIVITE_PER_MONTH(mois);
     }
 
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
