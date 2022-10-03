@@ -18,6 +18,7 @@ public class Activite {
     private String description;
     private Date   dateDebut;
     private Date   dateFin;
+    private int mois;
     private Boolean etat;
     private String nombrepersonnedemande;
 
@@ -28,17 +29,9 @@ public class Activite {
     @ManyToOne
     private Etat_activite etatActivite;
 
-    /*@ManyToOne
-    private Utilisateur utilisateur;*/
-
     @ManyToOne
     private Utilisateur responsable;
 
-    /*
-    @ManyToOne
-    private Utilisateur animer;
-
-     */
 
     @ManyToOne
     private Annee annee;
