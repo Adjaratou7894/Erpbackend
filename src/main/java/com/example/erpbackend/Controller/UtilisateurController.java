@@ -69,4 +69,9 @@ public class UtilisateurController {
 
         return utilisateurService.seConnecter(email, password);
     }
+    @ApiOperation(value = "Methode permettant de Se fe filté par entité")
+    @GetMapping("/afficher/{entite}")
+    List<Object> afficherParEntite(@PathVariable String entite){
+        return utilisateurService.afficherUtilisateurParEntite(entite);
+    }
 }
