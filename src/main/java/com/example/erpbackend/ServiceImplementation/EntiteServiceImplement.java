@@ -79,7 +79,7 @@ public class EntiteServiceImplement implements EntiteService {
         if (entiteRepository.findByNom(entite.getNom()) == null) {
             Entite ent = entiteRepository.findByIdEntite(idEntite);
             String iconephoto = ent.getPhotoentite();
-            File file = new File("C:\\Users\\ADIAWIAKOYE\\Desktop\\Erpbackend\\src\\main\\resources\\files" + ent.getIdEntite() + "/" + iconephoto);
+            File file = new File("src/main/resources/files" + ent.getIdEntite() + "/" + iconephoto);
             //File file = new File(ClassPathResource("files").getFile().getAbsolutePath();
             Path path = Paths.get(file.toURI());
                 Files.readAllBytes(path);

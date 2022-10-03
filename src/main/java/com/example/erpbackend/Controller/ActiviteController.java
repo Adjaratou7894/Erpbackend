@@ -70,27 +70,30 @@ public class ActiviteController {
         return activiteService.supprimerActivite(idactivite);
     }
 
-    @ApiOperation(value = "Ici on affiche les trois activites recente en fontion de l'etat")
+    @ApiOperation(value = "Ici on affiche les activites en fontion de l'etat")
     @GetMapping("/activitesRecentes/{etatActivite}")
     public List<Object> trouverTroisActviteParEtat(@PathVariable String etatActivite){
 
         return activiteService.afficheActiviteEnFonctionEtat(etatActivite);
     }
 
-
+    @ApiOperation(value = "Ici on affiche les activites en fontion de l'année")
     @GetMapping("/ParAnnee/{annee}")
     public List<Object> ActiviteParAnnee(@PathVariable int annee) {
+
         return activiteService.ActiviteParAnnee(annee);
     }
 
-
+    @ApiOperation(value = "Ici on affiche les activites en fontion de l'etat")
     @GetMapping("/ParEtat/{etat}")
     public List<Activite> activiteParEtat(@PathVariable String etat) {
+
         return activiteService.activiteParEtat(etat);
     }
 
     @GetMapping("/parDatePlusRecente")
     List<Object> activiteParDatePlusRecente(){
+
         return activiteService.activiteParDatePlusRecente();
     }
 
@@ -98,21 +101,30 @@ public class ActiviteController {
 
     @GetMapping("/parDateIntervale/{dateDebut}/{dateFin}")
     public List<Object> activiteParDateIntervale(@PathVariable String dateDebut, @PathVariable String dateFin) throws ParseException {
+
         return activiteService.activiteParDateIntervale(dateDebut, dateFin);
     }
 
 
     @GetMapping("/parEntite/{entite}")
     public List<Object> activiteParEntite(@PathVariable String entite) {
+
         return activiteService.activiteParEntite(entite);
     }
 
 
     @GetMapping("/parEntiteStatus/{entite}/{statut}")
     public List<Object> activiteParEntiteEtStatut(@PathVariable String entite, @PathVariable String statut) {
+
         return activiteService.activiteParEntiteEtStatut(entite, statut);
     }
     //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
+
+    @GetMapping("/afficher/{typeactivite}")
+    public int  nombreActivitePartypeactivite(@PathVariable String type_activite){
+
+        return activiteService.recupererNombreActivitePartypeactivite(type_activite);
+    }
 }
 
 

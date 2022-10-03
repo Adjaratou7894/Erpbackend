@@ -201,5 +201,11 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.GET_NUMBER_ACTIVITE_PER_MONTH(mois);
     }
 
+    @Override
+    public int recupererNombreActivitePartypeactivite(String type_activite) {
+
+        return activiteRepository.findByTypeActivite(type_activite).size();
+    }
+
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
 }

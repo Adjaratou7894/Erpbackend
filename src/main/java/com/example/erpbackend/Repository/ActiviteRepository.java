@@ -57,4 +57,8 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "select count(mois) from activite where mois = :mois", nativeQuery = true)
     int GET_NUMBER_ACTIVITE_PER_MONTH(@Param("mois") int mois);
+
+    @Query(value = "SELECT * FROM activite,type_activite WHERE activite.type_activite_idactivite = type_activite.idactivite AND type_activite.type_activite= :type_activite", nativeQuery = true)
+    List<Object> findByTypeActivite(@Param("type_activite") String type_activite);
+
 }

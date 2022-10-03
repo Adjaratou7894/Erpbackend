@@ -62,6 +62,8 @@ public interface ActiviteService {
 
     int recupererNombreActiviteParMois(int mois);
 
+    int recupererNombreActivitePartypeactivite(String type_activite);
+
 
 
 
