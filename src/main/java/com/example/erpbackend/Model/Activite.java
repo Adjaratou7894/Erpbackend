@@ -1,5 +1,6 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Activite {
     @ManyToOne
     private Etat_activite etatActivite;
 
+    @JsonIgnore
     @ManyToOne
     private Utilisateur responsable;
 
@@ -39,6 +41,7 @@ public class Activite {
     @ManyToOne
     private Entite entite;
 
+    @JsonIgnore
     @OneToOne
     private Salle salle;
 

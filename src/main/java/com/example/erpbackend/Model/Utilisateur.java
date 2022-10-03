@@ -1,5 +1,6 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.List;
 @Table
 @Data
 
-public class    Utilisateur {
+public class  Utilisateur {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long iduser;
@@ -23,12 +24,12 @@ public class    Utilisateur {
     private String email;
     private String password;
 
+
     @ManyToOne
     private Entite entite;
 
     @ManyToOne
     private Role role;
-
 
 
     @ManyToMany(
