@@ -144,6 +144,11 @@ public class ActiviteController {
     public int nombreEvenements(){
         return activiteService.nombreEvenement();
     }
+
+    @GetMapping("/nombreActiviteAvenir")
+    List<Object> nombreActiviteAvenir(){
+        return activiteService.troisActiviteavenir();
+    }
 }
 
 

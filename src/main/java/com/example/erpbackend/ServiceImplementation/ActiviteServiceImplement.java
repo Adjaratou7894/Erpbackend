@@ -252,5 +252,10 @@ public class ActiviteServiceImplement implements ActiviteService {
          }
     }
 
+    @Override
+    public List<Object> troisActiviteavenir() {
+        return activiteRepository.troisActiviteAvenir();
+    }
+
 
 }

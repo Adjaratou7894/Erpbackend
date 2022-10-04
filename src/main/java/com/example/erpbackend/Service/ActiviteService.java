@@ -72,6 +72,8 @@ public interface ActiviteService {
 
     public ReponseMessage AgetBytes(long idactivite) throws IOException;
 
+    List<Object> troisActiviteavenir();
+
 
 
 }
