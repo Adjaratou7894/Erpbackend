@@ -116,6 +116,12 @@ public class ActiviteController {
     public int nombreEvenements(){
         return activiteService.nombreEvenement();
     }
+
+    //trois activité recente
+    @GetMapping("/afficherTroisActiviteRecente")
+    List<Object> troisActiviteRecente(){
+        return activiteService.troisActiviteRecente();
+    }
 }
 
 

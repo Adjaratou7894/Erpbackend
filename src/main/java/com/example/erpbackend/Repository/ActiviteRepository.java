@@ -64,4 +64,8 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite =" +
             " type_activite.idactivite AND type_activite.type_activite = \"Evénements\";", nativeQuery = true)
     int nombreEvenement();
+    //les trois activite les plus recente
+    @Query(value = "SELECT activite.nom  AS \"nomactivite\",activite.description,utilisateur.nom  AS \"nomUser\",utilisateur.prenom AS \"prenomUser\"  FROM " +
+            "activite,utilisateur ORDER BY date_debut desc LIMIT 3", nativeQuery = true)
+    List<Object> troisActiviteRecente();
 }

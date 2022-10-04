@@ -208,5 +208,11 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.nombreEvenement();
     }
 
+    @Override
+    public List<Object> troisActiviteRecente() {
+        return activiteRepository.troisActiviteRecente();
+    }
+
+
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
 }

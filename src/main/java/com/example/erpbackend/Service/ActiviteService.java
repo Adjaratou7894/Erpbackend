@@ -63,6 +63,8 @@ public interface ActiviteService {
     int nombreTalks();
     int nombreEvenement();
 
+    List<Object> troisActiviteRecente();
+
 
 
 
