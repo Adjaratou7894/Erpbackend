@@ -14,4 +14,6 @@ public interface EntiteService {
     public  ReponseMessage modifier(Entite entite);
     //**********On supprime une entité avec son id et un type de retour String********
     public ReponseMessage supprimer(Long id);
+
+    Entite recupererEntiteParNom(String nom);
 }

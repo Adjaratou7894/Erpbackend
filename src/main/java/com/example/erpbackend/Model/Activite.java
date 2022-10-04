@@ -1,9 +1,8 @@
 package com.example.erpbackend.Model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
+
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -21,6 +20,7 @@ public class Activite {
     private String description;
     private Date   dateDebut;
     private Date   dateFin;
+    private int mois;
     private Boolean etat;
     private String nombrepersonnedemande;
 
@@ -30,18 +30,12 @@ public class Activite {
     @ManyToOne
     private Etat_activite etatActivite;
 
-    /*@ManyToOne
-    private Utilisateur utilisateur;*/
+
 
     @JsonIgnore
     @ManyToOne
     private Utilisateur responsable;
 
-    /*
-    @ManyToOne
-    private Utilisateur animer;
-
-     */
 
     @JsonIgnore
     @ManyToOne

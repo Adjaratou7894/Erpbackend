@@ -59,8 +59,7 @@ public class UtilisateurController {
     @DeleteMapping("/supprimer/{iduser}")
     public ReponseMessage supprimer(@PathVariable Long iduser){
             return utilisateurService.supprimerUtilisateur(iduser);
-
-        }
+    }
 
     // ============================== Ce connecter avec son email et mot de passe ================================
     @ApiOperation(value = "Methode permettant de Se connecter")

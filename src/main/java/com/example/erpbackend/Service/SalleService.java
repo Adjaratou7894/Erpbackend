@@ -18,4 +18,6 @@ public interface SalleService {
     List<Salle> AffichageDesSalleLibre();
 
     Salle trouverSalleParId(Long idsalle);
+
+    Salle trouverSalleParNom(String nom);
 }

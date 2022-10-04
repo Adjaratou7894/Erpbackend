@@ -67,7 +67,12 @@ public class EntiteServiceImplement implements EntiteService {
         }
     }
 
+    @Override
+    public Entite recupererEntiteParNom(String nom) {
+        return entiteRepository.findByNom(nom);
     }
+
+}
 
 
 

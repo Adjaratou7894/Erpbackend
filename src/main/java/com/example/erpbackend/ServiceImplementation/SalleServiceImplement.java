@@ -93,5 +93,10 @@ public class SalleServiceImplement implements SalleService {
         return salleRepository.findByIdsalle(idsalle);
     }
 
+    @Override
+    public Salle trouverSalleParNom(String nom) {
+        return salleRepository.findByNom(nom);
+    }
+
 
 }

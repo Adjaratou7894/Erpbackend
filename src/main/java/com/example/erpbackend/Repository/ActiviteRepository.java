@@ -46,4 +46,15 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "SELECT activite.nom as 'nom activité', activite.date_debut,activite.date_fin,entite.nom as 'nom entité',activite.etat,statut.nom as 'statut' FROM `activite`,entite,statut,acteur_activites,acteur WHERE activite.entite_id_entite=entite.id_entite AND activite.idactivite = acteur_activites.activite_id AND acteur_activites.acteur_id = acteur.idacteur AND statut.idstatut = acteur.statut_idstatut AND entite.nom=:entite AND statut.nom=:statut", nativeQuery = true)
     List<Object> findByEntiteAndStatus(@Param("entite") String entite, @Param("statut") String statut);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite) values (?,?);", nativeQuery = true)
+    int insert_activites_utilisateurs_animer(Long iduser, Long idactivite);
+
+
+
+    @Query(value = "select count(mois) from activite where mois = :mois", nativeQuery = true)
+    int GET_NUMBER_ACTIVITE_PER_MONTH(@Param("mois") int mois);
 }

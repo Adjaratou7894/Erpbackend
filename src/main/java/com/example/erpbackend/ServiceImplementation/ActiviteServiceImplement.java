@@ -2,13 +2,10 @@ package com.example.erpbackend.ServiceImplementation;
 
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
-import com.example.erpbackend.Model.Role;
 import com.example.erpbackend.Repository.ActiviteRepository;
 import com.example.erpbackend.Repository.Activite_ActeurRepository;
 import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -28,21 +25,42 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
-    public ReponseMessage ajouterActivite(Activite activite, String idacteurs) {
+    public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes) {
         if (activiteRepository.findByNom(activite.getNom()) == null){
+
             activite.setEtat(true);
-             activiteRepository.save(activite);
+
+
+           int mois =  activite.getDateDebut().getMonth()+1;
+
+           activite.setMois(mois);
+
+             Activite act = activiteRepository.save(activite);
 
             // //Un tableau qui contenera l'id des acteurs par case
             String[] allIdActeurs = idacteurs.split(",");
 
+            String[] allIdActeursInternes = idacteurInternes.split(",");
+
             System.out.println("les id : " + allIdActeurs);
+
+            System.out.println("les id internes: " + allIdActeursInternes);
 
             for (String idact : allIdActeurs) {
 
                 long l = Long.parseLong(idact);
 
-                activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, activite.getIdactivite());
+               activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, act.getIdactivite());
+
+            }
+
+            System.out.println(allIdActeursInternes);
+
+            for (String idact : allIdActeursInternes) {
+
+                long l = Long.parseLong(idact);
+
+                activiteRepository.insert_activites_utilisateurs_animer(l, act.getIdactivite());
 
             }
 
@@ -179,6 +197,11 @@ public class ActiviteServiceImplement implements ActiviteService {
             return activites;
         }
         return Collections.singletonList("Aucune activité ne trouvée pour cette entité en fonction de cette entite et status !");
+    }
+
+    @Override
+    public int recupererNombreActiviteParMois(int mois) {
+        return activiteRepository.GET_NUMBER_ACTIVITE_PER_MONTH(mois);
     }
 
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================

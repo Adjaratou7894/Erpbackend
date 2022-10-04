@@ -22,5 +22,7 @@ public interface TypeActiviteService {
  //
       ReponseMessage supprimerTypeActvite(Long id);
 
+      Type_activite recupererTypeActParLibelle(String libelleAct);
+
 
 }
