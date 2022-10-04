@@ -53,4 +53,15 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     @Transactional
     @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite) values (?,?);", nativeQuery = true)
     int insert_activites_utilisateurs_animer(Long iduser, Long idactivite);
+
+
+    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite =" +
+            " type_activite.idactivite AND type_activite.type_activite = \"Formations\";", nativeQuery = true)
+    int nombreFormation();
+    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite " +
+            "= type_activite.idactivite AND type_activite.type_activite = \" Talks\";\n", nativeQuery = true)
+    int nombreTalks();
+    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite =" +
+            " type_activite.idactivite AND type_activite.type_activite = \"Evénements\";", nativeQuery = true)
+    int nombreEvenement();
 }

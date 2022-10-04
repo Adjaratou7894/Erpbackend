@@ -193,5 +193,20 @@ public class ActiviteServiceImplement implements ActiviteService {
         return Collections.singletonList("Aucune activité ne trouvée pour cette entité en fonction de cette entite et status !");
     }
 
+    @Override
+    public int nombreFormation() {
+        return activiteRepository.nombreFormation();
+    }
+
+    @Override
+    public int nombreTalks() {
+        return activiteRepository.nombreTalks();
+    }
+
+    @Override
+    public int nombreEvenement() {
+        return activiteRepository.nombreEvenement();
+    }
+
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
 }

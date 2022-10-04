@@ -103,6 +103,19 @@ public class ActiviteController {
         return activiteService.activiteParEntiteEtStatut(entite, statut);
     }
     //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
+
+    @GetMapping("/nombreFormation")
+    public int nombreFormation() {
+        return activiteService.nombreFormation();
+    }@GetMapping("/nombreTalks")
+    public int nombreTalks() {
+        return activiteService.nombreTalks();
+    }
+
+    @GetMapping("/nombreEvenements")
+    public int nombreEvenements(){
+        return activiteService.nombreEvenement();
+    }
 }
 
 

@@ -59,6 +59,10 @@ public interface ActiviteService {
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR ENTITE et STATUS ===========================
     List<Object> activiteParEntiteEtStatut(String entite, String statut);
 
+    int nombreFormation();
+    int nombreTalks();
+    int nombreEvenement();
+
 
 
 
