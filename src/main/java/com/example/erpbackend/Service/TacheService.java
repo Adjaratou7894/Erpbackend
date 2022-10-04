@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface TacheService {
 
-    ReponseMessage enregistrerTaches(Taches taches);
+    ReponseMessage enregistrerTaches(Taches taches, String idusers);
 
     List<Taches> recupererTousLesTaches();
 

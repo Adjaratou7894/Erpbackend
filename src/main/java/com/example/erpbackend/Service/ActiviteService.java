@@ -13,7 +13,7 @@ import java.util.List;
 public interface ActiviteService {
     //,
     //================METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
-    ReponseMessage ajouterActivite(Activite activite, String idacteurs);
+    ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes);
 
 
     //================METHODE PERMETTANT DE MODIFIER UNE ACTIVITE=========================
@@ -58,6 +58,11 @@ public interface ActiviteService {
 
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR ENTITE et STATUS ===========================
     List<Object> activiteParEntiteEtStatut(String entite, String statut);
+
+
+    int recupererNombreActiviteParMois(int mois);
+
+    int recupererNombreActivitePartypeactivite(String type_activite);
 
 
 
