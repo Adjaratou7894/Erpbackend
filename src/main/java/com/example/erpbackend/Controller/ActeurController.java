@@ -12,8 +12,8 @@ import java.util.List;
 @RestController
 @Api(value = "hello", description = "controller permettant Gestion des Acteur")
 @AllArgsConstructor
-@RequestMapping("/acteur")
 @CrossOrigin(origins = "http://localhost:8100")
+@RequestMapping("/acteur")
 public class ActeurController {
 
     final private ActeurService acteurService;
