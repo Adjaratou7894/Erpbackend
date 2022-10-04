@@ -17,13 +17,15 @@ public class DesignationServiceImplement implements DesignationService {
 
     @Override
     public ReponseMessage enregistrerDesignation(Designation designation) {
-        if(designationRepository.findByLibelle(designation.getLibelle()) != null){
+        if(designationRepository.findByLibelle(designation.getLibelle()) == null){
             designationRepository.save(designation);
             ReponseMessage message = new ReponseMessage("Designation enregistré avec succes", true);
 
             return message;
         }else{
-            return null;
+            ReponseMessage message = new ReponseMessage("Designation non enregistre", false);
+
+            return message;
         }
     }
 

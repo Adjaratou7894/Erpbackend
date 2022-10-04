@@ -190,7 +190,7 @@ public class PostulantController {
     }
 
 
-    @ApiOperation(value = "ici on Afficher Le nombre de postulant ou de participant")
+    @ApiOperation(value = "ici on Affiche Le nombre de postulant ou de participant")
     @GetMapping("/afficherNombreParticipantOuApprenant/{typePostulant}")
     public int afficherNombreParticipantOuApprenant(@PathVariable String typePostulant){
 

@@ -102,7 +102,7 @@ public class ActiviteController {
     public List<Object> activiteParEntiteEtStatut(@PathVariable String entite, @PathVariable String statut) {
         return activiteService.activiteParEntiteEtStatut(entite, statut);
     }
-    //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
+    //================ FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE ======================
 }
 
 
