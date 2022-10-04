@@ -46,11 +46,22 @@ public class PostulantTireController {
         return postulantTireService.ajouterPostulantTrie(postulant, tirage, listeLibelle);
     }
 
+
     @ApiOperation(value = "ici on afficher tout les postulant tiré ")
     @GetMapping("/afficher")
     public List<Postulant> readPostulantTire(){
 
         return postulantTireService.recupererTousLesPostulantTire();
+    }
+    @ApiOperation(value = "ici on ajouter un participant ")
+    @PostMapping("/ajouter/{listelibelle}")
+    public ReponseMessage ajouterParticipant(@RequestBody Postulant postulant,@PathVariable String listelibelle) {
+        Liste_postulant liste = listePostulantService.trouverListePostulantParLibelle(listelibelle);
+
+        postulant.setListePostulant(liste);
+
+        return postulantTireService.ajouterParticipant(postulant, listelibelle);
+
     }
 
     @GetMapping("/afficher/{genre}")
@@ -60,6 +71,7 @@ public class PostulantTireController {
             return postulantTireService.recupererTousLesPostulantTireFilter(genre);
 
     }
+
     @ApiOperation(value = "ici on supprimer un postulant tiré ")
     @DeleteMapping("/supprimer/{id}")
     public ReponseMessage deletePostulantTire(@PathVariable Long id){
@@ -72,6 +84,20 @@ public class PostulantTireController {
     public List<Postulant> recupererLesPostulantTireParTirage(@PathVariable Long idTirage){
 
         return postulantTireService.recupererIdPostulantTireParTirage(idTirage);
+    }
+
+    @ApiOperation(value = "ici affiche le nombre de  participants ")
+    @GetMapping("/compteParticipant")
+    public int compteNombreParticipant(){
+
+        return postulantTireService.nombreParticipant();
+    }
+
+    @ApiOperation(value = "ici affiche le nombre de  apprenant ")
+    @GetMapping("/compteApprenant")
+    public int compteNombreApprenant(){
+
+        return postulantTireService.nombreApprenant();
     }
 
 }
