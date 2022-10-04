@@ -66,4 +66,9 @@ public class ActeurServiceImplement implements ActeurService {
 
     }
 
+    @Override
+    public List<Object> AfficherActeurRoleTout() {
+        return acteurRepository.AfficherActeurRoleTout();
+    }
+
 }

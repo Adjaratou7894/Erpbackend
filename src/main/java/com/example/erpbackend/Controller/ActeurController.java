@@ -47,5 +47,10 @@ public class ActeurController {
 
         return acteurService.SupprimerActeur(id);
     }
+    @ApiOperation(value = "ici on Afficher la liste des Acteur")
+    @GetMapping("/afficherAvecRole")
+    public List<Object> AfficherActeurRoleTout(){
+        return acteurService.AfficherActeurRoleTout();
+    }
 
 }

@@ -86,4 +86,18 @@ public class PostulantTireController {
         return postulantTireService.recupererIdPostulantTireParTirage(idTirage);
     }
 
+    @ApiOperation(value = "ici affiche le nombre de  participants ")
+    @GetMapping("/compteParticipant")
+    public int compteNombreParticipant(){
+
+        return postulantTireService.nombreParticipant();
+    }
+
+    @ApiOperation(value = "ici affiche le nombre de  apprenant ")
+    @GetMapping("/compteApprenant")
+    public int compteNombreApprenant(){
+
+        return postulantTireService.nombreApprenant();
+    }
+
 }

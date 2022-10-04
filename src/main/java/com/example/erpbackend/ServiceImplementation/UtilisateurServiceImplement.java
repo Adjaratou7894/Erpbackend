@@ -94,5 +94,10 @@ public class UtilisateurServiceImplement implements UtilisateurService {
         return utilisateurRepository.findUtilisateurParEntite(entite);
     }
 
+    @Override
+    public List<Object> findUtilisateurParEntiteToute() {
+        return utilisateurRepository.findUtilisateurParEntiteToute();
+    }
+
 
 }

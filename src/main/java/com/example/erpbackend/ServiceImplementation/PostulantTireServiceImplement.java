@@ -128,6 +128,16 @@ public class PostulantTireServiceImplement implements PostulantTireService {
     }
 
     @Override
+    public int nombreParticipant() {
+        return postulantTireRepository.nombreParticipant();
+    }
+
+    @Override
+    public int nombreApprenant() {
+        return postulantTireRepository.nombreApprenant();
+    }
+
+    @Override
     public List<Postulant> recupererTousLesPostulantTire() {
 
         List<Long> idPostTire = postulantTireRepository.FIND_ALL_POSTULANT_TIRE();

@@ -22,6 +22,9 @@ public interface PostulantTireService {
     Postulant_tire trouverPostulantTrieParidPostulant (Long idPostulant);
 
     ReponseMessage ajouterTousLesPostulantTire(List<Postulant> postulants);
+   int nombreParticipant();
+
+   int nombreApprenant();
 
 
 

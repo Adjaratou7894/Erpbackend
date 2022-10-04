@@ -17,6 +17,7 @@ public interface UtilisateurService {
 
     Object seConnecter(String email, String motDePasse);
     List<Object> afficherUtilisateurParEntite(String entite);
+    List<Object> findUtilisateurParEntiteToute();
 
 
 }
