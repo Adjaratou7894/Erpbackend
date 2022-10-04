@@ -8,6 +8,11 @@ import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -205,7 +210,33 @@ public class ActiviteServiceImplement implements ActiviteService {
     public int recupererNombreActivitePartypeactivite(String type_activite) {
 
         return activiteRepository.findByTypeActivite(type_activite).size();
+
     }
 
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
+
+
+
+    @Override
+    public ReponseMessage AgetBytes(long idactivite) throws IOException {
+         Activite activite = new Activite();
+         if(activiteRepository.findByNom(activite.getNom()) == null){
+             Activite act = activiteRepository.findByIdactivite(idactivite);
+
+             String imgactiphoto = act.getPhotoactivite();
+
+             File actfile = new File("src/main/resources/Afiles" + act.getIdactivite() + "/" + imgactiphoto);
+
+             Path path = Paths.get(actfile.toURI());
+             Files.readAllBytes(path);
+             activiteRepository.save(activite);
+             ReponseMessage message = new ReponseMessage("activite ajouter avec succes", true);
+             return message;
+         } else {
+             ReponseMessage message = new ReponseMessage("cet activite existe déjà", false);
+             return message;
+         }
+    }
+
+
 }

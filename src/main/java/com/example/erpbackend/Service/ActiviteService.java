@@ -6,6 +6,7 @@ import com.example.erpbackend.Model.Role;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -65,7 +66,7 @@ public interface ActiviteService {
     int recupererNombreActivitePartypeactivite(String type_activite);
 
 
-
+    public ReponseMessage AgetBytes(long idactivite) throws IOException;
 
 
 

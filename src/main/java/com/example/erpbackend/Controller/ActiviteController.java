@@ -125,6 +125,12 @@ public class ActiviteController {
 
         return activiteService.recupererNombreActivitePartypeactivite(type_activite);
     }
+
+
+ //   @PostMapping("/ajouterE")
+   // public ReponseMessage ajouteractivite(){
+
+    //}
 }
 
 
