@@ -70,11 +70,12 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             " type_activite.idactivite AND type_activite.type_activite = \"Evenement\";", nativeQuery = true)
     int nombreEvenement();
 
-    //les trois activite les plus recente
+    //les trois activite les plus recente l'id etatactivite represente l'activite en cour
     @Query(value = "SELECT activite.nom  AS \"nomactivite\",activite.description,utilisateur.nom  AS \"nomUser\",utilisateur.prenom AS \"prenomUser\"  FROM " +
-            "activite,utilisateur ORDER BY date_debut desc LIMIT 3", nativeQuery = true)
+            "activite,utilisateur WHERE activite.utilisateur_iduser=utilisateur.iduser AND activite.etat_activite_idetat= 1 ORDER BY date_debut desc LIMIT 3", nativeQuery = true)
     List<Object> troisActiviteRecente();
 
+    //les trois activite les plus recente l'id etatactivite represente l'activite à venir
     @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS \"nomUser\",utilisateur.prenom AS \"prenomUser\" FROM " +
             "activite,utilisateur WHERE activite.utilisateur_iduser=utilisateur.iduser AND activite.etat_activite_idetat= 2 ORDER BY activite.date_debut DESC LIMIT 3", nativeQuery = true)
     List<Object> troisActiviteAvenir();
