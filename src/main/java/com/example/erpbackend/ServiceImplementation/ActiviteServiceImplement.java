@@ -202,6 +202,7 @@ public class ActiviteServiceImplement implements ActiviteService {
     }
 
     @Override
+
     public int recupererNombreActiviteParMois(int mois) {
         return activiteRepository.GET_NUMBER_ACTIVITE_PER_MONTH(mois);
     }
@@ -210,6 +211,19 @@ public class ActiviteServiceImplement implements ActiviteService {
     public int recupererNombreActivitePartypeactivite(String type_activite) {
 
         return activiteRepository.findByTypeActivite(type_activite).size();
+    }
+    public int nombreFormation() {
+        return activiteRepository.nombreFormation();
+    }
+
+    @Override
+    public int nombreTalks() {
+        return activiteRepository.nombreTalks();
+    }
+
+    @Override
+    public int nombreEvenement() {
+        return activiteRepository.nombreEvenement();
 
     }
 

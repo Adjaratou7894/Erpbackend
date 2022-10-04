@@ -120,6 +120,7 @@ public class ActiviteController {
     }
     //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
 
+
     @GetMapping("/afficher/{typeactivite}")
     public int  nombreActivitePartypeactivite(@PathVariable String type_activite){
 
@@ -131,6 +132,18 @@ public class ActiviteController {
    // public ReponseMessage ajouteractivite(){
 
     //}
+    @GetMapping("/nombreFormation")
+    public int nombreFormation() {
+        return activiteService.nombreFormation();
+    }@GetMapping("/nombreTalks")
+    public int nombreTalks() {
+        return activiteService.nombreTalks();
+    }
+
+    @GetMapping("/nombreEvenements")
+    public int nombreEvenements(){
+        return activiteService.nombreEvenement();
+    }
 }
 
 

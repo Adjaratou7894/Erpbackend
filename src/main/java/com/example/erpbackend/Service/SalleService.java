@@ -18,4 +18,5 @@ public interface SalleService {
     List<Salle> AffichageDesSalleLibre();
 
     Salle trouverSalleParId(Long idsalle);
+    public List<Salle> AfficherLesSallesParDisponibilite(boolean disponibilite);
 }
