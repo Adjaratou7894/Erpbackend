@@ -48,9 +48,17 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Object> findByEntiteAndStatus(@Param("entite") String entite, @Param("statut") String statut);
 
 
-
     @Modifying
     @Transactional
     @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite) values (?,?);", nativeQuery = true)
     int insert_activites_utilisateurs_animer(Long iduser, Long idactivite);
+
+
+
+    @Query(value = "select count(mois) from activite where mois = :mois", nativeQuery = true)
+    int GET_NUMBER_ACTIVITE_PER_MONTH(@Param("mois") int mois);
+
+    @Query(value = "SELECT * FROM activite,type_activite WHERE activite.type_activite_idactivite = type_activite.idactivite AND type_activite.type_activite= :type_activite", nativeQuery = true)
+    List<Object> findByTypeActivite(@Param("type_activite") String type_activite);
+
 }

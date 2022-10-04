@@ -6,8 +6,14 @@ import com.example.erpbackend.Repository.EntiteRepository;
 import com.example.erpbackend.Service.EntiteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Service
@@ -59,6 +65,25 @@ public class EntiteServiceImplement implements EntiteService {
     public ReponseMessage supprimer(Long id) {
         if (entiteRepository.findByIdEntite(id) != null) {
             entiteRepository.deleteById(id);
+            ReponseMessage message = new ReponseMessage("Entité supprimée avec succes", true);
+            return message;
+        } else {
+            ReponseMessage message = new ReponseMessage("Entité non trouvée", false);
+            return message;
+        }
+    }
+
+    @Override
+    public ReponseMessage getBytes(long idEntite) throws IOException {
+              Entite entite = new Entite();
+        if (entiteRepository.findByNom(entite.getNom()) == null) {
+            Entite ent = entiteRepository.findByIdEntite(idEntite);
+            String iconephoto = ent.getPhotoentite();
+            File file = new File("src/main/resources/files" + ent.getIdEntite() + "/" + iconephoto);
+            //File file = new File(ClassPathResource("files").getFile().getAbsolutePath();
+            Path path = Paths.get(file.toURI());
+                Files.readAllBytes(path);
+            entiteRepository.save(entite);
             ReponseMessage message = new ReponseMessage("Entité supprimée avec succes", true);
             return message;
         } else {
