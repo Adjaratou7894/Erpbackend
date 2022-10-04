@@ -48,24 +48,35 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Object> findByEntiteAndStatus(@Param("entite") String entite, @Param("statut") String statut);
 
 
-
     @Modifying
     @Transactional
     @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite) values (?,?);", nativeQuery = true)
     int insert_activites_utilisateurs_animer(Long iduser, Long idactivite);
 
 
-    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite =" +
-            " type_activite.idactivite AND type_activite.type_activite = \"Formations\";", nativeQuery = true)
+    @Query(value = "select count(mois) from activite where mois = :mois", nativeQuery = true)
+    int GET_NUMBER_ACTIVITE_PER_MONTH(@Param("mois") int mois);
+
+    @Query(value = "SELECT * FROM activite,type_activite WHERE activite.type_activite_idactivite = type_activite.idactivite AND type_activite.type_activite= :type_activite", nativeQuery = true)
+    List<Object> findByTypeActivite(@Param("type_activite") String type_activite);
+
+    @Query(value = "SELECT COUNT(activite.type_activite_idactivite) FROM activite,type_activite WHERE activite.idactivite =" +
+            " type_activite.idactivite AND type_activite.type_activite = \"Formation\";", nativeQuery = true)
     int nombreFormation();
     @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite " +
-            "= type_activite.idactivite AND type_activite.type_activite = \" Talks\";\n", nativeQuery = true)
+            "= type_activite.idactivite AND type_activite.type_activite = \"Talk\";\n", nativeQuery = true)
     int nombreTalks();
     @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite =" +
-            " type_activite.idactivite AND type_activite.type_activite = \"Evénements\";", nativeQuery = true)
+            " type_activite.idactivite AND type_activite.type_activite = \"Evenement\";", nativeQuery = true)
     int nombreEvenement();
+
     //les trois activite les plus recente
     @Query(value = "SELECT activite.nom  AS \"nomactivite\",activite.description,utilisateur.nom  AS \"nomUser\",utilisateur.prenom AS \"prenomUser\"  FROM " +
             "activite,utilisateur ORDER BY date_debut desc LIMIT 3", nativeQuery = true)
     List<Object> troisActiviteRecente();
+
+    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS \"nomUser\",utilisateur.prenom AS \"prenomUser\" FROM " +
+            "activite,utilisateur WHERE activite.utilisateur_iduser=utilisateur.iduser AND activite.etat_activite_idetat= 2 ORDER BY activite.date_debut DESC LIMIT 3", nativeQuery = true)
+    List<Object> troisActiviteAvenir();
+
 }
