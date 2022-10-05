@@ -3,6 +3,8 @@ package com.example.erpbackend.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,7 +13,8 @@ import java.util.List;
 
 @Entity
 @Table
-@Data
+@Getter
+@Setter
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
