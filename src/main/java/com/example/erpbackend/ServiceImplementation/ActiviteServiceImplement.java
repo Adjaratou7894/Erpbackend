@@ -263,5 +263,10 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.troisActiviteAvenir();
     }
 
+    @Override
+    public List<Object> afficherActiviteParId(int idactivite) {
+        return activiteRepository.afficherActiviteParId(idactivite);
+    }
+
 
 }

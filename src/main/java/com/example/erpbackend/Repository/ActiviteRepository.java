@@ -85,4 +85,8 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             nativeQuery = true)
     List<Object> troisActiviteAvenir();
 
+    @Query(value = "SELECT * FROM activite WHERE idactivite=:idactivite;",
+            nativeQuery = true)
+    List<Object> afficherActiviteParId(int idactivite);
+
 }

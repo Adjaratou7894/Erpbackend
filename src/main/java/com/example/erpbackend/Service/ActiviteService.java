@@ -76,6 +76,8 @@ public interface ActiviteService {
 
     List<Object> troisActiviteavenir();
 
+    List<Object> afficherActiviteParId(int idactivite);
+
 
 
 }

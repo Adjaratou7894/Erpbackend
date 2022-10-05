@@ -156,6 +156,12 @@ public class ActiviteController {
         return activiteService.troisActiviteavenir();
 
     }
+
+    @GetMapping("/afficherActiviteParId/{idactivite}")
+    List<Object> afficherActiviteParId(@PathVariable int idactivite){
+        return activiteService.afficherActiviteParId(idactivite);
+
+    }
 }
 
 
