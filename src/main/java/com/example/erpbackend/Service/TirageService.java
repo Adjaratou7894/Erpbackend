@@ -36,5 +36,9 @@ public interface TirageService {
 
     List<Tirage> recupererIdTirageParListe(Long idliste);
 
+    List<Tirage> recupererTousTirageValider();
+
+    List<Tirage> recupererTousTirageNonValider();
+
 
 }

@@ -59,8 +59,7 @@ public class UtilisateurController {
     @DeleteMapping("/supprimer/{iduser}")
     public ReponseMessage supprimer(@PathVariable Long iduser){
             return utilisateurService.supprimerUtilisateur(iduser);
-
-        }
+    }
 
     // ============================== Ce connecter avec son email et mot de passe ================================
     @ApiOperation(value = "Methode permettant de Se connecter")
@@ -68,5 +67,16 @@ public class UtilisateurController {
     public Object seConnecter(@PathVariable String email, @PathVariable String password){
 
         return utilisateurService.seConnecter(email, password);
+    }
+    @ApiOperation(value = "Methode permettant de filtrer par entité")
+    @GetMapping("/afficher/{entite}")
+    List<Object> afficherParEntite(@PathVariable String entite){
+        return utilisateurService.afficherUtilisateurParEntite(entite);
+    }
+
+    @ApiOperation(value = "Methode permettant d'afficher par entité et rôle")
+    @GetMapping("/afficherToute")
+    List<Object> afficherParEntiteToute(){
+        return utilisateurService.findUtilisateurParEntiteToute();
     }
 }

@@ -1,11 +1,14 @@
 package com.example.erpbackend.ServiceImplementation;
 
 import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Liste_postulant;
 import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Postulant_tire;
 import com.example.erpbackend.Model.Tirage;
+import com.example.erpbackend.Repository.ListePostulantRepository;
 import com.example.erpbackend.Repository.PostulantRepository;
 import com.example.erpbackend.Repository.PostulantTireRepository;
+import com.example.erpbackend.Service.ListePostulantService;
 import com.example.erpbackend.Service.PostulantService;
 import com.example.erpbackend.Service.PostulantTireService;
 import lombok.AllArgsConstructor;
@@ -22,33 +25,63 @@ public class PostulantTireServiceImplement implements PostulantTireService {
     private PostulantService postulantService;
     private PostulantRepository postulantRepository;
 
-    @Override
-    public ReponseMessage ajouterPostulantTrie(Postulant postulant, Tirage tirage, String libelleListe) {
+    private ListePostulantService listePostulantService;
 
-            Postulant_tire postulantTire = new Postulant_tire();
+    private ListePostulantRepository listePostulantRepository;
+
+   @Override
+    public ReponseMessage ajouterParticipant(Postulant postulant, String listelibelle) {
+        Postulant_tire postulantTire = new Postulant_tire();
 
 
 
-        Postulant postulantAjoute = postulantService.ajouterPostulant(postulant, libelleListe);
+        Postulant postulantAjoute = postulantService.ajouterPostulant(postulant, listelibelle);
 
-            if(postulantAjoute != null){
+        if(postulantAjoute != null){
 
-                postulantTire.setIdPostulant(postulantAjoute.getId());
+            postulantTire.setIdPostulant(postulantAjoute.getId());
 
-                postulantTire.setTirage(tirage);
+            Liste_postulant listePostulant = listePostulantRepository.findByLibelleliste(listelibelle);
 
-                postulantTireRepository.save(postulantTire);
+            postulantTire.setListePostulant(listePostulant);
+            postulantTireRepository.save(postulantTire);
 
-                ReponseMessage message = new ReponseMessage("Participant ajouté avec succes", true);
+            ReponseMessage message = new ReponseMessage("Participant ajouté avec succes", true);
 
-                return  message;
-            } else {
+            return  message;
+        } else {
             ReponseMessage message = new ReponseMessage("Cet Participant existe déjà sur une liste veuillez l'ajouter depuis cette liste", false);
 
             return message;
         }
     }
 
+    @Override
+    public ReponseMessage ajouterPostulantTrie(Postulant postulant, Tirage tirage, String libelleListe) {
+
+        Postulant_tire postulantTire = new Postulant_tire();
+
+
+
+        Postulant postulantAjoute = postulantService.ajouterPostulant(postulant, libelleListe);
+
+        if(postulantAjoute != null){
+
+            postulantTire.setIdPostulant(postulantAjoute.getId());
+
+            postulantTire.setTirage(tirage);
+
+            postulantTireRepository.save(postulantTire);
+
+            ReponseMessage message = new ReponseMessage("PostulantTire ajouté avec succes", true);
+
+            return  message;
+        } else {
+            ReponseMessage message = new ReponseMessage("Cet PostulantTire existe déjà sur une liste veuillez l'ajouter depuis cette liste", false);
+
+            return message;
+        }
+    }
     @Override
     public List<Postulant_tire> listerPostulantTrie() {
 
@@ -92,6 +125,16 @@ public class PostulantTireServiceImplement implements PostulantTireService {
         ReponseMessage message = new ReponseMessage("Les poostulant on été ajouté avec succes", true);
 
         return message;
+    }
+
+    @Override
+    public int nombreParticipant() {
+        return postulantTireRepository.nombreParticipant();
+    }
+
+    @Override
+    public int nombreApprenant() {
+        return postulantTireRepository.nombreApprenant();
     }
 
     @Override

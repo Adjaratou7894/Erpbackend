@@ -54,7 +54,7 @@ public class EntiteController {
     @ApiOperation(value = "ici on Modifier un entité")
     @PutMapping("/modifier")
     public ReponseMessage modifierEntite(@RequestBody Entite entite){
-       return entiteServiceImplement.modifier(entite);
+        return entiteServiceImplement.modifier(entite);
 
     }
 
@@ -95,3 +95,5 @@ public class EntiteController {
     }
 
 }
+
+

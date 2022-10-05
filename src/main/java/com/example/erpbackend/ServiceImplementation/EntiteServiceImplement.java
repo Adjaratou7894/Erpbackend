@@ -74,13 +74,17 @@ public class EntiteServiceImplement implements EntiteService {
     }
 
     @Override
+    public Entite recupererEntiteParNom(String nom) {
+        return entiteRepository.findByNom(nom);
+    }
+    @Override
     public ReponseMessage getBytes(long idEntite) throws IOException {
               Entite entite = new Entite();
         if (entiteRepository.findByNom(entite.getNom()) == null) {
             Entite ent = entiteRepository.findByIdEntite(idEntite);
             String iconephoto = ent.getPhotoentite();
             File file = new File("src/main/resources/files" + ent.getIdEntite() + "/" + iconephoto);
-            //File file = new File(ClassPathResource("files").getFile().getAbsolutePath();
+
             Path path = Paths.get(file.toURI());
                 Files.readAllBytes(path);
             entiteRepository.save(entite);
@@ -93,6 +97,8 @@ public class EntiteServiceImplement implements EntiteService {
     }
 
     }
+
+
 
 
 

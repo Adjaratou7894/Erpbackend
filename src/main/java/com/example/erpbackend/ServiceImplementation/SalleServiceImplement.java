@@ -78,19 +78,28 @@ public class SalleServiceImplement implements SalleService {
     @Override
     public List<Salle> AffichageDesSalleOccupee() {
 
-        return salleRepository.AfficherLesSallesDisponible();
+        return salleRepository.AfficherLesSallesOccupee();
     }
 
     @Override
     public List<Salle> AffichageDesSalleLibre() {
 
-        return salleRepository.AfficherLesSallesOccupee();
+        return salleRepository.AfficherLesSallesDisponible();
     }
 
     @Override
     public Salle trouverSalleParId(Long idsalle) {
 
         return salleRepository.findByIdsalle(idsalle);
+    }
+
+    @Override
+    public Salle trouverSalleParNom(String nom) {
+        return salleRepository.findByNom(nom);
+    }
+    @Override
+    public List<Salle> AfficherLesSallesParDisponibilite( boolean disponibilite) {
+        return salleRepository.AfficherLesSallesParDisponibilite(disponibilite);
     }
 
 

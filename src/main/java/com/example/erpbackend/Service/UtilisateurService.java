@@ -16,5 +16,8 @@ public interface UtilisateurService {
     ReponseMessage supprimerUtilisateur(Long iduser);
 
     Object seConnecter(String email, String motDePasse);
+    List<Object> afficherUtilisateurParEntite(String entite);
+    List<Object> findUtilisateurParEntiteToute();
+
 
 }

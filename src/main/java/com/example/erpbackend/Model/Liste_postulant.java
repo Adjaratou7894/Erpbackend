@@ -16,6 +16,7 @@ public class Liste_postulant {
     private Integer nombretirage;
     private Date dateliste;
 
+
     @OneToOne
     private Activite activite;
 }

@@ -1,6 +1,10 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,7 +13,8 @@ import java.util.List;
 
 @Entity
 @Table
-@Data
+@Getter
+@Setter
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,23 +31,29 @@ public class Activite {
     @ManyToOne
     private Type_activite typeActivite;
 
-
     @ManyToOne
     private Etat_activite etatActivite;
 
+
+
+    @JsonIgnore
     @ManyToOne
     private Utilisateur responsable;
 
 
+    @JsonIgnore
     @ManyToOne
     private Annee annee;
+
     @ManyToOne
     private Entite entite;
 
+    @JsonIgnore
     @OneToOne
     private Salle salle;
 
 
+    @JsonIgnore
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {
