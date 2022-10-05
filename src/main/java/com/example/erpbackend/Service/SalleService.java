@@ -20,4 +20,6 @@ public interface SalleService {
     Salle trouverSalleParId(Long idsalle);
 
     Salle trouverSalleParNom(String nom);
+
+    public List<Salle> AfficherLesSallesParDisponibilite(boolean disponibilite);
 }

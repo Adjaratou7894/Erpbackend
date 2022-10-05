@@ -21,6 +21,7 @@ public class Activite {
     private Long  idactivite;
     private String nom;
     private String description;
+    private String photoactivite;
     private Date   dateDebut;
     private Date   dateFin;
     private int mois;

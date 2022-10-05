@@ -64,8 +64,19 @@ public class UtilisateurController {
     // ============================== Ce connecter avec son email et mot de passe ================================
     @ApiOperation(value = "Methode permettant de Se connecter")
     @GetMapping("/seconnecter/{email}/{password}")
-    public Utilisateur seConnecter(@PathVariable String email, @PathVariable String password){
+    public Object seConnecter(@PathVariable String email, @PathVariable String password){
 
         return utilisateurService.seConnecter(email, password);
+    }
+    @ApiOperation(value = "Methode permettant de filtrer par entité")
+    @GetMapping("/afficher/{entite}")
+    List<Object> afficherParEntite(@PathVariable String entite){
+        return utilisateurService.afficherUtilisateurParEntite(entite);
+    }
+
+    @ApiOperation(value = "Methode permettant d'afficher par entité et rôle")
+    @GetMapping("/afficherToute")
+    List<Object> afficherParEntiteToute(){
+        return utilisateurService.findUtilisateurParEntiteToute();
     }
 }

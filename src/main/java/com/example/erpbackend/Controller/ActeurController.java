@@ -16,7 +16,8 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:8100")
 public class ActeurController {
 
-    private final ActeurService acteurService;
+    final private ActeurService acteurService;
+
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UN ACTEUR======================
     @ApiOperation(value = "ici on ajoute un Acteur")
     @PostMapping("/ajouter")
@@ -45,6 +46,11 @@ public class ActeurController {
     public ReponseMessage delete (@PathVariable Long id){
 
         return acteurService.SupprimerActeur(id);
+    }
+    @ApiOperation(value = "ici on Afficher la liste des Acteur")
+    @GetMapping("/afficherAvecRole")
+    public List<Object> AfficherActeurRoleTout(){
+        return acteurService.AfficherActeurRoleTout();
     }
 
 }
