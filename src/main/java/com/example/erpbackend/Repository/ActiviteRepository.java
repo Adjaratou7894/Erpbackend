@@ -71,13 +71,18 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     int nombreEvenement();
 
     //les trois activite les plus recente l'id etatactivite represente l'activite en cour
-    @Query(value = "SELECT activite.nom  AS \"nomactivite\",activite.description,utilisateur.nom  AS \"nomUser\",utilisateur.prenom AS \"prenomUser\"  FROM " +
-            "activite,utilisateur WHERE activite.utilisateur_iduser=utilisateur.iduser AND activite.etat_activite_idetat= \"encours\" ORDER BY date_debut desc LIMIT 3", nativeQuery = true)
+    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS \"nomUser\"," +
+            "utilisateur.prenom AS \"prenomUser\",activite.idactivite FROM activite,utilisateur,etat_activite" +
+            " WHERE activite.utilisateur_iduser=utilisateur.iduser AND etat_activite.idetat =" +
+            " activite.idactivite AND etat_activite.etat =\"encours\" ORDER BY activite.date_debut DESC LIMIT 3", nativeQuery = true)
     List<Object> troisActiviteRecente();
 
     //les trois activite les plus recente l'id etatactivite represente l'activite à venir
-    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS \"nomUser\",utilisateur.prenom AS \"prenomUser\" FROM " +
-            "activite,utilisateur WHERE activite.utilisateur_iduser=utilisateur.iduser AND activite.etat_activite_idetat= \"à venir\" ORDER BY activite.date_debut DESC LIMIT 3", nativeQuery = true)
+    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS" +
+            " \"nomUser\",utilisateur.prenom AS \"prenomUser\",activite.idactivite FROM activite,utilisateur,etat_activite" +
+            " WHERE activite.utilisateur_iduser=utilisateur.iduser AND etat_activite.idetat =" +
+            " activite.idactivite AND etat_activite.etat =\"à venir\" ORDER BY activite.date_debut DESC LIMIT 3",
+            nativeQuery = true)
     List<Object> troisActiviteAvenir();
 
 }

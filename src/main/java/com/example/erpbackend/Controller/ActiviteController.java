@@ -151,7 +151,7 @@ public class ActiviteController {
     List<Object> troisActiviteRecente() {
         return activiteService.troisActiviteRecente();
     }
-    @GetMapping("/nombreActiviteAvenir")
+    @GetMapping("/afficherActiviteAvenir")
     List<Object> nombreActiviteAvenir(){
         return activiteService.troisActiviteavenir();
 
