@@ -1,10 +1,13 @@
 package com.example.erpbackend.Controller;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Acteur;
+import com.example.erpbackend.Model.Statut;
 import com.example.erpbackend.Service.ActeurService;
+import com.example.erpbackend.Service.StatutService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,13 +19,19 @@ import java.util.List;
 @RequestMapping("/acteur")
 public class ActeurController {
 
+    @Autowired
     final private ActeurService acteurService;
+
+    @Autowired
+    final private StatutService statutService;
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UN ACTEUR======================
     @ApiOperation(value = "ici on ajoute un Acteur")
-    @PostMapping("/ajouter")
-    public ReponseMessage creerActeur(@RequestBody Acteur acteur){
-
+    @PostMapping("/ajouter/{statut}")
+    public ReponseMessage creerActeur(@RequestBody Acteur acteur, @PathVariable String statut){
+        Statut ok=new Statut();
+        ok= statutService.trouverparnom(statut);
+        acteur.setStatut(ok);
         return acteurService.creerActeur(acteur);
         //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTEUR======================
     }
