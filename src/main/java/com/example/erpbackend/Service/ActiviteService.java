@@ -64,6 +64,8 @@ public interface ActiviteService {
 
     int recupererNombreActivitePartypeactivite(String type_activite);
 
+    List<Object> janvierKalanso();
+
 
 
 

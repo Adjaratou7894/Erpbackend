@@ -207,5 +207,10 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.findByTypeActivite(type_activite).size();
     }
 
+    @Override
+    public List<Object> janvierKalanso() {
+        return activiteRepository.janvierKalanso();
+    }
+
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
 }

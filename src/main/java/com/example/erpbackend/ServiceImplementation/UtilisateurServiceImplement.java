@@ -59,7 +59,7 @@ public class UtilisateurServiceImplement implements UtilisateurService {
     // ================= lister tous les utilisateurs ===================================================
     @Override
     public List<Utilisateur> afficherUtilisateur() {
-        return utilisateurRepository.findAll();
+        return utilisateurRepository.tousLesUtilisateurs();
     }
 
 

@@ -37,6 +37,9 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     @Query(value = "SELECT nom, date_debut FROM activite ORDER BY date_debut desc", nativeQuery = true)
     List<Object> findByDateRecent();
 
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=1", nativeQuery = true)
+    List<Object> janvierKalanso();
+
     @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite` WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
     List<Object> findByDateIntervale(Date dateDebut, Date dateFin);
 

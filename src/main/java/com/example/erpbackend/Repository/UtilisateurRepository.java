@@ -10,11 +10,16 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
+
+
+    @Query(value = "SELECT * FROM `utilisateur`",nativeQuery = true)
+    List<Utilisateur> tousLesUtilisateurs();
 
     Utilisateur findByEmailAndPassword(String email, String password);
 

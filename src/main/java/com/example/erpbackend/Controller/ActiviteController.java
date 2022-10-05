@@ -125,6 +125,11 @@ public class ActiviteController {
 
         return activiteService.recupererNombreActivitePartypeactivite(type_activite);
     }
+
+    @GetMapping("/janvierKalanso")
+    public  Object janvierKalanso(){
+        return activiteService.janvierKalanso();
+    }
 }
 
 
