@@ -3,6 +3,7 @@ package com.example.erpbackend.Service;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Entite;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface EntiteService {
@@ -15,5 +16,8 @@ public interface EntiteService {
     //**********On supprime une entité avec son id et un type de retour String********
     public ReponseMessage supprimer(Long id);
 
+
     Entite recupererEntiteParNom(String nom);
+
+    public ReponseMessage getBytes(long idEntite) throws IOException;
 }

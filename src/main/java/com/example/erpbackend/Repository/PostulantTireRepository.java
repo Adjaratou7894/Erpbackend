@@ -40,4 +40,13 @@ public interface PostulantTireRepository extends JpaRepository<Postulant_tire,Lo
     @Query(value = "select postulant_tire.id_postulant from postulant_tire where postulant_tire.tirage_idtirage = :tirage_idtirage", nativeQuery = true)
     List<Long> FIND_ALL_POSTULANT_TIRE_PAR_TIRAGE(@Param("tirage_idtirage") Long tirage_idtirage);
 
+    @Query(value = "SELECT COUNT(*) FROM postulant_tire,liste_postulant,tirage WHERE liste_postulant.idliste =" +
+            " postulant_tire.liste_postulant_idliste AND tirage.idtirage = postulant_tire.tirage_idtirage",
+            nativeQuery = true)
+    int nombreParticipant();
+    @Query(value = "SELECT COUNT(*) FROM postulant_tire,liste_postulant WHERE liste_postulant.idliste =" +
+            " postulant_tire.liste_postulant_idliste",
+            nativeQuery = true)
+    int nombreApprenant();
+
 }

@@ -6,6 +6,7 @@ import com.example.erpbackend.Model.Role;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
@@ -59,11 +60,21 @@ public interface ActiviteService {
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR ENTITE et STATUS ===========================
     List<Object> activiteParEntiteEtStatut(String entite, String statut);
 
+    int nombreFormation();
+    int nombreTalks();
+    int nombreEvenement();
+
+    List<Object> troisActiviteRecente();
+
 
     int recupererNombreActiviteParMois(int mois);
 
+    int recupererNombreActivitePartypeactivite(String type_activite);
 
 
+    public ReponseMessage AgetBytes(long idactivite) throws IOException;
+
+    List<Object> troisActiviteavenir();
 
 
 
