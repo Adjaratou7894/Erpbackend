@@ -122,7 +122,7 @@ public class ConfigExcel {
 
                         //si ça vaut 3
                         case 4:
-                            //On recuoere le email du postulant
+                            //On recupère le email du postulant
                             genre_postulant=nextCell.getStringCellValue();
 
                             //on affiche cette valeur dans la console
