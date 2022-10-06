@@ -17,5 +17,7 @@ public interface ActeurService {
     List<Acteur> afficherToutLesActeurs();
     ReponseMessage SupprimerActeur(Long idacteur);
 
+    public List<Object> AfficherActeurRoleTout();
+
 
 }

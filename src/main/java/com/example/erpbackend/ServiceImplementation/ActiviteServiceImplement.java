@@ -8,6 +8,11 @@ import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -197,6 +202,7 @@ public class ActiviteServiceImplement implements ActiviteService {
     }
 
     @Override
+
     public int recupererNombreActiviteParMois(int mois) {
         return activiteRepository.GET_NUMBER_ACTIVITE_PER_MONTH(mois);
     }
@@ -206,6 +212,26 @@ public class ActiviteServiceImplement implements ActiviteService {
 
         return activiteRepository.findByTypeActivite(type_activite).size();
     }
+    public int nombreFormation() {
+        return activiteRepository.nombreFormation();
+    }
+
+    @Override
+    public int nombreTalks() {
+        return activiteRepository.nombreTalks();
+    }
+
+    @Override
+    public int nombreEvenement() {
+        return activiteRepository.nombreEvenement();
+
+    }
+
+    @Override
+    public List<Object> troisActiviteRecente() {
+        return activiteRepository.troisActiviteRecente();
+    }
+
 
     @Override
     public List<Object> janvierKalanso() {
@@ -213,4 +239,44 @@ public class ActiviteServiceImplement implements ActiviteService {
     }
 
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
+
+
+
+    @Override
+    public ReponseMessage AgetBytes(long idactivite) throws IOException {
+         Activite activite = new Activite();
+         if(activiteRepository.findByNom(activite.getNom()) == null){
+             Activite act = activiteRepository.findByIdactivite(idactivite);
+
+             String imgactiphoto = act.getPhotoactivite();
+
+             File actfile = new File("src/main/resources/Afiles" + act.getIdactivite() + "/" + imgactiphoto);
+
+             Path path = Paths.get(actfile.toURI());
+             Files.readAllBytes(path);
+             activiteRepository.save(activite);
+             ReponseMessage message = new ReponseMessage("activite ajouter avec succes", true);
+             return message;
+         } else {
+             ReponseMessage message = new ReponseMessage("cet activite existe déjà", false);
+             return message;
+         }
+    }
+
+    @Override
+    public List<Object> troisActiviteavenir() {
+        return activiteRepository.troisActiviteAvenir();
+    }
+
+    @Override
+    public List<Object> afficherActiviteParId(int idactivite) {
+        return activiteRepository.afficherActiviteParId(idactivite);
+    }
+
+    @Override
+    public List<Object> LES_PERONNES_TIREE_V(Long idactivite) {
+        return activiteRepository.LES_PERONNES_TIREE_VALIDE(idactivite);
+    }
+
+
 }

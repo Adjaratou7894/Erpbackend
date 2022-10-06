@@ -57,11 +57,48 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     int insert_activites_utilisateurs_animer(Long iduser, Long idactivite);
 
 
-
     @Query(value = "select count(mois) from activite where mois = :mois", nativeQuery = true)
     int GET_NUMBER_ACTIVITE_PER_MONTH(@Param("mois") int mois);
 
     @Query(value = "SELECT * FROM activite,type_activite WHERE activite.type_activite_idactivite = type_activite.idactivite AND type_activite.type_activite= :type_activite", nativeQuery = true)
     List<Object> findByTypeActivite(@Param("type_activite") String type_activite);
+
+    @Query(value = "SELECT COUNT(activite.type_activite_idactivite) FROM activite,type_activite WHERE activite.idactivite =" +
+            " type_activite.idactivite AND type_activite.type_activite = \"Formation\";", nativeQuery = true)
+    int nombreFormation();
+    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite " +
+            "= type_activite.idactivite AND type_activite.type_activite = \"Talk\";\n", nativeQuery = true)
+    int nombreTalks();
+    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite =" +
+            " type_activite.idactivite AND type_activite.type_activite = \"Evenement\";", nativeQuery = true)
+    int nombreEvenement();
+
+    //les trois activite les plus recente l'id etatactivite represente l'activite en cour
+    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS \"nomUser\"," +
+            "utilisateur.prenom AS \"prenomUser\",activite.idactivite FROM activite,utilisateur,etat_activite" +
+            " WHERE activite.utilisateur_iduser=utilisateur.iduser AND etat_activite.idetat =" +
+            " activite.idactivite AND etat_activite.etat =\"encours\" ORDER BY activite.date_debut DESC LIMIT 3", nativeQuery = true)
+    List<Object> troisActiviteRecente();
+
+    //les trois activite les plus recente l'id etatactivite represente l'activite à venir
+    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS" +
+            " \"nomUser\",utilisateur.prenom AS \"prenomUser\",activite.idactivite FROM activite,utilisateur,etat_activite" +
+            " WHERE activite.utilisateur_iduser=utilisateur.iduser AND etat_activite.idetat =" +
+            " activite.idactivite AND etat_activite.etat =\"à venir\" ORDER BY activite.date_debut DESC LIMIT 3",
+            nativeQuery = true)
+    List<Object> troisActiviteAvenir();
+
+    @Query(value = "SELECT * FROM activite WHERE idactivite=:idactivite;",
+            nativeQuery = true)
+    List<Object> afficherActiviteParId(int idactivite);
+
+    // ============================ ICI ON RECUPERE LES PERSONNE TIRES SUR UN TIRAGE VALIDE ET SUR UNE ACTIVITE PRECIS
+
+    @Query(value = "SELECT postulant.nom_postulant,postulant.prenom_postulant," +
+            "postulant.email,postulant.numero_postulant, postulant.genre FROM postulant," +
+            "tirage,postulant_tire,activite WHERe tirage.validite = 1 AND postulant.id = postulant_tire.id " +
+            "AND postulant_tire.tirage_idtirage = tirage.idtirage AND activite.idactivite = tirage.activite_idactivite " +
+            "AND activite.idactivite = :idactivite",nativeQuery = true)
+    List<Object> LES_PERONNES_TIREE_VALIDE(Long  idactivite);
 
 }

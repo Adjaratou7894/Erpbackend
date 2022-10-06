@@ -29,7 +29,7 @@ public class ActiviteController {
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
     @ApiOperation(value = "ici on Ajouter une activité")
     @PostMapping("/ajouter/{idacteurs}/{idacteurInternes}")
-    public ReponseMessage createactivite(@RequestBody Activite activite , @PathVariable String idacteurs, @PathVariable String idacteurInternes){
+    public ReponseMessage createactivite(@RequestBody Activite activite, @PathVariable String idacteurs, @PathVariable String idacteurInternes) {
 //
 
         //, idacteurs
@@ -40,7 +40,7 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Modifier une activité")
     @PutMapping("/modifier ")
-    public ReponseMessage updateactivite(@RequestBody Activite activite){
+    public ReponseMessage updateactivite(@RequestBody Activite activite) {
 
         return activiteService.modifierActivite(activite);
     }
@@ -48,7 +48,7 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Afficher la liste des activités")
     @GetMapping("/afficher")
-    public List<Activite> readactivite(){
+    public List<Activite> readactivite() {
 
         return activiteService.afficherActivite();
     }
@@ -56,7 +56,7 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Afficher la liste des activités")
     @GetMapping("/afficher/{mois}")
-    public int  nombreActiviteParMois(@PathVariable int mois){
+    public int nombreActiviteParMois(@PathVariable int mois) {
 
         return activiteService.recupererNombreActiviteParMois(mois);
     }
@@ -65,14 +65,14 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Supprimer une activité")
     @DeleteMapping("/supprimer/{idactivite}")
-    public ReponseMessage deleteactivite(@PathVariable Long idactivite){
+    public ReponseMessage deleteactivite(@PathVariable Long idactivite) {
 
         return activiteService.supprimerActivite(idactivite);
     }
 
     @ApiOperation(value = "Ici on affiche les activites en fontion de l'etat")
     @GetMapping("/activitesRecentes/{etatActivite}")
-    public List<Object> trouverTroisActviteParEtat(@PathVariable String etatActivite){
+    public List<Object> trouverTroisActviteParEtat(@PathVariable String etatActivite) {
 
         return activiteService.afficheActiviteEnFonctionEtat(etatActivite);
     }
@@ -92,11 +92,10 @@ public class ActiviteController {
     }
 
     @GetMapping("/parDatePlusRecente")
-    List<Object> activiteParDatePlusRecente(){
+    List<Object> activiteParDatePlusRecente() {
 
         return activiteService.activiteParDatePlusRecente();
     }
-
 
 
     @GetMapping("/parDateIntervale/{dateDebut}/{dateFin}")
@@ -120,16 +119,60 @@ public class ActiviteController {
     }
     //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
 
+
     @GetMapping("/afficher/{typeactivite}")
-    public int  nombreActivitePartypeactivite(@PathVariable String type_activite){
+    public int nombreActivitePartypeactivite(@PathVariable String type_activite) {
 
         return activiteService.recupererNombreActivitePartypeactivite(type_activite);
     }
 
+
     @GetMapping("/janvierKalanso")
-    public  Object janvierKalanso(){
+    public Object janvierKalanso() {
         return activiteService.janvierKalanso();
     }
-}
+
+        //   @PostMapping("/ajouterE")
+        // public ReponseMessage ajouteractivite(){
+
+        //}
+        @GetMapping("/nombreFormation")
+        public int nombreFormation () {
+            return activiteService.nombreFormation();
+        }
+        @GetMapping("/nombreTalks")
+        public int nombreTalks () {
+            return activiteService.nombreTalks();
+        }
+
+        @GetMapping("/nombreEvenements")
+        public int nombreEvenements () {
+            return activiteService.nombreEvenement();
+        }
+
+
+        //trois activité recente
+        @GetMapping("/afficherTroisActiviteRecente")
+        List<Object> troisActiviteRecente () {
+            return activiteService.troisActiviteRecente();
+        }
+        @GetMapping("/afficherActiviteAvenir")
+        List<Object> nombreActiviteAvenir () {
+            return activiteService.troisActiviteavenir();
+
+        }
+
+        @GetMapping("/afficherActiviteParId/{idactivite}")
+        List<Object> afficherActiviteParId ( @PathVariable int idactivite){
+            return activiteService.afficherActiviteParId(idactivite);
+
+        }
+
+
+        @GetMapping("/lesPersonnes/{idactivite}")
+        List<Object> lesPersonnes(@PathVariable Long  idactivite){
+        return  this.activiteService.LES_PERONNES_TIREE_V(idactivite);
+        }
+    }
 
 

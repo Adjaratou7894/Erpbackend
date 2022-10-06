@@ -70,5 +70,11 @@ public class SalleController {
 
         return SalleService.SupprissionSalle(idsalle);
     }
+    @ApiOperation(value = "ici on Affiche de Toutes Les Salles Libres")
+    @GetMapping("/afficherDisponibilite/{disponibilite }")
+    public List<Salle> AfficherLesSallesParDisponibilite(@PathVariable boolean disponibilite){
+        return SalleService.AfficherLesSallesParDisponibilite(disponibilite) ;
+
+    }
 
 }

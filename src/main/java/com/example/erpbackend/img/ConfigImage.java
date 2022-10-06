@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 
 public class ConfigImage {
+    //pour l'image de l'entite
     public static void saveimg(String uploaDir, String nomfile, MultipartFile multipartFile) throws IOException{
 
         Path UploadPath = Paths.get(uploaDir);
@@ -26,5 +27,24 @@ public class ConfigImage {
                 throw new IOException("Impossible d'enregistrer le fichier image:" + nomfile, ioe);
             }
         }
+
+
+
+    public static void saveimgA(String uploaDira, String nomfilea, MultipartFile multipartFile) throws IOException{
+
+        Path UploadPatha = Paths.get(uploaDira);
+
+        if(!Files.exists(UploadPatha)) {
+            Files.createDirectories(UploadPatha);
+        }
+        try(InputStream inputStream = multipartFile.getInputStream()){
+            Path fichierPatha = UploadPatha.resolve(nomfilea);
+
+            Files.copy(inputStream, fichierPatha, StandardCopyOption.REPLACE_EXISTING);
+        } catch (IOException ioe){
+            throw new IOException("Impossible d'enregistrer le fichier image:" + nomfilea, ioe);
+        }
+    }
+
     }
 

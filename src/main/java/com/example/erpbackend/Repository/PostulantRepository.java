@@ -62,4 +62,5 @@ public interface PostulantRepository extends JpaRepository<Postulant,Long> {
            " ,liste_postulant ,activite WHERE postulant.liste_postulant_idliste = liste_postulant.idliste AND" +
            " activite.idactivite = liste_postulant.activite_idactivite AND activite.nom =:activite",nativeQuery = true)
     List<Object> findByActivite( @Param("activite") String activite);
+
 }
