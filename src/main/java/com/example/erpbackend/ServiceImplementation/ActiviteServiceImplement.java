@@ -207,5 +207,15 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.findByTypeActivite(type_activite).size();
     }
 
+    @Override
+    public List<Activite> activiteParEntiteEtTypeActivite(String etatActivite, Long idEntite) {
+        return activiteRepository.findByEtatAndTypeActivite(etatActivite, idEntite);
+    }
+
+    @Override
+    public List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite) {
+        return activiteRepository.findByTypeActiviteAndEntite(typeActivite, idEntite);
+    }
+
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
 }

@@ -44,6 +44,12 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Object> findByEntite(@Param("entite") String entite);
 
 
+    @Query(value = "x   ", nativeQuery = true)
+    List<Activite> findByEtatAndTypeActivite(@Param("etatActivite") String etatActivite, @Param("idEntite") Long idEntite);
+
+    @Query(value = "SELECT * FROM activite,type_activite WHERE activite.type_activite_idactivite = type_activite.idactivite AND type_activite.type_activite=:typeActivite AND activite.entite_id_entite=:idEntite", nativeQuery = true)
+    List<Activite> findByTypeActiviteAndEntite(@Param("typeActivite") String typeActivite, @Param("idEntite") Long idEntite);
+
     @Query(value = "SELECT activite.nom as 'nom activité', activite.date_debut,activite.date_fin,entite.nom as 'nom entité',activite.etat,statut.nom as 'statut' FROM `activite`,entite,statut,acteur_activites,acteur WHERE activite.entite_id_entite=entite.id_entite AND activite.idactivite = acteur_activites.activite_id AND acteur_activites.acteur_id = acteur.idacteur AND statut.idstatut = acteur.statut_idstatut AND entite.nom=:entite AND statut.nom=:statut", nativeQuery = true)
     List<Object> findByEntiteAndStatus(@Param("entite") String entite, @Param("statut") String statut);
 
@@ -60,5 +66,6 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "SELECT * FROM activite,type_activite WHERE activite.type_activite_idactivite = type_activite.idactivite AND type_activite.type_activite= :type_activite", nativeQuery = true)
     List<Object> findByTypeActivite(@Param("type_activite") String type_activite);
+
 
 }

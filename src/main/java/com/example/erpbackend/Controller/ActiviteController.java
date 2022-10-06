@@ -125,6 +125,18 @@ public class ActiviteController {
 
         return activiteService.recupererNombreActivitePartypeactivite(type_activite);
     }
+
+    @GetMapping("/parEntiteEtEtat/{etatActivite}/{idEntite}")
+    List<Activite> activiteParEntiteEtTypeActivite(@PathVariable String etatActivite, @PathVariable Long idEntite) {
+        return activiteService.activiteParEntiteEtTypeActivite(etatActivite, idEntite);
+    }
+
+
+    @GetMapping("/parTypeActiviteEtEntite/{typeActivite}/{idEntite}")
+    int activiteParTypeActiviteEtEntite(@PathVariable String typeActivite, @PathVariable Long idEntite){
+        return activiteService.activiteParTypeActiviteEtEntite(typeActivite, idEntite).size();
+    }
+
 }
 
 
