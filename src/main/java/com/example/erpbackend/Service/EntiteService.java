@@ -17,4 +17,6 @@ public interface EntiteService {
     public ReponseMessage supprimer(Long id);
 
     public ReponseMessage getBytes(long idEntite) throws IOException;
+
+    List<Object> afficherEntiteAccueil();
 }

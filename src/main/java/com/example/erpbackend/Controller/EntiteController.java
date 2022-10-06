@@ -94,6 +94,13 @@ public class EntiteController {
 
     }
 
+    @ApiOperation(value = "ici on Afficher les entités chez l'admin")
+    @GetMapping("/afficherEntiteAdmin")
+    public List<Object> afficherEntiteAdmin (){
+
+        return entiteServiceImplement.afficherEntiteAccueil();
+    }
+
 }
 
 

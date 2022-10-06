@@ -1,5 +1,6 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -22,20 +23,21 @@ public class Activite {
     private int mois;
     private Boolean etat;
     private String nombrepersonnedemande;
-
+    @JsonIgnore
     @ManyToOne
     private Type_activite typeActivite;
 
-
+    @JsonIgnore
     @ManyToOne
     private Etat_activite etatActivite;
-
+    @JsonIgnore
     @ManyToOne
     private Utilisateur responsable;
 
-
+    @JsonIgnore
     @ManyToOne
     private Annee annee;
+    @JsonIgnore
     @ManyToOne
     private Entite entite;
 
@@ -55,9 +57,4 @@ public class Activite {
             inverseJoinColumns = @JoinColumn(name = "iduser")
     )
     private List<Utilisateur> utilisateurs = new ArrayList<>();
-
-
-
-
-
 }

@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.ServiceImplementation.ActiviteServiceImplement;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ import java.util.List;
 public class ActiviteController {
 
     @Autowired
-    private ActiviteService activiteService;
+    private ActiviteServiceImplement activiteService;
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
     @ApiOperation(value = "ici on Ajouter une activité")
@@ -49,7 +50,6 @@ public class ActiviteController {
     @ApiOperation(value = "ici on Afficher la liste des activités")
     @GetMapping("/afficher")
     public List<Activite> readactivite(){
-
         return activiteService.afficherActivite();
     }
 

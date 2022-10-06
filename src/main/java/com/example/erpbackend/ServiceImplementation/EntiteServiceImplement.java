@@ -92,7 +92,12 @@ public class EntiteServiceImplement implements EntiteService {
         }
     }
 
+    @Override
+    public List<Object> afficherEntiteAccueil() {
+        return entiteRepository.afficherEntiteAccueil();
     }
+
+}
 
 
 
