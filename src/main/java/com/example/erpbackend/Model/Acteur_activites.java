@@ -12,6 +12,8 @@ public class Acteur_activites {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private String status;
+
     @ManyToOne
     @JoinColumn(name = "acteur_id")
     private Acteur acteur;

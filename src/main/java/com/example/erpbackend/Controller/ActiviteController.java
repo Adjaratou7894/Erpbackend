@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import org.springframework.data.repository.query.Param;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
@@ -54,9 +56,19 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Ajouter une activité")
     @PostMapping("/ajouter")
-    public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") int nombrepersonnedemande, @Param("datedeb") Date datedeb, @Param("datefin") Date datefin
-            ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes,  @Param("libelleEntite") String libelleEntite, @Param("typeAct") String typeAct, @Param("libelleSalle") String libelleSalle, @Param("idresponsable") Long idresponsable, @Param("userid") Long userid) throws IOException {
-          Activite activite = new Activite();
+    public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") int nombrepersonnedemande, @Param("datedeb") String datedeb, @Param("datefin") String datefin
+            ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes, @Param("libelleEntite") String libelleEntite, @Param("typeAct") String typeAct, @Param("libelleSalle") String libelleSalle, @Param("idresponsable") Long idresponsable, @Param("userid") Long userid) throws IOException, ParseException {
+
+         //file, nom, description,nombrepersonnedemande, datedeb, datefin, idacteurs, idacteurInternes, libelleEntite, typeAct, libelleSalle, idresponsable, userid
+
+
+        Date dateDebut = new SimpleDateFormat("yyyy/MM/dd").parse(datedeb);
+
+        Date dateFin = new SimpleDateFormat("yyyy/MM/dd").parse(datefin);
+
+
+
+        Activite activite = new Activite();
 
         Entite entite = entiteService.recupererEntiteParNom(libelleEntite);
 
@@ -68,9 +80,10 @@ public class ActiviteController {
 
         activite.setDescription(description);
 
-        activite.setDateDebut(datedeb);
 
-        activite.setDateFin(datefin);
+        activite.setDateDebut(dateDebut);
+
+        activite.setDateFin(dateFin);
 
         activite.getMois();
 
