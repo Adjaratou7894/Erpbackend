@@ -268,5 +268,10 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.afficherActiviteParId(idactivite);
     }
 
+    @Override
+    public List<Object> afficherActiviteParEntiteEtat(Long entite,String etat) {
+        return activiteRepository.afficherActiviteParEntiteEtat(entite,etat);
+    }
+
 
 }

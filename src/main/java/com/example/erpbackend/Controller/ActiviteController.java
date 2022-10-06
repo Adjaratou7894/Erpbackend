@@ -162,6 +162,11 @@ public class ActiviteController {
         return activiteService.afficherActiviteParId(idactivite);
 
     }
+
+    @GetMapping("/afficherActiviteParEntiteEtat/{entite}/{etat}")
+    List<Object> afficherActiviteParEntiteEtat(@PathVariable Long entite, @PathVariable String etat){
+        return activiteService.afficherActiviteParEntiteEtat(entite, etat);
+    }
 }
 
 

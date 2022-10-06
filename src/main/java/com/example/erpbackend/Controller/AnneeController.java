@@ -7,10 +7,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @Data
@@ -24,6 +23,12 @@ public class AnneeController {
     @ApiOperation(value = "ici on ajoute un Entité")
     @PostMapping("/ajouter")
     public ReponseMessage ajouterAnnee(@RequestBody Annee annee){
+
         return anneeServiceImplement.ajouterAnnee(annee);
+    }
+
+    @GetMapping("/affiche")
+    public List<Object> afficherAnnee(){
+       return anneeServiceImplement.afficherAnnee();
     }
 }

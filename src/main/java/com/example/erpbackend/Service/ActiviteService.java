@@ -78,6 +78,8 @@ public interface ActiviteService {
 
     List<Object> afficherActiviteParId(int idactivite);
 
+    List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
+
 
 
 }

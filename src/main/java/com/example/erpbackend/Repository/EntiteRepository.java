@@ -23,7 +23,7 @@ public interface EntiteRepository extends JpaRepository<Entite, Long> {
     @Query(value = " INSERT INTO ENTITE (nom) VALUES (\"Kalanso\");",nativeQuery = true)
     void creationentite();
     //Affichicher les entités au niveau du Dashbord Admin
-    @Query(value = " SELECT entite.nom , entite.logo FROM entite;",nativeQuery = true)
+    @Query(value = " SELECT entite.nom , entite.logo FROM entite LIMIT 4;",nativeQuery = true)
     List<Object> afficherEntiteAccueil();
 
 }
