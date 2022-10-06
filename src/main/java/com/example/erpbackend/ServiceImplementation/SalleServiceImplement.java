@@ -115,6 +115,10 @@ public class SalleServiceImplement implements SalleService {
     }
 
     @Override
+    public Salle trouverSalleParNom(String nom) {
+        return salleRepository.findByNom(nom);
+    }
+    @Override
     public List<Salle> AfficherLesSallesParDisponibilite( boolean disponibilite) {
         return salleRepository.AfficherLesSallesParDisponibilite(disponibilite);
     }

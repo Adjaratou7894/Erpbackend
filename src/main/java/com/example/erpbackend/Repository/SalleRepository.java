@@ -23,4 +23,6 @@ public interface SalleRepository extends JpaRepository<Salle, Long> {
 
     Salle findByIdsalle(Long idsalle);
 
+
+
 }

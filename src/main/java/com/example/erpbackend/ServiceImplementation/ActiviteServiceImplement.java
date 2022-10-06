@@ -32,19 +32,21 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Override
     public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes) {
         if (activiteRepository.findByNom(activite.getNom()) == null){
+
             activite.setEtat(true);
 
 
-           int mois =  activite.getDateDebut().getMonth()+1;
+         int mois =  activite.getDateDebut().getMonth()+1;
 
-           activite.setMois(mois);
 
-             activiteRepository.save(activite);
+         activite.setMois(mois);
+
+             Activite act = activiteRepository.save(activite);
 
             // //Un tableau qui contenera l'id des acteurs par case
             String[] allIdActeurs = idacteurs.split(",");
 
-            String[] allIdActeursInternes = idacteurs.split(",");
+            String[] allIdActeursInternes = idacteurInternes.split(",");
 
             System.out.println("les id : " + allIdActeurs);
 
@@ -54,15 +56,17 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                 long l = Long.parseLong(idact);
 
-                activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, activite.getIdactivite());
+               activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, act.getIdactivite());
 
             }
+
+            System.out.println(allIdActeursInternes);
 
             for (String idact : allIdActeursInternes) {
 
                 long l = Long.parseLong(idact);
 
-                activiteRepository.insert_activites_utilisateurs_animer(l, activite.getIdactivite());
+                activiteRepository.insert_activites_utilisateurs_animer(l, act.getIdactivite());
 
             }
 
@@ -250,7 +254,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
              String imgactiphoto = act.getPhotoactivite();
 
-             File actfile = new File("src/main/resources/Afiles" + act.getIdactivite() + "/" + imgactiphoto);
+             File actfile = new File("src/main/resources/imgActivite" + act.getIdactivite() + "/" + imgactiphoto);
 
              Path path = Paths.get(actfile.toURI());
              Files.readAllBytes(path);

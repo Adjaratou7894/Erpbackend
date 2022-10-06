@@ -183,4 +183,14 @@ public class TirageServiceImplement implements TirageService{
         return tirageRepository.FIND_ALL_TIRAGE_PAR_LISTE(idliste);
     }
 
+    @Override
+    public List<Tirage> recupererTousTirageValider() {
+        return tirageRepository.FIND_ALL_TIRAGE_ValidiDE();
+    }
+
+    @Override
+    public List<Tirage> recupererTousTirageNonValider() {
+        return tirageRepository.FIND_ALL_TIRAGE_BY_NONVILIDE();
+    }
+
 }

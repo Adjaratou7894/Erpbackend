@@ -1,6 +1,11 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -9,40 +14,54 @@ import java.util.List;
 
 @Entity
 @Table
-@Data
+@Getter
+@Setter
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long  idactivite;
     private String nom;
     private String description;
+    @Column(nullable = true, length = 64)
     private String photoactivite;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date   dateDebut;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date   dateFin;
     private int mois;
     private Boolean etat;
-    private String nombrepersonnedemande;
+    private int nombrepersonnedemande;
 
     @ManyToOne
     private Type_activite typeActivite;
 
-
     @ManyToOne
     private Etat_activite etatActivite;
 
+
+
+    @JsonIgnore
     @ManyToOne
     private Utilisateur responsable;
 
+    @JsonIgnore
+    @ManyToOne
+    private Utilisateur createur;
 
+
+    @JsonIgnore
     @ManyToOne
     private Annee annee;
+
     @ManyToOne
     private Entite entite;
 
+    @JsonIgnore
     @OneToOne
     private Salle salle;
 
 
+    @JsonIgnore
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {
@@ -55,9 +74,6 @@ public class Activite {
             inverseJoinColumns = @JoinColumn(name = "iduser")
     )
     private List<Utilisateur> utilisateurs = new ArrayList<>();
-
-
-
 
 
 }

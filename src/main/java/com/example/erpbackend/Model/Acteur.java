@@ -10,7 +10,6 @@ import java.util.List;
 @Entity
 @Table
 @Data
-
 public class Acteur {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)

@@ -74,6 +74,10 @@ public class EntiteServiceImplement implements EntiteService {
     }
 
     @Override
+    public Entite recupererEntiteParNom(String nom) {
+        return entiteRepository.findByNom(nom);
+    }
+    @Override
     public ReponseMessage getBytes(long idEntite) throws IOException {
               Entite entite = new Entite();
         if (entiteRepository.findByNom(entite.getNom()) == null) {
@@ -93,6 +97,8 @@ public class EntiteServiceImplement implements EntiteService {
     }
 
     }
+
+
 
 
 
