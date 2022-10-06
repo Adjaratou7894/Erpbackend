@@ -36,9 +36,10 @@ public class ActiviteServiceImplement implements ActiviteService {
             activite.setEtat(true);
 
 
-           int mois =  activite.getDateDebut().getMonth()+1;
+         int mois =  activite.getDateDebut().getMonth()+1;
 
-           activite.setMois(mois);
+
+         activite.setMois(mois);
 
              Activite act = activiteRepository.save(activite);
 
@@ -248,7 +249,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
              String imgactiphoto = act.getPhotoactivite();
 
-             File actfile = new File("src/main/resources/Afiles" + act.getIdactivite() + "/" + imgactiphoto);
+             File actfile = new File("src/main/resources/imgActivite" + act.getIdactivite() + "/" + imgactiphoto);
 
              Path path = Paths.get(actfile.toURI());
              Files.readAllBytes(path);

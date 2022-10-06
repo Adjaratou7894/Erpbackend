@@ -1,5 +1,6 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
@@ -21,12 +22,15 @@ public class Activite {
     private Long  idactivite;
     private String nom;
     private String description;
+    @Column(nullable = true, length = 64)
     private String photoactivite;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date   dateDebut;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date   dateFin;
     private int mois;
     private Boolean etat;
-    private String nombrepersonnedemande;
+    private int nombrepersonnedemande;
 
     @ManyToOne
     private Type_activite typeActivite;
@@ -39,6 +43,10 @@ public class Activite {
     @JsonIgnore
     @ManyToOne
     private Utilisateur responsable;
+
+    @JsonIgnore
+    @ManyToOne
+    private Utilisateur createur;
 
 
     @JsonIgnore
@@ -66,9 +74,6 @@ public class Activite {
             inverseJoinColumns = @JoinColumn(name = "iduser")
     )
     private List<Utilisateur> utilisateurs = new ArrayList<>();
-
-
-
 
 
 }

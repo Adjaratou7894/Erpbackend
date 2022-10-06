@@ -101,5 +101,10 @@ public class UtilisateurServiceImplement implements UtilisateurService {
         return utilisateurRepository.findUtilisateurParEntiteToute();
     }
 
+    @Override
+    public Utilisateur trouverUtilisateurParId(Long id) {
+        return utilisateurRepository.findByIduser(id);
+    }
+
 
 }
