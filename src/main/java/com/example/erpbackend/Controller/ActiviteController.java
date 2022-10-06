@@ -198,12 +198,165 @@ public class ActiviteController {
     }
 
 
-    @GetMapping("/janvierKalanso")
-    public Object janvierKalanso() {
-        return activiteService.janvierKalanso();
-    }
+        // controlleur statistique kalanso
+        @GetMapping("/janvierKalanso")
+        public Object janvierKalanso() {
+            return activiteService.janvierKalanso();
+        }
 
-        //   @PostMapping("/ajouterE")
+        @GetMapping("/fevrierKalanso")
+        public Object fevrierKalanso() {
+            return activiteService.fevrierKalanso();
+        }
+        @GetMapping("/marsKalanso")
+        public Object MarsKalanso() {
+            return activiteService.MarsKalanso();
+        }
+        @GetMapping("/avrilKalanso")
+        public Object AvrilKalanso() {
+            return activiteService.AvrilKalanso();
+        }
+        @GetMapping("/maiKalanso")
+        public Object MaiKalanso() {
+            return activiteService.MaiKalanso();
+        }
+        @GetMapping("/juinKalanso")
+        public Object juinKalanso() {
+            return activiteService.juinKalanso();
+        }
+        @GetMapping("/juilletKalanso")
+        public Object juilletKalanso() {
+            return activiteService.juilletKalanso();
+        }
+        @GetMapping("/aoutKalanso")
+        public Object AoutKalanso() {
+            return activiteService.AoutKalanso();
+        }
+        @GetMapping("/sepKalanso")
+        public Object SepKalanso() {
+            return activiteService.SepKalanso();
+        }
+        @GetMapping("/octKalanso")
+        public Object octKalanso() {
+            return activiteService.octKalanso();
+        }
+        @GetMapping("/noKalanso")
+        public Object noKalanso() {
+            return activiteService.noKalanso();
+        }
+        @GetMapping("/deKalanso")
+        public Object deKalanso() {
+            return activiteService.deKalanso();
+        }
+// controlleur statistique kalanso fin
+
+    // controlleur statistique kalanso
+    @GetMapping("/janvierfablab")
+    public Object janvierFablab() {
+        return activiteService.janvierFablab();
+    }
+    @GetMapping("/fevrierfablab")
+    public Object fevrierFablab() {
+        return activiteService.fevrierFablab();
+    }
+    @GetMapping("/marsfablab")
+    public Object MarsFablab() {
+        return activiteService.MarsFablab();
+    }
+    @GetMapping("/avrilfablab")
+    public Object AvrilFablab() {
+        return activiteService.AvrilFablab();
+    }
+    @GetMapping("/maifablab")
+    public Object MaiFablab() {
+        return activiteService.MaiFablab();
+    }
+    @GetMapping("/juinfablab")
+    public Object juinFablab() {
+        return activiteService.juinFablab();
+    }
+    @GetMapping("/juilletfablab")
+    public Object juilletFablab() {
+        return activiteService.juilletFablab();
+    }
+    @GetMapping("/aoutfablab")
+    public Object AoutFablab() {
+        return activiteService.AoutFablab();
+    }
+    @GetMapping("/sepfablab")
+    public Object SepFablab() {
+        return activiteService.SepFablab();
+    }
+    @GetMapping("/octfablab")
+    public Object octFablab() {
+        return activiteService.octFablab();
+    }
+    @GetMapping("/nofablab")
+    public Object noFablab() {
+        return activiteService.noFablab();
+    }
+    @GetMapping("/defablab")
+    public Object deFablab() {
+        return activiteService.deFablab();
+    }
+// controlleur statistique fab fin
+
+
+    // controlleur statistique kalanso
+    @GetMapping("/janvierfab")
+    public Object janvierfab() {
+        return activiteService.janvierfab();
+    }
+    @GetMapping("/fevrierfab")
+    public Object fevrierfab() {
+        return activiteService.fevrierfab();
+    }
+    @GetMapping("/marsfab")
+    public Object Marsfab() {
+        return activiteService.Marsfab();
+    }
+    @GetMapping("/avrilfab")
+    public Object Avrilfab() {
+        return activiteService.Avrilfab();
+    }
+    @GetMapping("/maifab")
+    public Object Maifab() {
+        return activiteService.Maifab();
+    }
+    @GetMapping("/juinfab")
+    public Object juinfab() {
+        return activiteService.juinfab();
+    }
+    @GetMapping("/juilletfab")
+    public Object juilletfab() {
+        return activiteService.juilletfab();
+    }
+    @GetMapping("/aoutfab")
+    public Object Aoutfab() {
+        return activiteService.Aoutfab();
+    }
+    @GetMapping("/sepfab")
+    public Object Sepfab() {
+        return activiteService.Sepfab();
+    }
+    @GetMapping("/octfab")
+    public Object octfab() {
+        return activiteService.octfab();
+    }
+    @GetMapping("/nofab")
+    public Object nofab() {
+        return activiteService.nofab();
+    }
+    @GetMapping("/defab")
+    public Object defab() {
+        return activiteService.defab();
+    }
+// controlleur statistique fab fin
+
+
+
+
+    //   @PostMapping("/ajouterE")
         // public ReponseMessage ajouteractivite(){
 
         //}

@@ -36,9 +36,99 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "SELECT nom, date_debut FROM activite ORDER BY date_debut desc", nativeQuery = true)
     List<Object> findByDateRecent();
+    // debut des statistiques  pour entité kalanso
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=1", nativeQuery = true)
+        int janvierKalanso();
 
-    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=1", nativeQuery = true)
-    List<Object> janvierKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=2", nativeQuery = true)
+        int fevrierKalanso();
+
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=3", nativeQuery = true)
+        int MarsKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=4", nativeQuery = true)
+        int AvrilKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=5", nativeQuery = true)
+        int MaiKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=6", nativeQuery = true)
+        int juinKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=7", nativeQuery = true)
+        int juilletKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=8", nativeQuery = true)
+        int AoutKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=9", nativeQuery = true)
+        int SepKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=10", nativeQuery = true)
+        int octKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=11", nativeQuery = true)
+        int noKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=12", nativeQuery = true)
+        int deKalanso();
+    // fin des statistiques  pour entité kalanso
+
+
+    // debut des statistiques  pour entité fab
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=1", nativeQuery = true)
+    int janvierfab();
+
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=2", nativeQuery = true)
+    int fevrierfab();
+
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=3", nativeQuery = true)
+    int Marsfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=4", nativeQuery = true)
+    int Avrilfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=5", nativeQuery = true)
+    int Maifab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=6", nativeQuery = true)
+    int juinfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=7", nativeQuery = true)
+    int juilletfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=8", nativeQuery = true)
+    int Aoutfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=9", nativeQuery = true)
+    int Sepfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=10", nativeQuery = true)
+    int octfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=11", nativeQuery = true)
+    int nofab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=12", nativeQuery = true)
+    int defab();
+    // fin des statistiques  pour entité fab
+
+
+    // debut des statistiques  pour entité Fablab
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=1", nativeQuery = true)
+    int janvierFablab();
+
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=2", nativeQuery = true)
+    int fevrierFablab();
+
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=3", nativeQuery = true)
+    int MarsFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=4", nativeQuery = true)
+    int AvrilFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=5", nativeQuery = true)
+    int MaiFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=6", nativeQuery = true)
+    int juinFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=7", nativeQuery = true)
+    int juilletFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=8", nativeQuery = true)
+    int AoutFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=9", nativeQuery = true)
+    int SepFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=10", nativeQuery = true)
+    int octFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=11", nativeQuery = true)
+    int noFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=12", nativeQuery = true)
+    int deFablab();
+    // fin des statistiques  pour entité Solidaire fablab
+
+
+
+
+
 
     @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite` WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
     List<Object> findByDateIntervale(Date dateDebut, Date dateFin);

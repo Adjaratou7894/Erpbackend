@@ -71,7 +71,30 @@ public interface ActiviteService {
 
     int recupererNombreActivitePartypeactivite(String type_activite);
 
-    List<Object> janvierKalanso();
+    // debut de statistique kalanso
+    int janvierKalanso();int fevrierKalanso();int MarsKalanso();  int AvrilKalanso();
+    int MaiKalanso(); int juinKalanso(); int juilletKalanso(); int AoutKalanso();
+    int SepKalanso();  int octKalanso();    int noKalanso();   int deKalanso();
+    // fin du statisqtique kalanso
+
+    // debut de statistique fab
+    int janvierfab();int fevrierfab();int Marsfab();  int Avrilfab();
+    int Maifab(); int juinfab(); int juilletfab(); int Aoutfab();
+    int Sepfab();  int octfab();    int nofab();   int defab();
+    // fin du statisqtique fab
+
+
+
+    // debur de statistique kalanso
+    int janvierFablab();int fevrierFablab();int MarsFablab();  int AvrilFablab();
+    int MaiFablab(); int juinFablab(); int juilletFablab(); int AoutFablab();
+    int SepFablab();  int octFablab();    int noFablab();   int deFablab();
+    // fin du statisqtique kalanso
+
+
+
+
+
 
 
     public ReponseMessage AgetBytes(long idactivite) throws IOException;
