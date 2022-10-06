@@ -7,6 +7,7 @@ import com.example.erpbackend.Service.UtilisateurService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -87,5 +88,14 @@ public class UtilisateurServiceImplement implements UtilisateurService {
         }else {
         return utilisateur;
         }
+    }
+
+    @Override
+    public List<Object> responsableParEntite(Long idEntite, String role) {
+        List<Object> reponse = utilisateurRepository.findByEntiteAndRole(idEntite, role);
+        if(reponse.size() != 0){
+            return reponse;
+        }
+        return Collections.singletonList("Cette entité n'a pas encore un responsable !");
     }
 }

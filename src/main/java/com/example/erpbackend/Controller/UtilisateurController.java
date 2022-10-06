@@ -69,4 +69,10 @@ public class UtilisateurController {
 
         return utilisateurService.seConnecter(email, password);
     }
+
+    @GetMapping("/responsableParEntite/{role}/{idEntite}")
+    List<Object> findByEntiteAndRole(@PathVariable String role, @PathVariable Long idEntite){
+        return utilisateurService.responsableParEntite(idEntite, role);
+    }
+
 }

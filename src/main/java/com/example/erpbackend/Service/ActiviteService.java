@@ -64,6 +64,11 @@ public interface ActiviteService {
 
     int recupererNombreActivitePartypeactivite(String type_activite);
 
+    List<Object> activiteParEntiteEtTypeActivite(String etatActivite, Long idEntite);
+
+    List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite);
+
+
 
 
 
