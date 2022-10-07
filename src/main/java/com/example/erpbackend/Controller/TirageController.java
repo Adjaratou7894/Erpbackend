@@ -104,10 +104,10 @@ public class TirageController {
 
 
     @ApiOperation(value = "ici on Modifier une activité")
-    @PutMapping("/valider")
-    public ReponseMessage validerTirage(@RequestBody Tirage tirage){
+    @PutMapping("/valider/{libelleTirage}")
+    public ReponseMessage validerTirage(@PathVariable String libelleTirage){
 
-        return tirageService.validerTirageTirage(tirage);
+        return tirageService.validerTirageTirage(libelleTirage);
     }
 
     @ApiOperation(value = "ici affiche les tirages par id d'une liste ")

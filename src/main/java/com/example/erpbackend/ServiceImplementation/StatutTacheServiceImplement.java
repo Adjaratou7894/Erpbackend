@@ -16,6 +16,7 @@ public class StatutTacheServiceImplement implements StatutTacheService {
 
     @Override
     public ReponseMessage enregistreStatutTache(StatutTache statutTache) {
+        statutTacheRepository.save(statutTache);
         ReponseMessage message = new ReponseMessage("Le statut enregistré avec succes", true);
 
         return message;

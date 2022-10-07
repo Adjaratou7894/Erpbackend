@@ -159,8 +159,9 @@ public class TirageServiceImplement implements TirageService{
     }
 
     @Override
-    public ReponseMessage validerTirageTirage(Tirage tirage) {
-        if (tirageRepository.findByLibelleTirage(tirage.getLibelleTirage()) != null) {
+    public ReponseMessage validerTirageTirage(String libelleTirage) {
+        Tirage tirage = tirageRepository.findByLibelleTirage(libelleTirage);
+        if (tirage != null) {
             return tirageRepository.findById(tirage.getIdtirage())
                     .map(p -> {
                         p.setValidite(tirage.getValidite());
