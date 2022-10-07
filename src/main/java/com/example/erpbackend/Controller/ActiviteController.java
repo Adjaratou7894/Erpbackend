@@ -220,9 +220,14 @@ public class ActiviteController {
     //}
     @GetMapping("/nombreFormation")
     public int nombreFormation() {
+
         return activiteService.nombreFormation();
-    }@GetMapping("/nombreTalks")
+    }
+
+
+    @GetMapping("/nombreTalks")
     public int nombreTalks() {
+
         return activiteService.nombreTalks();
     }
 
