@@ -29,6 +29,19 @@ public class ActeurServiceImplement implements ActeurService {
     }
 
     @Override
+    public Acteur modifierActeur(Acteur acteur, Long idacteur) {
+        Acteur acteurUpdate = acteurRepository.findById(idacteur).get();
+        acteurUpdate.setNom(acteur.getNom());
+        acteurUpdate.setPrenom(acteur.getPrenom());
+        acteurUpdate.setEmail(acteur.getEmail());
+        acteurUpdate.setNumero(acteur.getNumero());
+        return acteurRepository.saveAndFlush(acteurUpdate);
+
+
+    }
+
+
+  /*  @Override
     public ReponseMessage modifierActeur(Acteur acteur) {
         if (acteurRepository.findByIdacteur(acteur.getIdacteur()) !=null) {
             return acteurRepository.findById(acteur.getIdacteur())
@@ -46,7 +59,7 @@ public class ActeurServiceImplement implements ActeurService {
             return message;
         }
 
-    }
+    }*/
 
     @Override
     public List<Acteur> afficherToutLesActeurs() {

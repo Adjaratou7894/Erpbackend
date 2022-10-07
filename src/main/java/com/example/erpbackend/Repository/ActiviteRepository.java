@@ -30,7 +30,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Object> ActiviteEnFonctionAnnee(@Param("annee") int annee);
 
 
-    @Query(value = "SELECT * FROM activite,etat_activite WHERE activite.etat_activite_idetat = etat_activite.idetat AND etat_activite.etat =:etat", nativeQuery = true)
+    @Query(value = "SELECT * FROM activite, etat_activite WHERE activite.etat_activite_idetat = etat_activite.idetat AND etat_activite.etat =:etat", nativeQuery = true)
     List<Activite> findByEtat(@Param("etat") String etat);
 
 

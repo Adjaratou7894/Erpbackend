@@ -200,6 +200,9 @@ public class ActiviteController {
 
         return activiteService.activiteParEntiteEtStatut(entite, statut);
     }
+
+    //================ FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE ======================
+
     //================FIN DE LA METHODE PERMETTANT DE SUPPRIMER UNE ACTIVITE======================
 
 
@@ -225,6 +228,7 @@ public class ActiviteController {
 
     @GetMapping("/nombreEvenements")
     public int nombreEvenements(){
+
         return activiteService.nombreEvenement();
     }
 
@@ -232,25 +236,31 @@ public class ActiviteController {
     //trois activité recente
     @GetMapping("/afficherTroisActiviteRecente")
     List<Object> troisActiviteRecente() {
+
         return activiteService.troisActiviteRecente();
     }
+
+
     @GetMapping("/nombreActiviteAvenir")
     List<Object> nombreActiviteAvenir(){
+
         return activiteService.troisActiviteavenir();
 
     }
 
+
     @GetMapping("/parEntiteEtEtat/{etatActivite}/{idEntite}")
     List<Object> activiteParEntiteEtTypeActivite(@PathVariable String etatActivite, @PathVariable Long idEntite) {
+
         return activiteService.activiteParEntiteEtTypeActivite(etatActivite, idEntite);
     }
 
 
     @GetMapping("/parTypeActiviteEtEntite/{typeActivite}/{idEntite}")
     int activiteParTypeActiviteEtEntite(@PathVariable String typeActivite, @PathVariable Long idEntite){
+
         return activiteService.activiteParTypeActiviteEtEntite(typeActivite, idEntite).size();
     }
-
 
 }
 
