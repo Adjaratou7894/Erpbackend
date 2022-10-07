@@ -87,7 +87,6 @@ public class ActiviteController {
     @ApiOperation(value = "Ici on affiche les activites en fontion de l'etat")
     @GetMapping("/ParEtat/{etat}")
     public List<Activite> activiteParEtat(@PathVariable String etat) {
-
         return activiteService.activiteParEtat(etat);
     }
 
