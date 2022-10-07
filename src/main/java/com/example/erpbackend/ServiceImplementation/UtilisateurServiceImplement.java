@@ -59,6 +59,7 @@ public class UtilisateurServiceImplement implements UtilisateurService {
     // ================= lister tous les utilisateurs ===================================================
     @Override
     public List<Utilisateur> afficherUtilisateur() {
+
         return utilisateurRepository.findAll();
     }
 
@@ -79,11 +80,12 @@ public class UtilisateurServiceImplement implements UtilisateurService {
 
     // ================= Connexion d'un utilisateur avec email et mot de passe ==================================
     @Override
-    public Object seConnecter(String email, String motDePasse) {
-        Utilisateur utilisateur = utilisateurRepository.findByEmailAndPassword(email, motDePasse).get();
+    public Utilisateur seConnecter(String email, String motDePasse) {
+
+        Utilisateur utilisateur = utilisateurRepository.findByEmailAndPassword(email, motDePasse);
         if (utilisateur == null){
             ReponseMessage message = new ReponseMessage("Mot de passe ou identifiant incorrect", false);
-            return message;
+            return null;
         }else {
         return utilisateur;
         }
@@ -97,6 +99,11 @@ public class UtilisateurServiceImplement implements UtilisateurService {
     @Override
     public List<Object> findUtilisateurParEntiteToute() {
         return utilisateurRepository.findUtilisateurParEntiteToute();
+    }
+
+    @Override
+    public Utilisateur trouverUtilisateurParId(Long id) {
+        return utilisateurRepository.findByIduser(id);
     }
 
 

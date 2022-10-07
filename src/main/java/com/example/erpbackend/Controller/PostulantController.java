@@ -180,8 +180,6 @@ public class PostulantController {
     }
 
 
-
-
 //fin de l'import
     @ApiOperation(value = "ici on Afficher les postulants")
     @GetMapping("/afficher")

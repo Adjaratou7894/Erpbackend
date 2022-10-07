@@ -1,6 +1,5 @@
 package com.example.erpbackend.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +15,7 @@ public class Liste_postulant {
     private String libelleliste;
     private Integer nombretirage;
     private Date dateliste;
+
 
     @OneToOne
     private Activite activite;

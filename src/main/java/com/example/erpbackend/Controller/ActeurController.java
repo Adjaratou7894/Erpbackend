@@ -14,8 +14,8 @@ import java.util.List;
 
 @RestController
 @Api(value = "hello", description = "controller permettant Gestion des Acteur")
-@AllArgsConstructor
 @CrossOrigin(origins = "http://localhost:8100")
+@AllArgsConstructor
 @RequestMapping("/acteur")
 public class ActeurController {
 
@@ -27,20 +27,20 @@ public class ActeurController {
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UN ACTEUR======================
     @ApiOperation(value = "ici on ajoute un Acteur")
-    @PostMapping("/ajouter/{statut}")
-    public ReponseMessage creerActeur(@RequestBody Acteur acteur, @PathVariable String statut){
+    @PostMapping("/ajouter/{stat}")
+    public ReponseMessage creerActeur(@RequestBody Acteur acteur, @PathVariable String stat){
         Statut ok=new Statut();
-        ok= statutService.trouverparnom(statut);
+        ok= statutService.trouverparnom(stat);
         acteur.setStatut(ok);
         return acteurService.creerActeur(acteur);
         //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTEUR======================
     }
 
     @ApiOperation(value = "ici on Modifier un Acteur")
-    @PutMapping("/modifier")
-    public ReponseMessage modifierActeur(@RequestBody Acteur acteur){
+    @PutMapping("/modifier/{idacteur}")
+    public Acteur modifierActeur(@RequestBody Acteur acteur, @PathVariable Long idacteur){
 
-        return acteurService.modifierActeur(acteur);
+        return acteurService.modifierActeur(acteur, idacteur);
     }
 
     @ApiOperation(value = "ici on Afficher la liste des Acteur")
@@ -59,6 +59,7 @@ public class ActeurController {
     @ApiOperation(value = "ici on Afficher la liste des Acteur")
     @GetMapping("/afficherAvecRole")
     public List<Object> AfficherActeurRoleTout(){
+
         return acteurService.AfficherActeurRoleTout();
     }
 

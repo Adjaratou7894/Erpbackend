@@ -2,15 +2,17 @@ package com.example.erpbackend.ServiceImplementation;
 
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
-import com.example.erpbackend.Model.Role;
 import com.example.erpbackend.Repository.ActiviteRepository;
 import com.example.erpbackend.Repository.Activite_ActeurRepository;
 import com.example.erpbackend.Service.ActiviteService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -30,13 +32,21 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Override
     public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes) {
         if (activiteRepository.findByNom(activite.getNom()) == null){
+
             activite.setEtat(true);
-             activiteRepository.save(activite);
+
+
+         int mois =  activite.getDateDebut().getMonth()+1;
+
+
+         activite.setMois(mois);
+
+             Activite act = activiteRepository.save(activite);
 
             // //Un tableau qui contenera l'id des acteurs par case
             String[] allIdActeurs = idacteurs.split(",");
 
-            String[] allIdActeursInternes = idacteurs.split(",");
+            String[] allIdActeursInternes = idacteurInternes.split(",");
 
             System.out.println("les id : " + allIdActeurs);
 
@@ -46,15 +56,17 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                 long l = Long.parseLong(idact);
 
-                activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, activite.getIdactivite());
+               activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, act.getIdactivite());
 
             }
+
+            System.out.println(allIdActeursInternes);
 
             for (String idact : allIdActeursInternes) {
 
                 long l = Long.parseLong(idact);
 
-                activiteRepository.insert_activites_utilisateurs_animer(l, activite.getIdactivite());
+                activiteRepository.insert_activites_utilisateurs_animer(l, act.getIdactivite());
 
             }
 
@@ -193,5 +205,67 @@ public class ActiviteServiceImplement implements ActiviteService {
         return Collections.singletonList("Aucune activité ne trouvée pour cette entité en fonction de cette entite et status !");
     }
 
+    @Override
+
+    public int recupererNombreActiviteParMois(int mois) {
+        return activiteRepository.GET_NUMBER_ACTIVITE_PER_MONTH(mois);
+    }
+
+    @Override
+    public int recupererNombreActivitePartypeactivite(String type_activite) {
+
+        return activiteRepository.findByTypeActivite(type_activite).size();
+    }
+    public int nombreFormation() {
+        return activiteRepository.nombreFormation();
+    }
+
+    @Override
+    public int nombreTalks() {
+        return activiteRepository.nombreTalks();
+    }
+
+    @Override
+    public int nombreEvenement() {
+        return activiteRepository.nombreEvenement();
+
+    }
+
+    @Override
+    public List<Object> troisActiviteRecente() {
+        return activiteRepository.troisActiviteRecente();
+    }
+
+
     //================FIN DE LA METHODE PERMETTANT DE RECUPERER L'IDENTIFIANT D'UNE ACTIVITE=========================
+
+
+
+    @Override
+    public ReponseMessage AgetBytes(long idactivite) throws IOException {
+         Activite activite = new Activite();
+         if(activiteRepository.findByNom(activite.getNom()) == null){
+             Activite act = activiteRepository.findByIdactivite(idactivite);
+
+             String imgactiphoto = act.getPhotoactivite();
+
+             File actfile = new File("src/main/resources/imgActivite" + act.getIdactivite() + "/" + imgactiphoto);
+
+             Path path = Paths.get(actfile.toURI());
+             Files.readAllBytes(path);
+             activiteRepository.save(activite);
+             ReponseMessage message = new ReponseMessage("activite ajouter avec succes", true);
+             return message;
+         } else {
+             ReponseMessage message = new ReponseMessage("cet activite existe déjà", false);
+             return message;
+         }
+    }
+
+    @Override
+    public List<Object> troisActiviteavenir() {
+        return activiteRepository.troisActiviteAvenir();
+    }
+
+
 }

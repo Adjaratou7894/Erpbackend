@@ -12,7 +12,7 @@ public interface ActeurService {
     ReponseMessage creerActeur(Acteur acteur);
 
     // Mise à jour d'un acteur
-    ReponseMessage modifierActeur(Acteur acteur);
+    Acteur modifierActeur(Acteur acteur, Long idacteur);
 
     List<Acteur> afficherToutLesActeurs();
     ReponseMessage SupprimerActeur(Long idacteur);

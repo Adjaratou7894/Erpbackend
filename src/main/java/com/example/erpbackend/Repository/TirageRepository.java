@@ -23,4 +23,12 @@ public interface TirageRepository extends JpaRepository<Tirage,Long> {
     @Query(value = "select * from tirage where tirage.liste_postulant_idliste = :liste_postulant_idliste", nativeQuery = true)
     List<Tirage> FIND_ALL_TIRAGE_PAR_LISTE(@Param("liste_postulant_idliste") Long liste_postulant_idliste);
 
+    @Query(value = "select * from tirage where validite = 1 ORDER BY idtirage DESC", nativeQuery = true)
+    List<Tirage> FIND_ALL_TIRAGE_ValidiDE();
+
+    @Query(value = "select * from tirage where validite = 0 ORDER BY idtirage DESC", nativeQuery = true)
+    List<Tirage> FIND_ALL_TIRAGE_BY_NONVILIDE();
+
+
+
 }

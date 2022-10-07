@@ -1,5 +1,6 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -28,6 +29,7 @@ public class Taches {
     private Activite activite;
 
 
+
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {
@@ -39,5 +41,6 @@ public class Taches {
             joinColumns = @JoinColumn(name = "idST"),
             inverseJoinColumns = @JoinColumn(name = "iduser")
     )
+
     private List<Utilisateur> utilisateurs = new ArrayList<>();
 }
