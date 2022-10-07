@@ -170,7 +170,6 @@ public class ActiviteController {
     @ApiOperation(value = "Ici on affiche les activites en fontion de l'etat")
     @GetMapping("/ParEtat/{etat}")
     public List<Activite> activiteParEtat(@PathVariable String etat) {
-
         return activiteService.activiteParEtat(etat);
     }
 
@@ -211,6 +210,7 @@ public class ActiviteController {
     }
 
 
+
  //   @PostMapping("/ajouterE")
    // public ReponseMessage ajouteractivite(){
 
@@ -239,6 +239,19 @@ public class ActiviteController {
         return activiteService.troisActiviteavenir();
 
     }
+
+    @GetMapping("/parEntiteEtEtat/{etatActivite}/{idEntite}")
+    List<Object> activiteParEntiteEtTypeActivite(@PathVariable String etatActivite, @PathVariable Long idEntite) {
+        return activiteService.activiteParEntiteEtTypeActivite(etatActivite, idEntite);
+    }
+
+
+    @GetMapping("/parTypeActiviteEtEntite/{typeActivite}/{idEntite}")
+    int activiteParTypeActiviteEtEntite(@PathVariable String typeActivite, @PathVariable Long idEntite){
+        return activiteService.activiteParTypeActiviteEtEntite(typeActivite, idEntite).size();
+    }
+
+
 }
 
 

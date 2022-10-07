@@ -28,6 +28,7 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
     @Query(value = "INSERT INTO utilisateur (nom, prenom, email, numero, password, role_idrole, entite_id_entite)  VALUES(\"Kaloga\", \"Fatoumata\", \"fk1@orangemali.com\",  \"676665554\",  \"1234\", 1,1);",nativeQuery = true)
     void creationadmin();
 
+
     @Query(value =  "SELECT iduser,utilisateur.nom,prenom,email,numero,role.nom as \"nomrole\",entite.nom " +
             "as \"nomentite\" FROM utilisateur,role,entite WHERE utilisateur.entite_id_entite = entite.id_entite " +
             "AND utilisateur.role_idrole = role.idrole AND entite.nom= :entite",nativeQuery = true)
@@ -37,4 +38,8 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
             " \"nomentite\" FROM utilisateur,role,entite WHERE utilisateur.entite_id_entite = entite.id_entite" +
             " AND utilisateur.role_idrole = role.idrole",nativeQuery = true)
     List<Object> findUtilisateurParEntiteToute();
+
+    @Query(value = "SELECT utilisateur.nom, utilisateur.prenom, utilisateur.email, utilisateur.numero, role.nom as role_nom, entite.nom as entite_nom FROM `utilisateur`, role, entite WHERE utilisateur.entite_id_entite = entite.id_entite AND utilisateur.role_idrole = role.idrole AND entite.id_entite=:idEntite AND role.nom=:role",nativeQuery = true)
+    List<Object> findByEntiteAndRole(@Param("idEntite") Long idEntite, @Param("role") String role);
+
 }
