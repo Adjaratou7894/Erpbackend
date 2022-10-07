@@ -13,6 +13,8 @@ import java.util.List;
 public interface TirageRepository extends JpaRepository<Tirage,Long> {
     Tirage findByLibelleTirage(String libelleTirage);
 
+    Tirage findByIdtirage(Long idtirage);
+
     @Query(value = "SELECT COUNT(idtirage) FROM `tirage`", nativeQuery = true)
     Long nombretirageTotale();
 

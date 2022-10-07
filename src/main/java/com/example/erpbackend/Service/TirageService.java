@@ -32,7 +32,7 @@ public interface TirageService {
 
     //Valider un tirage
 
-    ReponseMessage validerTirageTirage(Tirage tirage);
+    ReponseMessage validerTirageTirage(Tirage tirage, Long id);
 
     List<Tirage> recupererIdTirageParListe(Long idliste);
 
