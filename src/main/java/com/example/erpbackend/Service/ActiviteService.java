@@ -102,6 +102,11 @@ public interface ActiviteService {
     List<Object> troisActiviteavenir();
 
     List<Object> afficherActiviteParId(int idactivite);
+    List<Activite> activiteParEntiteEtTypeActivite(String etatActivite, Long idEntite);
+
+    List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite);
+
+
 
     //++++++++++++++++++++++++++++++++++++++++++ List<Object> LES_PERONNES_TIREE_VALIDE(Long  idActivite);
 

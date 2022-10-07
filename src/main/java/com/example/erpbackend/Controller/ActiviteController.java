@@ -397,6 +397,19 @@ public class ActiviteController {
         List<Object> lesPersonnes(@PathVariable Long  idactivite){
         return  this.activiteService.LES_PERONNES_TIREE_V(idactivite);
         }
+
+
+    @GetMapping("/parEntiteEtEtat/{etatActivite}/{idEntite}")
+    List<Activite> activiteParEntiteEtTypeActivite(@PathVariable String etatActivite, @PathVariable Long idEntite) {
+        return activiteService.activiteParEntiteEtTypeActivite(etatActivite, idEntite);
     }
+
+
+    @GetMapping("/parTypeActiviteEtEntite/{typeActivite}/{idEntite}")
+    int activiteParTypeActiviteEtEntite(@PathVariable String typeActivite, @PathVariable Long idEntite){
+        return activiteService.activiteParTypeActiviteEtEntite(typeActivite, idEntite).size();
+    }
+
+}
 
 
