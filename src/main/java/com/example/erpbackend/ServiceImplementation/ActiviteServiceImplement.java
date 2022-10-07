@@ -273,5 +273,10 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.afficherActiviteParEntiteEtat(entite,etat);
     }
 
+    @Override
+    public List<Object> afficherActiviteDansFront() {
+        return activiteRepository.afficherActiviteDansFront();
+    }
+
 
 }

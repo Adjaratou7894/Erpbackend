@@ -44,7 +44,9 @@ public class AnneeSerciceImplement implements AnneeService {
     }
 
     @Override
-    public List<Object> afficherAnnee() {
-        return anneeRepository.afficherAnnee();
+    public List<Annee> afficherAnnee() {
+        return anneeRepository.findAll();
     }
+
+
 }

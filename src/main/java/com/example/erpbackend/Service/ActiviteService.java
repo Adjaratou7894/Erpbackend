@@ -80,6 +80,8 @@ public interface ActiviteService {
 
     List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
 
+    List<Object> afficherActiviteDansFront();
+
 
 
 }

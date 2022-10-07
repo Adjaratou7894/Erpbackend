@@ -167,6 +167,12 @@ public class ActiviteController {
     List<Object> afficherActiviteParEntiteEtat(@PathVariable Long entite, @PathVariable String etat){
         return activiteService.afficherActiviteParEntiteEtat(entite, etat);
     }
+
+    //afficher dans le repoting
+    @GetMapping("/afficherDansReporting")
+    List<Object> afficherActiviteDansFront(){
+        return  activiteService.afficherActiviteDansFront();
+    }
 }
 
 

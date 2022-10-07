@@ -8,5 +8,6 @@ import java.util.List;
 public interface AnneeService {
 
     ReponseMessage ajouterAnnee (Annee annee);
-    List<Object> afficherAnnee();
+
+    List<Annee> afficherAnnee();
 }

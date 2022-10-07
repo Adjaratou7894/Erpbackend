@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @Data
 @Api(value = "hello", description = "controller permettant la Gestion des Années")
+@CrossOrigin(origins = "*")
 @RequestMapping("/annee")
 public class AnneeController {
 
@@ -28,7 +29,7 @@ public class AnneeController {
     }
 
     @GetMapping("/affiche")
-    public List<Object> afficherAnnee(){
+    public List<Annee> afficherAnnee(){
        return anneeServiceImplement.afficherAnnee();
     }
 }

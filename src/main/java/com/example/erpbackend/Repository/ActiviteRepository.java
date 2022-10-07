@@ -30,21 +30,34 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Object> ActiviteEnFonctionAnnee(@Param("annee") int annee);
 
 
-    @Query(value = "SELECT * FROM activite,etat_activite WHERE activite.etat_activite_idetat = etat_activite.idetat AND etat_activite.etat =:etat", nativeQuery = true)
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom', " +
+            "activite.date_debut,etat_activite.etat from activite,entite,etat_activite " +
+            "WHERE activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat =" +
+            " etat_activite.idetat AND etat_activite.etat=:etat;", nativeQuery = true)
     List<Activite> findByEtat(@Param("etat") String etat);
 
 
     @Query(value = "SELECT nom, date_debut FROM activite ORDER BY date_debut desc", nativeQuery = true)
     List<Object> findByDateRecent();
 
-    @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite` WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
+    @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite`" +
+            " WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
     List<Object> findByDateIntervale(Date dateDebut, Date dateFin);
 
-    @Query(value = "SELECT activite.nom, activite.date_debut,activite.date_fin,entite.nom as 'entitenom',activite.etat FROM `activite`,entite WHERE activite.entite_id_entite=entite.id_entite AND entite.nom=:entite", nativeQuery = true)
+    //filtrage par entité
+
+    @Query(value = "SELECT activite.idactivite,activite.nom,entite.nom as 'entitenom', activite.date_debut,etat_activite.etat" +
+            " from activite,entite,etat_activite WHERE activite.entite_id_entite = entite.id_entite " +
+            "AND activite.etat_activite_idetat = etat_activite.idetat AND entite.nom =:entite", nativeQuery = true)
     List<Object> findByEntite(@Param("entite") String entite);
 
 
-    @Query(value = "SELECT activite.nom as 'nom activité', activite.date_debut,activite.date_fin,entite.nom as 'nom entité',activite.etat,statut.nom as 'statut' FROM `activite`,entite,statut,acteur_activites,acteur WHERE activite.entite_id_entite=entite.id_entite AND activite.idactivite = acteur_activites.activite_id AND acteur_activites.acteur_id = acteur.idacteur AND statut.idstatut = acteur.statut_idstatut AND entite.nom=:entite AND statut.nom=:statut", nativeQuery = true)
+    @Query(value = "SELECT activite.nom as 'nom activité', activite.date_debut,activite.date_fin,entite.nom" +
+            " as 'nom entité',activite.etat,statut.nom as 'statut' FROM `activite`,entite," +
+            "statut,acteur_activites,acteur WHERE activite.entite_id_entite=entite.id_entite AND" +
+            " activite.idactivite = acteur_activites.activite_id AND acteur_activites.acteur_id =" +
+            " acteur.idacteur AND statut.idstatut = acteur.statut_idstatut AND entite.nom=:entite" +
+            " AND statut.nom=:statut", nativeQuery = true)
     List<Object> findByEntiteAndStatus(@Param("entite") String entite, @Param("statut") String statut);
 
 
@@ -64,7 +77,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             " type_activite.idactivite AND type_activite.type_activite = \"Formation\";", nativeQuery = true)
     int nombreFormation();
     @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite " +
-            "= type_activite.idactivite AND type_activite.type_activite = \"Talk\";\n", nativeQuery = true)
+            "= type_activite.idactivite AND type_activite.type_activite = \"Talks\";\n", nativeQuery = true)
     int nombreTalks();
     @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite =" +
             " type_activite.idactivite AND type_activite.type_activite = \"Evenement\";", nativeQuery = true)
@@ -94,4 +107,10 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             nativeQuery = true)
     List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
 
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom'" +
+            ", activite.date_debut,etat_activite.etat from activite,entite,etat_activite WHERE" +
+            " activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat = " +
+            "etat_activite.idetat",
+            nativeQuery = true)
+    List<Object> afficherActiviteDansFront();
 }
