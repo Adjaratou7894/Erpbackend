@@ -63,10 +63,12 @@ public class UtilisateurController {
 
     // ============================== Ce connecter avec son email et mot de passe ================================
     @ApiOperation(value = "Methode permettant de Se connecter")
-    @GetMapping("/seconnecter/{email}/{password}")
-    public Object seConnecter(@PathVariable String email, @PathVariable String password){
 
-        return utilisateurService.seConnecter(email, password);
+    @GetMapping("/seconnecter/{email}/{pass}")
+    public Object seConnecter(@PathVariable String email, @PathVariable String pass){
+
+
+        return utilisateurService.seConnecter(email, pass);
     }
 
     @ApiOperation(value = "Methode permettant de filtrer par entité")

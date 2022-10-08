@@ -9,7 +9,11 @@ public interface AnneeService {
 
     ReponseMessage ajouterAnnee (Annee annee);
 
+
     Annee recupererAnneeParLibelle(int annee);
 
     List<Annee> recupererLesAnnee();
+
+    List<Object> afficherAnnee();
+
 }

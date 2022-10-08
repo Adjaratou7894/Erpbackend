@@ -36,6 +36,99 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "SELECT nom, date_debut FROM activite ORDER BY date_debut desc", nativeQuery = true)
     List<Object> findByDateRecent();
+    // debut des statistiques  pour entité kalanso
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=1", nativeQuery = true)
+        int janvierKalanso();
+
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=2", nativeQuery = true)
+        int fevrierKalanso();
+
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=3", nativeQuery = true)
+        int MarsKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=4", nativeQuery = true)
+        int AvrilKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=5", nativeQuery = true)
+        int MaiKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=6", nativeQuery = true)
+        int juinKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=7", nativeQuery = true)
+        int juilletKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=8", nativeQuery = true)
+        int AoutKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=9", nativeQuery = true)
+        int SepKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=10", nativeQuery = true)
+        int octKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=11", nativeQuery = true)
+        int noKalanso();
+        @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=1 AND mois=12", nativeQuery = true)
+        int deKalanso();
+    // fin des statistiques  pour entité kalanso
+
+
+    // debut des statistiques  pour entité fab
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=1", nativeQuery = true)
+    int janvierfab();
+
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=2", nativeQuery = true)
+    int fevrierfab();
+
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=3", nativeQuery = true)
+    int Marsfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=4", nativeQuery = true)
+    int Avrilfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=5", nativeQuery = true)
+    int Maifab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=6", nativeQuery = true)
+    int juinfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=7", nativeQuery = true)
+    int juilletfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=8", nativeQuery = true)
+    int Aoutfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=9", nativeQuery = true)
+    int Sepfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=10", nativeQuery = true)
+    int octfab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=11", nativeQuery = true)
+    int nofab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=2 AND mois=12", nativeQuery = true)
+    int defab();
+    // fin des statistiques  pour entité fab
+
+
+    // debut des statistiques  pour entité Fablab
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=1", nativeQuery = true)
+    int janvierFablab();
+
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=2", nativeQuery = true)
+    int fevrierFablab();
+
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=3", nativeQuery = true)
+    int MarsFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=4", nativeQuery = true)
+    int AvrilFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=5", nativeQuery = true)
+    int MaiFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=6", nativeQuery = true)
+    int juinFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=7", nativeQuery = true)
+    int juilletFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=8", nativeQuery = true)
+    int AoutFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=9", nativeQuery = true)
+    int SepFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=10", nativeQuery = true)
+    int octFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=11", nativeQuery = true)
+    int noFablab();
+    @Query (value = "SELECT COUNT(idactivite) FROM `activite` WHERE entite_id_entite=3 AND mois=12", nativeQuery = true)
+    int deFablab();
+    // fin des statistiques  pour entité Solidaire fablab
+
+
+
+
+
 
     @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite` WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
     List<Object> findByDateIntervale(Date dateDebut, Date dateFin);
@@ -66,28 +159,52 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     @Query(value = "SELECT * FROM activite,type_activite WHERE activite.type_activite_idactivite = type_activite.idactivite AND type_activite.type_activite= :type_activite", nativeQuery = true)
     List<Object> findByTypeActivite(@Param("type_activite") String type_activite);
 
-    @Query(value = "SELECT COUNT(activite.type_activite_idactivite) FROM activite,type_activite WHERE activite.idactivite =" +
-            " type_activite.idactivite AND type_activite.type_activite = \"Formation\";", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.type_activite_idactivite = " +
+            "type_activite.idactivite AND type_activite.type_activite = \"Formation\";", nativeQuery = true)
     int nombreFormation();
-    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite " +
-            "= type_activite.idactivite AND type_activite.type_activite = \"Talk\";\n", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.type_activite_idactivite = " +
+            "type_activite.idactivite AND type_activite.type_activite = \"Talk\";", nativeQuery = true)
     int nombreTalks();
-    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.idactivite =" +
-            " type_activite.idactivite AND type_activite.type_activite = \"Evenement\";", nativeQuery = true)
+    @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.type_activite_idactivite = " +
+            "type_activite.idactivite AND type_activite.type_activite = \"Evennement\";", nativeQuery = true)
     int nombreEvenement();
 
     //les trois activite les plus recente l'id etatactivite represente l'activite en cour
-    @Query(value = "SELECT activite.nom  AS \"nomactivite\",activite.description,utilisateur.nom  AS \"nomUser\",utilisateur.prenom AS \"prenomUser\"  FROM " +
-            "activite,utilisateur WHERE activite.utilisateur_iduser=utilisateur.iduser AND activite.etat_activite_idetat= \"encours\" ORDER BY date_debut desc LIMIT 3", nativeQuery = true)
+    @Query(value = "SELECT activite.nom AS nomactivite,activite.description,utilisateur.nom AS nomUser, utilisateur.prenom AS prenomUser,activite.idactivite " +
+            "FROM activite,utilisateur,etat_activite WHERE utilisateur.iduser=activite.utilisateur_iduser AND etat_activite.idetat = activite.etat_activite_idetat " +
+            "AND etat_activite.etat =\"encours\" ORDER BY activite.date_debut DESC LIMIT 3;", nativeQuery = true)
     List<Object> troisActiviteRecente();
 
     //les trois activite les plus recente l'id etatactivite represente l'activite à venir
-    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS \"nomUser\",utilisateur.prenom AS \"prenomUser\" FROM " +
-            "activite,utilisateur WHERE activite.utilisateur_iduser=utilisateur.iduser AND activite.etat_activite_idetat= \"à venir\" ORDER BY activite.date_debut DESC LIMIT 3", nativeQuery = true)
+    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS" +
+            " \"nomUser\",utilisateur.prenom AS \"prenomUser\",activite.idactivite FROM activite,utilisateur,etat_activite" +
+            " WHERE etat_activite.idetat =" +
+            " activite.idactivite AND etat_activite.etat =\"avenir\" ORDER BY activite.date_debut DESC LIMIT 3",
+            nativeQuery = true)
     List<Object> troisActiviteAvenir();
 
     @Query(value = "select * from activite where liste_idliste is NULL;", nativeQuery = true)
     List<Activite> FIND_ALL_ACTIVITE_NOT_VALILIDE();
 
+    @Query(value = "SELECT * FROM activite WHERE idactivite=:idactivite;",
+            nativeQuery = true)
+    List<Object> afficherActiviteParId(int idactivite);
+    @Query(value = "SELECT activite.nom,activite.description,etat_activite.etat,activite.date_debut,activite.date_fin FROM activite,entite,etat_activite WHERE activite.entite_id_entite =" +
+            " entite.id_entite AND activite.etat_activite_idetat = etat_activite.idetat " +
+            "AND etat_activite.etat =:etat AND entite.id_entite =:entite;",
+            nativeQuery = true)
+    List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
+
+    @Query(value = "SELECT COUNT(activite.idactivite) FROM activite WHERE activite.entite_id_entite =:idactivite", nativeQuery = true)
+    int counterActivite(@Param("idactivite") Long idactivite );
+
+    // ============================ ICI ON RECUPERE LES PERSONNE TIRES SUR UN TIRAGE VALIDE ET SUR UNE ACTIVITE PRECIS
+
+    @Query(value = "SELECT postulant.nom_postulant,postulant.prenom_postulant," +
+            "postulant.email,postulant.numero_postulant, postulant.genre FROM postulant," +
+            "tirage,postulant_tire,activite WHERe tirage.validite = 1 AND postulant.id = postulant_tire.id " +
+            "AND postulant_tire.tirage_idtirage = tirage.idtirage AND activite.idactivite = tirage.activite_idactivite " +
+            "AND activite.idactivite = :idactivite",nativeQuery = true)
+    List<Object> LES_PERONNES_TIREE_VALIDE(Long  idactivite);
 
 }

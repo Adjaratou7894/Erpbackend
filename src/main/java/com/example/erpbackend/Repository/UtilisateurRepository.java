@@ -18,6 +18,10 @@ import java.util.Optional;
 
 public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
 
+
+    @Query(value = "SELECT * FROM `utilisateur`",nativeQuery = true)
+    List<Utilisateur> tousLesUtilisateurs();
+
     Utilisateur findByEmailAndPassword(String email, String password);
 
     Utilisateur findByEmail(String email);

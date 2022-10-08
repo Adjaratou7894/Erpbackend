@@ -73,7 +73,30 @@ public interface ActiviteService {
 
     List<Object> activiteParEntiteEtTypeActivite(String etatActivite, Long idEntite);
 
-    List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite);
+
+    // debut de statistique kalanso
+    int janvierKalanso();int fevrierKalanso();int MarsKalanso();  int AvrilKalanso();
+    int MaiKalanso(); int juinKalanso(); int juilletKalanso(); int AoutKalanso();
+    int SepKalanso();  int octKalanso();    int noKalanso();   int deKalanso();
+    // fin du statisqtique kalanso
+
+    // debut de statistique fab
+    int janvierfab();int fevrierfab();int Marsfab();  int Avrilfab();
+    int Maifab(); int juinfab(); int juilletfab(); int Aoutfab();
+    int Sepfab();  int octfab();    int nofab();   int defab();
+    // fin du statisqtique fab
+
+
+
+    // debur de statistique kalanso
+    int janvierFablab();int fevrierFablab();int MarsFablab();  int AvrilFablab();
+    int MaiFablab(); int juinFablab(); int juilletFablab(); int AoutFablab();
+    int SepFablab();  int octFablab();    int noFablab();   int deFablab();
+    // fin du statisqtique kalanso
+
+
+
+
 
 
 
@@ -82,6 +105,18 @@ public interface ActiviteService {
     List<Object> troisActiviteavenir();
 
     List<Activite> recupererActivitesSansListe();
+    List<Object> afficherActiviteParId(int idactivite);
 
+    List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite);
+
+
+
+    //++++++++++++++++++++++++++++++++++++++++++ List<Object> LES_PERONNES_TIREE_VALIDE(Long  idActivite);
+
+    List<Object> LES_PERONNES_TIREE_V(Long  idActivite);
+
+    List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
+
+    int counterActivite(Long idactivite);
 
 }

@@ -6,6 +6,8 @@ import com.example.erpbackend.Repository.UtilisateurRepository;
 import com.example.erpbackend.Service.*;
 import com.example.erpbackend.ServiceImplementation.ActiviteServiceImplement;
 import com.example.erpbackend.img.ConfigImage;
+
+import com.example.erpbackend.ServiceImplementation.ActiviteServiceImplement;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -36,7 +38,7 @@ import java.util.List;
 public class ActiviteController {
 
     @Autowired
-    private ActiviteService activiteService;
+    private ActiviteServiceImplement activiteService;
 
     final private EntiteService entiteService;
 
@@ -55,6 +57,7 @@ public class ActiviteController {
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================
 
     @ApiOperation(value = "ici on Ajouter une activité")
+
     @PostMapping("/ajouter")
     public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") int nombrepersonnedemande, @RequestParam("datedeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datedeb, @RequestParam("datefin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datefin
             ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes, @Param("libelleEntite") String libelleEntite, @Param("typeAct") String typeAct, @Param("libelleSalle") String libelleSalle, @Param("idresponsable") Long idresponsable, @Param("userid") Long userid) throws IOException, ParseException {
@@ -87,9 +90,9 @@ public class ActiviteController {
 
         activite.getMois();
 
-        activite.setCreateur(utilisateurService.trouverUtilisateurParId(userid));
+       // activite.setCreateur(utilisateurService.trouverUtilisateurParId(userid));
 
-        activite.setNombrepersonnedemande(nombrepersonnedemande);
+       // activite.setNombrepersonnedemande(nombrepersonnedemande);
 
         activite.setResponsable(utilisateurService.trouverUtilisateurParId(idresponsable));
 
@@ -123,7 +126,7 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Modifier une activité")
     @PutMapping("/modifier ")
-    public ReponseMessage updateactivite(@RequestBody Activite activite){
+    public ReponseMessage updateactivite(@RequestBody Activite activite) {
 
         return activiteService.modifierActivite(activite);
     }
@@ -131,7 +134,8 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Afficher la liste des activités")
     @GetMapping("/afficher")
-    public List<Activite> readactivite(){
+
+    public List<Activite> readactivite() {
 
         return activiteService.afficherActivite();
     }
@@ -139,7 +143,7 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Afficher la liste des activités")
     @GetMapping("/afficher/{mois}")
-    public int  nombreActiviteParMois(@PathVariable int mois){
+    public int nombreActiviteParMois(@PathVariable int mois) {
 
         return activiteService.recupererNombreActiviteParMois(mois);
     }
@@ -148,14 +152,14 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Supprimer une activité")
     @DeleteMapping("/supprimer/{idactivite}")
-    public ReponseMessage deleteactivite(@PathVariable Long idactivite){
+    public ReponseMessage deleteactivite(@PathVariable Long idactivite) {
 
         return activiteService.supprimerActivite(idactivite);
     }
 
     @ApiOperation(value = "Ici on affiche les activites en fontion de l'etat")
     @GetMapping("/activitesRecentes/{etatActivite}")
-    public List<Object> trouverTroisActviteParEtat(@PathVariable String etatActivite){
+    public List<Object> trouverTroisActviteParEtat(@PathVariable String etatActivite) {
 
         return activiteService.afficheActiviteEnFonctionEtat(etatActivite);
     }
@@ -174,11 +178,10 @@ public class ActiviteController {
     }
 
     @GetMapping("/parDatePlusRecente")
-    List<Object> activiteParDatePlusRecente(){
+    List<Object> activiteParDatePlusRecente() {
 
         return activiteService.activiteParDatePlusRecente();
     }
-
 
 
     @GetMapping("/parDateIntervale/{dateDebut}/{dateFin}")
@@ -207,10 +210,11 @@ public class ActiviteController {
 
 
     @GetMapping("/afficher/{typeactivite}")
-    public int  nombreActivitePartypeactivite(@PathVariable String type_activite){
+    public int nombreActivitePartypeactivite(@PathVariable String type_activite) {
 
         return activiteService.recupererNombreActivitePartypeactivite(type_activite);
     }
+
 
 
 
@@ -218,11 +222,7 @@ public class ActiviteController {
    // public ReponseMessage ajouteractivite(){
 
     //}
-    @GetMapping("/nombreFormation")
-    public int nombreFormation() {
 
-        return activiteService.nombreFormation();
-    }
 
 
     @GetMapping("/nombreTalks")
@@ -230,6 +230,169 @@ public class ActiviteController {
 
         return activiteService.nombreTalks();
     }
+
+        // controlleur statistique kalanso
+        @GetMapping("/janvierKalanso")
+        public Object janvierKalanso() {
+            return activiteService.janvierKalanso();
+        }
+
+        @GetMapping("/fevrierKalanso")
+        public Object fevrierKalanso() {
+            return activiteService.fevrierKalanso();
+        }
+        @GetMapping("/marsKalanso")
+        public Object MarsKalanso() {
+            return activiteService.MarsKalanso();
+        }
+        @GetMapping("/avrilKalanso")
+        public Object AvrilKalanso() {
+            return activiteService.AvrilKalanso();
+        }
+        @GetMapping("/maiKalanso")
+        public Object MaiKalanso() {
+            return activiteService.MaiKalanso();
+        }
+        @GetMapping("/juinKalanso")
+        public Object juinKalanso() {
+            return activiteService.juinKalanso();
+        }
+        @GetMapping("/juilletKalanso")
+        public Object juilletKalanso() {
+            return activiteService.juilletKalanso();
+        }
+        @GetMapping("/aoutKalanso")
+        public Object AoutKalanso() {
+            return activiteService.AoutKalanso();
+        }
+        @GetMapping("/sepKalanso")
+        public Object SepKalanso() {
+            return activiteService.SepKalanso();
+        }
+        @GetMapping("/octKalanso")
+        public Object octKalanso() {
+            return activiteService.octKalanso();
+        }
+        @GetMapping("/noKalanso")
+        public Object noKalanso() {
+            return activiteService.noKalanso();
+        }
+        @GetMapping("/deKalanso")
+        public Object deKalanso() {
+            return activiteService.deKalanso();
+        }
+// controlleur statistique kalanso fin
+
+    // controlleur statistique kalanso
+    @GetMapping("/janvierfablab")
+    public Object janvierFablab() {
+        return activiteService.janvierFablab();
+    }
+    @GetMapping("/fevrierfablab")
+    public Object fevrierFablab() {
+        return activiteService.fevrierFablab();
+    }
+    @GetMapping("/marsfablab")
+    public Object MarsFablab() {
+        return activiteService.MarsFablab();
+    }
+    @GetMapping("/avrilfablab")
+    public Object AvrilFablab() {
+        return activiteService.AvrilFablab();
+    }
+    @GetMapping("/maifablab")
+    public Object MaiFablab() {
+        return activiteService.MaiFablab();
+    }
+    @GetMapping("/juinfablab")
+    public Object juinFablab() {
+        return activiteService.juinFablab();
+    }
+    @GetMapping("/juilletfablab")
+    public Object juilletFablab() {
+        return activiteService.juilletFablab();
+    }
+    @GetMapping("/aoutfablab")
+    public Object AoutFablab() {
+        return activiteService.AoutFablab();
+    }
+    @GetMapping("/sepfablab")
+    public Object SepFablab() {
+        return activiteService.SepFablab();
+    }
+    @GetMapping("/octfablab")
+    public Object octFablab() {
+        return activiteService.octFablab();
+    }
+    @GetMapping("/nofablab")
+    public Object noFablab() {
+        return activiteService.noFablab();
+    }
+    @GetMapping("/defablab")
+    public Object deFablab() {
+        return activiteService.deFablab();
+    }
+// controlleur statistique fab fin
+
+
+    // controlleur statistique kalanso
+    @GetMapping("/janvierfab")
+    public Object janvierfab() {
+        return activiteService.janvierfab();
+    }
+    @GetMapping("/fevrierfab")
+    public Object fevrierfab() {
+        return activiteService.fevrierfab();
+    }
+    @GetMapping("/marsfab")
+    public Object Marsfab() {
+        return activiteService.Marsfab();
+    }
+    @GetMapping("/avrilfab")
+    public Object Avrilfab() {
+        return activiteService.Avrilfab();
+    }
+    @GetMapping("/maifab")
+    public Object Maifab() {
+        return activiteService.Maifab();
+
+    }
+    @GetMapping("/juinfab")
+    public Object juinfab() {
+        return activiteService.juinfab();
+    }
+    @GetMapping("/juilletfab")
+    public Object juilletfab() {
+        return activiteService.juilletfab();
+    }
+    @GetMapping("/aoutfab")
+    public Object Aoutfab() {
+        return activiteService.Aoutfab();
+    }
+    @GetMapping("/sepfab")
+    public Object Sepfab() {
+        return activiteService.Sepfab();
+    }
+    @GetMapping("/octfab")
+    public Object octfab() {
+        return activiteService.octfab();
+    }
+    @GetMapping("/nofab")
+    public Object nofab() {
+        return activiteService.nofab();
+    }
+    @GetMapping("/defab")
+    public Object defab() {
+        return activiteService.defab();
+    }
+// controlleur statistique fab fin
+
+
+
+
+    //   @PostMapping("/ajouterE")
+        // public ReponseMessage ajouteractivite(){
+
 
     @GetMapping("/nombreEvenements")
     public int nombreEvenements(){
@@ -239,32 +402,61 @@ public class ActiviteController {
 
 
     //trois activité recente
-    @GetMapping("/afficherTroisActiviteRecente")
-    List<Object> troisActiviteRecente() {
-
-        return activiteService.troisActiviteRecente();
-    }
 
 
-    @GetMapping("/nombreActiviteAvenir")
-    List<Object> nombreActiviteAvenir(){
 
-        return activiteService.troisActiviteavenir();
 
-    }
+        @GetMapping("/nombreFormation")
+        public int nombreFormation () {
+            return activiteService.nombreFormation();
+        }
+
+
+
+        @GetMapping("/counterActivite/{idactivite}")
+        public  int counterActivite(@PathVariable("idactivite") Long idactivite) {
+        return activiteService.counterActivite(idactivite);
+        }
+
+        //trois activité recente
+        @GetMapping("/afficherTroisActiviteRecente")
+        List<Object> troisActiviteRecente () {
+            return activiteService.troisActiviteRecente();
+        }
+        @GetMapping("/afficherActiviteAvenir")
+        List<Object> nombreActiviteAvenir () {
+            return activiteService.troisActiviteavenir();
+
+        }
+
+        @GetMapping("/afficherActiviteParId/{idactivite}")
+        List<Object> afficherActiviteParId ( @PathVariable int idactivite){
+            return activiteService.afficherActiviteParId(idactivite);
+
+        }
+
+
+        @GetMapping("/lesPersonnes/{idactivite}")
+        List<Object> lesPersonnes(@PathVariable Long  idactivite){
+        return  this.activiteService.LES_PERONNES_TIREE_V(idactivite);
+        }
 
 
     @GetMapping("/parEntiteEtEtat/{etatActivite}/{idEntite}")
     List<Object> activiteParEntiteEtTypeActivite(@PathVariable String etatActivite, @PathVariable Long idEntite) {
-
         return activiteService.activiteParEntiteEtTypeActivite(etatActivite, idEntite);
     }
 
 
     @GetMapping("/parTypeActiviteEtEntite/{typeActivite}/{idEntite}")
     int activiteParTypeActiviteEtEntite(@PathVariable String typeActivite, @PathVariable Long idEntite){
-
         return activiteService.activiteParTypeActiviteEtEntite(typeActivite, idEntite).size();
+    }
+
+
+    @GetMapping("/afficherActiviteParEntiteEtat/{entite}/{etat}")
+    List<Object> afficherActiviteParEntiteEtat(@PathVariable Long entite, @PathVariable String etat){
+        return activiteService.afficherActiviteParEntiteEtat(entite, etat);
     }
 
     @GetMapping("/activiteSansListe")
@@ -272,6 +464,7 @@ public class ActiviteController {
 
         return activiteService.recupererActivitesSansListe();
     }
+
 
 }
 
