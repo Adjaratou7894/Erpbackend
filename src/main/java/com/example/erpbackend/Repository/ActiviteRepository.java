@@ -187,6 +187,11 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     @Query(value = "SELECT * FROM activite WHERE idactivite=:idactivite;",
             nativeQuery = true)
     List<Object> afficherActiviteParId(int idactivite);
+    @Query(value = "SELECT activite.nom,activite.description,etat_activite.etat,activite.date_debut,activite.date_fin FROM activite,entite,etat_activite WHERE activite.entite_id_entite =" +
+            " entite.id_entite AND activite.etat_activite_idetat = etat_activite.idetat " +
+            "AND etat_activite.etat =:etat AND entite.id_entite =:entite;",
+            nativeQuery = true)
+    List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
 
     // ============================ ICI ON RECUPERE LES PERSONNE TIRES SUR UN TIRAGE VALIDE ET SUR UNE ACTIVITE PRECIS
 

@@ -24,6 +24,7 @@ public class AnneeController {
     @ApiOperation(value = "ici on ajoute un Entité")
     @PostMapping("/ajouter")
     public ReponseMessage ajouterAnnee(@RequestBody Annee annee){
+
         return anneeService.ajouterAnnee(annee);
     }
 
@@ -32,5 +33,8 @@ public class AnneeController {
     public List<Annee> recupererLesAnnee(){
 
         return anneeService.recupererLesAnnee();
+
     }
+
+
 }

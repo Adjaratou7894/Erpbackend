@@ -463,5 +463,10 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.LES_PERONNES_TIREE_VALIDE(idactivite);
     }
 
+    public List<Object> afficherActiviteParEntiteEtat(Long entite,String etat) {
+        return activiteRepository.afficherActiviteParEntiteEtat(entite,etat);
+
+    }
+
 
 }

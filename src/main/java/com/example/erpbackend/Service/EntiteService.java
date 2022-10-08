@@ -20,4 +20,6 @@ public interface EntiteService {
     Entite recupererEntiteParNom(String nom);
 
     public ReponseMessage getBytes(long idEntite) throws IOException;
+
+    List<Object> afficherEntiteAccueil();
 }

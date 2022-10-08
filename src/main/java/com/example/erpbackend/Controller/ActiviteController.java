@@ -6,6 +6,8 @@ import com.example.erpbackend.Repository.UtilisateurRepository;
 import com.example.erpbackend.Service.*;
 import com.example.erpbackend.ServiceImplementation.ActiviteServiceImplement;
 import com.example.erpbackend.img.ConfigImage;
+
+import com.example.erpbackend.ServiceImplementation.ActiviteServiceImplement;
 import io.swagger.annotations.Api;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,7 +36,7 @@ import java.util.List;
 public class ActiviteController {
 
     @Autowired
-    private ActiviteService activiteService;
+    private ActiviteServiceImplement activiteService;
 
     final private EntiteService entiteService;
 
@@ -75,9 +77,9 @@ public class ActiviteController {
 
         activite.getMois();
 
-        activite.setCreateur(utilisateurService.trouverUtilisateurParId(userid));
+       // activite.setCreateur(utilisateurService.trouverUtilisateurParId(userid));
 
-        activite.setNombrepersonnedemande(nombrepersonnedemande);
+       // activite.setNombrepersonnedemande(nombrepersonnedemande);
 
         activite.setResponsable(utilisateurService.trouverUtilisateurParId(idresponsable));
 
@@ -119,6 +121,7 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Afficher la liste des activités")
     @GetMapping("/afficher")
+
     public List<Activite> readactivite() {
 
         return activiteService.afficherActivite();
@@ -408,6 +411,11 @@ public class ActiviteController {
     @GetMapping("/parTypeActiviteEtEntite/{typeActivite}/{idEntite}")
     int activiteParTypeActiviteEtEntite(@PathVariable String typeActivite, @PathVariable Long idEntite){
         return activiteService.activiteParTypeActiviteEtEntite(typeActivite, idEntite).size();
+    }
+
+    @GetMapping("/afficherActiviteParEntiteEtat/{entite}/{etat}")
+    List<Object> afficherActiviteParEntiteEtat(@PathVariable Long entite, @PathVariable String etat){
+        return activiteService.afficherActiviteParEntiteEtat(entite, etat);
     }
 
 }

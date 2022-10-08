@@ -112,6 +112,8 @@ public interface ActiviteService {
 
     List<Object> LES_PERONNES_TIREE_V(Long  idActivite);
 
+    List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
+
 
 
 }
