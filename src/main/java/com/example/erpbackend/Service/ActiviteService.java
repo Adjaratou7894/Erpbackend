@@ -81,6 +81,7 @@ public interface ActiviteService {
 
     List<Object> troisActiviteavenir();
 
+    List<Activite> recupererActivitesSansListe();
 
 
 }

@@ -86,5 +86,8 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             "activite,utilisateur WHERE activite.utilisateur_iduser=utilisateur.iduser AND activite.etat_activite_idetat= \"à venir\" ORDER BY activite.date_debut DESC LIMIT 3", nativeQuery = true)
     List<Object> troisActiviteAvenir();
 
+    @Query(value = "select * from activite where liste_idliste is NULL;", nativeQuery = true)
+    List<Activite> FIND_ALL_ACTIVITE_NOT_VALILIDE();
+
 
 }

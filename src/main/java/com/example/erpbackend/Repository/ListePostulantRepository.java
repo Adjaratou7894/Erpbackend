@@ -16,4 +16,7 @@ public interface ListePostulantRepository extends JpaRepository<Liste_postulant,
     Liste_postulant findByLibelleliste(String libelleliste);
 
     Liste_postulant findByIdliste(Long idlistepostulant);
+
+    @Query(value = "SELECT * FROM liste_postulant, tirage WHERE liste_postulant.idliste = tirage.liste_postulant_idliste and validite = 0;", nativeQuery = true)
+    List<Liste_postulant> FIND_ALL_LISTE_NOT_VALILIDE();
 }

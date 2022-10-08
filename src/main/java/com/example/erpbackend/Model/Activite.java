@@ -24,10 +24,13 @@ public class Activite {
     private String description;
     @Column(nullable = true, length = 64)
     private String photoactivite;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date   dateDebut;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+
+    //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date   dateFin;
+
     private int mois;
     private Boolean etat;
     private int nombrepersonnedemande;
@@ -60,6 +63,7 @@ public class Activite {
     @OneToOne
     private Salle salle;
 
+    @JsonIgnore
     @OneToOne
     private Liste_postulant liste;
 

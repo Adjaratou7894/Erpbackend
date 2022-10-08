@@ -5,6 +5,7 @@ import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Repository.ActiviteRepository;
 import com.example.erpbackend.Repository.Activite_ActeurRepository;
 import com.example.erpbackend.Service.ActiviteService;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class ActiviteServiceImplement implements ActiviteService {
 
     @Autowired
@@ -27,6 +29,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     @Autowired
     private Activite_ActeurRepository activite_acteurRepository;
+
+    public ActiviteServiceImplement() {
+    }
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
@@ -44,30 +49,40 @@ public class ActiviteServiceImplement implements ActiviteService {
              Activite act = activiteRepository.save(activite);
 
             // //Un tableau qui contenera l'id des acteurs par case
-            String[] allIdActeurs = idacteurs.split(",");
 
-            String[] allIdActeursInternes = idacteurInternes.split(",");
 
-            System.out.println("les id : " + allIdActeurs);
 
-            System.out.println("les id internes: " + allIdActeursInternes);
+            if(idacteurs.equals("null")){
 
-            for (String idact : allIdActeurs) {
+            }else {
+                //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
+                String[] allIdActeurs = idacteurs.split(",");
+                System.out.println(allIdActeurs);
 
-                long l = Long.parseLong(idact);
 
-               activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, act.getIdactivite());
+                for (String idact : allIdActeurs) {
 
+                    long l = Long.parseLong(idact);
+
+                    activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, act.getIdactivite());
+
+                }
             }
 
-            System.out.println(allIdActeursInternes);
 
-            for (String idact : allIdActeursInternes) {
+            if(idacteurInternes.equals("null")){
 
-                long l = Long.parseLong(idact);
+                }else{
+                String[] allIdActeursInternes = idacteurInternes.split(",");
 
-                activiteRepository.insert_activites_utilisateurs_animer(l, act.getIdactivite());
+                System.out.println(allIdActeursInternes);
 
+                for (String idact : allIdActeursInternes) {
+
+                    long l = Long.parseLong(idact);
+
+                    activiteRepository.insert_activites_utilisateurs_animer(l, act.getIdactivite());
+                }
             }
 
             ReponseMessage message = new ReponseMessage("Activité ajoutée avec succes", true);
@@ -275,6 +290,11 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Override
     public List<Object> troisActiviteavenir() {
         return activiteRepository.troisActiviteAvenir();
+    }
+
+    @Override
+    public List<Activite> recupererActivitesSansListe() {
+        return activiteRepository.FIND_ALL_ACTIVITE_NOT_VALILIDE();
     }
 
 

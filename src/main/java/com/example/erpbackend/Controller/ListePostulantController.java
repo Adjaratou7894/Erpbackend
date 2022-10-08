@@ -71,4 +71,13 @@ public class ListePostulantController {
         return listePostulantService.supprimerListePostulant(idlistepostulant);
     }
 
+    @ApiOperation(value = "ici on affiche les listes sur les quelles aucuns tirages n'est validés")
+    @GetMapping("/listeTirageNonValide")
+    public List<Liste_postulant> recupererListeTirageNonValidé(){
+
+    return listePostulantService.recupererListeAvecTirageNonValide();
+    }
+
+
+
 }

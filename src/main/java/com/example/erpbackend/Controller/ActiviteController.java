@@ -56,15 +56,15 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Ajouter une activité")
     @PostMapping("/ajouter")
-    public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") int nombrepersonnedemande, @Param("datedeb") String datedeb, @Param("datefin") String datefin
+    public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") int nombrepersonnedemande, @RequestParam("datedeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datedeb, @RequestParam("datefin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datefin
             ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes, @Param("libelleEntite") String libelleEntite, @Param("typeAct") String typeAct, @Param("libelleSalle") String libelleSalle, @Param("idresponsable") Long idresponsable, @Param("userid") Long userid) throws IOException, ParseException {
 
          //file, nom, description,nombrepersonnedemande, datedeb, datefin, idacteurs, idacteurInternes, libelleEntite, typeAct, libelleSalle, idresponsable, userid
 
 
-        Date dateDebut = new SimpleDateFormat("yyyy/MM/dd").parse(datedeb);
+        //Date dateDebut = new SimpleDateFormat("yyyy/MM/dd").parse(datedeb);
 
-        Date dateFin = new SimpleDateFormat("yyyy/MM/dd").parse(datefin);
+        //Date dateFin = new SimpleDateFormat("yyyy/MM/dd").parse(datefin);
 
 
 
@@ -81,9 +81,9 @@ public class ActiviteController {
         activite.setDescription(description);
 
 
-        activite.setDateDebut(dateDebut);
+        activite.setDateDebut(datedeb);
 
-        activite.setDateFin(dateFin);
+        activite.setDateFin(datefin);
 
         activite.getMois();
 
@@ -265,6 +265,12 @@ public class ActiviteController {
     int activiteParTypeActiviteEtEntite(@PathVariable String typeActivite, @PathVariable Long idEntite){
 
         return activiteService.activiteParTypeActiviteEtEntite(typeActivite, idEntite).size();
+    }
+
+    @GetMapping("/activiteSansListe")
+    List<Activite> recupererActiviteNonlierAliste(){
+
+        return activiteService.recupererActivitesSansListe();
     }
 
 }

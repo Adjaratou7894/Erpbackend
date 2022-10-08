@@ -84,4 +84,9 @@ public class ListePostulantServiceImplement implements ListePostulantService {
     public Liste_postulant creerlistepostulant(Liste_postulant listePostulant) {
         return listePostulantRepository.save(listePostulant);
     }
+
+    @Override
+    public List<Liste_postulant> recupererListeAvecTirageNonValide() {
+        return listePostulantRepository.FIND_ALL_LISTE_NOT_VALILIDE();
+    }
 }

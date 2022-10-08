@@ -23,4 +23,6 @@ public interface ListePostulantService {
 
     Liste_postulant creerlistepostulant(Liste_postulant listePostulant);
 
+    List<Liste_postulant> recupererListeAvecTirageNonValide();
+
 }

@@ -59,9 +59,9 @@ public class PostulantController {
 
             Liste_postulant liste_postulant = new Liste_postulant();
             Activite activite = activiteService.trouverActiviteParLibelle(libelleActivite);
+            //activite.set
 
             if (activite == null) {
-
 
                 ReponseMessage message = new ReponseMessage("Cette activité n'existe pas", false);
 
@@ -79,6 +79,7 @@ public class PostulantController {
                 liste_postulant.setLibelleliste(libelleliste);
 
                 Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
+                activite.setListe(lpt);
 
                 for (Postulant pot : postelist) {
 
@@ -94,7 +95,6 @@ public class PostulantController {
                 return message;
             }
         }
-
     }
 
 }
