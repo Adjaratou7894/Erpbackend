@@ -60,6 +60,9 @@ public class Activite {
     @OneToOne
     private Salle salle;
 
+    @OneToOne
+    private Liste_postulant liste;
+
 
     @JsonIgnore
     @ManyToMany(
