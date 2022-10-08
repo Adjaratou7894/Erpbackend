@@ -56,8 +56,24 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite) values (?,?);", nativeQuery = true)
-    int insert_activites_utilisateurs_animer(Long iduser, Long idactivite);
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite, status) values (?,?, \"Formateur\");", nativeQuery = true)
+    int insert_activites_utilisateurs_animer_formateurs(Long iduser, Long idactivite);
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite, status) values (?,?, \"Organisateur\");", nativeQuery = true)
+    int insert_activites_utilisateurs_animer_Organisateurs(Long iduser, Long idactivite);
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite, status) values (?,?, \"Intervenant\");", nativeQuery = true)
+    int insert_activites_utilisateurs_animer_Intervenants(Long iduser, Long idactivite);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite, status) values (?,?, \"Lead\");", nativeQuery = true)
+    int insert_activites_utilisateurs_animer_Leads(Long iduser, Long idactivite);
 
 
     @Query(value = "select count(mois) from activite where mois = :mois", nativeQuery = true)
@@ -88,6 +104,9 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "select * from activite where liste_idliste is NULL;", nativeQuery = true)
     List<Activite> FIND_ALL_ACTIVITE_NOT_VALILIDE();
+
+    @Query(value = "select * from activite order by datecreation desc", nativeQuery = true)
+    List<Activite> FIND_ALL_ACTIVITE_RECENT_CREATION();
 
 
 }

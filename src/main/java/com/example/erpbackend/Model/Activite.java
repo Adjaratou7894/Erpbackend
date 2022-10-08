@@ -26,7 +26,9 @@ public class Activite {
     private String photoactivite;
 
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date   dateDebut;
+    private Date dateDebut;
+
+    private Date datecreation;
 
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date   dateFin;
@@ -47,7 +49,7 @@ public class Activite {
     @ManyToOne
     private Utilisateur responsable;
 
-    @JsonIgnore
+   @JsonIgnore
     @ManyToOne
     private Utilisateur createur;
 

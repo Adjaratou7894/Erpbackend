@@ -14,7 +14,7 @@ import java.util.List;
 public interface ActiviteService {
     //,
     //================METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
-    ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes);
+    ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes, String idacteursOrg, String idacteurInternesOrg, String idacteursInterv, String idacteurInternesInterv, String idacteursLead, String idacteurInternesLead);
 
 
     //================METHODE PERMETTANT DE MODIFIER UNE ACTIVITE=========================

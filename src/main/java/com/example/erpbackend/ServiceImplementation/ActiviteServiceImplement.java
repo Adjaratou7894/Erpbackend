@@ -30,13 +30,15 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Autowired
     private Activite_ActeurRepository activite_acteurRepository;
 
-    public ActiviteServiceImplement() {
-    }
-
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
-    public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes) {
-        if (activiteRepository.findByNom(activite.getNom()) == null){
+    public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes,  String idacteursOrg,
+                                          String idacteurInternesOrg, String idacteursInterv,
+                                          String idacteurInternesInterv, String idacteursLead,
+                                          String idacteurInternesLead) {
+
+
+        if(activiteRepository.findByNom(activite.getNom()) == null){
 
             activite.setEtat(true);
 
@@ -50,9 +52,10 @@ public class ActiviteServiceImplement implements ActiviteService {
 
             // //Un tableau qui contenera l'id des acteurs par case
 
+                    ////formateurs
 
-
-            if(idacteurs.equals("null")){
+            //formateurs externes
+            if(idacteurs.contains("")){
 
             }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
@@ -64,13 +67,13 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     long l = Long.parseLong(idact);
 
-                    activite_acteurRepository.INSERT_ACTEUR_ACTIVITES(l, act.getIdactivite());
+                    activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Formateurs(l, act.getIdactivite());
 
                 }
             }
 
-
-            if(idacteurInternes.equals("null")){
+            //Formateurs internes
+            if(idacteurInternes.contains("")){
 
                 }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
@@ -81,9 +84,134 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     long l = Long.parseLong(idact);
 
-                    activiteRepository.insert_activites_utilisateurs_animer(l, act.getIdactivite());
+                    activiteRepository.insert_activites_utilisateurs_animer_formateurs(l, act.getIdactivite());
                 }
             }
+
+
+
+
+            ///organisateurs
+
+
+
+            //Organisateurs externes
+            if(idacteursOrg.contains("")){
+
+            }else {
+                //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
+                String[] allIdActeurs = idacteurs.split(",");
+                System.out.println(allIdActeurs);
+
+
+                for (String idact : allIdActeurs) {
+
+                    long l = Long.parseLong(idact);
+
+                    activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Organisateurs(l, act.getIdactivite());
+
+                }
+            }
+
+            //Organisateurs internes
+            if(idacteurInternesOrg.contains("")){
+
+            }else{
+                String[] allIdActeursInternes = idacteurInternes.split(",");
+
+                System.out.println(allIdActeursInternes);
+
+                for (String idact : allIdActeursInternes) {
+
+                    long l = Long.parseLong(idact);
+
+                    activiteRepository.insert_activites_utilisateurs_animer_Organisateurs(l, act.getIdactivite());
+                }
+            }
+
+
+
+
+
+            ////intervenants
+
+
+            //Intervenant externes
+            if(idacteursInterv.contains("")){
+
+            }else {
+                //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
+                String[] allIdActeurs = idacteurs.split(",");
+                System.out.println(allIdActeurs);
+
+                for (String idact : allIdActeurs) {
+
+                    long l = Long.parseLong(idact);
+
+                    activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Intervenants(l, act.getIdactivite());
+
+                }
+            }
+
+
+
+            //Intervenant internes
+            if(idacteurInternesInterv.contains("")){
+
+            }else{
+                String[] allIdActeursInternes = idacteurInternes.split(",");
+
+                System.out.println(allIdActeursInternes);
+
+                for (String idact : allIdActeursInternes) {
+
+                    long l = Long.parseLong(idact);
+
+                    activiteRepository.insert_activites_utilisateurs_animer_Intervenants(l, act.getIdactivite());
+                }
+            }
+
+
+
+
+            /////Lead
+
+
+            //Lead externes
+            if(idacteursLead.contains("")){
+
+            }else {
+                //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
+                String[] allIdActeurs = idacteurs.split(",");
+                System.out.println(allIdActeurs);
+
+
+                for (String idact : allIdActeurs) {
+
+                    long l = Long.parseLong(idact);
+
+                    activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Lead(l, act.getIdactivite());
+
+                }
+            }
+
+            //Lead internes
+            if(idacteurInternesLead.contains("")){
+
+            }else{
+                String[] allIdActeursInternes = idacteurInternes.split(",");
+
+                System.out.println(allIdActeursInternes);
+
+                for (String idact : allIdActeursInternes) {
+
+                    long l = Long.parseLong(idact);
+
+                    activiteRepository.insert_activites_utilisateurs_animer_Leads(l, act.getIdactivite());
+                }
+            }
+
+
 
             ReponseMessage message = new ReponseMessage("Activité ajoutée avec succes", true);
             return  message;
@@ -127,7 +255,7 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Override
     public List<Activite> afficherActivite() {
 
-        return activiteRepository.findAll();
+        return activiteRepository.FIND_ALL_ACTIVITE_RECENT_CREATION();
     }
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LA LISTE DES ACTIVITES=========================
 
