@@ -160,10 +160,11 @@ public class TirageServiceImplement implements TirageService{
 
     @Override
     public ReponseMessage validerTirageTirage(Tirage tirage, Long id) {
-        if (tirageRepository.findByIdtirage(id) != null) {
-            return tirageRepository.findById(tirage.getIdtirage())
+        Tirage tirageAmodifier = tirageRepository.findByIdtirage(id);
+        if (tirageAmodifier != null) {
+            return tirageRepository.findById(tirageAmodifier.getIdtirage())
                     .map(p -> {
-                        p.setValidite(tirage.getValidite());
+                        p.setValidite(true);
                         tirageRepository.save(p);
                         ReponseMessage message = new ReponseMessage("Tirage validé avec succes", true);
                         return  message;

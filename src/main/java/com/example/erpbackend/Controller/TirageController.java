@@ -104,7 +104,7 @@ public class TirageController {
 
     @ApiOperation(value = "ici on Modifier une activité")
     @PutMapping("/valider/{id}")
-    public ReponseMessage validerTirage(@RequestBody Tirage tirage,@PathVariable Long id) {
+    public ReponseMessage validerTirage(@RequestBody Tirage tirage, @PathVariable Long id) {
 
         return tirageService.validerTirageTirage(tirage, id);
     }
