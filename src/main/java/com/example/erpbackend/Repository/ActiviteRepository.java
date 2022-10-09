@@ -126,10 +126,6 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     // fin des statistiques  pour entité Solidaire fablab
 
 
-
-
-
-
     @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite` WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
     List<Object> findByDateIntervale(Date dateDebut, Date dateFin);
 
@@ -187,7 +183,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     //les trois activite les plus recente l'id etatactivite represente l'activite en cour
     @Query(value = "SELECT activite.nom AS nomactivite,activite.description,utilisateur.nom AS nomUser, utilisateur.prenom AS prenomUser,activite.idactivite " +
-            "FROM activite,utilisateur,etat_activite WHERE utilisateur.iduser=activite.utilisateur_iduser AND etat_activite.idetat = activite.etat_activite_idetat " +
+            "FROM activite,utilisateur,etat_activite WHERE utilisateur.iduser=activite.createur_iduser AND etat_activite.idetat = activite.etat_activite_idetat " +
             "AND etat_activite.etat =\"encours\" ORDER BY activite.date_debut DESC LIMIT 3;", nativeQuery = true)
     List<Object> troisActiviteRecente();
 
@@ -227,5 +223,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             "AND postulant_tire.tirage_idtirage = tirage.idtirage AND activite.idactivite = tirage.activite_idactivite " +
             "AND activite.idactivite = :idactivite",nativeQuery = true)
     List<Object> LES_PERONNES_TIREE_VALIDE(Long  idactivite);
+
+
 
 }

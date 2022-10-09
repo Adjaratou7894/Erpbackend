@@ -1,13 +1,17 @@
 package com.example.erpbackend.Model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table
-@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Setter
+@Getter
+
 public class Liste_postulant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,6 +19,8 @@ public class Liste_postulant {
     private String libelleliste;
     private Integer nombretirage;
     private Date dateliste;
+
+    private Boolean validite;
 
 
     @OneToOne

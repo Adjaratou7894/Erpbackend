@@ -99,11 +99,12 @@ public class TirageServiceImplement implements TirageService{
             //retourne le tirage crée
             Tirage tirageCree = tirageRepository.save(tirage);
 
+            System.out.println("liste : "+ liste.getLibelleliste());
             //retourne tous les postulants d'une liste donnée
             List<Postulant> listePostulantATiree = postulantRepository.FIND_POSTULANT_PAR_ID_LIST(liste.getIdliste());
 
             System.out.println("nombre: " + tirageCree.getNombrePostulantTire() + "id: " + tirageCree.getIdtirage());
-
+            System.out.println("taillle taille taille: "+ listePostulantATiree.size());
             trie(listePostulantATiree, tirageCree.getNombrePostulantTire(), tirageCree.getIdtirage());
 
             liste.setNombretirage(liste.getNombretirage()+1);
@@ -165,9 +166,18 @@ public class TirageServiceImplement implements TirageService{
             return tirageRepository.findById(tirageAmodifier.getIdtirage())
                     .map(p -> {
                         p.setValidite(true);
-                        tirageRepository.save(p);
-                        ReponseMessage message = new ReponseMessage("Tirage validé avec succes", true);
-                        return  message;
+                        System.out.println(tirageRepository.FIND_ALL_TIRAGE_NOT_VALIDE_LISTE(tirageAmodifier.getListePostulant().getIdliste()));
+                        if(tirageRepository.FIND_ALL_TIRAGE_NOT_VALIDE_LISTE(tirageAmodifier.getListePostulant().getIdliste()).size() == 0){
+                            tirageAmodifier.getListePostulant().setValidite(true);
+
+                            tirageRepository.save(p);
+                            ReponseMessage message = new ReponseMessage("Tirage validé avec succès", true);
+                            return  message;
+                        }else {
+                            ReponseMessage message = new ReponseMessage("Cette liste a déjà un tirage validé", false);
+                            return  message;
+                        }
+
 
                     }).orElseThrow(() -> new RuntimeException("Tirage non trouvée !"));
         }else {

@@ -13,9 +13,10 @@ import java.util.List;
 
 @Entity
 @Table
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

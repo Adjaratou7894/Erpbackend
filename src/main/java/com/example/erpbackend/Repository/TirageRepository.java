@@ -32,5 +32,9 @@ public interface TirageRepository extends JpaRepository<Tirage,Long> {
     List<Tirage> FIND_ALL_TIRAGE_BY_NONVILIDE();
 
 
+    @Query(value = "select * from tirage where validite = 1 and tirage.liste_postulant_idliste = :liste_postulant_idliste", nativeQuery = true)
+    List<Tirage> FIND_ALL_TIRAGE_NOT_VALIDE_LISTE(@Param("liste_postulant_idliste") Long liste_postulant_idliste);
+
+
 
 }

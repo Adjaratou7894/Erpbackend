@@ -76,6 +76,8 @@ public class PostulantController {
 
                 liste_postulant.setNombretirage(0);
 
+                liste_postulant.setValidite(false);
+
                 liste_postulant.setLibelleliste(libelleliste);
 
                 Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
