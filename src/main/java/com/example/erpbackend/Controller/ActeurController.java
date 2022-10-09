@@ -63,4 +63,10 @@ public class ActeurController {
         return acteurService.AfficherActeurRoleTout();
     }
 
+    @ApiOperation(value = "ici on Afficher la liste des Acteur")
+    @GetMapping("/unacteur/{idacteur}")
+    public List<Acteur> trouverActeurParId(@PathVariable long idacteur) {
+        return acteurService.trouverActeurParId(idacteur);
+    }
+
 }

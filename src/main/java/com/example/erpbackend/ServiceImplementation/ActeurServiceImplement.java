@@ -40,26 +40,11 @@ public class ActeurServiceImplement implements ActeurService {
 
     }
 
+    @Override
+    public List<Acteur> trouverActeurParId(long idacteur) {
+        return acteurRepository.findByIdacteur(idacteur);
+    }
 
-  /*  @Override
-    public ReponseMessage modifierActeur(Acteur acteur) {
-        if (acteurRepository.findByIdacteur(acteur.getIdacteur()) !=null) {
-            return acteurRepository.findById(acteur.getIdacteur())
-                    .map(acteur1->{
-                        acteur1.setNom(acteur.getNom());
-                        acteur1.setPrenom(acteur.getPrenom());
-                        acteur1.setNumero(acteur.getNumero());
-                        acteurRepository.save(acteur1);
-                        ReponseMessage message = new ReponseMessage("Acteur modifié avec succes", true);
-                        return  message;
-                    }).orElseThrow(() -> new RuntimeException("Désole, Acteur non trouvée"));
-        }else {
-            ReponseMessage message = new ReponseMessage("Désole, Acteur non trouvée", false);
-
-            return message;
-        }
-
-    }*/
 
     @Override
     public List<Acteur> afficherToutLesActeurs() {

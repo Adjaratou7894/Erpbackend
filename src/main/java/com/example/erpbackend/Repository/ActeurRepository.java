@@ -12,7 +12,11 @@ import java.util.List;
 public interface ActeurRepository extends JpaRepository<Acteur, Long> {
     Acteur findByNom(String nom);
 
-    Acteur findByIdacteur(Long idacteur);
+    @Query(
+            value = "Select * from acteur where idacteur = :idacteur",
+            nativeQuery = true
+    )
+    public List<Acteur> findByIdacteur(Long idacteur);
 
     Acteur findByNumero(String numero);
 

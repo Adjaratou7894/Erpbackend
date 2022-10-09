@@ -14,6 +14,8 @@ public interface ActeurService {
     // Mise à jour d'un acteur
     Acteur modifierActeur(Acteur acteur, Long idacteur);
 
+    List<Acteur> trouverActeurParId(long idacteur);
+
     List<Acteur> afficherToutLesActeurs();
     ReponseMessage SupprimerActeur(Long idacteur);
 
