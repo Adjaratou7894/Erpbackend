@@ -13,9 +13,10 @@ import java.util.List;
 
 @Entity
 @Table
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class Activite {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +27,9 @@ public class Activite {
     private String photoactivite;
 
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
-    private Date   dateDebut;
+    private Date dateDebut;
+
+    private Date datecreation;
 
     //@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date   dateFin;
@@ -46,10 +49,15 @@ public class Activite {
     @ManyToOne
     private Utilisateur responsable;
 
-    @JsonIgnore
 
+   @JsonIgnore
+    @ManyToOne
+    private Utilisateur createur;
+
+    @JsonIgnore
     @ManyToOne
     private Annee annee;
+
     @JsonIgnore
     @ManyToOne
     private Entite entite;

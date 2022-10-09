@@ -126,10 +126,6 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     // fin des statistiques  pour entité Solidaire fablab
 
 
-
-
-
-
     @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite` WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
     List<Object> findByDateIntervale(Date dateDebut, Date dateFin);
 
@@ -149,8 +145,24 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite) values (?,?);", nativeQuery = true)
-    int insert_activites_utilisateurs_animer(Long iduser, Long idactivite);
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite, status) values (?,?, \"Formateur\");", nativeQuery = true)
+    int insert_activites_utilisateurs_animer_formateurs(Long iduser, Long idactivite);
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite, status) values (?,?, \"Organisateur\");", nativeQuery = true)
+    int insert_activites_utilisateurs_animer_Organisateurs(Long iduser, Long idactivite);
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite, status) values (?,?, \"Intervenant\");", nativeQuery = true)
+    int insert_activites_utilisateurs_animer_Intervenants(Long iduser, Long idactivite);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into activites_utilisateurs_animer(iduser, idactivite, status) values (?,?, \"Lead\");", nativeQuery = true)
+    int insert_activites_utilisateurs_animer_Leads(Long iduser, Long idactivite);
 
 
     @Query(value = "select count(mois) from activite where mois = :mois", nativeQuery = true)
@@ -171,7 +183,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     //les trois activite les plus recente l'id etatactivite represente l'activite en cour
     @Query(value = "SELECT activite.nom AS nomactivite,activite.description,utilisateur.nom AS nomUser, utilisateur.prenom AS prenomUser,activite.idactivite " +
-            "FROM activite,utilisateur,etat_activite WHERE utilisateur.iduser=activite.utilisateur_iduser AND etat_activite.idetat = activite.etat_activite_idetat " +
+            "FROM activite,utilisateur,etat_activite WHERE utilisateur.iduser=activite.createur_iduser AND etat_activite.idetat = activite.etat_activite_idetat " +
             "AND etat_activite.etat =\"encours\" ORDER BY activite.date_debut DESC LIMIT 3;", nativeQuery = true)
     List<Object> troisActiviteRecente();
 
@@ -185,6 +197,11 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "select * from activite where liste_idliste is NULL;", nativeQuery = true)
     List<Activite> FIND_ALL_ACTIVITE_NOT_VALILIDE();
+
+
+    @Query(value = "select * from activite order by datecreation desc", nativeQuery = true)
+    List<Activite> FIND_ALL_ACTIVITE_RECENT_CREATION();
+
 
     @Query(value = "SELECT * FROM activite WHERE idactivite=:idactivite;",
             nativeQuery = true)
@@ -206,5 +223,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             "AND postulant_tire.tirage_idtirage = tirage.idtirage AND activite.idactivite = tirage.activite_idactivite " +
             "AND activite.idactivite = :idactivite",nativeQuery = true)
     List<Object> LES_PERONNES_TIREE_VALIDE(Long  idactivite);
+
+
 
 }

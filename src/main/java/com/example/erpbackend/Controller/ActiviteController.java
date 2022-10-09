@@ -60,7 +60,12 @@ public class ActiviteController {
 
     @PostMapping("/ajouter")
     public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") int nombrepersonnedemande, @RequestParam("datedeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datedeb, @RequestParam("datefin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datefin
-            ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes, @Param("libelleEntite") String libelleEntite, @Param("typeAct") String typeAct, @Param("libelleSalle") String libelleSalle, @Param("idresponsable") Long idresponsable, @Param("userid") Long userid) throws IOException, ParseException {
+            ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes
+            ,@Param("idacteursInterv") String idacteursInterv, @Param("idacteurInternesInterv") String idacteurInternesInterv
+            ,@Param("idacteursOrg") String idacteursOrg, @Param("idacteurInternesOrg") String idacteurInternesOrg
+            ,@Param("idacteursLead") String idacteursLead, @Param("idacteurInternesLead") String idacteurInternesLead
+            ,@Param("typeAct") String libelleEntite, @Param("typeAct") String typeAct, @Param("idresponsable") String libelleSalle
+            ,@Param("idresponsable") Long idresponsable, @Param("userid") Long userid) throws IOException, ParseException {
 
          //file, nom, description,nombrepersonnedemande, datedeb, datefin, idacteurs, idacteurInternes, libelleEntite, typeAct, libelleSalle, idresponsable, userid
 
@@ -70,6 +75,7 @@ public class ActiviteController {
         //Date dateFin = new SimpleDateFormat("yyyy/MM/dd").parse(datefin);
 
 
+        System.out.println("les id de l'acteurs aaaaaaaaaaaaaaaaaaa : " + idacteurs);
 
         Activite activite = new Activite();
 
@@ -80,6 +86,8 @@ public class ActiviteController {
         activite.setPhotoactivite(nomfile);
 
         activite.setNom(nom);
+
+        activite.setDatecreation(new Date());
 
         activite.setDescription(description);
 
@@ -96,7 +104,9 @@ public class ActiviteController {
 
         activite.setResponsable(utilisateurService.trouverUtilisateurParId(idresponsable));
 
-        String url= "src/main/resources/imgActivite/";
+        //String url= "src/main/resources/imgActivite/";
+
+        String url= "C:/Users/mkkeita/Desktop/projects/ionic/ApplicationERPInterface/src/assets/images/";
 
         ConfigImage.saveimgA(url, nomfile, file);
 
@@ -119,7 +129,7 @@ public class ActiviteController {
         activite.setAnnee(anneeService.recupererAnneeParLibelle(anneeAct));
 
         // idacteurs
-        return activiteService.ajouterActivite(activite, idacteurs, idacteurInternes);
+        return activiteService.ajouterActivite(activite, idacteurs, idacteurInternes, idacteursOrg, idacteurInternesOrg, idacteursInterv, idacteurInternesInterv, idacteursLead, idacteurInternesLead);
 
     }
     //================FIN DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE======================

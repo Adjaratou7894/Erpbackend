@@ -14,8 +14,26 @@ public interface Activite_ActeurRepository extends JpaRepository<Acteur_activite
 
     @Modifying
     @Transactional
-    @Query(value = "insert into acteur_activites(acteur_id, activite_id) values (?, ?);", nativeQuery = true)
-    int INSERT_ACTEUR_ACTIVITES(Long acteur_id, Long activite_id);
+    @Query(value = "insert into acteur_activites(acteur_id, activite_id, status) values (?, ?, \"Formateur\");", nativeQuery = true)
+    int INSERT_ACTEUR_ACTIVITES_Formateurs(Long acteur_id, Long activite_id);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into acteur_activites(acteur_id, activite_id, status) values (?, ?, \"Organisateur\");", nativeQuery = true)
+    int INSERT_ACTEUR_ACTIVITES_Organisateurs(Long acteur_id, Long activite_id);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into acteur_activites(acteur_id, activite_id, status) values (?, ?, \"Intervenant\");", nativeQuery = true)
+    int INSERT_ACTEUR_ACTIVITES_Intervenants(Long acteur_id, Long activite_id);
+
+
+    @Modifying
+    @Transactional
+    @Query(value = "insert into acteur_activites(acteur_id, activite_id, status) values (?, ?, \"Lead\");", nativeQuery = true)
+    int INSERT_ACTEUR_ACTIVITES_Lead(Long acteur_id, Long activite_id);
 
 
 

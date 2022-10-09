@@ -55,7 +55,9 @@ public class TirageController {
             Activite activiteConserne = liste_postulant.getActivite();
 
             Liste_postulant listeConserne = listePostulantService.trouverListePostulantParLibelle(libelle_liste);
-
+System.out.println("act aaaaaaaaaaaaaaaaaaaaaaaaaa: " + activiteConserne.getNom());
+            System.out.println("act aaaaaaaaaaaaaaaaaaaaaaaaaa: " + listeConserne.getLibelleliste());
+            //System.out.println("act aaaaaaaaaaaaaaaaaaaaaaaaaa: " + );
             return tirageService.creer(tirage, listeConserne, activiteConserne);
         } else {
             ReponseMessage message = new ReponseMessage("Ce tirage existe dejà", false);
@@ -104,7 +106,7 @@ public class TirageController {
 
     @ApiOperation(value = "ici on Modifier une activité")
     @PutMapping("/valider/{id}")
-    public ReponseMessage validerTirage(@RequestBody Tirage tirage,@PathVariable Long id) {
+    public ReponseMessage validerTirage(@RequestBody Tirage tirage, @PathVariable Long id) {
 
         return tirageService.validerTirageTirage(tirage, id);
     }
