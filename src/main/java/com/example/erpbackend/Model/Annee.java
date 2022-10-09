@@ -10,6 +10,8 @@ import javax.persistence.*;
 @Entity
 @Data
 @Table
+@AllArgsConstructor
+@NoArgsConstructor
 public class Annee {
 
     @Id
