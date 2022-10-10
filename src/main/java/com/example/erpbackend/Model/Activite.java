@@ -42,7 +42,7 @@ public class Activite {
     @ManyToOne
     private Type_activite typeActivite;
 
-    @JsonIgnore
+
     @ManyToOne
     private Etat_activite etatActivite;
     @JsonIgnore

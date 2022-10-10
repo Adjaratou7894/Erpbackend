@@ -43,6 +43,12 @@ public class ListePostulantController {
 
         return listePostulantService.afficherListePostulant();
     }
+    @ApiOperation(value = "ici on afficher la Liste Postulant par libellee liste ")
+    @GetMapping("/afficher/{lib}")
+    public List<Object> afficherListePostulant( @PathVariable String lib) {
+
+        return listePostulantService.trouver(lib);
+    }
     @ApiOperation(value = "ici on afficher la Liste Postulant ")
     @GetMapping("/afficherNbreListePostulant")
     public int nbreListePostulant(){
