@@ -1,6 +1,8 @@
 package com.example.erpbackend.Model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.AbstractList;
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @Table
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Acteur {
     @Id
     @GeneratedValue( strategy = GenerationType.IDENTITY)

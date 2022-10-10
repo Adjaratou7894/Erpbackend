@@ -22,9 +22,15 @@ public class UtilisateurServiceImplement implements UtilisateurService {
     @Override
     public ReponseMessage ajouterUtilisateur(Utilisateur utilisateur) {
         if (utilisateurRepository.findByEmail(utilisateur.getEmail()) == null){
-            utilisateurRepository.save(utilisateur);
-            ReponseMessage message = new ReponseMessage("Utilisateur ajouté avec succes", true);
-            return  message;
+            if(utilisateur.getEmail().endsWith("@orangemali.com") == false){
+                ReponseMessage message = new ReponseMessage("mail non validé", true);
+                return message;
+            }else {
+                utilisateurRepository.save(utilisateur);
+                ReponseMessage message = new ReponseMessage("Utilisateur ajouté avec succes", true);
+                return  message;
+            }
+
         }else {
             ReponseMessage message = new ReponseMessage("Cet utilisateur existe déjà ", false);
 

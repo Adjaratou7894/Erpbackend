@@ -11,7 +11,6 @@ import java.util.Date;
 @NoArgsConstructor
 @Setter
 @Getter
-
 public class Liste_postulant {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
