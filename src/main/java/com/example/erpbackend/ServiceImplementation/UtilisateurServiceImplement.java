@@ -23,9 +23,16 @@ public class UtilisateurServiceImplement implements UtilisateurService {
     public ReponseMessage ajouterUtilisateur(Utilisateur utilisateur) {
         if (utilisateurRepository.findByEmail(utilisateur.getEmail()) == null){
             if(utilisateur.getEmail().endsWith("@orangemali.com") == false){
-                ReponseMessage message = new ReponseMessage("mail non validé", true);
+                ReponseMessage message = new ReponseMessage("Mail non validé", false);
                 return message;
-            }else {
+            }else  if(utilisateur.getEmail().length()<8){
+                ReponseMessage message = new ReponseMessage("Numero de telephone court", false);
+                return message;
+            }else  if (utilisateur.getPassword().length() < 4){
+                ReponseMessage message = new ReponseMessage("Mot de passe court", false);
+                return message;
+            }
+            else {
                 utilisateurRepository.save(utilisateur);
                 ReponseMessage message = new ReponseMessage("Utilisateur ajouté avec succes", true);
                 return  message;
