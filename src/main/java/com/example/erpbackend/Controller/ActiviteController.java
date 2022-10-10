@@ -106,7 +106,7 @@ public class ActiviteController {
 
         //String url= "src/main/resources/imgActivite/";
 
-        String url= "C:/Users/mkkeita/Desktop/projects/ionic/ApplicationERPInterface/src/assets/images/";
+        String url= "C:\\Users\\sddiakite\\Desktop\\Awa\\ApplicationERPInterface\\src\\assets\\images/";
 
         ConfigImage.saveimgA(url, nomfile, file);
 
