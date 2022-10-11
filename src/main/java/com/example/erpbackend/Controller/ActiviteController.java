@@ -75,7 +75,7 @@ public class ActiviteController {
         //Date dateFin = new SimpleDateFormat("yyyy/MM/dd").parse(datefin);
 
 
-        System.out.println("les id de l'acteurs aaaaaaaaaaaaaaaaaaa : " + idacteurs);
+        System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteurInternes);
 
         Activite activite = new Activite();
 
@@ -106,7 +106,7 @@ public class ActiviteController {
 
         //String url= "src/main/resources/imgActivite/";
 
-        String url= "C:\\Users\\sddiakite\\Desktop\\Awa\\ApplicationERPInterface\\src\\assets\\images/";
+        String url= "C:\\Users\\mkkeita\\Desktop\\projects\\ionic\\ApplicationERPInterface\\src\\assets\\images/";
 
         ConfigImage.saveimgA(url, nomfile, file);
 

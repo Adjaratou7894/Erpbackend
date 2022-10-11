@@ -55,7 +55,7 @@ public class ActiviteServiceImplement implements ActiviteService {
                     ////formateurs
 
             //formateurs externes
-            if(idacteurs.contains("")){
+            if(idacteurs != null){
 
             }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
@@ -73,7 +73,7 @@ public class ActiviteServiceImplement implements ActiviteService {
             }
 
             //Formateurs internes
-            if(idacteurInternes.contains("")){
+            if(idacteurInternes != null){
 
                 }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
@@ -96,7 +96,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Organisateurs externes
-            if(idacteursOrg.contains("")){
+            if(idacteursOrg != null){
 
             }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
@@ -137,7 +137,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Intervenant externes
-            if(idacteursInterv.contains("")){
+            if(idacteursInterv != null){
 
             }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
@@ -156,7 +156,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Intervenant internes
-            if(idacteurInternesInterv.contains("")){
+            if(idacteurInternesInterv != null){
 
             }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
@@ -178,7 +178,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Lead externes
-            if(idacteursLead.contains("")){
+            if(idacteursLead != null){
 
             }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
@@ -196,7 +196,7 @@ public class ActiviteServiceImplement implements ActiviteService {
             }
 
             //Lead internes
-            if(idacteurInternesLead.contains("")){
+            if(idacteurInternesLead != null){
 
             }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
