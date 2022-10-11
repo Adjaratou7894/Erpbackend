@@ -106,7 +106,7 @@ public class ActiviteController {
 
         //String url= "src/main/resources/imgActivite/";
 
-        String url= "C:/Users/adcoulibaly/Desktop/ERP/ApplicationERPInterface/src/assets/images/";
+        String url= "C:/Users/mccamara/Desktop/Nouveau dossier/ApplicationERPInterface/src/assets/images";
 
         ConfigImage.saveimgA(url, nomfile, file);
 
@@ -158,6 +158,9 @@ public class ActiviteController {
         return activiteService.recupererNombreActiviteParMois(mois);
     }
 
+
+
+
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LA LISTE DES ACTIVITES========================
 
     @ApiOperation(value = "ici on Supprimer une activité")
@@ -187,6 +190,22 @@ public class ActiviteController {
         return activiteService.activiteParEtat(etat);
     }
 
+
+    @GetMapping("/ParEntite/{entite_id}")
+    public List<Activite> formation(@PathVariable Long entite_id) {
+
+        return activiteService.formation(entite_id);
+    }
+    @GetMapping("/ParEntite2/{entite_id}")
+    public List<Activite> talk(@PathVariable Long entite_id) {
+
+        return activiteService.talk(entite_id);
+    }
+    @GetMapping("/ParEntite3/{entite_id}")
+    public List<Activite> eve(@PathVariable Long entite_id) {
+
+        return activiteService.eve(entite_id);
+    }
     @GetMapping("/parDatePlusRecente")
     List<Object> activiteParDatePlusRecente() {
 

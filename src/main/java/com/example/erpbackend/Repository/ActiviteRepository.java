@@ -33,6 +33,14 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     @Query(value = "SELECT * FROM activite, etat_activite WHERE activite.etat_activite_idetat = etat_activite.idetat AND etat_activite.etat =:etat", nativeQuery = true)
     List<Activite> findByEtat(@Param("etat") String etat);
 
+    @Query(value = "SELECT * FROM `activite` WHERE  activite.type_activite_idactivite=1 AND activite.entite_id_entite=:entite_id", nativeQuery = true)
+    List<Activite> formation(@Param("entite_id") Long entite_id);
+
+
+    @Query(value = "SELECT * FROM `activite` WHERE  activite.type_activite_idactivite=2 AND activite.entite_id_entite=:entite_id", nativeQuery = true)
+    List<Activite> talk(@Param("entite_id") Long entite_id);
+    @Query(value = "SELECT * FROM `activite` WHERE  activite.type_activite_idactivite=3 AND activite.entite_id_entite=:entite_id", nativeQuery = true)
+    List<Activite> eve(@Param("entite_id") Long entite_id);
 
     @Query(value = "SELECT nom, date_debut FROM activite ORDER BY date_debut desc", nativeQuery = true)
     List<Object> findByDateRecent();
@@ -199,6 +207,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Activite> FIND_ALL_ACTIVITE_NOT_VALILIDE();
 
 
+
     @Query(value = "select * from activite order by datecreation desc", nativeQuery = true)
     List<Activite> FIND_ALL_ACTIVITE_RECENT_CREATION();
 
@@ -223,7 +232,5 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             "AND postulant_tire.tirage_idtirage = tirage.idtirage AND activite.idactivite = tirage.activite_idactivite " +
             "AND activite.idactivite = :idactivite",nativeQuery = true)
     List<Object> LES_PERONNES_TIREE_VALIDE(Long  idactivite);
-
-
 
 }

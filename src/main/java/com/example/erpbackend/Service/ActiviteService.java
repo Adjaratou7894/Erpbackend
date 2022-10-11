@@ -41,8 +41,12 @@ public interface ActiviteService {
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES D'UNE ANNEE ====================================
     List<Object> ActiviteParAnnee(int annee);
 
+
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR ETAT ====================================
     List<Activite> activiteParEtat(String etat);
+    List<Activite> formation(Long entite_id);
+    List<Activite> eve(Long entite_id);
+    List<Activite> talk(Long entite_id);
 
 
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR LA DATE LA PLUS RECENTE ====================

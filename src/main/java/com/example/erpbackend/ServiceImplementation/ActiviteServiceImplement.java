@@ -304,9 +304,28 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     }
 
+
+
+
     @Override
     public List<Activite> activiteParEtat(String etat) {
         return activiteRepository.findByEtat(etat);
+    }
+
+
+    @Override
+    public List<Activite> formation(Long entite_id) {
+        return activiteRepository.formation(entite_id);
+    }
+
+    @Override
+    public List<Activite> eve(Long entite_id) {
+        return activiteRepository.eve(entite_id);
+    }
+
+    @Override
+    public List<Activite> talk(Long entite_id) {
+        return activiteRepository.talk(entite_id);
     }
 
     @Override
