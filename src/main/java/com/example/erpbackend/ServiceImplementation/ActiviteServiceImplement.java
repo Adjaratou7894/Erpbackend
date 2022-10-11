@@ -55,7 +55,7 @@ public class ActiviteServiceImplement implements ActiviteService {
                     ////formateurs
 
             //formateurs externes
-            if(idacteurs != null){
+            if(idacteurs.contains("")){
 
             }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
@@ -73,7 +73,7 @@ public class ActiviteServiceImplement implements ActiviteService {
             }
 
             //Formateurs internes
-            if(idacteurInternes != null){
+            if(idacteurInternes.contains("")){
 
                 }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
@@ -96,7 +96,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Organisateurs externes
-            if(idacteursOrg != null){
+            if(idacteursOrg.contains("")){
 
             }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
@@ -156,7 +156,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Intervenant internes
-            if(idacteurInternesInterv != null){
+            if(idacteurInternesInterv.contains("")){
 
             }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
@@ -178,7 +178,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Lead externes
-            if(idacteursLead != null){
+            if(idacteursLead.contains("")){
 
             }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
