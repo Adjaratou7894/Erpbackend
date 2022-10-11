@@ -210,6 +210,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             " entite.id_entite AND activite.etat_activite_idetat = etat_activite.idetat " +
             "AND etat_activite.etat =:etat AND entite.id_entite =:entite;",
             nativeQuery = true)
+
     List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
 
     @Query(value = "SELECT COUNT(activite.idactivite) FROM activite WHERE activite.entite_id_entite =:idactivite", nativeQuery = true)
