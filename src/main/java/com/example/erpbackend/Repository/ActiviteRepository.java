@@ -182,16 +182,17 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     int nombreEvenement();
 
     //les trois activite les plus recente l'id etatactivite represente l'activite en cour
-    @Query(value = "SELECT activite.nom AS nomactivite,activite.description,utilisateur.nom AS nomUser, utilisateur.prenom AS prenomUser,activite.idactivite " +
-            "FROM activite,utilisateur,etat_activite WHERE utilisateur.iduser=activite.createur_iduser AND etat_activite.idetat = activite.etat_activite_idetat " +
-            "AND etat_activite.etat =\"encours\" ORDER BY activite.date_debut DESC LIMIT 3;", nativeQuery = true)
+    @Query(value = "SELECT activite.nom AS nomactivite,activite.description,utilisateur.nom AS nomUser, utilisateur.prenom AS\n" +
+            " prenomUser,activite.idactivite , activite.photoactivite as photo FROM activite,utilisateur,etat_activite WHERE \n" +
+            "  etat_activite.idetat = activite.etat_activite_idetat and  utilisateur.iduser =activite.createur_iduser\n" +
+            "            AND etat_activite.etat =\"encours\" ORDER BY activite.date_debut DESC LIMIT 3;", nativeQuery = true)
     List<Object> troisActiviteRecente();
 
     //les trois activite les plus recente l'id etatactivite represente l'activite à venir
-    @Query(value = "SELECT activite.nom AS \"nomactivite\",activite.description,utilisateur.nom AS" +
-            " \"nomUser\",utilisateur.prenom AS \"prenomUser\",activite.idactivite FROM activite,utilisateur,etat_activite" +
-            " WHERE etat_activite.idetat =" +
-            " activite.idactivite AND etat_activite.etat =\"avenir\" ORDER BY activite.date_debut DESC LIMIT 3",
+    @Query(value = "SELECT activite.nom AS nomactivite,activite.description,utilisateur.nom AS nomUser, utilisateur.prenom AS\n" +
+            " prenomUser,activite.idactivite , activite.photoactivite as photo FROM activite,utilisateur,etat_activite WHERE \n" +
+            "  etat_activite.idetat = activite.etat_activite_idetat and  utilisateur.iduser =activite.createur_iduser\n" +
+            "            AND etat_activite.etat =\"avenir\" ORDER BY activite.date_debut DESC LIMIT 3;",
             nativeQuery = true)
     List<Object> troisActiviteAvenir();
 
@@ -226,5 +227,11 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Object> LES_PERONNES_TIREE_VALIDE(Long  idactivite);
 
 
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom'" +
+            ", activite.date_debut,etat_activite.etat,activite.idactivite from activite,entite,etat_activite WHERE" +
+            " activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat = " +
+            "etat_activite.idetat",
+            nativeQuery = true)
+    List<Object> afficherActiviteDansFront();
 
 }

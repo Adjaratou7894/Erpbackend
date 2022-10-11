@@ -59,7 +59,7 @@ public class ActiviteController {
     @ApiOperation(value = "ici on Ajouter une activité")
 
     @PostMapping("/ajouter")
-    public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") int nombrepersonnedemande, @RequestParam("datedeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datedeb, @RequestParam("datefin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datefin
+    public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") Long nombrepersonnedemande, @RequestParam("datedeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datedeb, @RequestParam("datefin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datefin
             ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes
             ,@Param("idacteursInterv") String idacteursInterv, @Param("idacteurInternesInterv") String idacteurInternesInterv
             ,@Param("idacteursOrg") String idacteursOrg, @Param("idacteurInternesOrg") String idacteurInternesOrg
@@ -90,6 +90,8 @@ public class ActiviteController {
         activite.setDatecreation(new Date());
 
         activite.setDescription(description);
+
+        activite.setNombrepersonnedemande(nombrepersonnedemande);
 
 
         activite.setDateDebut(datedeb);
@@ -473,6 +475,11 @@ public class ActiviteController {
     List<Activite> recupererActiviteNonlierAliste(){
 
         return activiteService.recupererActivitesSansListe();
+    }
+
+    @GetMapping("/afficherDansReporting")
+    List<Object> afficherDansReportingc(){
+        return activiteService.afficherActiviteDansFront();
     }
 
 
