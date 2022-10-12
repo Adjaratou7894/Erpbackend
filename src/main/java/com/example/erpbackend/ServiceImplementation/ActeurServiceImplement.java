@@ -29,6 +29,11 @@ public class ActeurServiceImplement implements ActeurService {
     }
 
     @Override
+    public List<Acteur> trouverActeurParId(long idacteur) {
+        return acteurRepository.findByIdacteur(idacteur);
+    }
+
+    @Override
     public Acteur modifierActeur(Acteur acteur, Long idacteur) {
         Acteur acteurUpdate = acteurRepository.findById(idacteur).get();
         acteurUpdate.setNom(acteur.getNom());
