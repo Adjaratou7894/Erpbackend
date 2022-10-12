@@ -123,4 +123,8 @@ public interface ActiviteService {
 
     int counterActivite(Long idactivite);
 
+
+    ///++++++++++++++++++++++++++++++++++++
+    List<Object> afficherActiviteDansFront();
+
 }

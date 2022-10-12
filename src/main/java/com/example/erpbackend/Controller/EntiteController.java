@@ -83,7 +83,9 @@ public class EntiteController {
         System.out.println(entite.getIdEntite());
         System.out.println(entite.getNom());
         if(entiteRepository.findByNom(nom) == null) {
-            String uploaDir = "C:/Users/adcoulibaly/Desktop/ERP/ApplicationERPInterface/src/assets/images";
+
+            String uploaDir = "C:/Users/mccamara/Desktop/Nouveau dossier/ApplicationERPInterface/src/assets/images";
+
             //String uploaDir = new ClassPathResource("files/").getFile().getAbsolutePath();
             ConfigImage.saveimg(uploaDir, nomfile, file);
             //  entiteServiceImplement.ajouter(entite);

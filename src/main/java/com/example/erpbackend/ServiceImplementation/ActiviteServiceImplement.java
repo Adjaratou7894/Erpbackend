@@ -55,9 +55,8 @@ public class ActiviteServiceImplement implements ActiviteService {
                     ////formateurs
 
             //formateurs externes
-            if(idacteurs.contains("")){
+            if(idacteurs.contains(",")){
 
-            }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
                 System.out.println(allIdActeurs);
@@ -70,12 +69,14 @@ public class ActiviteServiceImplement implements ActiviteService {
                     activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Formateurs(l, act.getIdactivite());
 
                 }
+
+            }else {
+
             }
 
             //Formateurs internes
-            if(idacteurInternes.contains("")){
+            if(idacteurInternes.contains(",")){
 
-                }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
 
                 System.out.println(allIdActeursInternes);
@@ -86,6 +87,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     activiteRepository.insert_activites_utilisateurs_animer_formateurs(l, act.getIdactivite());
                 }
+
+                }else{
+
             }
 
 
@@ -95,10 +99,11 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
 
-            //Organisateurs externes
-            if(idacteursOrg.contains("")){
 
-            }else {
+
+            //Organisateurs externes
+            if(idacteursOrg.contains(",")){
+
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
                 System.out.println(allIdActeurs);
@@ -111,12 +116,14 @@ public class ActiviteServiceImplement implements ActiviteService {
                     activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Organisateurs(l, act.getIdactivite());
 
                 }
+
+            }else {
+
             }
 
             //Organisateurs internes
-            if(idacteurInternesOrg.contains("")){
+            if(idacteurInternesOrg.contains(",")){
 
-            }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
 
                 System.out.println(allIdActeursInternes);
@@ -127,6 +134,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     activiteRepository.insert_activites_utilisateurs_animer_Organisateurs(l, act.getIdactivite());
                 }
+
+            }else{
+
             }
 
 
@@ -137,9 +147,8 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Intervenant externes
-            if(idacteursInterv.contains("")){
+            if(idacteursInterv.contains(",")){
 
-            }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
                 System.out.println(allIdActeurs);
@@ -151,14 +160,16 @@ public class ActiviteServiceImplement implements ActiviteService {
                     activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Intervenants(l, act.getIdactivite());
 
                 }
+
+            }else {
+
             }
 
 
 
             //Intervenant internes
-            if(idacteurInternesInterv.contains("")){
+            if(idacteurInternesInterv.contains(",")){
 
-            }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
 
                 System.out.println(allIdActeursInternes);
@@ -169,6 +180,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     activiteRepository.insert_activites_utilisateurs_animer_Intervenants(l, act.getIdactivite());
                 }
+
+            }else{
+
             }
 
 
@@ -178,9 +192,8 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Lead externes
-            if(idacteursLead.contains("")){
+            if(idacteursLead.contains(",")){
 
-            }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
                 System.out.println(allIdActeurs);
@@ -193,12 +206,16 @@ public class ActiviteServiceImplement implements ActiviteService {
                     activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Lead(l, act.getIdactivite());
 
                 }
+
+            }else {
+
             }
 
-            //Lead internes
-            if(idacteurInternesLead.contains("")){
+            System.out.println("mon test test test test: "+idacteurInternesLead.contains(","));
 
-            }else{
+            //Lead internes
+            if(idacteurInternesLead.contains(",")){
+
                 String[] allIdActeursInternes = idacteurInternes.split(",");
 
                 System.out.println(allIdActeursInternes);
@@ -209,6 +226,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     activiteRepository.insert_activites_utilisateurs_animer_Leads(l, act.getIdactivite());
                 }
+
+            }else{
+
             }
 
 
@@ -640,6 +660,11 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     public int counterActivite(Long idactivite) {
         return activiteRepository.counterActivite(idactivite);
+    }
+
+    @Override
+    public List<Object> afficherActiviteDansFront() {
+        return activiteRepository.afficherActiviteDansFront();
     }
 
 
