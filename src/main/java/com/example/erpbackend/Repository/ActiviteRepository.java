@@ -30,8 +30,18 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Object> ActiviteEnFonctionAnnee(@Param("annee") int annee);
 
 
+
     @Query(value = "SELECT * FROM activite, etat_activite WHERE activite.etat_activite_idetat = etat_activite.idetat AND etat_activite.etat =:etat", nativeQuery = true)
-    List<Activite> findByEtat(@Param("etat") String etat);
+            List<Activite> findByEtat(@Param("etat") String etat);
+  /*
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom', " +
+            "activite.date_debut,etat_activite.etat from activite,entite,etat_activite " +
+            "WHERE activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat =" +
+            " etat_activite.idetat AND etat_activite.etat=:etat;", nativeQuery = true)
+
+   */
+
+
 
     @Query(value = "SELECT * FROM `activite` WHERE  activite.type_activite_idactivite=1 AND activite.entite_id_entite=:entite_id", nativeQuery = true)
     List<Activite> formation(@Param("entite_id") Long entite_id);
@@ -134,20 +144,28 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     // fin des statistiques  pour entité Solidaire fablab
 
 
-    @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite` WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
+    @Query(value = "SELECT activite.nom, activite.date_debut, activite.date_fin FROM `activite`" +
+            " WHERE date_debut BETWEEN :dateDebut AND :dateFin", nativeQuery = true)
     List<Object> findByDateIntervale(Date dateDebut, Date dateFin);
 
-    @Query(value = "SELECT activite.nom, activite.date_debut,activite.date_fin,entite.nom as 'entitenom',activite.etat FROM `activite`,entite WHERE activite.entite_id_entite=entite.id_entite AND entite.nom=:entite", nativeQuery = true)
+    //filtrage par entité
+
+    @Query(value = "SELECT activite.idactivite,activite.nom,entite.nom as 'entitenom', activite.date_debut,etat_activite.etat" +
+            " from activite,entite,etat_activite WHERE activite.entite_id_entite = entite.id_entite " +
+            "AND activite.etat_activite_idetat = etat_activite.idetat AND entite.nom =:entite", nativeQuery = true)
     List<Object> findByEntite(@Param("entite") String entite);
 
 
+
     @Query(value = "SELECT activite.nom,activite.description,etat_activite.etat,activite.date_debut,activite.date_fin, activite.photoactivite as photo FROM activite,entite,etat_activite WHERE activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat = etat_activite.idetat AND etat_activite.etat = :etatActivite AND entite.id_entite=:idEntite", nativeQuery = true)
+
     List<Object> findByEtatAndTypeActivite(@Param("etatActivite") String etatActivite, @Param("idEntite") Long idEntite);
 
     @Query(value = "SELECT * FROM activite,type_activite WHERE activite.type_activite_idactivite = type_activite.idactivite AND type_activite.type_activite=:typeActivite AND activite.entite_id_entite=:idEntite", nativeQuery = true)
     List<Activite> findByTypeActiviteAndEntite(@Param("typeActivite") String typeActivite, @Param("idEntite") Long idEntite);
 
     @Query(value = "SELECT activite.nom as 'nom activité', activite.date_debut,activite.date_fin,entite.nom as 'nom entité',activite.etat,statut.nom as 'statut' FROM `activite`,entite,statut,acteur_activites,acteur WHERE activite.entite_id_entite=entite.id_entite AND activite.idactivite = acteur_activites.activite_id AND acteur_activites.acteur_id = acteur.idacteur AND statut.idstatut = acteur.statut_idstatut AND entite.nom=:entite AND statut.nom=:statut", nativeQuery = true)
+
     List<Object> findByEntiteAndStatus(@Param("entite") String entite, @Param("statut") String statut);
 
 
@@ -182,6 +200,7 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.type_activite_idactivite = " +
             "type_activite.idactivite AND type_activite.type_activite = \"Formation\";", nativeQuery = true)
     int nombreFormation();
+
     @Query(value = "SELECT COUNT(*) FROM activite,type_activite WHERE activite.type_activite_idactivite = " +
             "type_activite.idactivite AND type_activite.type_activite = \"Talk\";", nativeQuery = true)
     int nombreTalks();
@@ -223,25 +242,23 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
 
+
     @Query(value = "SELECT COUNT(activite.idactivite) FROM activite WHERE activite.entite_id_entite =:idactivite", nativeQuery = true)
     int counterActivite(@Param("idactivite") Long idactivite );
 
     // ============================ ICI ON RECUPERE LES PERSONNE TIRES SUR UN TIRAGE VALIDE ET SUR UNE ACTIVITE PRECIS
+
 
     @Query(value = "SELECT postulant.nom_postulant,postulant.prenom_postulant," +
             "postulant.email,postulant.numero_postulant, postulant.genre FROM postulant," +
             "tirage,postulant_tire,activite WHERe tirage.validite = 1 AND postulant.id = postulant_tire.id " +
             "AND postulant_tire.tirage_idtirage = tirage.idtirage AND activite.idactivite = tirage.activite_idactivite " +
             "AND activite.idactivite = :idactivite",nativeQuery = true)
+
     List<Object> LES_PERONNES_TIREE_VALIDE(Long  idactivite);
 
 
-    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom'" +
-            ", activite.date_debut,etat_activite.etat,activite.idactivite from activite,entite,etat_activite WHERE" +
-            " activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat = " +
-            "etat_activite.idetat",
-            nativeQuery = true)
-    List<Object> afficherActiviteDansFront();
+
 
     @Query(value = "select createur_iduser from activite where idactivite = :idactivite", nativeQuery = true)
     Long FIND_ACTIVITE_Createur(@Param("idactivite") Long idactivite);
@@ -257,5 +274,24 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "select type_activite_idactivite from activite where idactivite = :idactivite;", nativeQuery = true)
     Long FIND_ACTIVITE_Type(@Param("idactivite") Long idactivite);
+
+
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom'" +
+            ", activite.date_debut,etat_activite.etat,activite.idactivite from activite,entite,etat_activite WHERE" +
+            " activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat = " +
+            "etat_activite.idetat",
+            nativeQuery = true)
+    List<Object> afficherActiviteDansFront();
+
+
+    /*============================================ ici on fait les filtre de reporting =========================================================  */
+
+
+    @Query(value = "SELECT * FROM activite,etat_activite,entite WHERE" +
+            " entite.id_entite=activite.entite_id_entite AND etat_activite.idetat=activite.etat_activite_idetat AND" +
+            " activite.date_debut =:dateDebut AND" +
+            " etat_activite.etat=:etatActivite AND entite.nom = :entite_nom;",nativeQuery = true)
+    List<Object> filtreReporting(@Param("dateDebut") String date_debut,@Param("etatActivite") String etat_activite,@Param("entite_nom") String nom);
+
 
 }

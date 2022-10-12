@@ -491,6 +491,7 @@ public class ActiviteController {
         return activiteService.afficherActiviteParEntiteEtat(entite, etat);
     }
 
+
     @GetMapping("/activiteSansListe")
     List<Activite> recupererActiviteNonlierAliste(){
 
@@ -502,10 +503,19 @@ public class ActiviteController {
         return activiteService.afficherActiviteDansFront();
     }
 
+
+
     @GetMapping("/tousActivites/{idact}")
     ActiviteRetour recupererActivites(@PathVariable Long idact){
 
         return activiteService.recupererTousActivite(idact);
+    }
+
+    //============================================================Reporting filtre
+
+    @GetMapping("/FiltreReporting/{date_debut}/{etat_activite}/{nom}")
+    public List<Object> leReporting(@PathVariable("date_debut") String date_debut, @PathVariable("etat_activite")String etat_activite, @PathVariable("nom")String nom) {
+        return activiteService.filtreReportingS(date_debut,etat_activite,nom);
     }
 
 

@@ -2,6 +2,7 @@ package com.example.erpbackend.Controller;
 
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Entite;
+import com.example.erpbackend.Model.Utilisateur;
 import com.example.erpbackend.Repository.EntiteRepository;
 import com.example.erpbackend.ServiceImplementation.EntiteServiceImplement;
 import com.example.erpbackend.img.ConfigImage;
@@ -69,7 +70,7 @@ public class EntiteController {
     }
 
     @PostMapping("/ajouterE")
-    public ReponseMessage ajouterEntit(@Param("nom") String nom, @Param("slogant") String slogant, @Param("description") String description, @Param("file") MultipartFile file) throws IOException {
+    public ReponseMessage ajouterEntit(@Param("nom") String nom, @Param("slogant") String slogant, @Param("description") String description, @Param("iduser") Utilisateur iduser, @Param("file") MultipartFile file) throws IOException {
         Entite entite = new Entite();
         String nomfile = StringUtils.cleanPath(file.getOriginalFilename());
         System.out.println(nom);
@@ -80,6 +81,7 @@ public class EntiteController {
          entite.setSlogant(slogant);
         System.out.println(nomfile);
          entite.setPhotoentite(nomfile);
+         entite.setUtilisateur(iduser);
         System.out.println(entite.getIdEntite());
         System.out.println(entite.getNom());
         if(entiteRepository.findByNom(nom) == null) {

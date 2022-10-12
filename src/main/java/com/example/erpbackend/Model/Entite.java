@@ -1,5 +1,6 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,5 +25,10 @@ public class Entite {
     private String photoentite;
 
     private String slogant;
+
+    @JsonIgnore
+    @ManyToOne
+    private Utilisateur utilisateur;
+
 
 }

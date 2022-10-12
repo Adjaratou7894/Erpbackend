@@ -701,8 +701,12 @@ public class ActiviteServiceImplement implements ActiviteService {
         activiteRetour.setSalle(salleRepository.findByIdsalle(salleId).getNom());
         activiteRetour.setEtat(etatActiviteRepository.findByIdetat(etatId).getEtat());
 
-        return activiteRetour;
+        return activiteRetour;}
+
+    public List<Object> filtreReportingS(String date_debut, String etat_activite, String nom) {
+        return activiteRepository.filtreReporting(date_debut,etat_activite,nom);
     }
+
 
 
 }
