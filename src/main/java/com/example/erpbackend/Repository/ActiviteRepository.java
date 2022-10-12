@@ -1,6 +1,8 @@
 package com.example.erpbackend.Repository;
 
+import com.example.erpbackend.Model.Acteur_activites;
 import com.example.erpbackend.Model.Activite;
+import com.example.erpbackend.Model.ActivitesUtilisateursAnimer;
 import com.example.erpbackend.Model.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -248,5 +250,6 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
 
     @Query(value = "select type_activite_idactivite from activite where idactivite = :idactivite;", nativeQuery = true)
     Long FIND_ACTIVITE_Type(@Param("idactivite") Long idactivite);
+
 
 }

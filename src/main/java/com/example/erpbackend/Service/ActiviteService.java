@@ -2,7 +2,9 @@ package com.example.erpbackend.Service;
 
 import com.example.erpbackend.Message.ActiviteRetour;
 import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Acteur_activites;
 import com.example.erpbackend.Model.Activite;
+import com.example.erpbackend.Model.ActivitesUtilisateursAnimer;
 import com.example.erpbackend.Model.Role;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
@@ -123,5 +125,8 @@ public interface ActiviteService {
     List<Object> afficherActiviteDansFront();
 
     ActiviteRetour recupererTousActivite(Long idact);
+
+    List<Object> recuperActeurActivites(Long idAct);
+    List<Object> recupererActivitesUtilAnimer(Long idAct);
 
 }

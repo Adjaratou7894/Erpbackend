@@ -2,8 +2,9 @@ package com.example.erpbackend.ServiceImplementation;
 
 import com.example.erpbackend.Message.ActiviteRetour;
 import com.example.erpbackend.Message.ReponseMessage;
+import com.example.erpbackend.Model.Acteur_activites;
 import com.example.erpbackend.Model.Activite;
-import com.example.erpbackend.Model.Utilisateur;
+import com.example.erpbackend.Model.ActivitesUtilisateursAnimer;
 import com.example.erpbackend.Repository.*;
 import com.example.erpbackend.Service.ActiviteService;
 import lombok.AllArgsConstructor;
@@ -39,6 +40,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     @Autowired
     private EtatActiviteRepository etatActiviteRepository;
+
+    @Autowired
+    private ActiviteUtilisateurAnimerRepository activiteUtilisateurAnimerRepository;
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
@@ -683,6 +687,16 @@ public class ActiviteServiceImplement implements ActiviteService {
         activiteRetour.setEtat(etatActiviteRepository.findByIdetat(etatId).getEtat());
 
         return activiteRetour;
+    }
+
+    @Override
+    public List<Object> recuperActeurActivites(Long idAct) {
+        return activite_acteurRepository.recupererActeur_activites(idAct);
+    }
+
+    @Override
+    public List<Object> recupererActivitesUtilAnimer(Long idAct) {
+        return activiteUtilisateurAnimerRepository.recupererActeurUtilisateurAnimer(idAct);
     }
 
 

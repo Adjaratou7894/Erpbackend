@@ -489,6 +489,17 @@ public class ActiviteController {
         return activiteService.recupererTousActivite(idact);
     }
 
+    @GetMapping("/acteur_activites/{idAct}")
+    List<Object> recupererActeurActivites(@PathVariable Long idAct){
+        return activiteService.recuperActeurActivites(idAct);
+    }
+
+    @GetMapping("/activitesAnimer/{idAct}")
+    List<Object> recupererActeurActivitesUtilisateursAnimer(@PathVariable Long idAct){
+        return activiteService.recupererActivitesUtilAnimer(idAct);
+
+    }
+
 
 }
 
