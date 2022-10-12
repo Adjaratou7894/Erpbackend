@@ -1,5 +1,6 @@
 package com.example.erpbackend.Service;
 
+import com.example.erpbackend.Message.ActiviteRetour;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Role;
@@ -101,14 +102,12 @@ public interface ActiviteService {
 
 
 
-
-
-
     public ReponseMessage AgetBytes(long idactivite) throws IOException;
 
     List<Object> troisActiviteavenir();
 
     List<Activite> recupererActivitesSansListe();
+
     List<Object> afficherActiviteParId(int idactivite);
 
     List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite);
@@ -126,5 +125,7 @@ public interface ActiviteService {
 
     ///++++++++++++++++++++++++++++++++++++
     List<Object> afficherActiviteDansFront();
+
+    ActiviteRetour recupererTousActivite(Long idact);
 
 }
