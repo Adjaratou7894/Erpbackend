@@ -110,6 +110,8 @@ public interface ActiviteService {
     List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite);
 
 
+    List<Object> afficherActiviteDansFront();
+
 
     //++++++++++++++++++++++++++++++++++++++++++ List<Object> LES_PERONNES_TIREE_VALIDE(Long  idActivite);
 
@@ -118,5 +120,10 @@ public interface ActiviteService {
     List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
 
     int counterActivite(Long idactivite);
+
+    //================================================================================
+
+    List<Object> filtreReportingS(String date_debut,String etat_activite,String nom);
+
 
 }

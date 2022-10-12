@@ -469,10 +469,25 @@ public class ActiviteController {
         return activiteService.afficherActiviteParEntiteEtat(entite, etat);
     }
 
+
     @GetMapping("/activiteSansListe")
     List<Activite> recupererActiviteNonlierAliste(){
 
         return activiteService.recupererActivitesSansListe();
+    }
+
+
+    //afficher dans le repoting
+    @GetMapping("/afficherDansReporting")
+    List<Object> afficherActiviteDansFront(){
+        return  activiteService.afficherActiviteDansFront();
+    }
+
+    //============================================================Reporting filtre
+
+    @GetMapping("/FiltreReporting/{date_debut}/{etat_activite}/{nom}")
+    public List<Object> leReporting(@PathVariable("date_debut") String date_debut, @PathVariable("etat_activite")String etat_activite, @PathVariable("nom")String nom) {
+        return activiteService.filtreReportingS(date_debut,etat_activite,nom);
     }
 
 

@@ -623,5 +623,15 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.counterActivite(idactivite);
     }
 
+    @Override
+    public List<Object> filtreReportingS(String date_debut, String etat_activite, String nom) {
+        return activiteRepository.filtreReporting(date_debut,etat_activite,nom);
+    }
+
+    @Override
+    public List<Object> afficherActiviteDansFront() {
+        return activiteRepository.afficherActiviteDansFront();
+    }
+
 
 }

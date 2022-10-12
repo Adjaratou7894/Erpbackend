@@ -99,7 +99,7 @@ public class UtilisateurServiceImplement implements UtilisateurService {
 
         } else {
 
-            ReponseMessage message = new ReponseMessage("Mot de passe ou identifiant incorrect", false);
+            ReponseMessage message = new ReponseMessage("Mot de passe ou email incorrect", false);
 
             return message;
         }
