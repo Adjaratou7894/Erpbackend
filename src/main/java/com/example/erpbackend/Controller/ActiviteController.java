@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ActiviteRetour;
 import com.example.erpbackend.Model.*;
 import com.example.erpbackend.Repository.EtatActiviteRepository;
 import com.example.erpbackend.Repository.UtilisateurRepository;
@@ -480,6 +481,12 @@ public class ActiviteController {
     @GetMapping("/afficherDansReporting")
     List<Object> afficherDansReportingc(){
         return activiteService.afficherActiviteDansFront();
+    }
+
+    @GetMapping("/tousActivites/{idact}")
+    ActiviteRetour recupererActivites(@PathVariable Long idact){
+
+        return activiteService.recupererTousActivite(idact);
     }
 
 

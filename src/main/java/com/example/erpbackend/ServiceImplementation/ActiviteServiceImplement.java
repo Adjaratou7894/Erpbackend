@@ -1,9 +1,10 @@
 package com.example.erpbackend.ServiceImplementation;
 
+import com.example.erpbackend.Message.ActiviteRetour;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
-import com.example.erpbackend.Repository.ActiviteRepository;
-import com.example.erpbackend.Repository.Activite_ActeurRepository;
+import com.example.erpbackend.Model.Utilisateur;
+import com.example.erpbackend.Repository.*;
 import com.example.erpbackend.Service.ActiviteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,15 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     @Autowired
     private Activite_ActeurRepository activite_acteurRepository;
+
+    @Autowired
+    private SalleRepository salleRepository;
+
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    private EtatActiviteRepository etatActiviteRepository;
 
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
@@ -646,6 +656,33 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Override
     public List<Object> afficherActiviteDansFront() {
         return activiteRepository.afficherActiviteDansFront();
+    }
+
+    @Override
+    public ActiviteRetour recupererTousActivite(Long idact) {
+
+        ActiviteRetour activiteRetour = new ActiviteRetour();
+
+        Activite activite = activiteRepository.findByIdactivite(idact);
+
+        Long createurId = activiteRepository.FIND_ACTIVITE_Createur(idact);
+        Long respondId = activiteRepository.FIND_ACTIVITE_Responsable(idact);
+        Long salleId = activiteRepository.FIND_ACTIVITE_Etat(idact);
+        Long etatId = activiteRepository.FIND_ACTIVITE_Etat(idact);
+
+        activiteRetour.setLibelle(activite.getNom());
+        activiteRetour.setDescription(activite.getDescription());
+        activiteRetour.setPhoto(activite.getPhotoactivite());
+        activiteRetour.setDateDebut(activite.getDateDebut());
+        activiteRetour.setDatefin(activite.getDateFin());
+        activiteRetour.setObjectifVise(activite.getIdactivite());
+
+        activiteRetour.setCreateur(utilisateurRepository.findByIduser(createurId).getNom());
+        activiteRetour.setResponsable(utilisateurRepository.findByIduser(respondId).getNom());
+        activiteRetour.setSalle(salleRepository.findByIdsalle(salleId).getNom());
+        activiteRetour.setEtat(etatActiviteRepository.findByIdetat(etatId).getEtat());
+
+        return activiteRetour;
     }
 
 

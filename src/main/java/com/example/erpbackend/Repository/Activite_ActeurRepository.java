@@ -37,5 +37,6 @@ public interface Activite_ActeurRepository extends JpaRepository<Acteur_activite
 
 
 
+    //@Query(value = "select * from activite_acteur where ")
 
 }

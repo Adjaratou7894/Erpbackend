@@ -234,4 +234,19 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
             nativeQuery = true)
     List<Object> afficherActiviteDansFront();
 
+    @Query(value = "select createur_iduser from activite where idactivite = :idactivite", nativeQuery = true)
+    Long FIND_ACTIVITE_Createur(@Param("idactivite") Long idactivite);
+
+    @Query(value = "select salle_idsalle from activite where idactivite = :idactivite", nativeQuery = true)
+    Long FIND_ACTIVITE_Salle_id(@Param("idactivite") Long idactivite);
+
+    @Query(value = "select responsable_iduser from activite where idactivite = :idactivite", nativeQuery = true)
+    Long FIND_ACTIVITE_Responsable(@Param("idactivite") Long idactivite);
+
+    @Query(value = "select etat_activite_idetat from activite where idactivite = :idactivite", nativeQuery = true)
+    Long FIND_ACTIVITE_Etat(@Param("idactivite") Long idactivite);
+
+    @Query(value = "select type_activite_idactivite from activite where idactivite = :idactivite;", nativeQuery = true)
+    Long FIND_ACTIVITE_Type(@Param("idactivite") Long idactivite);
+
 }
