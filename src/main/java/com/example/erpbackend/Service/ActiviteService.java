@@ -113,14 +113,13 @@ public interface ActiviteService {
     List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite);
 
 
-    List<Object> afficherActiviteDansFront();
 
 
     //++++++++++++++++++++++++++++++++++++++++++ List<Object> LES_PERONNES_TIREE_VALIDE(Long  idActivite);
 
     List<Object> LES_PERONNES_TIREE_V(Long  idActivite);
 
-    List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
+
 
     int counterActivite(Long idactivite);
 
@@ -137,6 +136,16 @@ public interface ActiviteService {
     //================================================================================
 
     List<Object> filtreReportingS(String date_debut,String etat_activite,String nom);
+
+
+    List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
+
+    List<Object> afficherActiviteDansFront();
+    List<Object> afficherFiltreActiviteParEntiteDansFront( String entite);
+    List<Object> afficherFiltreListeActiviteDansFront( String listepostulant);
+    List<Object> afficherFiltreParActiviteDansFront( String activite);
+    List<Object> afficherFiltreParEtatDansFront( String etat_activite);
+    List<Object> afficherFiltreParAnneeDansFront( int annee);
 
 
 

@@ -276,13 +276,6 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     Long FIND_ACTIVITE_Type(@Param("idactivite") Long idactivite);
 
 
-    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom'" +
-            ", activite.date_debut,etat_activite.etat,activite.idactivite from activite,entite,etat_activite WHERE" +
-            " activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat = " +
-            "etat_activite.idetat",
-            nativeQuery = true)
-    List<Object> afficherActiviteDansFront();
-
 
     /*============================================ ici on fait les filtre de reporting =========================================================  */
 
@@ -294,4 +287,51 @@ public interface ActiviteRepository extends JpaRepository<Activite, Long> {
     List<Object> filtreReporting(@Param("dateDebut") String date_debut,@Param("etatActivite") String etat_activite,@Param("entite_nom") String nom);
 
 
+    //afficher entité dans repoting
+
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom' , " +
+            "activite.date_debut,etat_activite.etat,activite.idactivite,liste_postulant.libelleliste " +
+            "from activite,entite,etat_activite,liste_postulant WHERE activite.entite_id_entite = " +
+            "entite.id_entite AND activite.etat_activite_idetat = etat_activite.idetat AND " +
+            "liste_postulant.activite_idactivite = activite.idactivite;",
+            nativeQuery = true)
+    List<Object> afficherActiviteDansFront();
+    //filtre par entité dans repoting
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom' , activite.date_debut," +
+            "etat_activite.etat,activite.idactivite,liste_postulant.libelleliste from activite,entite," +
+            "etat_activite,liste_postulant WHERE activite.entite_id_entite = entite.id_entite AND" +
+            " activite.etat_activite_idetat = etat_activite.idetat AND liste_postulant.activite_idactivite = " +
+            "activite.idactivite AND entite.nom =:entite",
+            nativeQuery = true)
+    List<Object> afficherFiltreActiviteParEntiteDansFront(@Param("entite") String entite);
+    //filtrer par libellé listé dans repoting
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom' ," +
+            " activite.date_debut,etat_activite.etat,activite.idactivite,liste_postulant.libelleliste " +
+            "from activite,entite,etat_activite,liste_postulant WHERE activite.entite_id_entite = " +
+            "entite.id_entite AND activite.etat_activite_idetat = etat_activite.idetat AND " +
+            "liste_postulant.activite_idactivite = activite.idactivite AND" +
+            " liste_postulant.libelleliste =:liste_postulant",nativeQuery = true)
+    List<Object> afficherFiltreListeActiviteDansFront(@Param("liste_postulant") String liste_postulant);
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom' , activite.date_debut," +
+            "etat_activite.etat,activite.idactivite,liste_postulant.libelleliste from activite,entite," +
+            "etat_activite,liste_postulant WHERE activite.entite_id_entite = entite.id_entite AND " +
+            "activite.etat_activite_idetat = etat_activite.idetat AND liste_postulant.activite_idactivite = " +
+            "activite.idactivite AND activite.nom =:activite",nativeQuery = true)
+    List<Object> afficherFiltreParActiviteDansFront(@Param("activite") String activite);
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom' , activite.date_debut," +
+            "etat_activite.etat,activite.idactivite,liste_postulant.libelleliste from activite,entite,etat_activite," +
+            "liste_postulant WHERE activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat = " +
+            "etat_activite.idetat AND liste_postulant.activite_idactivite = activite.idactivite AND" +
+            " etat_activite.etat =:etat_activite",nativeQuery = true)
+    List<Object> afficherFiltreParEtatDansFront(@Param("etat_activite") String etat_activite);
+    @Query(value = "SELECT activite.nom as \"nomactivite\",entite.nom as 'entitenom' , activite.date_debut," +
+            "etat_activite.etat,activite.idactivite,liste_postulant.libelleliste from activite,entite,etat_activite," +
+            "liste_postulant,annee WHERE activite.entite_id_entite = entite.id_entite AND activite.etat_activite_idetat" +
+            " = etat_activite.idetat AND annee.id = activite.annee_id AND liste_postulant.activite_idactivite =" +
+            " activite.idactivite AND annee.annee =:annee",nativeQuery = true)
+    List<Object> afficherFiltreParAnneeDansFront(@Param("annee") int  annee);
+
 }
+
+
+

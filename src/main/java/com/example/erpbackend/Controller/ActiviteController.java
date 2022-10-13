@@ -79,10 +79,12 @@ public class ActiviteController {
         System.out.println("les id de l'acteurs externes aaaaaaaaaaaaaaaaaaa : " + idacteurs);
         System.out.println("les id de l'acteurs externes aaaaaaaaaaaaaaaaaaa : " + idacteursOrg);
         System.out.println("les id de l'acteurs externes aaaaaaaaaaaaaaaaaaa : " + idacteursInterv);
+        System.out.println("les id de l'acteurs externes aaaaaaaaaaaaaaaaaaa : " + idacteursLead);
 
         System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteurInternes);
         System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteurInternesOrg);
         System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteursInterv);
+        System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteursLead);
 
         Activite activite = new Activite();
 
@@ -533,6 +535,38 @@ public class ActiviteController {
     @GetMapping("/FiltreReporting/{date_debut}/{etat_activite}/{nom}")
     public List<Object> leReporting(@PathVariable("date_debut") String date_debut, @PathVariable("etat_activite")String etat_activite, @PathVariable("nom")String nom) {
         return activiteService.filtreReportingS(date_debut,etat_activite,nom);
+    }
+
+
+
+
+    //afficher dans le repoting
+
+    //afficher par liste libéllé dans reporting
+    @GetMapping("/filtreliste/{listepostulant}")
+    List<Object>afficherFiltreListeActiviteDansFront(@PathVariable String listepostulant){
+        return activiteService.afficherFiltreListeActiviteDansFront(listepostulant);
+    }
+    //afficher paractivité dans reporting
+    @GetMapping("/filtreParAcivite/{activite}")
+    List<Object>afficherFiltreParActiviteDansFront(@PathVariable String activite){
+        return activiteService.afficherFiltreListeActiviteDansFront(activite);
+    }
+
+    //filtré par etat
+    @GetMapping("/filtreParEtat/{etat}")
+    List<Object> afficherFiltreParEtatDansFront(@PathVariable String etat){
+        return  activiteService.afficherFiltreParEtatDansFront(etat);
+    }
+    //filtre par année dans reporting
+    @GetMapping("/filtreParAnnee/{annee}")
+    List<Object> afficherFiltreParAnneeDansFront(@PathVariable int annee){
+        return activiteService.afficherFiltreParAnneeDansFront(annee);
+    }
+    @GetMapping("/ReportingparEntite/{entite}")
+    public List<Object> afficherFiltreActiviteDansFront(@PathVariable  String entite) {
+
+        return activiteService.afficherFiltreActiviteParEntiteDansFront(entite);
     }
 
 

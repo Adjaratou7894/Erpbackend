@@ -72,7 +72,7 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
-                System.out.println(allIdActeurs);
+                System.out.println("jes");
 
 
                 for (String idact : allIdActeurs) {
@@ -151,7 +151,6 @@ public class ActiviteServiceImplement implements ActiviteService {
             }else{
 
             }
-
 
 
 
@@ -665,19 +664,11 @@ public class ActiviteServiceImplement implements ActiviteService {
         return activiteRepository.LES_PERONNES_TIREE_VALIDE(idactivite);
     }
 
-    public List<Object> afficherActiviteParEntiteEtat(Long entite,String etat) {
-        return activiteRepository.afficherActiviteParEntiteEtat(entite,etat);
 
-    }
 
 
     public int counterActivite(Long idactivite) {
         return activiteRepository.counterActivite(idactivite);
-    }
-
-    @Override
-    public List<Object> afficherActiviteDansFront() {
-        return activiteRepository.afficherActiviteDansFront();
     }
 
     @Override
@@ -721,6 +712,53 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     public List<Object> filtreReportingS(String date_debut, String etat_activite, String nom) {
         return activiteRepository.filtreReporting(date_debut,etat_activite,nom);
+    }
+
+
+    @Override
+    public List<Object> afficherActiviteParEntiteEtat(Long entite,String etat) {
+        return activiteRepository.afficherActiviteParEntiteEtat(entite,etat);
+    }
+
+    @Override
+    public List<Object> afficherActiviteDansFront() {
+        return activiteRepository.afficherActiviteDansFront();
+    }
+
+    @Override
+    public List<Object> afficherFiltreActiviteParEntiteDansFront(String entite) {
+        //  return activiteRepository.afficherFiltreActiviteParEntiteDansFront(entite);
+        List<Object> entiteActivite = activiteRepository.afficherFiltreActiviteParEntiteDansFront(entite);
+        if (entiteActivite.size() != 0){
+            return entiteActivite;
+        }
+        return Collections.singletonList("Aucune activité trouvée dans cette entité !");
+
+        /*List<Object> activites = activiteRepository.findByDateRecent();
+        if (activites.size() != 0){
+            return activites;
+        }
+        return Collections.singletonList("Aucune activité trouvée !");*/
+    }
+
+    @Override
+    public List<Object> afficherFiltreListeActiviteDansFront(String listepostulant) {
+        return activiteRepository.afficherFiltreListeActiviteDansFront(listepostulant);
+    }
+
+    @Override
+    public List<Object> afficherFiltreParActiviteDansFront(String activite) {
+        return activiteRepository.afficherFiltreParActiviteDansFront(activite);
+    }
+
+    @Override
+    public List<Object> afficherFiltreParEtatDansFront(String etat) {
+        return activiteRepository.afficherFiltreParEtatDansFront(etat);
+    }
+
+    @Override
+    public List<Object> afficherFiltreParAnneeDansFront(int annee) {
+        return activiteRepository.afficherFiltreParAnneeDansFront(annee);
     }
 
 
