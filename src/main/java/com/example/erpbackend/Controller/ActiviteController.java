@@ -1,5 +1,6 @@
 package com.example.erpbackend.Controller;
 
+import com.example.erpbackend.Message.ActiviteRetour;
 import com.example.erpbackend.Model.*;
 import com.example.erpbackend.Repository.EtatActiviteRepository;
 import com.example.erpbackend.Repository.UtilisateurRepository;
@@ -59,7 +60,7 @@ public class ActiviteController {
     @ApiOperation(value = "ici on Ajouter une activité")
 
     @PostMapping("/ajouter")
-    public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") int nombrepersonnedemande, @RequestParam("datedeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datedeb, @RequestParam("datefin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datefin
+    public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") Long nombrepersonnedemande, @RequestParam("datedeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datedeb, @RequestParam("datefin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datefin
             ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes
             ,@Param("idacteursInterv") String idacteursInterv, @Param("idacteurInternesInterv") String idacteurInternesInterv
             ,@Param("idacteursOrg") String idacteursOrg, @Param("idacteurInternesOrg") String idacteurInternesOrg
@@ -75,7 +76,7 @@ public class ActiviteController {
         //Date dateFin = new SimpleDateFormat("yyyy/MM/dd").parse(datefin);
 
 
-        System.out.println("les id de l'acteurs aaaaaaaaaaaaaaaaaaa : " + idacteurs);
+        System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteurInternes);
 
         Activite activite = new Activite();
 
@@ -90,6 +91,8 @@ public class ActiviteController {
         activite.setDatecreation(new Date());
 
         activite.setDescription(description);
+
+        activite.setNombrepersonnedemande(nombrepersonnedemande);
 
 
         activite.setDateDebut(datedeb);
@@ -106,7 +109,7 @@ public class ActiviteController {
 
         //String url= "src/main/resources/imgActivite/";
 
-        String url= "C:/Users/mkkeita/Desktop/projects/ionic/ApplicationERPInterface/src/assets/images/";
+        String url= "C:/Users/mccamara/Desktop/Nouveau dossier/ApplicationERPInterface/src/assets/images";
 
         ConfigImage.saveimgA(url, nomfile, file);
 
@@ -158,6 +161,9 @@ public class ActiviteController {
         return activiteService.recupererNombreActiviteParMois(mois);
     }
 
+
+
+
     //================FIN DE LA METHODE PERMETTANT D'AFFICHER LA LISTE DES ACTIVITES========================
 
     @ApiOperation(value = "ici on Supprimer une activité")
@@ -187,6 +193,22 @@ public class ActiviteController {
         return activiteService.activiteParEtat(etat);
     }
 
+
+    @GetMapping("/ParEntite/{entite_id}")
+    public List<Activite> formation(@PathVariable Long entite_id) {
+
+        return activiteService.formation(entite_id);
+    }
+    @GetMapping("/ParEntite2/{entite_id}")
+    public List<Activite> talk(@PathVariable Long entite_id) {
+
+        return activiteService.talk(entite_id);
+    }
+    @GetMapping("/ParEntite3/{entite_id}")
+    public List<Activite> eve(@PathVariable Long entite_id) {
+
+        return activiteService.eve(entite_id);
+    }
     @GetMapping("/parDatePlusRecente")
     List<Object> activiteParDatePlusRecente() {
 
@@ -469,10 +491,31 @@ public class ActiviteController {
         return activiteService.afficherActiviteParEntiteEtat(entite, etat);
     }
 
+
     @GetMapping("/activiteSansListe")
     List<Activite> recupererActiviteNonlierAliste(){
 
         return activiteService.recupererActivitesSansListe();
+    }
+
+    @GetMapping("/afficherDansReporting")
+    List<Object> afficherDansReportingc(){
+        return activiteService.afficherActiviteDansFront();
+    }
+
+
+
+    @GetMapping("/tousActivites/{idact}")
+    ActiviteRetour recupererActivites(@PathVariable Long idact){
+
+        return activiteService.recupererTousActivite(idact);
+    }
+
+    //============================================================Reporting filtre
+
+    @GetMapping("/FiltreReporting/{date_debut}/{etat_activite}/{nom}")
+    public List<Object> leReporting(@PathVariable("date_debut") String date_debut, @PathVariable("etat_activite")String etat_activite, @PathVariable("nom")String nom) {
+        return activiteService.filtreReportingS(date_debut,etat_activite,nom);
     }
 
 

@@ -10,11 +10,13 @@ import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
 @Data
 @Api(value = "hello", description = "controller permettant la Gestion des Années")
+@CrossOrigin(origins = "*")
 @RequestMapping("/annee")
 public class AnneeController {
 
@@ -28,12 +30,18 @@ public class AnneeController {
         return anneeService.ajouterAnnee(annee);
     }
 
+/*
     @ApiOperation(value = "ici on affiche toutes année")
     @GetMapping("/afficher")
-    public List<Annee> recupererLesAnnee(){
+    public List<Annee> recupererLesAnnee() {
 
         return anneeService.recupererLesAnnee();
+    }
+    */
 
+    @GetMapping("/affiche")
+    public List<Annee> afficherAnnee(){
+       return anneeService.afficherAnnee();
     }
 
 

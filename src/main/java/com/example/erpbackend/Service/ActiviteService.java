@@ -1,5 +1,6 @@
 package com.example.erpbackend.Service;
 
+import com.example.erpbackend.Message.ActiviteRetour;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
 import com.example.erpbackend.Model.Role;
@@ -41,8 +42,12 @@ public interface ActiviteService {
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES D'UNE ANNEE ====================================
     List<Object> ActiviteParAnnee(int annee);
 
+
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR ETAT ====================================
     List<Activite> activiteParEtat(String etat);
+    List<Activite> formation(Long entite_id);
+    List<Activite> eve(Long entite_id);
+    List<Activite> talk(Long entite_id);
 
 
     //================METHODE PERMETTANT DE RECUPERER LES ACTIVITES PAR LA DATE LA PLUS RECENTE ====================
@@ -97,18 +102,18 @@ public interface ActiviteService {
 
 
 
-
-
-
     public ReponseMessage AgetBytes(long idactivite) throws IOException;
 
     List<Object> troisActiviteavenir();
 
     List<Activite> recupererActivitesSansListe();
+
     List<Object> afficherActiviteParId(int idactivite);
 
     List<Activite> activiteParTypeActiviteEtEntite(String typeActivite, Long idEntite);
 
+
+    List<Object> afficherActiviteDansFront();
 
 
     //++++++++++++++++++++++++++++++++++++++++++ List<Object> LES_PERONNES_TIREE_VALIDE(Long  idActivite);
@@ -118,5 +123,18 @@ public interface ActiviteService {
     List<Object> afficherActiviteParEntiteEtat(Long entite,String etat);
 
     int counterActivite(Long idactivite);
+
+
+
+    ///++++++++++++++++++++++++++++++++++++
+
+
+    ActiviteRetour recupererTousActivite(Long idact);
+
+    //================================================================================
+
+    List<Object> filtreReportingS(String date_debut,String etat_activite,String nom);
+
+
 
 }

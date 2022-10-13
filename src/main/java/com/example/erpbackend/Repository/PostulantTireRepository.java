@@ -49,4 +49,14 @@ public interface PostulantTireRepository extends JpaRepository<Postulant_tire,Lo
             nativeQuery = true)
     int nombreApprenant();
 
+    @Query(value = "SELECT postulant_tire.id,postulant.nom_postulant,postulant.prenom_postulant," +
+            "postulant.numero_postulant,postulant.email,postulant.genre FROM postulant_tire,postulant " +
+            "WHERE postulant_tire.id_postulant = postulant.id AND postulant.genre =:postulant",
+            nativeQuery = true)
+    List<Object> parGenre(String postulant);
+    @Query(value = "SELECT DISTINCT postulant.genre FROM postulant_tire,postulant WHERE" +
+            " postulant_tire.id_postulant = postulant.id;",
+            nativeQuery = true)
+    List<Object> afficheGenre();
+
 }

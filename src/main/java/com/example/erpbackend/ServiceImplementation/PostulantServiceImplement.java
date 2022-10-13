@@ -31,7 +31,10 @@ public class PostulantServiceImplement implements PostulantService {
 
        Liste_postulant liste  = listePostulantService.trouverListePostulantParLibelle(libelleListe);
 
-        Long idListe = liste.getIdliste();
+       System.out.println("liste bbbbbb: " + liste.getLibelleliste());
+
+
+       Long idListe = liste.getIdliste();
 
         List<Postulant> listPostulant = postulantRepository.FIND_POSTULANT_FROM_LISTE(idListe);
 
@@ -97,6 +100,7 @@ public class PostulantServiceImplement implements PostulantService {
         }
         return Collections.singletonList("aucun postulant n'est trouvé avec cette activité !");
     }
+
 
 
 }

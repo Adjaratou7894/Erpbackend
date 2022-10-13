@@ -195,4 +195,13 @@ public class PostulantTireServiceImplement implements PostulantTireService {
 
         return postulantList;
     }
+    @Override
+    public List<Object> parGenre(String postulant) {
+        return postulantTireRepository.parGenre(postulant);
+    }
+
+    @Override
+    public List<Object> afficheGenre() {
+        return postulantTireRepository.afficheGenre();
+    }
 }

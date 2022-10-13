@@ -29,7 +29,9 @@ public interface UtilisateurRepository extends JpaRepository<Utilisateur,Long> {
     Utilisateur findByIduser(Long iduser);
     @Modifying
     @Transactional
-    @Query(value = "INSERT INTO utilisateur (nom, prenom, email, numero, password, role_idrole, entite_id_entite)  VALUES(\"Kaloga\", \"Fatoumata\", \"fk1@orangemali.com\",  \"676665554\",  \"1234\", 1,1);",nativeQuery = true)
+    @Query(value = "INSERT INTO utilisateur (nom, prenom, email, numero, password, role_idrole, entite_id_entite)" +
+            "  VALUES(\"Kaloga\", \"Fatoumata\", \"fk1@orangemali.com\",  \"676665554\",  \"1234\", 1,1);",
+            nativeQuery = true)
     void creationadmin();
 
 

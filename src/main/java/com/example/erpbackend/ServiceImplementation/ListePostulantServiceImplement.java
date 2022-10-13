@@ -2,6 +2,7 @@ package com.example.erpbackend.ServiceImplementation;
 
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Liste_postulant;
+import com.example.erpbackend.Model.Postulant;
 import com.example.erpbackend.Model.Tirage;
 import com.example.erpbackend.Repository.ListePostulantRepository;
 import com.example.erpbackend.Service.ListePostulantService;
@@ -88,5 +89,10 @@ public class ListePostulantServiceImplement implements ListePostulantService {
     @Override
     public List<Liste_postulant> recupererListeAvecTirageNonValide() {
         return listePostulantRepository.FIND_ALL_LISTE_NOT_VALILIDE();
+    }
+
+    @Override
+    public List<Object> trouver(String lib) {
+        return listePostulantRepository.trouvertout(lib);
     }
 }

@@ -11,6 +11,8 @@ public interface ActeurService {
     // Création d'un acteur
     ReponseMessage creerActeur(Acteur acteur);
 
+
+    List<Acteur> trouverActeurParId(long idacteur);
     // Mise à jour d'un acteur
     Acteur modifierActeur(Acteur acteur, Long idacteur);
 

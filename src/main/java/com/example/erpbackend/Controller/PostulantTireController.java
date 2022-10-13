@@ -1,14 +1,8 @@
 package com.example.erpbackend.Controller;
 
 import com.example.erpbackend.Message.ReponseMessage;
-import com.example.erpbackend.Model.Liste_postulant;
-import com.example.erpbackend.Model.Postulant;
-import com.example.erpbackend.Model.Postulant_tire;
-import com.example.erpbackend.Model.Tirage;
-import com.example.erpbackend.Service.ListePostulantService;
-import com.example.erpbackend.Service.PostulantService;
-import com.example.erpbackend.Service.PostulantTireService;
-import com.example.erpbackend.Service.TirageService;
+import com.example.erpbackend.Model.*;
+import com.example.erpbackend.Service.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
@@ -33,6 +27,8 @@ public class PostulantTireController {
 
     private final ListePostulantService listePostulantService;
 
+    private final ActiviteService activiteService;
+
     @ApiOperation(value = "ici on ajouter un postulant tiré ")
     @PostMapping("/ajouter/{listeLibelle}/{tirageLibelle}")
     public ReponseMessage ajouterPostulantTire(@RequestBody Postulant postulant, @PathVariable String tirageLibelle, @PathVariable String listeLibelle){
@@ -54,13 +50,15 @@ public class PostulantTireController {
         return postulantTireService.recupererTousLesPostulantTire();
     }
     @ApiOperation(value = "ici on ajouter un participant ")
-    @PostMapping("/ajouter/{listelibelle}")
-    public ReponseMessage ajouterParticipant(@RequestBody Postulant postulant,@PathVariable String listelibelle) {
-        Liste_postulant liste = listePostulantService.trouverListePostulantParLibelle(listelibelle);
+    @PostMapping("/ajouter/{libelleactivite}")
+    public ReponseMessage ajouterParticipant(@RequestBody Postulant postulant,@PathVariable String libelleactivite) {
+        Activite activite = activiteService.trouverActiviteParLibelle(libelleactivite);
+
+        Liste_postulant liste = activite.getListe();
 
         postulant.setListePostulant(liste);
 
-        return postulantTireService.ajouterParticipant(postulant, listelibelle);
+        return postulantTireService.ajouterParticipant(postulant, liste.getLibelleliste());
 
     }
 
@@ -98,6 +96,17 @@ public class PostulantTireController {
     public int compteNombreApprenant(){
 
         return postulantTireService.nombreApprenant();
+    }
+
+    @GetMapping("/parGenre/{postulant}")
+    List<Object> parGenre(@PathVariable String postulant){
+        return  postulantTireService.parGenre(postulant);
+    }
+
+    @GetMapping("/afficheGenre")
+    List<Object> afficheGenre(){
+
+        return postulantTireService.afficheGenre();
     }
 
 }

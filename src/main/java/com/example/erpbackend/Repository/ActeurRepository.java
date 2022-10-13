@@ -12,9 +12,15 @@ import java.util.List;
 public interface ActeurRepository extends JpaRepository<Acteur, Long> {
     Acteur findByNom(String nom);
 
-    Acteur findByIdacteur(Long idacteur);
+   // Acteur findByIdacteur(Long idacteur);
 
     Acteur findByNumero(String numero);
+
+    @Query(
+            value = "Select * from acteur where idacteur = :idacteur",
+            nativeQuery = true
+    )
+    public List<Acteur> findByIdacteur(Long idacteur);
 
     @Query(value = "SELECT DISTINCT acteur.prenom, acteur.nom, acteur.numero, acteur.email, role.nom as" +
             " \"nomRole\" FROM `acteur`, role,utilisateur,statut WHERE acteur.statut_idstatut = " +

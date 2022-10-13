@@ -44,7 +44,6 @@ public class AnneeSerciceImplement implements AnneeService {
     }
 
     @Override
-
     public Annee recupererAnneeParLibelle(int annee) {
         return anneeRepository.findByAnnee(annee);
     }
@@ -54,7 +53,10 @@ public class AnneeSerciceImplement implements AnneeService {
         return anneeRepository.findAll();
     }
 
-    public List<Object> afficherAnnee() {
-        return anneeRepository.afficherAnnee();
+
+    public List<Annee> afficherAnnee() {
+        return anneeRepository.findAll();
     }
+
+
 }

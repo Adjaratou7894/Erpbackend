@@ -1,5 +1,6 @@
 package com.example.erpbackend.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,9 +18,17 @@ public class Entite {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long   idEntite;
     private String nom;
+
     private String description;
     @Column(nullable = true, length = 64)
+
     private String photoentite;
+
     private String slogant;
+
+    @JsonIgnore
+    @ManyToOne
+    private Utilisateur utilisateur;
+
 
 }

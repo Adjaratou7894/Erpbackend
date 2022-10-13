@@ -37,12 +37,12 @@ public class Activite {
     private int mois;
     private Boolean etat;
 
-    private String nombrepersonnedemande;
+    private Long nombrepersonnedemande;
     @JsonIgnore
     @ManyToOne
     private Type_activite typeActivite;
 
-    @JsonIgnore
+
     @ManyToOne
     private Etat_activite etatActivite;
     @JsonIgnore

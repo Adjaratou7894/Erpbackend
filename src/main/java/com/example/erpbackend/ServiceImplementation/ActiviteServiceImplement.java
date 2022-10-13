@@ -1,9 +1,10 @@
 package com.example.erpbackend.ServiceImplementation;
 
+import com.example.erpbackend.Message.ActiviteRetour;
 import com.example.erpbackend.Message.ReponseMessage;
 import com.example.erpbackend.Model.Activite;
-import com.example.erpbackend.Repository.ActiviteRepository;
-import com.example.erpbackend.Repository.Activite_ActeurRepository;
+import com.example.erpbackend.Model.Utilisateur;
+import com.example.erpbackend.Repository.*;
 import com.example.erpbackend.Service.ActiviteService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,15 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Autowired
     private Activite_ActeurRepository activite_acteurRepository;
 
+    @Autowired
+    private SalleRepository salleRepository;
+
+    @Autowired
+    private UtilisateurRepository utilisateurRepository;
+
+    @Autowired
+    private EtatActiviteRepository etatActiviteRepository;
+
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
     public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes,  String idacteursOrg,
@@ -55,9 +65,8 @@ public class ActiviteServiceImplement implements ActiviteService {
                     ////formateurs
 
             //formateurs externes
-            if(idacteurs.contains("")){
+            if(idacteurs.contains(",")){
 
-            }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
                 System.out.println(allIdActeurs);
@@ -70,12 +79,14 @@ public class ActiviteServiceImplement implements ActiviteService {
                     activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Formateurs(l, act.getIdactivite());
 
                 }
+
+            }else {
+
             }
 
             //Formateurs internes
-            if(idacteurInternes.contains("")){
+            if(idacteurInternes.contains(",")){
 
-                }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
 
                 System.out.println(allIdActeursInternes);
@@ -86,6 +97,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     activiteRepository.insert_activites_utilisateurs_animer_formateurs(l, act.getIdactivite());
                 }
+
+                }else{
+
             }
 
 
@@ -95,10 +109,11 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
 
-            //Organisateurs externes
-            if(idacteursOrg.contains("")){
 
-            }else {
+
+            //Organisateurs externes
+            if(idacteursOrg.contains(",")){
+
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
                 System.out.println(allIdActeurs);
@@ -111,12 +126,14 @@ public class ActiviteServiceImplement implements ActiviteService {
                     activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Organisateurs(l, act.getIdactivite());
 
                 }
+
+            }else {
+
             }
 
             //Organisateurs internes
-            if(idacteurInternesOrg.contains("")){
+            if(idacteurInternesOrg.contains(",")){
 
-            }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
 
                 System.out.println(allIdActeursInternes);
@@ -127,6 +144,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     activiteRepository.insert_activites_utilisateurs_animer_Organisateurs(l, act.getIdactivite());
                 }
+
+            }else{
+
             }
 
 
@@ -137,9 +157,8 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Intervenant externes
-            if(idacteursInterv.contains("")){
+            if(idacteursInterv.contains(",")){
 
-            }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
                 System.out.println(allIdActeurs);
@@ -151,14 +170,16 @@ public class ActiviteServiceImplement implements ActiviteService {
                     activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Intervenants(l, act.getIdactivite());
 
                 }
+
+            }else {
+
             }
 
 
 
             //Intervenant internes
-            if(idacteurInternesInterv.contains("")){
+            if(idacteurInternesInterv.contains(",")){
 
-            }else{
                 String[] allIdActeursInternes = idacteurInternes.split(",");
 
                 System.out.println(allIdActeursInternes);
@@ -169,6 +190,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     activiteRepository.insert_activites_utilisateurs_animer_Intervenants(l, act.getIdactivite());
                 }
+
+            }else{
+
             }
 
 
@@ -178,9 +202,8 @@ public class ActiviteServiceImplement implements ActiviteService {
 
 
             //Lead externes
-            if(idacteursLead.contains("")){
+            if(idacteursLead.contains(",")){
 
-            }else {
                 //System.out.println("ghbbbbbbbbbbbbbbbbbbbbbbbbbbbbb : "+ idacteurs);
                 String[] allIdActeurs = idacteurs.split(",");
                 System.out.println(allIdActeurs);
@@ -193,12 +216,16 @@ public class ActiviteServiceImplement implements ActiviteService {
                     activite_acteurRepository.INSERT_ACTEUR_ACTIVITES_Lead(l, act.getIdactivite());
 
                 }
+
+            }else {
+
             }
 
-            //Lead internes
-            if(idacteurInternesLead.contains("")){
+            System.out.println("mon test test test test: "+idacteurInternesLead.contains(","));
 
-            }else{
+            //Lead internes
+            if(idacteurInternesLead.contains(",")){
+
                 String[] allIdActeursInternes = idacteurInternes.split(",");
 
                 System.out.println(allIdActeursInternes);
@@ -209,6 +236,9 @@ public class ActiviteServiceImplement implements ActiviteService {
 
                     activiteRepository.insert_activites_utilisateurs_animer_Leads(l, act.getIdactivite());
                 }
+
+            }else{
+
             }
 
 
@@ -304,9 +334,28 @@ public class ActiviteServiceImplement implements ActiviteService {
 
     }
 
+
+
+
     @Override
     public List<Activite> activiteParEtat(String etat) {
         return activiteRepository.findByEtat(etat);
+    }
+
+
+    @Override
+    public List<Activite> formation(Long entite_id) {
+        return activiteRepository.formation(entite_id);
+    }
+
+    @Override
+    public List<Activite> eve(Long entite_id) {
+        return activiteRepository.eve(entite_id);
+    }
+
+    @Override
+    public List<Activite> talk(Long entite_id) {
+        return activiteRepository.talk(entite_id);
     }
 
     @Override
@@ -622,6 +671,42 @@ public class ActiviteServiceImplement implements ActiviteService {
     public int counterActivite(Long idactivite) {
         return activiteRepository.counterActivite(idactivite);
     }
+
+    @Override
+    public List<Object> afficherActiviteDansFront() {
+        return activiteRepository.afficherActiviteDansFront();
+    }
+
+    @Override
+    public ActiviteRetour recupererTousActivite(Long idact) {
+
+        ActiviteRetour activiteRetour = new ActiviteRetour();
+
+        Activite activite = activiteRepository.findByIdactivite(idact);
+
+        Long createurId = activiteRepository.FIND_ACTIVITE_Createur(idact);
+        Long respondId = activiteRepository.FIND_ACTIVITE_Responsable(idact);
+        Long salleId = activiteRepository.FIND_ACTIVITE_Etat(idact);
+        Long etatId = activiteRepository.FIND_ACTIVITE_Etat(idact);
+
+        activiteRetour.setLibelle(activite.getNom());
+        activiteRetour.setDescription(activite.getDescription());
+        activiteRetour.setPhoto(activite.getPhotoactivite());
+        activiteRetour.setDateDebut(activite.getDateDebut());
+        activiteRetour.setDatefin(activite.getDateFin());
+        activiteRetour.setObjectifVise(activite.getIdactivite());
+
+        activiteRetour.setCreateur(utilisateurRepository.findByIduser(createurId).getNom());
+        activiteRetour.setResponsable(utilisateurRepository.findByIduser(respondId).getNom());
+        activiteRetour.setSalle(salleRepository.findByIdsalle(salleId).getNom());
+        activiteRetour.setEtat(etatActiviteRepository.findByIdetat(etatId).getEtat());
+
+        return activiteRetour;}
+
+    public List<Object> filtreReportingS(String date_debut, String etat_activite, String nom) {
+        return activiteRepository.filtreReporting(date_debut,etat_activite,nom);
+    }
+
 
 
 }
