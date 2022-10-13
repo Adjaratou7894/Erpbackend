@@ -40,6 +40,9 @@ public class ActiviteServiceImplement implements ActiviteService {
     @Autowired
     private EtatActiviteRepository etatActiviteRepository;
 
+    @Autowired
+    private ActiviteUtilisateurAnimerRepository activiteUtilisateurAnimerRepository;
+
     //================DEBUT DE LA METHODE PERMETTANT D'AJOUTER UNE ACTIVITE=========================
     @Override
     public ReponseMessage ajouterActivite(Activite activite, String idacteurs, String idacteurInternes,  String idacteursOrg,
@@ -689,6 +692,7 @@ public class ActiviteServiceImplement implements ActiviteService {
         Long salleId = activiteRepository.FIND_ACTIVITE_Etat(idact);
         Long etatId = activiteRepository.FIND_ACTIVITE_Etat(idact);
 
+        activiteRetour.setId(activite.getIdactivite());
         activiteRetour.setLibelle(activite.getNom());
         activiteRetour.setDescription(activite.getDescription());
         activiteRetour.setPhoto(activite.getPhotoactivite());
@@ -701,7 +705,19 @@ public class ActiviteServiceImplement implements ActiviteService {
         activiteRetour.setSalle(salleRepository.findByIdsalle(salleId).getNom());
         activiteRetour.setEtat(etatActiviteRepository.findByIdetat(etatId).getEtat());
 
-        return activiteRetour;}
+        return activiteRetour;
+    }
+
+    @Override
+    public List<Object> recupererActivitesUtilAnimer(Long idAct) {
+        return activiteUtilisateurAnimerRepository.recupererActeurUtilisateurAnimer(idAct);
+    }
+
+    @Override
+    public List<Object> recuperActeurActivites(Long idAct) {
+        return activite_acteurRepository.recupererActeur_activites(idAct);
+    }
+
 
     public List<Object> filtreReportingS(String date_debut, String etat_activite, String nom) {
         return activiteRepository.filtreReporting(date_debut,etat_activite,nom);

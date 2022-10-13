@@ -97,23 +97,33 @@ public class TirageServiceImplement implements TirageService{
             tirage.setValidite(false);
 
             //retourne le tirage crée
-            Tirage tirageCree = tirageRepository.save(tirage);
 
             System.out.println("liste : "+ liste.getLibelleliste());
             //retourne tous les postulants d'une liste donnée
             List<Postulant> listePostulantATiree = postulantRepository.FIND_POSTULANT_PAR_ID_LIST(liste.getIdliste());
 
-            System.out.println("nombre: " + tirageCree.getNombrePostulantTire() + "id: " + tirageCree.getIdtirage());
+            //System.out.println("nombre: " + tirageCree.getNombrePostulantTire() + "id: " + tirageCree.getIdtirage());
             System.out.println("taillle taille taille: "+ listePostulantATiree.size());
-            trie(listePostulantATiree, tirageCree.getNombrePostulantTire(), tirageCree.getIdtirage());
 
-            liste.setNombretirage(liste.getNombretirage()+1);
+            if(listePostulantATiree.size() >= tirage.getNombrePostulantTire()){
+                Tirage tirageCree = tirageRepository.save(tirage);
 
-            listePostulantService.modifierListePostulant(liste);
+                trie(listePostulantATiree, tirageCree.getNombrePostulantTire(), tirageCree.getIdtirage());
 
-            ReponseMessage message = new ReponseMessage("Tirage éffectué avec succes", true);
+                liste.setNombretirage(liste.getNombretirage()+1);
 
-            return message;
+                listePostulantService.modifierListePostulant(liste);
+
+                ReponseMessage message = new ReponseMessage("Tirage éffectué avec succes", true);
+
+                return message;
+            }else {
+                ReponseMessage message = new ReponseMessage("Veuillez saisir un nombre plus petit", false);
+
+                return message;
+            }
+
+
         }else if(liste == null){
             ReponseMessage message = new ReponseMessage("Cette liste n'existe pas", false);
 

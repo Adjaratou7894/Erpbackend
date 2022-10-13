@@ -50,7 +50,7 @@ public class  Utilisateur {
     )
     private List<Activite> activites = new ArrayList<>();
 
-
+@JsonIgnore
     @ManyToMany(
             fetch = FetchType.LAZY,
             cascade = {

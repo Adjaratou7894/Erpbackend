@@ -17,6 +17,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -55,7 +56,12 @@ public class PostulantController {
             ReponseMessage message = new ReponseMessage("Fichier vide", false);
 
             return message;
-        } else {
+        } else if (file.getSize() >= 1048576){
+            ReponseMessage message = new ReponseMessage("Fichier Lourde", false);
+
+            return message;
+        }
+        else {
 
             Liste_postulant liste_postulant = new Liste_postulant();
             Activite activite = activiteService.trouverActiviteParLibelle(libelleActivite);
@@ -79,6 +85,7 @@ public class PostulantController {
                 liste_postulant.setValidite(false);
 
                 liste_postulant.setLibelleliste(libelleliste);
+                liste_postulant.setDateliste(new Date());
 
                 Liste_postulant lpt = listePostulantService.creerlistepostulant(liste_postulant);
                 activite.setListe(lpt);

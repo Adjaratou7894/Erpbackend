@@ -18,17 +18,23 @@ public class TacheServiceImplement implements TacheService {
     public ReponseMessage enregistrerTaches(Taches taches, String idusers) {
         tachesRepository.save(taches);
 
+        if (idusers.contains(",")){
+            System.out.println("je suis sansé ne pas etre null: " +
+                    "" + idusers);
+            String[] allIdidusers = idusers.split(",");
 
-        String[] allIdidusers = idusers.split(",");
+            System.out.println("les id : " + allIdidusers);
 
-        System.out.println("les id : " + allIdidusers);
+            for (String idact : allIdidusers) {
 
-        for (String idact : allIdidusers) {
+                long l = Long.parseLong(idact);
 
-            long l = Long.parseLong(idact);
+                tachesRepository.insert_taches_utilisateurs(l, taches.getIdTache());
 
-            tachesRepository.insert_taches_utilisateurs(l, taches.getIdTache());
-
+            }
+        }else {
+            System.out.println("je suis sansé etre null: " +
+                    "" + idusers);
         }
 
 

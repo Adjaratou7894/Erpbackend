@@ -23,12 +23,16 @@ public class Taches {
     private Date datedebut;
     private Date datefin;
 
+
+    @JsonIgnore
     @ManyToOne
     private Designation designation;
 
+    @JsonIgnore
     @ManyToOne
     private Statut statut;
 
+    @JsonIgnore
     @ManyToOne
     private Activite activite;
 

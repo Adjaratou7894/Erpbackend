@@ -39,7 +39,7 @@ import java.util.List;
 public class ActiviteController {
 
     @Autowired
-    private ActiviteServiceImplement activiteService;
+    private ActiviteService activiteService;
 
     final private EntiteService entiteService;
 
@@ -59,14 +59,14 @@ public class ActiviteController {
 
     @ApiOperation(value = "ici on Ajouter une activité")
 
-    @PostMapping("/ajouter")
+    @PostMapping("/ajouter/{userid}")
     public ReponseMessage createactivite(@Param("file") MultipartFile file, @Param("nom") String nom, @Param("description") String description, @Param("nombrepersonnedemande") Long nombrepersonnedemande, @RequestParam("datedeb") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datedeb, @RequestParam("datefin") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date datefin
             ,@Param("idacteurs") String idacteurs, @Param("idacteurInternes") String idacteurInternes
             ,@Param("idacteursInterv") String idacteursInterv, @Param("idacteurInternesInterv") String idacteurInternesInterv
             ,@Param("idacteursOrg") String idacteursOrg, @Param("idacteurInternesOrg") String idacteurInternesOrg
             ,@Param("idacteursLead") String idacteursLead, @Param("idacteurInternesLead") String idacteurInternesLead
             ,@Param("typeAct") String libelleEntite, @Param("typeAct") String typeAct, @Param("idresponsable") String libelleSalle
-            ,@Param("idresponsable") Long idresponsable, @Param("userid") Long userid) throws IOException, ParseException {
+            ,@Param("idresponsable") Long idresponsable, @PathVariable Long userid) throws IOException, ParseException {
 
          //file, nom, description,nombrepersonnedemande, datedeb, datefin, idacteurs, idacteurInternes, libelleEntite, typeAct, libelleSalle, idresponsable, userid
 
@@ -76,11 +76,19 @@ public class ActiviteController {
         //Date dateFin = new SimpleDateFormat("yyyy/MM/dd").parse(datefin);
 
 
+        System.out.println("les id de l'acteurs externes aaaaaaaaaaaaaaaaaaa : " + idacteurs);
+        System.out.println("les id de l'acteurs externes aaaaaaaaaaaaaaaaaaa : " + idacteursOrg);
+        System.out.println("les id de l'acteurs externes aaaaaaaaaaaaaaaaaaa : " + idacteursInterv);
+
         System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteurInternes);
+        System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteurInternesOrg);
+        System.out.println("les id de l'acteurs internes aaaaaaaaaaaaaaaaaaa : " + idacteursInterv);
 
         Activite activite = new Activite();
 
         Entite entite = entiteService.recupererEntiteParNom(libelleEntite);
+        Utilisateur user = utilisateurService.trouverUtilisateurParId(userid);
+        activite.setCreateur(user);
 
         String nomfile = StringUtils.cleanPath(file.getOriginalFilename());
 
@@ -109,7 +117,7 @@ public class ActiviteController {
 
         //String url= "src/main/resources/imgActivite/";
 
-        String url= "C:/Users/mccamara/Desktop/Nouveau dossier/ApplicationERPInterface/src/assets/images";
+        String url= "C:\\Users\\mccamara\\Desktop\\Nouveau dossier\\Nouveau dossier\\ApplicationERPInterface\\src\\assets\\images/";
 
         ConfigImage.saveimgA(url, nomfile, file);
 
@@ -504,6 +512,15 @@ public class ActiviteController {
     }
 
 
+    @GetMapping("/acteur_activites/{idAct}")
+    List<Object> recupererActeurActivites(@PathVariable Long idAct){
+        return activiteService.recuperActeurActivites(idAct);
+    }
+
+    @GetMapping("/activitesAnimer/{idAct}")
+    List<Object> recupererActeurActivitesUtilisateursAnimer(@PathVariable Long idAct) {
+        return activiteService.recupererActivitesUtilAnimer(idAct);
+    }
 
     @GetMapping("/tousActivites/{idact}")
     ActiviteRetour recupererActivites(@PathVariable Long idact){

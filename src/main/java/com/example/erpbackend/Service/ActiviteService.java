@@ -127,6 +127,9 @@ public interface ActiviteService {
 
 
     ///++++++++++++++++++++++++++++++++++++
+    List<Object> recuperActeurActivites(Long idAct);
+
+    List<Object> recupererActivitesUtilAnimer(Long idAct);
 
 
     ActiviteRetour recupererTousActivite(Long idact);
